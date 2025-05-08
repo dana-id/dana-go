@@ -15,7 +15,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dana-id/dana-go-api-client/config"
+	"github.com/dana-id/go_client/config"
 	uuid "github.com/google/uuid"
 )
 

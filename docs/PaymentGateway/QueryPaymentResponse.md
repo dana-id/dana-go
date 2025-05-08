@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **FeeAmount** | Pointer to [**Money**](Money.md) |  | [optional] 
 **PaidTime** | Pointer to **string** | Payment timestamp in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time) | [optional] 
 **Title** | Pointer to **string** | Brief description of transaction | [optional] 
-**AdditionalInfo** | Pointer to **interface{}** |  | [optional] 
+**AdditionalInfo** | Pointer to [**QueryPaymentResponseAdditionalInfo**](QueryPaymentResponseAdditionalInfo.md) |  | [optional] 
 
 ## Methods
 
@@ -449,20 +449,20 @@ HasTitle returns a boolean if a field has been set.
 
 ### GetAdditionalInfo
 
-`func (o *QueryPaymentResponse) GetAdditionalInfo() interface{}`
+`func (o *QueryPaymentResponse) GetAdditionalInfo() QueryPaymentResponseAdditionalInfo`
 
 GetAdditionalInfo returns the AdditionalInfo field if non-nil, zero value otherwise.
 
 ### GetAdditionalInfoOk
 
-`func (o *QueryPaymentResponse) GetAdditionalInfoOk() (*interface{}, bool)`
+`func (o *QueryPaymentResponse) GetAdditionalInfoOk() (*QueryPaymentResponseAdditionalInfo, bool)`
 
 GetAdditionalInfoOk returns a tuple with the AdditionalInfo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAdditionalInfo
 
-`func (o *QueryPaymentResponse) SetAdditionalInfo(v interface{})`
+`func (o *QueryPaymentResponse) SetAdditionalInfo(v QueryPaymentResponseAdditionalInfo)`
 
 SetAdditionalInfo sets AdditionalInfo field to given value.
 
@@ -472,16 +472,6 @@ SetAdditionalInfo sets AdditionalInfo field to given value.
 
 HasAdditionalInfo returns a boolean if a field has been set.
 
-### SetAdditionalInfoNil
-
-`func (o *QueryPaymentResponse) SetAdditionalInfoNil(b bool)`
-
- SetAdditionalInfoNil sets the value for AdditionalInfo to be an explicit nil
-
-### UnsetAdditionalInfo
-`func (o *QueryPaymentResponse) UnsetAdditionalInfo()`
-
-UnsetAdditionalInfo ensures that no value is present for AdditionalInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

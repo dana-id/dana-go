@@ -16,12 +16,12 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/dana-id/dana-go-api-client/test/fixtures"
+	"github.com/dana-id/go_client/test/fixtures"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	payment_gateway "github.com/dana-id/dana-go-api-client/payment_gateway/v1"
+	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
 )
 
 func init() {

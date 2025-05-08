@@ -14,7 +14,7 @@ import (
 	"encoding/json"
 	"bytes"
 	"fmt"
-	utils "github.com/dana-id/dana-go-api-client/utils"
+	utils "github.com/dana-id/go_client/utils"
 )
 
 // checks if the QueryPaymentResponse type satisfies the MappedNullable interface at compile time
@@ -53,7 +53,7 @@ type QueryPaymentResponse struct {
 	PaidTime *string `json:"paidTime,omitempty" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
 	// Brief description of transaction
 	Title *string `json:"title,omitempty"`
-	AdditionalInfo interface{} `json:"additionalInfo,omitempty"`
+	AdditionalInfo *QueryPaymentResponseAdditionalInfo `json:"additionalInfo,omitempty"`
 }
 
 type _QueryPaymentResponse QueryPaymentResponse
@@ -593,23 +593,22 @@ func (o *QueryPaymentResponse) SetTitle(v string) {
 	o.Title = &v
 }
 
-// GetAdditionalInfo returns the AdditionalInfo field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *QueryPaymentResponse) GetAdditionalInfo() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetAdditionalInfo returns the AdditionalInfo field value if set, zero value otherwise.
+func (o *QueryPaymentResponse) GetAdditionalInfo() QueryPaymentResponseAdditionalInfo {
+	if o == nil || utils.IsNil(o.AdditionalInfo) {
+		var ret QueryPaymentResponseAdditionalInfo
 		return ret
 	}
-	return o.AdditionalInfo
+	return *o.AdditionalInfo
 }
 
 // GetAdditionalInfoOk returns a tuple with the AdditionalInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *QueryPaymentResponse) GetAdditionalInfoOk() (*interface{}, bool) {
+func (o *QueryPaymentResponse) GetAdditionalInfoOk() (*QueryPaymentResponseAdditionalInfo, bool) {
 	if o == nil || utils.IsNil(o.AdditionalInfo) {
 		return nil, false
 	}
-	return &o.AdditionalInfo, true
+	return o.AdditionalInfo, true
 }
 
 // HasAdditionalInfo returns a boolean if a field has been set.
@@ -621,9 +620,9 @@ func (o *QueryPaymentResponse) HasAdditionalInfo() bool {
 	return false
 }
 
-// SetAdditionalInfo gets a reference to the given interface{} and assigns it to the AdditionalInfo field.
-func (o *QueryPaymentResponse) SetAdditionalInfo(v interface{}) {
-	o.AdditionalInfo = v
+// SetAdditionalInfo gets a reference to the given QueryPaymentResponseAdditionalInfo and assigns it to the AdditionalInfo field.
+func (o *QueryPaymentResponse) SetAdditionalInfo(v QueryPaymentResponseAdditionalInfo) {
+	o.AdditionalInfo = &v
 }
 
 func (o QueryPaymentResponse) MarshalJSON() ([]byte, error) {
@@ -679,7 +678,7 @@ func (o QueryPaymentResponse) ToMap() (map[string]interface{}, error) {
 	if !utils.IsNil(o.Title) {
 		toSerialize["title"] = o.Title
 	}
-	if o.AdditionalInfo != nil {
+	if !utils.IsNil(o.AdditionalInfo) {
 		toSerialize["additionalInfo"] = o.AdditionalInfo
 	}
 	return toSerialize, nil

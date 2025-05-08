@@ -14,7 +14,7 @@ import (
 	"encoding/json"
 	"bytes"
 	"fmt"
-	utils "github.com/dana-id/dana-go-api-client/utils"
+	utils "github.com/dana-id/go_client/utils"
 )
 
 // checks if the Goods type satisfies the MappedNullable interface at compile time

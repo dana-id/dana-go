@@ -29,10 +29,10 @@ import (
 	"regexp"
 	"strings"
 
-	common "github.com/dana-id/dana-go-api-client/common"
-	config "github.com/dana-id/dana-go-api-client/config"
-	payment_gateway "github.com/dana-id/dana-go-api-client/payment_gateway/v1"
-	exceptions "github.com/dana-id/dana-go-api-client/exceptions"
+	common "github.com/dana-id/go_client/common"
+	config "github.com/dana-id/go_client/config"
+	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
+	exceptions "github.com/dana-id/go_client/exceptions"
 )
 
 var (

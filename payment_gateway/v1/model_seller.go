@@ -15,36 +15,36 @@ import (
 	utils "github.com/dana-id/go_client/utils"
 )
 
-// checks if the Buyer type satisfies the MappedNullable interface at compile time
-var _ utils.MappedNullable = &Buyer{}
+// checks if the Seller type satisfies the MappedNullable interface at compile time
+var _ utils.MappedNullable = &Seller{}
 
-// Buyer struct for Buyer
-type Buyer struct {
+// Seller struct for Seller
+type Seller struct {
 	ExternalUserType *string `json:"externalUserType,omitempty"`
 	Nickname *string `json:"nickname,omitempty"`
 	ExternalUserId *string `json:"externalUserId,omitempty"`
 	UserId *string `json:"userId,omitempty"`
 }
 
-// NewBuyer instantiates a new Buyer object
+// NewSeller instantiates a new Seller object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBuyer() *Buyer {
-	this := Buyer{}
+func NewSeller() *Seller {
+	this := Seller{}
 	return &this
 }
 
-// NewBuyerWithDefaults instantiates a new Buyer object
+// NewSellerWithDefaults instantiates a new Seller object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBuyerWithDefaults() *Buyer {
-	this := Buyer{}
+func NewSellerWithDefaults() *Seller {
+	this := Seller{}
 	return &this
 }
 
 // GetExternalUserType returns the ExternalUserType field value if set, zero value otherwise.
-func (o *Buyer) GetExternalUserType() string {
+func (o *Seller) GetExternalUserType() string {
 	if o == nil || utils.IsNil(o.ExternalUserType) {
 		var ret string
 		return ret
@@ -54,7 +54,7 @@ func (o *Buyer) GetExternalUserType() string {
 
 // GetExternalUserTypeOk returns a tuple with the ExternalUserType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Buyer) GetExternalUserTypeOk() (*string, bool) {
+func (o *Seller) GetExternalUserTypeOk() (*string, bool) {
 	if o == nil || utils.IsNil(o.ExternalUserType) {
 		return nil, false
 	}
@@ -62,7 +62,7 @@ func (o *Buyer) GetExternalUserTypeOk() (*string, bool) {
 }
 
 // HasExternalUserType returns a boolean if a field has been set.
-func (o *Buyer) HasExternalUserType() bool {
+func (o *Seller) HasExternalUserType() bool {
 	if o != nil && !utils.IsNil(o.ExternalUserType) {
 		return true
 	}
@@ -71,12 +71,12 @@ func (o *Buyer) HasExternalUserType() bool {
 }
 
 // SetExternalUserType gets a reference to the given string and assigns it to the ExternalUserType field.
-func (o *Buyer) SetExternalUserType(v string) {
+func (o *Seller) SetExternalUserType(v string) {
 	o.ExternalUserType = &v
 }
 
 // GetNickname returns the Nickname field value if set, zero value otherwise.
-func (o *Buyer) GetNickname() string {
+func (o *Seller) GetNickname() string {
 	if o == nil || utils.IsNil(o.Nickname) {
 		var ret string
 		return ret
@@ -86,7 +86,7 @@ func (o *Buyer) GetNickname() string {
 
 // GetNicknameOk returns a tuple with the Nickname field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Buyer) GetNicknameOk() (*string, bool) {
+func (o *Seller) GetNicknameOk() (*string, bool) {
 	if o == nil || utils.IsNil(o.Nickname) {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *Buyer) GetNicknameOk() (*string, bool) {
 }
 
 // HasNickname returns a boolean if a field has been set.
-func (o *Buyer) HasNickname() bool {
+func (o *Seller) HasNickname() bool {
 	if o != nil && !utils.IsNil(o.Nickname) {
 		return true
 	}
@@ -103,12 +103,12 @@ func (o *Buyer) HasNickname() bool {
 }
 
 // SetNickname gets a reference to the given string and assigns it to the Nickname field.
-func (o *Buyer) SetNickname(v string) {
+func (o *Seller) SetNickname(v string) {
 	o.Nickname = &v
 }
 
 // GetExternalUserId returns the ExternalUserId field value if set, zero value otherwise.
-func (o *Buyer) GetExternalUserId() string {
+func (o *Seller) GetExternalUserId() string {
 	if o == nil || utils.IsNil(o.ExternalUserId) {
 		var ret string
 		return ret
@@ -118,7 +118,7 @@ func (o *Buyer) GetExternalUserId() string {
 
 // GetExternalUserIdOk returns a tuple with the ExternalUserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Buyer) GetExternalUserIdOk() (*string, bool) {
+func (o *Seller) GetExternalUserIdOk() (*string, bool) {
 	if o == nil || utils.IsNil(o.ExternalUserId) {
 		return nil, false
 	}
@@ -126,7 +126,7 @@ func (o *Buyer) GetExternalUserIdOk() (*string, bool) {
 }
 
 // HasExternalUserId returns a boolean if a field has been set.
-func (o *Buyer) HasExternalUserId() bool {
+func (o *Seller) HasExternalUserId() bool {
 	if o != nil && !utils.IsNil(o.ExternalUserId) {
 		return true
 	}
@@ -135,12 +135,12 @@ func (o *Buyer) HasExternalUserId() bool {
 }
 
 // SetExternalUserId gets a reference to the given string and assigns it to the ExternalUserId field.
-func (o *Buyer) SetExternalUserId(v string) {
+func (o *Seller) SetExternalUserId(v string) {
 	o.ExternalUserId = &v
 }
 
 // GetUserId returns the UserId field value if set, zero value otherwise.
-func (o *Buyer) GetUserId() string {
+func (o *Seller) GetUserId() string {
 	if o == nil || utils.IsNil(o.UserId) {
 		var ret string
 		return ret
@@ -150,7 +150,7 @@ func (o *Buyer) GetUserId() string {
 
 // GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Buyer) GetUserIdOk() (*string, bool) {
+func (o *Seller) GetUserIdOk() (*string, bool) {
 	if o == nil || utils.IsNil(o.UserId) {
 		return nil, false
 	}
@@ -158,7 +158,7 @@ func (o *Buyer) GetUserIdOk() (*string, bool) {
 }
 
 // HasUserId returns a boolean if a field has been set.
-func (o *Buyer) HasUserId() bool {
+func (o *Seller) HasUserId() bool {
 	if o != nil && !utils.IsNil(o.UserId) {
 		return true
 	}
@@ -167,11 +167,11 @@ func (o *Buyer) HasUserId() bool {
 }
 
 // SetUserId gets a reference to the given string and assigns it to the UserId field.
-func (o *Buyer) SetUserId(v string) {
+func (o *Seller) SetUserId(v string) {
 	o.UserId = &v
 }
 
-func (o Buyer) MarshalJSON() ([]byte, error) {
+func (o Seller) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -179,7 +179,7 @@ func (o Buyer) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Buyer) ToMap() (map[string]interface{}, error) {
+func (o Seller) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !utils.IsNil(o.ExternalUserType) {
 		toSerialize["externalUserType"] = o.ExternalUserType
@@ -196,38 +196,38 @@ func (o Buyer) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableBuyer struct {
-	value *Buyer
+type NullableSeller struct {
+	value *Seller
 	isSet bool
 }
 
-func (v NullableBuyer) Get() *Buyer {
+func (v NullableSeller) Get() *Seller {
 	return v.value
 }
 
-func (v *NullableBuyer) Set(val *Buyer) {
+func (v *NullableSeller) Set(val *Seller) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBuyer) IsSet() bool {
+func (v NullableSeller) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBuyer) Unset() {
+func (v *NullableSeller) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBuyer(val *Buyer) *NullableBuyer {
-	return &NullableBuyer{value: val, isSet: true}
+func NewNullableSeller(val *Seller) *NullableSeller {
+	return &NullableSeller{value: val, isSet: true}
 }
 
-func (v NullableBuyer) MarshalJSON() ([]byte, error) {
+func (v NullableSeller) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBuyer) UnmarshalJSON(src []byte) error {
+func (v *NullableSeller) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

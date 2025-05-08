@@ -1,4 +1,4 @@
-module github.com/dana-id/dana-go-api-client
+module github.com/dana-id/go_client
 
 go 1.18
 
@@ -14,7 +14,3 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
-
-replace github.com/dana-id/dana-go-api-client/payment_gateway => ./payment_gateway
-
-replace github.com/dana-id/dana-go-api-client/utils => ../utils

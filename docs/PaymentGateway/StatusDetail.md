@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AcquirementStatus** | **string** | The status of acquirement | 
-**Frozen** | Pointer to **bool** | Whether the frozen is true or not | [optional] 
-**Cancelled** | Pointer to **bool** | Whether the cancelled is true or not | [optional] 
+**Frozen** | Pointer to **string** | Whether the frozen is true or not | [optional] 
+**Cancelled** | Pointer to **string** | Whether the cancelled is true or not | [optional] 
 
 ## Methods
 
@@ -49,20 +49,20 @@ SetAcquirementStatus sets AcquirementStatus field to given value.
 
 ### GetFrozen
 
-`func (o *StatusDetail) GetFrozen() bool`
+`func (o *StatusDetail) GetFrozen() string`
 
 GetFrozen returns the Frozen field if non-nil, zero value otherwise.
 
 ### GetFrozenOk
 
-`func (o *StatusDetail) GetFrozenOk() (*bool, bool)`
+`func (o *StatusDetail) GetFrozenOk() (*string, bool)`
 
 GetFrozenOk returns a tuple with the Frozen field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFrozen
 
-`func (o *StatusDetail) SetFrozen(v bool)`
+`func (o *StatusDetail) SetFrozen(v string)`
 
 SetFrozen sets Frozen field to given value.
 
@@ -74,20 +74,20 @@ HasFrozen returns a boolean if a field has been set.
 
 ### GetCancelled
 
-`func (o *StatusDetail) GetCancelled() bool`
+`func (o *StatusDetail) GetCancelled() string`
 
 GetCancelled returns the Cancelled field if non-nil, zero value otherwise.
 
 ### GetCancelledOk
 
-`func (o *StatusDetail) GetCancelledOk() (*bool, bool)`
+`func (o *StatusDetail) GetCancelledOk() (*string, bool)`
 
 GetCancelledOk returns a tuple with the Cancelled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCancelled
 
-`func (o *StatusDetail) SetCancelled(v bool)`
+`func (o *StatusDetail) SetCancelled(v string)`
 
 SetCancelled sets Cancelled field to given value.
 

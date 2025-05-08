@@ -18,7 +18,7 @@ import (
 	"os"
 	"time"
 
-	payment_gateway "github.com/dana-id/dana-go-api-client/payment_gateway/v1"
+	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
 )
 
 // GetMerchantId returns the merchant ID from environment or a default value

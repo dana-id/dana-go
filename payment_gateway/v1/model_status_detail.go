@@ -14,7 +14,7 @@ import (
 	"encoding/json"
 	"bytes"
 	"fmt"
-	utils "github.com/dana-id/dana-go-api-client/utils"
+	utils "github.com/dana-id/go_client/utils"
 )
 
 // checks if the StatusDetail type satisfies the MappedNullable interface at compile time
@@ -25,9 +25,9 @@ type StatusDetail struct {
 	// The status of acquirement
 	AcquirementStatus string `json:"acquirementStatus"`
 	// Whether the frozen is true or not
-	Frozen *bool `json:"frozen,omitempty"`
+	Frozen *string `json:"frozen,omitempty"`
 	// Whether the cancelled is true or not
-	Cancelled *bool `json:"cancelled,omitempty"`
+	Cancelled *string `json:"cancelled,omitempty"`
 }
 
 type _StatusDetail StatusDetail
@@ -75,9 +75,9 @@ func (o *StatusDetail) SetAcquirementStatus(v string) {
 }
 
 // GetFrozen returns the Frozen field value if set, zero value otherwise.
-func (o *StatusDetail) GetFrozen() bool {
+func (o *StatusDetail) GetFrozen() string {
 	if o == nil || utils.IsNil(o.Frozen) {
-		var ret bool
+		var ret string
 		return ret
 	}
 	return *o.Frozen
@@ -85,7 +85,7 @@ func (o *StatusDetail) GetFrozen() bool {
 
 // GetFrozenOk returns a tuple with the Frozen field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StatusDetail) GetFrozenOk() (*bool, bool) {
+func (o *StatusDetail) GetFrozenOk() (*string, bool) {
 	if o == nil || utils.IsNil(o.Frozen) {
 		return nil, false
 	}
@@ -101,15 +101,15 @@ func (o *StatusDetail) HasFrozen() bool {
 	return false
 }
 
-// SetFrozen gets a reference to the given bool and assigns it to the Frozen field.
-func (o *StatusDetail) SetFrozen(v bool) {
+// SetFrozen gets a reference to the given string and assigns it to the Frozen field.
+func (o *StatusDetail) SetFrozen(v string) {
 	o.Frozen = &v
 }
 
 // GetCancelled returns the Cancelled field value if set, zero value otherwise.
-func (o *StatusDetail) GetCancelled() bool {
+func (o *StatusDetail) GetCancelled() string {
 	if o == nil || utils.IsNil(o.Cancelled) {
-		var ret bool
+		var ret string
 		return ret
 	}
 	return *o.Cancelled
@@ -117,7 +117,7 @@ func (o *StatusDetail) GetCancelled() bool {
 
 // GetCancelledOk returns a tuple with the Cancelled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StatusDetail) GetCancelledOk() (*bool, bool) {
+func (o *StatusDetail) GetCancelledOk() (*string, bool) {
 	if o == nil || utils.IsNil(o.Cancelled) {
 		return nil, false
 	}
@@ -133,8 +133,8 @@ func (o *StatusDetail) HasCancelled() bool {
 	return false
 }
 
-// SetCancelled gets a reference to the given bool and assigns it to the Cancelled field.
-func (o *StatusDetail) SetCancelled(v bool) {
+// SetCancelled gets a reference to the given string and assigns it to the Cancelled field.
+func (o *StatusDetail) SetCancelled(v string) {
 	o.Cancelled = &v
 }
 
