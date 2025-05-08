@@ -12,7 +12,7 @@ package payment_gateway
 
 import (
 	"encoding/json"
-	utils "github.com/dana-id/dana-go-api-client/utils"
+	utils "github.com/dana-id/go_client/utils"
 )
 
 // checks if the QueryPaymentRequestAdditionalInfo type satisfies the MappedNullable interface at compile time

@@ -28,7 +28,7 @@ import (
 	"fmt"
 	"os"
 	payment_gateway "github.com/dana-id/dana-go-api-client/payment_gateway/v1"
-	"github.com/dana-id/dana-go-api-client/config"
+	"github.com/dana-id/go_client/config"
 )
 
 func main() {
@@ -109,7 +109,7 @@ import (
 	"fmt"
 	"os"
 	payment_gateway "github.com/dana-id/dana-go-api-client/payment_gateway/v1"
-	"github.com/dana-id/dana-go-api-client/config"
+	"github.com/dana-id/go_client/config"
 )
 
 func main() {
@@ -190,7 +190,7 @@ import (
 	"fmt"
 	"os"
 	payment_gateway "github.com/dana-id/dana-go-api-client/payment_gateway/v1"
-	"github.com/dana-id/dana-go-api-client/config"
+	"github.com/dana-id/go_client/config"
 )
 
 func main() {

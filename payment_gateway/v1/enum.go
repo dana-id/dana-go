@@ -39,6 +39,11 @@ const (
     TYPE_NOTIFICATION_ Type = "NOTIFICATION"
 )
 
+type Businessscenario string
+const (
+    BUSINESSSCENARIO_PAYMENT_GATEWAY_ Businessscenario = "PAYMENT_GATEWAY"
+)
+
 type Acquirementstatus string
 const (
     ACQUIREMENTSTATUS_INIT_ Acquirementstatus = "INIT"
