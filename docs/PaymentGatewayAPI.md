@@ -28,6 +28,7 @@ import (
 	"fmt"
 	"os"
 	payment_gateway "github.com/dana-id/dana-go-api-client/payment_gateway/v1"
+	payment_gateway "github.com/dana-id/dana-go-api-client/payment_gateway/v1"
 	"github.com/dana-id/go_client/config"
 )
 
@@ -50,13 +51,13 @@ func main() {
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
 	}
 	apiClient := payment_gateway.NewAPIClient(configuration)
-	resp, r, err := apiClient.PaymentGatewayAPI.ConsultPay(context.Background()).(request).Execute()
+	_, r, err := apiClient.PaymentGatewayAPI.ConsultPay(context.Background()).ConsultPayRequest(request).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.ConsultPay``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `ConsultPay`: ConsultPayResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.ConsultPay`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.ConsultPay`: %v\n", r.Body)
 }
 ```
 
@@ -109,6 +110,7 @@ import (
 	"fmt"
 	"os"
 	payment_gateway "github.com/dana-id/dana-go-api-client/payment_gateway/v1"
+	payment_gateway "github.com/dana-id/dana-go-api-client/payment_gateway/v1"
 	"github.com/dana-id/go_client/config"
 )
 
@@ -131,13 +133,13 @@ func main() {
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
 	}
 	apiClient := payment_gateway.NewAPIClient(configuration)
-	resp, r, err := apiClient.PaymentGatewayAPI.CreateOrder(context.Background()).(request).Execute()
+	_, r, err := apiClient.PaymentGatewayAPI.CreateOrder(context.Background()).CreateOrderRequest(request).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.CreateOrder``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `CreateOrder`: CreateOrderResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.CreateOrder`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.CreateOrder`: %v\n", r.Body)
 }
 ```
 
@@ -190,6 +192,7 @@ import (
 	"fmt"
 	"os"
 	payment_gateway "github.com/dana-id/dana-go-api-client/payment_gateway/v1"
+	payment_gateway "github.com/dana-id/dana-go-api-client/payment_gateway/v1"
 	"github.com/dana-id/go_client/config"
 )
 
@@ -212,13 +215,13 @@ func main() {
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
 	}
 	apiClient := payment_gateway.NewAPIClient(configuration)
-	resp, r, err := apiClient.PaymentGatewayAPI.QueryPayment(context.Background()).(request).Execute()
+	_, r, err := apiClient.PaymentGatewayAPI.QueryPayment(context.Background()).QueryPaymentRequest(request).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.QueryPayment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `QueryPayment`: QueryPaymentResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.QueryPayment`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.QueryPayment`: %v\n", r.Body)
 }
 ```
 
