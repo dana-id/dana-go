@@ -46,6 +46,139 @@ func NewPaymentGatewayAPIService(client common.ClientInterface) *PaymentGatewayA
 	}
 }
 
+type ApiCancelOrderRequest struct {
+	ctx context.Context
+	ApiService *PaymentGatewayAPIService
+	cancelOrderRequest *CancelOrderRequest
+}
+
+func (r ApiCancelOrderRequest) CancelOrderRequest(cancelOrderRequest CancelOrderRequest) ApiCancelOrderRequest {
+	r.cancelOrderRequest = &cancelOrderRequest
+	return r
+}
+
+func (r ApiCancelOrderRequest) Execute() (*CancelOrderResponse, *http.Response, error) {
+	return r.ApiService.CancelOrderExecute(r)
+}
+
+/*
+CancelOrder Cancel Order API
+
+This API is used to cancel the order from merchant's platform to DANA
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCancelOrderRequest
+*/
+func (a *PaymentGatewayAPIService) CancelOrder(ctx context.Context) ApiCancelOrderRequest {
+	return ApiCancelOrderRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return CancelOrderResponse
+func (a *PaymentGatewayAPIService) CancelOrderExecute(r ApiCancelOrderRequest) (*CancelOrderResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []common.FormFile
+		localVarReturnValue  *CancelOrderResponse
+	)
+
+	localBasePath, err := a.GetConfig().ServerURLWithContext(r.ctx, "PaymentGatewayAPIService.CancelOrder")
+	if err != nil {
+		return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+			ErrorMsg: err.Error(),
+		}
+	}
+
+	localVarPath := localBasePath + "/v1.0/debit/cancel.htm"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.cancelOrderRequest == nil {
+		return localVarReturnValue, nil, utils.ReportError("cancelOrderRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := utils.SelectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := utils.SelectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.cancelOrderRequest
+	// Set API Key Authentication headers using centralized utility function
+	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
+		// Process request body for authentication if present
+		var dataForSnapStr string
+		dst := &bytes.Buffer{}
+		dataForSnap, err := json.Marshal(localVarPostBody)
+		if err != nil {
+			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+				ErrorMsg: fmt.Sprintf("Failed to marshal request: %v", err),
+			}
+		}
+
+		err = json.Compact(dst, dataForSnap)
+		if err != nil {
+			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+				ErrorMsg: err.Error(),
+			}
+		}
+		dataForSnapStr = string(dst.Bytes())
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath)
+		
+	}
+	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.CallAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &exceptions.GenericOpenAPIError{
+			RawBody:  localVarBody,
+			ErrorMsg: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	// Return body data
+	
+	if localVarHTTPResponse.StatusCode >= 200 && localVarHTTPResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err == nil { 
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
+	}
+		return localVarReturnValue, localVarHTTPResponse, nil
+}
 type ApiConsultPayRequest struct {
 	ctx context.Context
 	ApiService *PaymentGatewayAPIService
@@ -391,6 +524,139 @@ func (a *PaymentGatewayAPIService) QueryPaymentExecute(r ApiQueryPaymentRequest)
 		val := "PAYMENT_GATEWAY"
 		r.queryPaymentRequest.AdditionalInfo.BusinessScenario = &val
 	}
+	// Set API Key Authentication headers using centralized utility function
+	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
+		// Process request body for authentication if present
+		var dataForSnapStr string
+		dst := &bytes.Buffer{}
+		dataForSnap, err := json.Marshal(localVarPostBody)
+		if err != nil {
+			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+				ErrorMsg: fmt.Sprintf("Failed to marshal request: %v", err),
+			}
+		}
+
+		err = json.Compact(dst, dataForSnap)
+		if err != nil {
+			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+				ErrorMsg: err.Error(),
+			}
+		}
+		dataForSnapStr = string(dst.Bytes())
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath)
+		
+	}
+	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.CallAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &exceptions.GenericOpenAPIError{
+			RawBody:  localVarBody,
+			ErrorMsg: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	// Return body data
+	
+	if localVarHTTPResponse.StatusCode >= 200 && localVarHTTPResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err == nil { 
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
+	}
+		return localVarReturnValue, localVarHTTPResponse, nil
+}
+type ApiRefundOrderRequest struct {
+	ctx context.Context
+	ApiService *PaymentGatewayAPIService
+	refundOrderRequest *RefundOrderRequest
+}
+
+func (r ApiRefundOrderRequest) RefundOrderRequest(refundOrderRequest RefundOrderRequest) ApiRefundOrderRequest {
+	r.refundOrderRequest = &refundOrderRequest
+	return r
+}
+
+func (r ApiRefundOrderRequest) Execute() (*RefundOrderResponse, *http.Response, error) {
+	return r.ApiService.RefundOrderExecute(r)
+}
+
+/*
+RefundOrder Refund Order API
+
+This API is used to refund the order from merchant's platform to DANA
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiRefundOrderRequest
+*/
+func (a *PaymentGatewayAPIService) RefundOrder(ctx context.Context) ApiRefundOrderRequest {
+	return ApiRefundOrderRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return RefundOrderResponse
+func (a *PaymentGatewayAPIService) RefundOrderExecute(r ApiRefundOrderRequest) (*RefundOrderResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []common.FormFile
+		localVarReturnValue  *RefundOrderResponse
+	)
+
+	localBasePath, err := a.GetConfig().ServerURLWithContext(r.ctx, "PaymentGatewayAPIService.RefundOrder")
+	if err != nil {
+		return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+			ErrorMsg: err.Error(),
+		}
+	}
+
+	localVarPath := localBasePath + "/v1.0/debit/refund.htm"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.refundOrderRequest == nil {
+		return localVarReturnValue, nil, utils.ReportError("refundOrderRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := utils.SelectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := utils.SelectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.refundOrderRequest
 	// Set API Key Authentication headers using centralized utility function
 	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
 		// Process request body for authentication if present
