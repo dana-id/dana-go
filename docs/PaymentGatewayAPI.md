@@ -108,6 +108,7 @@ Consult Pay API
 package main
 
 import (
+	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
 	"os"
@@ -189,6 +190,7 @@ Create Payment Order
 package main
 
 import (
+	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
 	"os"
@@ -270,6 +272,7 @@ Query Payment
 package main
 
 import (
+	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
 	"os"
@@ -351,6 +354,7 @@ Refund Order API
 package main
 
 import (
+	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
 	"os"
