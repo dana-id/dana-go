@@ -128,3 +128,46 @@ func GetQueryPaymentRequest(orderRequest *payment_gateway.CreateOrderByApiReques
 		OriginalReferenceNo:        strPtr(order.GetReferenceNo()),
 	}
 }
+
+// GetCancelOrderRequest returns a fixture for CancelOrderRequest
+func GetCancelOrderRequest(orderRequest *payment_gateway.CreateOrderByApiRequest) payment_gateway.CancelOrderRequest {
+	// Helper for string pointer
+	strPtr := func(s string) *string {
+		return &s
+	}
+
+	return payment_gateway.CancelOrderRequest{
+		MerchantId:                 GetMerchantId(),
+		OriginalPartnerReferenceNo: orderRequest.GetPartnerReferenceNo(),
+		Reason:                     strPtr("Test cancellation"),
+	}
+}
+
+// GetRefundOrderRequest returns a fixture for RefundOrderRequest
+// func GetRefundOrderRequest(orderRequest *payment_gateway.CreateOrderByApiRequest) payment_gateway.RefundOrderRequest {
+// 	// Generate a unique partner refund number based on timestamp
+// 	partnerRefundNo := "REFUND-" + time.Now().Format("20060102150405")
+
+// 	// Helper for string pointer
+// 	strPtr := func(s string) *string {
+// 		return &s
+// 	}
+
+// 	return payment_gateway.RefundOrderRequest{
+// 		MerchantId:                 GetMerchantId(),
+// 		OriginalPartnerReferenceNo: orderRequest.GetPartnerReferenceNo(),
+// 		PartnerRefundNo:            partnerRefundNo,
+// 		RefundAmount: payment_gateway.Money{
+// 			Value:    "10000.00",
+// 			Currency: "IDR",
+// 		},
+// 		Reason: strPtr("Test refund"),
+// 		// Add additional info as a map with the required fields for the special case
+// 		AdditionalInfo: map[string]interface{}{
+// 			"payoutAccountNo": "20050000000001503276",
+// 			"actorType":       "BACK_OFFICE",
+// 			"deviceId":       "TEST-DEVICE-ID",
+// 			"terminalType":   "WEB",
+// 		},
+// 	}
+// }
