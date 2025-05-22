@@ -36,7 +36,7 @@ type CancelOrderRequest struct {
 	Reason *string `json:"reason,omitempty"`
 	// Store identifier to indicate to which store this payment belongs to
 	ExternalStoreId *string `json:"externalStoreId,omitempty"`
-	// Amount. Contains two sub fields - Value (Transaction amount, including the cents) and Currency (Currency code based on ISO 4217)
+	// Amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	Amount *Money `json:"amount,omitempty"`
 	// Additional information
 	AdditionalInfo map[string]interface{} `json:"additionalInfo,omitempty"`

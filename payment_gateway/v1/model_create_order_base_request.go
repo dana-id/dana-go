@@ -24,14 +24,15 @@ var _ utils.MappedNullable = &CreateOrderBaseRequest{}
 type CreateOrderBaseRequest struct {
 	// Transaction identifier on partner system
 	PartnerReferenceNo string `json:"partnerReferenceNo"`
-	// Unique merchant identifier
+	// Merchant identifier that is unique per each merchant
 	MerchantId string `json:"merchantId"`
-	Amount Money `json:"amount"`
 	// Information of sub merchant identifier
 	SubMerchantId *string `json:"subMerchantId,omitempty"`
+	// Amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
+	Amount Money `json:"amount"`
 	// Store identifier to indicate to which store this payment belongs to
 	ExternalStoreId *string `json:"externalStoreId,omitempty"`
-	// The date and time when the order is valid until in the following format: YYYY-MM-DDTHH:MM:SS+07:00 
+	// The time when the payment will be automatically expired, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
 	ValidUpTo *string `json:"validUpTo,omitempty" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
 	// Payment method(s) that cannot be used for this
 	DisabledPayMethods *string `json:"disabledPayMethods,omitempty"`
@@ -110,30 +111,6 @@ func (o *CreateOrderBaseRequest) SetMerchantId(v string) {
 	o.MerchantId = v
 }
 
-// GetAmount returns the Amount field value
-func (o *CreateOrderBaseRequest) GetAmount() Money {
-	if o == nil {
-		var ret Money
-		return ret
-	}
-
-	return o.Amount
-}
-
-// GetAmountOk returns a tuple with the Amount field value
-// and a boolean to check if the value has been set.
-func (o *CreateOrderBaseRequest) GetAmountOk() (*Money, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Amount, true
-}
-
-// SetAmount sets field value
-func (o *CreateOrderBaseRequest) SetAmount(v Money) {
-	o.Amount = v
-}
-
 // GetSubMerchantId returns the SubMerchantId field value if set, zero value otherwise.
 func (o *CreateOrderBaseRequest) GetSubMerchantId() string {
 	if o == nil || utils.IsNil(o.SubMerchantId) {
@@ -164,6 +141,30 @@ func (o *CreateOrderBaseRequest) HasSubMerchantId() bool {
 // SetSubMerchantId gets a reference to the given string and assigns it to the SubMerchantId field.
 func (o *CreateOrderBaseRequest) SetSubMerchantId(v string) {
 	o.SubMerchantId = &v
+}
+
+// GetAmount returns the Amount field value
+func (o *CreateOrderBaseRequest) GetAmount() Money {
+	if o == nil {
+		var ret Money
+		return ret
+	}
+
+	return o.Amount
+}
+
+// GetAmountOk returns a tuple with the Amount field value
+// and a boolean to check if the value has been set.
+func (o *CreateOrderBaseRequest) GetAmountOk() (*Money, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Amount, true
+}
+
+// SetAmount sets field value
+func (o *CreateOrderBaseRequest) SetAmount(v Money) {
+	o.Amount = v
 }
 
 // GetExternalStoreId returns the ExternalStoreId field value if set, zero value otherwise.
@@ -298,10 +299,10 @@ func (o CreateOrderBaseRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["partnerReferenceNo"] = o.PartnerReferenceNo
 	toSerialize["merchantId"] = o.MerchantId
-	toSerialize["amount"] = o.Amount
 	if !utils.IsNil(o.SubMerchantId) {
 		toSerialize["subMerchantId"] = o.SubMerchantId
 	}
+	toSerialize["amount"] = o.Amount
 	if !utils.IsNil(o.ExternalStoreId) {
 		toSerialize["externalStoreId"] = o.ExternalStoreId
 	}

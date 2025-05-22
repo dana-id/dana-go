@@ -4,22 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PayOptionDetails** | [**[]PayOptionDetail**](PayOptionDetail.md) |  | 
-**AdditionalInfo** | Pointer to [**CreateOrderByRedirectAdditionalInfo**](CreateOrderByRedirectAdditionalInfo.md) |  | [optional] 
+**AdditionalInfo** | Pointer to [**CreateOrderByApiAdditionalInfo**](CreateOrderByApiAdditionalInfo.md) |  | [optional] 
 **PartnerReferenceNo** | **string** | Transaction identifier on partner system | 
-**MerchantId** | **string** | Unique merchant identifier | 
-**Amount** | [**Money**](Money.md) |  | 
+**MerchantId** | **string** | Merchant identifier that is unique per each merchant | 
 **SubMerchantId** | Pointer to **string** | Information of sub merchant identifier | [optional] 
+**Amount** | [**Money**](Money.md) | Amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | 
 **ExternalStoreId** | Pointer to **string** | Store identifier to indicate to which store this payment belongs to | [optional] 
-**ValidUpTo** | Pointer to **string** | The date and time when the order is valid until in the following format: YYYY-MM-DDTHH:MM:SS+07:00  | [optional] 
+**ValidUpTo** | Pointer to **string** | The time when the payment will be automatically expired, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
 **DisabledPayMethods** | Pointer to **string** | Payment method(s) that cannot be used for this | [optional] 
 **UrlParams** | [**[]UrlParam**](UrlParam.md) | Notify URL that DANA must send the payment notification to | 
+**PayOptionDetails** | [**[]PayOptionDetail**](PayOptionDetail.md) |  | 
 
 ## Methods
 
 ### NewCreateOrderRequest
 
-`func NewCreateOrderRequest(payOptionDetails []PayOptionDetail, partnerReferenceNo string, merchantId string, amount Money, urlParams []UrlParam, ) *CreateOrderRequest`
+`func NewCreateOrderRequest(partnerReferenceNo string, merchantId string, amount Money, urlParams []UrlParam, payOptionDetails []PayOptionDetail, ) *CreateOrderRequest`
 
 NewCreateOrderRequest instantiates a new CreateOrderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -34,42 +34,22 @@ NewCreateOrderRequestWithDefaults instantiates a new CreateOrderRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetPayOptionDetails
-
-`func (o *CreateOrderRequest) GetPayOptionDetails() []PayOptionDetail`
-
-GetPayOptionDetails returns the PayOptionDetails field if non-nil, zero value otherwise.
-
-### GetPayOptionDetailsOk
-
-`func (o *CreateOrderRequest) GetPayOptionDetailsOk() (*[]PayOptionDetail, bool)`
-
-GetPayOptionDetailsOk returns a tuple with the PayOptionDetails field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPayOptionDetails
-
-`func (o *CreateOrderRequest) SetPayOptionDetails(v []PayOptionDetail)`
-
-SetPayOptionDetails sets PayOptionDetails field to given value.
-
-
 ### GetAdditionalInfo
 
-`func (o *CreateOrderRequest) GetAdditionalInfo() CreateOrderByRedirectAdditionalInfo`
+`func (o *CreateOrderRequest) GetAdditionalInfo() CreateOrderByApiAdditionalInfo`
 
 GetAdditionalInfo returns the AdditionalInfo field if non-nil, zero value otherwise.
 
 ### GetAdditionalInfoOk
 
-`func (o *CreateOrderRequest) GetAdditionalInfoOk() (*CreateOrderByRedirectAdditionalInfo, bool)`
+`func (o *CreateOrderRequest) GetAdditionalInfoOk() (*CreateOrderByApiAdditionalInfo, bool)`
 
 GetAdditionalInfoOk returns a tuple with the AdditionalInfo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAdditionalInfo
 
-`func (o *CreateOrderRequest) SetAdditionalInfo(v CreateOrderByRedirectAdditionalInfo)`
+`func (o *CreateOrderRequest) SetAdditionalInfo(v CreateOrderByApiAdditionalInfo)`
 
 SetAdditionalInfo sets AdditionalInfo field to given value.
 
@@ -119,26 +99,6 @@ and a boolean to check if the value has been set.
 SetMerchantId sets MerchantId field to given value.
 
 
-### GetAmount
-
-`func (o *CreateOrderRequest) GetAmount() Money`
-
-GetAmount returns the Amount field if non-nil, zero value otherwise.
-
-### GetAmountOk
-
-`func (o *CreateOrderRequest) GetAmountOk() (*Money, bool)`
-
-GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAmount
-
-`func (o *CreateOrderRequest) SetAmount(v Money)`
-
-SetAmount sets Amount field to given value.
-
-
 ### GetSubMerchantId
 
 `func (o *CreateOrderRequest) GetSubMerchantId() string`
@@ -163,6 +123,26 @@ SetSubMerchantId sets SubMerchantId field to given value.
 `func (o *CreateOrderRequest) HasSubMerchantId() bool`
 
 HasSubMerchantId returns a boolean if a field has been set.
+
+### GetAmount
+
+`func (o *CreateOrderRequest) GetAmount() Money`
+
+GetAmount returns the Amount field if non-nil, zero value otherwise.
+
+### GetAmountOk
+
+`func (o *CreateOrderRequest) GetAmountOk() (*Money, bool)`
+
+GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAmount
+
+`func (o *CreateOrderRequest) SetAmount(v Money)`
+
+SetAmount sets Amount field to given value.
+
 
 ### GetExternalStoreId
 
@@ -257,6 +237,26 @@ and a boolean to check if the value has been set.
 `func (o *CreateOrderRequest) SetUrlParams(v []UrlParam)`
 
 SetUrlParams sets UrlParams field to given value.
+
+
+### GetPayOptionDetails
+
+`func (o *CreateOrderRequest) GetPayOptionDetails() []PayOptionDetail`
+
+GetPayOptionDetails returns the PayOptionDetails field if non-nil, zero value otherwise.
+
+### GetPayOptionDetailsOk
+
+`func (o *CreateOrderRequest) GetPayOptionDetailsOk() (*[]PayOptionDetail, bool)`
+
+GetPayOptionDetailsOk returns a tuple with the PayOptionDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPayOptionDetails
+
+`func (o *CreateOrderRequest) SetPayOptionDetails(v []PayOptionDetail)`
+
+SetPayOptionDetails sets PayOptionDetails field to given value.
 
 
 

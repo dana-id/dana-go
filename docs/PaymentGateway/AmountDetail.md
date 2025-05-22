@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderAmount** | [**Money**](Money.md) | Order amount including cents and currency (ISO format) | 
-**PayAmount** | Pointer to [**Money**](Money.md) | Pay amount including cents and currency (ISO format) | [optional] 
-**VoidAmount** | Pointer to [**Money**](Money.md) | Void amount including cents and currency (ISO format) | [optional] 
-**ConfirmAmount** | Pointer to [**Money**](Money.md) | Confirm amount including cents and currency (ISO format) | [optional] 
-**RefundAmount** | Pointer to [**Money**](Money.md) | Refund amount including cents and currency (ISO format) | [optional] 
-**ChargebackAmount** | Pointer to [**Money**](Money.md) | Chargeback amount including cents and currency (ISO format) | [optional] 
-**ChargeAmount** | Pointer to [**Money**](Money.md) | Charge amount including cents and currency (ISO format) | [optional] 
+**OrderAmount** | [**Money**](Money.md) | Order amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | 
+**PayAmount** | Pointer to [**Money**](Money.md) | Pay amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | [optional] 
+**VoidAmount** | Pointer to [**Money**](Money.md) | Void amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | [optional] 
+**ConfirmAmount** | Pointer to [**Money**](Money.md) | Confirm amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | [optional] 
+**RefundAmount** | Pointer to [**Money**](Money.md) | Refund amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | [optional] 
+**ChargebackAmount** | Pointer to [**Money**](Money.md) | Chargeback amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | [optional] 
+**ChargeAmount** | Pointer to [**Money**](Money.md) | Charge amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | [optional] 
 
 ## Methods
 

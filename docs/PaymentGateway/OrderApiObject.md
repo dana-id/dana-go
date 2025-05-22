@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderTitle** | **string** |  | 
-**MerchantTransType** | Pointer to **string** |  | [optional] 
-**Buyer** | Pointer to [**Buyer**](Buyer.md) |  | [optional] 
-**Goods** | Pointer to [**[]Goods**](Goods.md) |  | [optional] 
-**ShippingInfo** | Pointer to [**[]ShippingInfo**](ShippingInfo.md) |  | [optional] 
-**ExtendInfo** | Pointer to **string** |  | [optional] 
-**Scenario** | Pointer to **string** |  | [optional] 
+**OrderTitle** | **string** | Additional information of order title | 
+**MerchantTransType** | Pointer to **string** | Additional information of merchant transaction type | [optional] 
+**Buyer** | Pointer to [**Buyer**](Buyer.md) | Additional information of buyer | [optional] 
+**Goods** | Pointer to [**[]Goods**](Goods.md) | Additional information of goods | [optional] 
+**ShippingInfo** | Pointer to [**[]ShippingInfo**](ShippingInfo.md) | Additional information of shipping info | [optional] 
+**ExtendInfo** | Pointer to **string** | Additional information of extend | [optional] 
+**Scenario** | Pointer to **string** | For Payment Gateway scenario, need to fill it as API | [optional] 
 
 ## Methods
 

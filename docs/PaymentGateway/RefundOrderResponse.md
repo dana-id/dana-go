@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseCode** | **string** | Refer to response code list | 
-**ResponseMessage** | **string** | Refer to response code list | 
+**ResponseCode** | **string** | Response code. Refer to https://dashboard.dana.id/api-docs/read/127#HTML-API-RefundOrder-ResponseCodeandMessage | 
+**ResponseMessage** | **string** | Response message. Refer to https://dashboard.dana.id/api-docs/read/127#HTML-API-RefundOrder-ResponseCodeandMessage | 
 **OriginalReferenceNo** | Pointer to **string** | Original transaction identifier on DANA system | [optional] 
 **OriginalPartnerReferenceNo** | **string** | Original transaction identifier on partner system | 
 **OriginalExternalId** | Pointer to **string** | Original external identifier on header message | [optional] 

@@ -22,17 +22,17 @@ var _ utils.MappedNullable = &CancelOrderResponse{}
 
 // CancelOrderResponse struct for CancelOrderResponse
 type CancelOrderResponse struct {
-	// Refer to response code list
+	// Response code. Refer to https://dashboard.dana.id/api-docs/read/117#HTML-API-CancelOrder-ResponseCodeandMessage
 	ResponseCode string `json:"responseCode"`
-	// Refer to response code list
+	// Response message. Refer to https://dashboard.dana.id/api-docs/read/117#HTML-API-CancelOrder-ResponseCodeandMessage
 	ResponseMessage string `json:"responseMessage"`
-	// Original transaction identifier on DANA system
+	// Original transaction identifier on DANA system. Present if successfully processed
 	OriginalReferenceNo *string `json:"originalReferenceNo,omitempty"`
 	// Original transaction identifier on partner system
 	OriginalPartnerReferenceNo string `json:"originalPartnerReferenceNo"`
 	// Original external identifier on header message
 	OriginalExternalId *string `json:"originalExternalId,omitempty"`
-	// Cancellation date time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
+	// Cancellation date time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time). Present if successfully processed
 	CancelTime *string `json:"cancelTime,omitempty" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
 	// Transaction date, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
 	TransactionDate *string `json:"transactionDate,omitempty" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`

@@ -22,18 +22,31 @@ var _ utils.MappedNullable = &EnvInfo{}
 
 // EnvInfo struct for EnvInfo
 type EnvInfo struct {
+	// Session identifier
 	SessionId *string `json:"sessionId,omitempty"`
+	// Token identifier
 	TokenId *string `json:"tokenId,omitempty"`
+	// Website language
 	WebsiteLanguage *string `json:"websiteLanguage,omitempty"`
+	// Client IP address
 	ClientIp *string `json:"clientIp,omitempty"`
+	// Operating system type
 	OsType *string `json:"osType,omitempty"`
+	// App version
 	AppVersion *string `json:"appVersion,omitempty"`
+	// SDK version
 	SdkVersion *string `json:"sdkVersion,omitempty"`
+	// The source platform is always independent payment gateway (IPG)
 	SourcePlatform string `json:"sourcePlatform"`
+	// Order operating system type
 	OrderOsType *string `json:"orderOsType,omitempty"`
+	// Merchant App version
 	MerchantAppVersion *string `json:"merchantAppVersion,omitempty"`
+	// Terminal type. The enums:<br> * APP - Mobile Application<br> * WEB - Browser Web<br> * WAP - Mobile Wap<br> * SYSTEM - System Call<br> 
 	TerminalType string `json:"terminalType"`
+	// Order terminal type. The enums:<br> * APP - Mobile Application<br> * WEB - Browser Web<br> * WAP - Mobile Wap<br> * SYSTEM - System Call<br> 
 	OrderTerminalType *string `json:"orderTerminalType,omitempty"`
+	// Extend information
 	ExtendInfo *string `json:"extendInfo,omitempty"`
 }
 

@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatedTime** | **string** | Time of created order, format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time) | 
-**ExpiryTime** | **string** | Time of expiry order, format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time) | 
-**PaidTimes** | Pointer to **[]string** | Array of paid order times in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time) | [optional] 
-**ConfirmedTimes** | Pointer to **[]string** | Array of confirmed order times in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time) | [optional] 
-**CancelledTime** | Pointer to **string** | Time of cancelled order in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time) | [optional] 
+**CreatedTime** | **string** | Time of created order, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | 
+**ExpiryTime** | **string** | Time of expiry order, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | 
+**PaidTimes** | Pointer to **[]string** | Time of paid order, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
+**ConfirmedTimes** | Pointer to **[]string** | Time of confirmed order, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
+**CancelledTime** | Pointer to **string** | Time of cancelled order, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
 
 ## Methods
 

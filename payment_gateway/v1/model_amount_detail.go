@@ -22,19 +22,19 @@ var _ utils.MappedNullable = &AmountDetail{}
 
 // AmountDetail struct for AmountDetail
 type AmountDetail struct {
-	// Order amount including cents and currency (ISO format)
+	// Order amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	OrderAmount Money `json:"orderAmount"`
-	// Pay amount including cents and currency (ISO format)
+	// Pay amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	PayAmount *Money `json:"payAmount,omitempty"`
-	// Void amount including cents and currency (ISO format)
+	// Void amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	VoidAmount *Money `json:"voidAmount,omitempty"`
-	// Confirm amount including cents and currency (ISO format)
+	// Confirm amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	ConfirmAmount *Money `json:"confirmAmount,omitempty"`
-	// Refund amount including cents and currency (ISO format)
+	// Refund amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	RefundAmount *Money `json:"refundAmount,omitempty"`
-	// Chargeback amount including cents and currency (ISO format)
+	// Chargeback amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	ChargebackAmount *Money `json:"chargebackAmount,omitempty"`
-	// Charge amount including cents and currency (ISO format)
+	// Charge amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	ChargeAmount *Money `json:"chargeAmount,omitempty"`
 }
 

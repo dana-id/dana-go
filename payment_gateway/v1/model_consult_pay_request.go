@@ -24,7 +24,9 @@ var _ utils.MappedNullable = &ConsultPayRequest{}
 type ConsultPayRequest struct {
 	// Merchant identifier that is unique per each merchant
 	MerchantId string `json:"merchantId"`
+	// Amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	Amount Money `json:"amount"`
+	// Additional information
 	AdditionalInfo ConsultPayRequestAdditionalInfo `json:"additionalInfo"`
 }
 

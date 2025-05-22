@@ -22,7 +22,7 @@ var _ utils.MappedNullable = &StatusDetail{}
 
 // StatusDetail struct for StatusDetail
 type StatusDetail struct {
-	// The status of acquirement
+	// Acquirement status. The enums:<br> * INIT - Order is created but not paid yet<br> * SUCCESS - Order is succeeded<br> * CLOSED - Order is closed<br> * PAYING - Order is paid but not finish<br> * MERCHANT_ACCEPT - Order is accepted by merchant after order is paid for PAY-CONFIRM<br> * CANCELLED - Order is cancelled<br> 
 	AcquirementStatus string `json:"acquirementStatus"`
 	// Whether the frozen is true or not
 	Frozen *string `json:"frozen,omitempty"`

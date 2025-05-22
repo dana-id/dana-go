@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PhoneNumber** | Pointer to **string** |  | [optional] 
-**PaymentCode** | Pointer to **string** |  | [optional] 
+**PhoneNumber** | Pointer to **string** | User&#39;s phone number | [optional] 
+**PaymentCode** | Pointer to **string** | Payment code that used for payment with virtual account | [optional] 
 **PromoInfos** | Pointer to [**[]PromoInfo**](PromoInfo.md) |  | [optional] 
 
 ## Methods

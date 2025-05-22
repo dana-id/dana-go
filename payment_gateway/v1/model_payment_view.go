@@ -12,6 +12,8 @@ package payment_gateway
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 	utils "github.com/dana-id/go_client/utils"
 )
 
@@ -22,22 +24,25 @@ var _ utils.MappedNullable = &PaymentView{}
 type PaymentView struct {
 	// Cashier request identifier
 	CashierRequestId *string `json:"cashierRequestId,omitempty"`
-	// Paid time in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time)
+	// Information of paid time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
 	PaidTime *string `json:"paidTime,omitempty" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
-	// Information of pay options
-	PayOptionInfos []PayOptionInfo `json:"payOptionInfos,omitempty"`
+	// Information of pay option
+	PayOptionInfos []PayOptionInfo `json:"payOptionInfos"`
 	// Extend information of pay request
 	PayRequestExtendInfo *string `json:"payRequestExtendInfo,omitempty"`
-	// Additional extend information
+	// Extend information
 	ExtendInfo *string `json:"extendInfo,omitempty"`
 }
+
+type _PaymentView PaymentView
 
 // NewPaymentView instantiates a new PaymentView object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentView() *PaymentView {
+func NewPaymentView(payOptionInfos []PayOptionInfo) *PaymentView {
 	this := PaymentView{}
+	this.PayOptionInfos = payOptionInfos
 	return &this
 }
 
@@ -113,34 +118,26 @@ func (o *PaymentView) SetPaidTime(v string) {
 	o.PaidTime = &v
 }
 
-// GetPayOptionInfos returns the PayOptionInfos field value if set, zero value otherwise.
+// GetPayOptionInfos returns the PayOptionInfos field value
 func (o *PaymentView) GetPayOptionInfos() []PayOptionInfo {
-	if o == nil || utils.IsNil(o.PayOptionInfos) {
+	if o == nil {
 		var ret []PayOptionInfo
 		return ret
 	}
+
 	return o.PayOptionInfos
 }
 
-// GetPayOptionInfosOk returns a tuple with the PayOptionInfos field value if set, nil otherwise
+// GetPayOptionInfosOk returns a tuple with the PayOptionInfos field value
 // and a boolean to check if the value has been set.
 func (o *PaymentView) GetPayOptionInfosOk() ([]PayOptionInfo, bool) {
-	if o == nil || utils.IsNil(o.PayOptionInfos) {
+	if o == nil {
 		return nil, false
 	}
 	return o.PayOptionInfos, true
 }
 
-// HasPayOptionInfos returns a boolean if a field has been set.
-func (o *PaymentView) HasPayOptionInfos() bool {
-	if o != nil && !utils.IsNil(o.PayOptionInfos) {
-		return true
-	}
-
-	return false
-}
-
-// SetPayOptionInfos gets a reference to the given []PayOptionInfo and assigns it to the PayOptionInfos field.
+// SetPayOptionInfos sets field value
 func (o *PaymentView) SetPayOptionInfos(v []PayOptionInfo) {
 	o.PayOptionInfos = v
 }
@@ -225,9 +222,7 @@ func (o PaymentView) ToMap() (map[string]interface{}, error) {
 	if !utils.IsNil(o.PaidTime) {
 		toSerialize["paidTime"] = o.PaidTime
 	}
-	if !utils.IsNil(o.PayOptionInfos) {
-		toSerialize["payOptionInfos"] = o.PayOptionInfos
-	}
+	toSerialize["payOptionInfos"] = o.PayOptionInfos
 	if !utils.IsNil(o.PayRequestExtendInfo) {
 		toSerialize["payRequestExtendInfo"] = o.PayRequestExtendInfo
 	}
@@ -235,6 +230,43 @@ func (o PaymentView) ToMap() (map[string]interface{}, error) {
 		toSerialize["extendInfo"] = o.ExtendInfo
 	}
 	return toSerialize, nil
+}
+
+func (o *PaymentView) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"payOptionInfos",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPaymentView := _PaymentView{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPaymentView)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PaymentView(varPaymentView)
+
+	return err
 }
 
 type NullablePaymentView struct {

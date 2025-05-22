@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AcquirementStatus** | **string** | The status of acquirement | 
+**AcquirementStatus** | **string** | Acquirement status. The enums:<br /> * INIT - Order is created but not paid yet<br /> * SUCCESS - Order is succeeded<br /> * CLOSED - Order is closed<br /> * PAYING - Order is paid but not finish<br /> * MERCHANT_ACCEPT - Order is accepted by merchant after order is paid for PAY-CONFIRM<br /> * CANCELLED - Order is cancelled<br />  | 
 **Frozen** | Pointer to **string** | Whether the frozen is true or not | [optional] 
 **Cancelled** | Pointer to **string** | Whether the cancelled is true or not | [optional] 
 

@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SessionId** | Pointer to **string** |  | [optional] 
-**TokenId** | Pointer to **string** |  | [optional] 
-**WebsiteLanguage** | Pointer to **string** |  | [optional] 
-**ClientIp** | Pointer to **string** |  | [optional] 
-**OsType** | Pointer to **string** |  | [optional] 
-**AppVersion** | Pointer to **string** |  | [optional] 
-**SdkVersion** | Pointer to **string** |  | [optional] 
-**SourcePlatform** | **string** |  | 
-**OrderOsType** | Pointer to **string** |  | [optional] 
-**MerchantAppVersion** | Pointer to **string** |  | [optional] 
-**TerminalType** | **string** |  | 
-**OrderTerminalType** | Pointer to **string** |  | [optional] 
-**ExtendInfo** | Pointer to **string** |  | [optional] 
+**SessionId** | Pointer to **string** | Session identifier | [optional] 
+**TokenId** | Pointer to **string** | Token identifier | [optional] 
+**WebsiteLanguage** | Pointer to **string** | Website language | [optional] 
+**ClientIp** | Pointer to **string** | Client IP address | [optional] 
+**OsType** | Pointer to **string** | Operating system type | [optional] 
+**AppVersion** | Pointer to **string** | App version | [optional] 
+**SdkVersion** | Pointer to **string** | SDK version | [optional] 
+**SourcePlatform** | **string** | The source platform is always independent payment gateway (IPG) | 
+**OrderOsType** | Pointer to **string** | Order operating system type | [optional] 
+**MerchantAppVersion** | Pointer to **string** | Merchant App version | [optional] 
+**TerminalType** | **string** | Terminal type. The enums:<br /> * APP - Mobile Application<br /> * WEB - Browser Web<br /> * WAP - Mobile Wap<br /> * SYSTEM - System Call<br />  | 
+**OrderTerminalType** | Pointer to **string** | Order terminal type. The enums:<br /> * APP - Mobile Application<br /> * WEB - Browser Web<br /> * WAP - Mobile Wap<br /> * SYSTEM - System Call<br />  | [optional] 
+**ExtendInfo** | Pointer to **string** | Extend information | [optional] 
 
 ## Methods
 

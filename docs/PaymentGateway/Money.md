@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Value** | **string** | Value of amount. Following ISO-4217, for IDR the value includes 2 decimal digits separated with point e.g. IDR 10.000,- will be placed with 10000.00 | 
-**Currency** | **string** | Currency of money following ISO-4217 | 
+**Value** | **string** | Value of amount. Following ISO-4217, for IDR the value includes 2 decimal digits separated with point e.g. ,IDR 10.000,- will be placed with 10000.00 | 
+**Currency** | **string** | Currency. Following ISO-4217 | 
 
 ## Methods
 

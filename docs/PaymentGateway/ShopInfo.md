@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ShopId** | Pointer to **string** | Shop identifier (required if externalShopId is blank) | [optional] 
-**ExternalShopId** | Pointer to **string** | External shop identifier (required if shopId is blank) | [optional] 
-**OperatorId** | Pointer to **string** | Operator identifier | [optional] 
-**ShopAddress** | Pointer to **string** | Shop address | [optional] 
-**DivisionId** | Pointer to **string** | Division identifier | [optional] 
-**ExternalDivisionId** | Pointer to **string** | External division identifier | [optional] 
-**DivisionType** | Pointer to **string** | Division type | [optional] 
-**ShopName** | Pointer to **string** | Shop name | [optional] 
+**ShopId** | Pointer to **string** | Information of shop identifier. Required if externalShopId is blank | [optional] 
+**ExternalShopId** | Pointer to **string** | Information of external shop identifier. Required if shopId is blank | [optional] 
+**OperatorId** | Pointer to **string** | Information of operator identifier | [optional] 
+**ShopAddress** | Pointer to **string** | Information of shop address | [optional] 
+**DivisionId** | Pointer to **string** | Information of division identifier | [optional] 
+**ExternalDivisionId** | Pointer to **string** | Information of external division identifier | [optional] 
+**DivisionType** | Pointer to **string** | Information of division type | [optional] 
+**ShopName** | Pointer to **string** | Information of shop name | [optional] 
 
 ## Methods
 

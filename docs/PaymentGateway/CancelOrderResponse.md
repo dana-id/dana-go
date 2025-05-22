@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseCode** | **string** | Refer to response code list | 
-**ResponseMessage** | **string** | Refer to response code list | 
-**OriginalReferenceNo** | Pointer to **string** | Original transaction identifier on DANA system | [optional] 
+**ResponseCode** | **string** | Response code. Refer to https://dashboard.dana.id/api-docs/read/117#HTML-API-CancelOrder-ResponseCodeandMessage | 
+**ResponseMessage** | **string** | Response message. Refer to https://dashboard.dana.id/api-docs/read/117#HTML-API-CancelOrder-ResponseCodeandMessage | 
+**OriginalReferenceNo** | Pointer to **string** | Original transaction identifier on DANA system. Present if successfully processed | [optional] 
 **OriginalPartnerReferenceNo** | **string** | Original transaction identifier on partner system | 
 **OriginalExternalId** | Pointer to **string** | Original external identifier on header message | [optional] 
-**CancelTime** | Pointer to **string** | Cancellation date time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
+**CancelTime** | Pointer to **string** | Cancellation date time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time). Present if successfully processed | [optional] 
 **TransactionDate** | Pointer to **string** | Transaction date, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
 **AdditionalInfo** | Pointer to **map[string]interface{}** | Additional information | [optional] 
 

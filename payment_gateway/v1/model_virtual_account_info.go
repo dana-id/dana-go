@@ -12,8 +12,6 @@ package payment_gateway
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 	utils "github.com/dana-id/go_client/utils"
 )
 
@@ -22,25 +20,20 @@ var _ utils.MappedNullable = &VirtualAccountInfo{}
 
 // VirtualAccountInfo struct for VirtualAccountInfo
 type VirtualAccountInfo struct {
-	// Virtual account code (required if payMethod is VIRTUAL_ACCOUNT)
-	VirtualAccountCode string `json:"virtualAccountCode"`
-	// Expiry time of virtual account in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time)
-	VirtualAccountExpiryTime string `json:"virtualAccountExpiryTime" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
-	// Signature of virtual account
-	Signature string `json:"signature"`
+	// Virtual account code. Present if successfully processed and payment method is VIRTUAL_ACCOUNT
+	VirtualAccountCode *string `json:"virtualAccountCode,omitempty"`
+	// Expiry time of virtual account, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time). Present if successfully processed and payment method is VIRTUAL_ACCOUNT
+	VirtualAccountExpiryTime *string `json:"virtualAccountExpiryTime,omitempty" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
+	// Signature of virtual account. Present if successfully processed and payment method is VIRTUAL_ACCOUNT
+	Signature *string `json:"signature,omitempty"`
 }
-
-type _VirtualAccountInfo VirtualAccountInfo
 
 // NewVirtualAccountInfo instantiates a new VirtualAccountInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVirtualAccountInfo(virtualAccountCode string, virtualAccountExpiryTime string, signature string) *VirtualAccountInfo {
+func NewVirtualAccountInfo() *VirtualAccountInfo {
 	this := VirtualAccountInfo{}
-	this.VirtualAccountCode = virtualAccountCode
-	this.VirtualAccountExpiryTime = virtualAccountExpiryTime
-	this.Signature = signature
 	return &this
 }
 
@@ -52,76 +45,100 @@ func NewVirtualAccountInfoWithDefaults() *VirtualAccountInfo {
 	return &this
 }
 
-// GetVirtualAccountCode returns the VirtualAccountCode field value
+// GetVirtualAccountCode returns the VirtualAccountCode field value if set, zero value otherwise.
 func (o *VirtualAccountInfo) GetVirtualAccountCode() string {
-	if o == nil {
+	if o == nil || utils.IsNil(o.VirtualAccountCode) {
 		var ret string
 		return ret
 	}
-
-	return o.VirtualAccountCode
+	return *o.VirtualAccountCode
 }
 
-// GetVirtualAccountCodeOk returns a tuple with the VirtualAccountCode field value
+// GetVirtualAccountCodeOk returns a tuple with the VirtualAccountCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualAccountInfo) GetVirtualAccountCodeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || utils.IsNil(o.VirtualAccountCode) {
 		return nil, false
 	}
-	return &o.VirtualAccountCode, true
+	return o.VirtualAccountCode, true
 }
 
-// SetVirtualAccountCode sets field value
+// HasVirtualAccountCode returns a boolean if a field has been set.
+func (o *VirtualAccountInfo) HasVirtualAccountCode() bool {
+	if o != nil && !utils.IsNil(o.VirtualAccountCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetVirtualAccountCode gets a reference to the given string and assigns it to the VirtualAccountCode field.
 func (o *VirtualAccountInfo) SetVirtualAccountCode(v string) {
-	o.VirtualAccountCode = v
+	o.VirtualAccountCode = &v
 }
 
-// GetVirtualAccountExpiryTime returns the VirtualAccountExpiryTime field value
+// GetVirtualAccountExpiryTime returns the VirtualAccountExpiryTime field value if set, zero value otherwise.
 func (o *VirtualAccountInfo) GetVirtualAccountExpiryTime() string {
-	if o == nil {
+	if o == nil || utils.IsNil(o.VirtualAccountExpiryTime) {
 		var ret string
 		return ret
 	}
-
-	return o.VirtualAccountExpiryTime
+	return *o.VirtualAccountExpiryTime
 }
 
-// GetVirtualAccountExpiryTimeOk returns a tuple with the VirtualAccountExpiryTime field value
+// GetVirtualAccountExpiryTimeOk returns a tuple with the VirtualAccountExpiryTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualAccountInfo) GetVirtualAccountExpiryTimeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || utils.IsNil(o.VirtualAccountExpiryTime) {
 		return nil, false
 	}
-	return &o.VirtualAccountExpiryTime, true
+	return o.VirtualAccountExpiryTime, true
 }
 
-// SetVirtualAccountExpiryTime sets field value
+// HasVirtualAccountExpiryTime returns a boolean if a field has been set.
+func (o *VirtualAccountInfo) HasVirtualAccountExpiryTime() bool {
+	if o != nil && !utils.IsNil(o.VirtualAccountExpiryTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetVirtualAccountExpiryTime gets a reference to the given string and assigns it to the VirtualAccountExpiryTime field.
 func (o *VirtualAccountInfo) SetVirtualAccountExpiryTime(v string) {
-	o.VirtualAccountExpiryTime = v
+	o.VirtualAccountExpiryTime = &v
 }
 
-// GetSignature returns the Signature field value
+// GetSignature returns the Signature field value if set, zero value otherwise.
 func (o *VirtualAccountInfo) GetSignature() string {
-	if o == nil {
+	if o == nil || utils.IsNil(o.Signature) {
 		var ret string
 		return ret
 	}
-
-	return o.Signature
+	return *o.Signature
 }
 
-// GetSignatureOk returns a tuple with the Signature field value
+// GetSignatureOk returns a tuple with the Signature field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VirtualAccountInfo) GetSignatureOk() (*string, bool) {
-	if o == nil {
+	if o == nil || utils.IsNil(o.Signature) {
 		return nil, false
 	}
-	return &o.Signature, true
+	return o.Signature, true
 }
 
-// SetSignature sets field value
+// HasSignature returns a boolean if a field has been set.
+func (o *VirtualAccountInfo) HasSignature() bool {
+	if o != nil && !utils.IsNil(o.Signature) {
+		return true
+	}
+
+	return false
+}
+
+// SetSignature gets a reference to the given string and assigns it to the Signature field.
 func (o *VirtualAccountInfo) SetSignature(v string) {
-	o.Signature = v
+	o.Signature = &v
 }
 
 func (o VirtualAccountInfo) MarshalJSON() ([]byte, error) {
@@ -134,49 +151,16 @@ func (o VirtualAccountInfo) MarshalJSON() ([]byte, error) {
 
 func (o VirtualAccountInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["virtualAccountCode"] = o.VirtualAccountCode
-	toSerialize["virtualAccountExpiryTime"] = o.VirtualAccountExpiryTime
-	toSerialize["signature"] = o.Signature
+	if !utils.IsNil(o.VirtualAccountCode) {
+		toSerialize["virtualAccountCode"] = o.VirtualAccountCode
+	}
+	if !utils.IsNil(o.VirtualAccountExpiryTime) {
+		toSerialize["virtualAccountExpiryTime"] = o.VirtualAccountExpiryTime
+	}
+	if !utils.IsNil(o.Signature) {
+		toSerialize["signature"] = o.Signature
+	}
 	return toSerialize, nil
-}
-
-func (o *VirtualAccountInfo) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"virtualAccountCode",
-		"virtualAccountExpiryTime",
-		"signature",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varVirtualAccountInfo := _VirtualAccountInfo{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varVirtualAccountInfo)
-
-	if err != nil {
-		return err
-	}
-
-	*o = VirtualAccountInfo(varVirtualAccountInfo)
-
-	return err
 }
 
 type NullableVirtualAccountInfo struct {

@@ -22,15 +22,15 @@ var _ utils.MappedNullable = &TimeDetail{}
 
 // TimeDetail struct for TimeDetail
 type TimeDetail struct {
-	// Time of created order, format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time)
+	// Time of created order, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
 	CreatedTime string `json:"createdTime" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
-	// Time of expiry order, format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time)
+	// Time of expiry order, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
 	ExpiryTime string `json:"expiryTime" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
-	// Array of paid order times in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time)
+	// Time of paid order, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
 	PaidTimes []string `json:"paidTimes,omitempty"`
-	// Array of confirmed order times in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time)
+	// Time of confirmed order, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
 	ConfirmedTimes []string `json:"confirmedTimes,omitempty"`
-	// Time of cancelled order in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time)
+	// Time of cancelled order, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
 	CancelledTime *string `json:"cancelledTime,omitempty" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
 }
 

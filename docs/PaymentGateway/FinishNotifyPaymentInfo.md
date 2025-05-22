@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CashierRequestId** | **string** | Cashier request identifier | 
-**PaidTime** | **string** | Time of paid transaction (format in YYYY-MM-DDTHH:mm:ss+07:00) | 
-**PayOptionInfos** | [**[]PayOptionInfo**](PayOptionInfo.md) | Information of pay options | 
+**PaidTime** | **string** | Information of paid time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | 
+**PayOptionInfos** | [**[]PayOptionInfo**](PayOptionInfo.md) | Information of pay option. Refer to payOptionInfos for the detailed | 
 **PayRequestExtendInfo** | Pointer to **string** | Extend information of pay request | [optional] 
-**ExtendInfo** | Pointer to **string** | Additional extended information | [optional] 
+**ExtendInfo** | Pointer to **string** | Extend information | [optional] 
 
 ## Methods
 

@@ -20,7 +20,7 @@ var _ utils.MappedNullable = &CreateOrderResponseAdditionalInfo{}
 
 // CreateOrderResponseAdditionalInfo struct for CreateOrderResponseAdditionalInfo
 type CreateOrderResponseAdditionalInfo struct {
-	// Payment code (only for Virtual Account / QRIS)
+	// Additional information of payment code. Only use for Payment Gateway service. Present if payment using Virtual Account/QRIS
 	PaymentCode *string `json:"paymentCode,omitempty"`
 }
 

@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PartnerReferenceNo** | **string** | Transaction identifier on partner system | 
-**MerchantId** | **string** | Unique merchant identifier | 
-**Amount** | [**Money**](Money.md) |  | 
+**MerchantId** | **string** | Merchant identifier that is unique per each merchant | 
 **SubMerchantId** | Pointer to **string** | Information of sub merchant identifier | [optional] 
+**Amount** | [**Money**](Money.md) | Amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | 
 **ExternalStoreId** | Pointer to **string** | Store identifier to indicate to which store this payment belongs to | [optional] 
-**ValidUpTo** | Pointer to **string** | The date and time when the order is valid until in the following format: YYYY-MM-DDTHH:MM:SS+07:00  | [optional] 
+**ValidUpTo** | Pointer to **string** | The time when the payment will be automatically expired, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
 **DisabledPayMethods** | Pointer to **string** | Payment method(s) that cannot be used for this | [optional] 
 **UrlParams** | [**[]UrlParam**](UrlParam.md) | Notify URL that DANA must send the payment notification to | 
 
@@ -72,26 +72,6 @@ and a boolean to check if the value has been set.
 SetMerchantId sets MerchantId field to given value.
 
 
-### GetAmount
-
-`func (o *CreateOrderBaseRequest) GetAmount() Money`
-
-GetAmount returns the Amount field if non-nil, zero value otherwise.
-
-### GetAmountOk
-
-`func (o *CreateOrderBaseRequest) GetAmountOk() (*Money, bool)`
-
-GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAmount
-
-`func (o *CreateOrderBaseRequest) SetAmount(v Money)`
-
-SetAmount sets Amount field to given value.
-
-
 ### GetSubMerchantId
 
 `func (o *CreateOrderBaseRequest) GetSubMerchantId() string`
@@ -116,6 +96,26 @@ SetSubMerchantId sets SubMerchantId field to given value.
 `func (o *CreateOrderBaseRequest) HasSubMerchantId() bool`
 
 HasSubMerchantId returns a boolean if a field has been set.
+
+### GetAmount
+
+`func (o *CreateOrderBaseRequest) GetAmount() Money`
+
+GetAmount returns the Amount field if non-nil, zero value otherwise.
+
+### GetAmountOk
+
+`func (o *CreateOrderBaseRequest) GetAmountOk() (*Money, bool)`
+
+GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAmount
+
+`func (o *CreateOrderBaseRequest) SetAmount(v Money)`
+
+SetAmount sets Amount field to given value.
+
 
 ### GetExternalStoreId
 

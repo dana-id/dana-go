@@ -29,6 +29,8 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/mitchellh/mapstructure"
+
 	common "github.com/dana-id/go_client/common"
 	config "github.com/dana-id/go_client/config"
 	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
@@ -395,18 +397,59 @@ func (c *APIClient) decodeImpl(v interface{}, b []byte, contentType string) (err
 	if JsonCheck.MatchString(contentType) {
 		if actualObj, ok := v.(interface{ GetActualInstance() interface{} }); ok { // oneOf, anyOf schemas
 			if unmarshalObj, ok := actualObj.(interface{ UnmarshalJSON([]byte) error }); ok { // make sure it has UnmarshalJSON defined
+				// Try direct unmarshaling first
 				if err = unmarshalObj.UnmarshalJSON(b); err != nil {
+					// If it fails due to unknown fields, try using mapstructure
+					if strings.Contains(err.Error(), "unknown field") {
+						actualInstance := actualObj.GetActualInstance()
+						if err = UnmarshalJson(b, actualInstance); err == nil {
+							return nil
+						}
+					}
 					return err
 				}
 			} else {
 				return errors.New("unknown type with GetActualInstance but no unmarshalObj.UnmarshalJSON defined")
 			}
-		} else if err = json.Unmarshal(b, v); err != nil { // simple model
-			return err
+		} else { // simple model
+			// Try standard unmarshaling first
+			if err = json.Unmarshal(b, v); err != nil {
+				// If it fails due to unknown fields, try mapstructure
+				if strings.Contains(err.Error(), "unknown field") {
+					err = UnmarshalJson(b, v)
+					if err == nil {
+						return nil
+					}
+				}
+				return err
+			}
 		}
 		return nil
 	}
 	return errors.New("undefined response type")
+}
+
+func UnmarshalJson(input []byte, result interface{}) error {
+    tempMap := make(map[string]interface{})
+    if err := json.Unmarshal(input, &tempMap); err != nil {
+        return err
+    }
+
+    var md mapstructure.Metadata
+    decoder, err := mapstructure.NewDecoder(
+        &mapstructure.DecoderConfig{
+            Metadata: &md,
+            Result:   result,
+        })
+    if err != nil {
+        return err
+    }
+
+    if err := decoder.Decode(tempMap); err != nil {
+        return err
+    }
+
+    return nil
 }
 
 // Add a file to the multipart request

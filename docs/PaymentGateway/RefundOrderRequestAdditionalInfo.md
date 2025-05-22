@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayoutAccountNo** | Pointer to **string** | Additional information of payout account number. This param need to be filled if want to refund to specific payout account not that specified by DANA | [optional] 
 **RefundAppliedTime** | Pointer to **string** | Additional information of refund applied time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
-**ActorType** | Pointer to **string** | Additional information of actor type, refer to ActorTypeEnum | [optional] 
+**ActorType** | Pointer to **string** | Additional information of actor type. The enums:<br /> * USER - User<br /> * MERCHANT - Merchant&lt;br * MERCHANT_OPERATOR - Merchant operator<br /> * BACK_OFFICE - Back office<br /> * SYSTEM - System<br />  | [optional] 
 **ReturnChargeToPayer** | Pointer to **string** | Additional information of return charge to payer | [optional] 
 **Destination** | Pointer to **string** | Additional information of destination | [optional] 
-**EnvInfo** | Pointer to **map[string]interface{}** | Additional information of environment | [optional] 
-**AuditInfo** | Pointer to **map[string]interface{}** | Additional information of audit | [optional] 
-**ActorContext** | Pointer to **map[string]interface{}** | Additional information of actor context | [optional] 
-**RefundOptionBill** | Pointer to **[]map[string]interface{}** | Additional information of refund option bill | [optional] 
+**EnvInfo** | Pointer to [**EnvInfo**](EnvInfo.md) | Additional information of environment | [optional] 
+**AuditInfo** | Pointer to [**AuditInfo**](AuditInfo.md) | Additional information of audit | [optional] 
+**ActorContext** | Pointer to [**ActorContext**](ActorContext.md) | Additional information of actor context | [optional] 
+**RefundOptionBill** | Pointer to [**[]RefundOptionBill**](RefundOptionBill.md) | Additional information of refund option bill | [optional] 
 **ExtendInfo** | Pointer to **string** | Additional information of extend | [optional] 
 **AsyncRefund** | Pointer to **string** | Additional information of async refund to determine the process of refund whether sync or async. The values is true/false | [optional] 
 
@@ -162,20 +162,20 @@ HasDestination returns a boolean if a field has been set.
 
 ### GetEnvInfo
 
-`func (o *RefundOrderRequestAdditionalInfo) GetEnvInfo() map[string]interface{}`
+`func (o *RefundOrderRequestAdditionalInfo) GetEnvInfo() EnvInfo`
 
 GetEnvInfo returns the EnvInfo field if non-nil, zero value otherwise.
 
 ### GetEnvInfoOk
 
-`func (o *RefundOrderRequestAdditionalInfo) GetEnvInfoOk() (*map[string]interface{}, bool)`
+`func (o *RefundOrderRequestAdditionalInfo) GetEnvInfoOk() (*EnvInfo, bool)`
 
 GetEnvInfoOk returns a tuple with the EnvInfo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvInfo
 
-`func (o *RefundOrderRequestAdditionalInfo) SetEnvInfo(v map[string]interface{})`
+`func (o *RefundOrderRequestAdditionalInfo) SetEnvInfo(v EnvInfo)`
 
 SetEnvInfo sets EnvInfo field to given value.
 
@@ -187,20 +187,20 @@ HasEnvInfo returns a boolean if a field has been set.
 
 ### GetAuditInfo
 
-`func (o *RefundOrderRequestAdditionalInfo) GetAuditInfo() map[string]interface{}`
+`func (o *RefundOrderRequestAdditionalInfo) GetAuditInfo() AuditInfo`
 
 GetAuditInfo returns the AuditInfo field if non-nil, zero value otherwise.
 
 ### GetAuditInfoOk
 
-`func (o *RefundOrderRequestAdditionalInfo) GetAuditInfoOk() (*map[string]interface{}, bool)`
+`func (o *RefundOrderRequestAdditionalInfo) GetAuditInfoOk() (*AuditInfo, bool)`
 
 GetAuditInfoOk returns a tuple with the AuditInfo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAuditInfo
 
-`func (o *RefundOrderRequestAdditionalInfo) SetAuditInfo(v map[string]interface{})`
+`func (o *RefundOrderRequestAdditionalInfo) SetAuditInfo(v AuditInfo)`
 
 SetAuditInfo sets AuditInfo field to given value.
 
@@ -212,20 +212,20 @@ HasAuditInfo returns a boolean if a field has been set.
 
 ### GetActorContext
 
-`func (o *RefundOrderRequestAdditionalInfo) GetActorContext() map[string]interface{}`
+`func (o *RefundOrderRequestAdditionalInfo) GetActorContext() ActorContext`
 
 GetActorContext returns the ActorContext field if non-nil, zero value otherwise.
 
 ### GetActorContextOk
 
-`func (o *RefundOrderRequestAdditionalInfo) GetActorContextOk() (*map[string]interface{}, bool)`
+`func (o *RefundOrderRequestAdditionalInfo) GetActorContextOk() (*ActorContext, bool)`
 
 GetActorContextOk returns a tuple with the ActorContext field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetActorContext
 
-`func (o *RefundOrderRequestAdditionalInfo) SetActorContext(v map[string]interface{})`
+`func (o *RefundOrderRequestAdditionalInfo) SetActorContext(v ActorContext)`
 
 SetActorContext sets ActorContext field to given value.
 
@@ -237,20 +237,20 @@ HasActorContext returns a boolean if a field has been set.
 
 ### GetRefundOptionBill
 
-`func (o *RefundOrderRequestAdditionalInfo) GetRefundOptionBill() []map[string]interface{}`
+`func (o *RefundOrderRequestAdditionalInfo) GetRefundOptionBill() []RefundOptionBill`
 
 GetRefundOptionBill returns the RefundOptionBill field if non-nil, zero value otherwise.
 
 ### GetRefundOptionBillOk
 
-`func (o *RefundOrderRequestAdditionalInfo) GetRefundOptionBillOk() (*[]map[string]interface{}, bool)`
+`func (o *RefundOrderRequestAdditionalInfo) GetRefundOptionBillOk() (*[]RefundOptionBill, bool)`
 
 GetRefundOptionBillOk returns a tuple with the RefundOptionBill field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRefundOptionBill
 
-`func (o *RefundOrderRequestAdditionalInfo) SetRefundOptionBill(v []map[string]interface{})`
+`func (o *RefundOrderRequestAdditionalInfo) SetRefundOptionBill(v []RefundOptionBill)`
 
 SetRefundOptionBill sets RefundOptionBill field to given value.
 

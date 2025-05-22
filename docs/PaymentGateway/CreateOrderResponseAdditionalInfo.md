@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PaymentCode** | Pointer to **string** | Payment code (only for Virtual Account / QRIS) | [optional] 
+**PaymentCode** | Pointer to **string** | Additional information of payment code. Only use for Payment Gateway service. Present if payment using Virtual Account/QRIS | [optional] 
 
 ## Methods
 

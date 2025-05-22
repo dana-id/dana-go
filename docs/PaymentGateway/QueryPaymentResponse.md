@@ -4,24 +4,24 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseCode** | **string** | Refer to response code list:<br /> * 2005500 - Successful<br /> * 4005500 - Bad Request - Retry request with proper parameter<br /> * 4005501 - Invalid Field Format - Retry request with proper parameter<br /> * 4005502 - Invalid Mandatory Field - Retry request with proper parameter<br /> * 4015500 - Unauthorized. [reason] - Retry request with proper parameter<br /> * 4015501 - Invalid Token (B2B) - Retry request with proper parameter<br /> * 4045501 - Transaction Not Found - Try to create a new order<br /> * 4295500 - Too Many Requests - Retry request periodically<br /> * 5005500 - General Error - Retry request periodically<br /> * 5005501 - Internal Server Error - Retry request periodically<br />  | 
-**ResponseMessage** | **string** | Refer to response code list  | 
-**OriginalPartnerReferenceNo** | Pointer to **string** | Original transaction identifier on partner system | [optional] 
-**OriginalReferenceNo** | Pointer to **string** | Original transaction identifier on DANA system | [optional] 
+**ResponseCode** | **string** | Response code. Refer to https://dashboard.dana.id/api-docs/read/126#HTML-API-QueryPayment-ResponseCodeandMessage | 
+**ResponseMessage** | **string** | Response message. Refer to https://dashboard.dana.id/api-docs/read/126#HTML-API-QueryPayment-ResponseCodeandMessage | 
+**OriginalPartnerReferenceNo** | Pointer to **string** | Original transaction identifier on partner system. Present if transaction found | [optional] 
+**OriginalReferenceNo** | Pointer to **string** | Original transaction identifier on DANA system. Present if transaction found | [optional] 
 **OriginalExternalId** | Pointer to **string** | Original external identifier on header message | [optional] 
-**ServiceCode** | **string** | Transaction type indicator:<br /> - IPG Cashier Pay - SNAP: 54<br /> - QRIS CPM (Acquirer) - SNAP: 60<br /> - QRIS MPM (Acquirer) - SNAP: 47<br /> - Payment Gateway: 54<br />  | [default to "54"]
-**LatestTransactionStatus** | **string** | Status code:<br /> - 00 &#x3D; Success. Order has been successfully in final state and paid<br /> - 01 &#x3D; Initiated. Waiting for payment. Mark Payment as Pending<br /> - 02 &#x3D; Paying. The order is in process, not in final state, payment is success. Mark Payment as Success<br /> - 05 &#x3D; Cancelled. Order has been cancelled. Mark Payment as Failed<br /> - 07 &#x3D; Not found. Order is not found. Mark Payment as Failed<br />  | 
+**ServiceCode** | **string** | Transaction type indicator is based on the service code of the original transaction request:<br /> - IPG Cashier Pay - SNAP: 54<br /> - QRIS CPM (Acquirer) - SNAP: 60<br /> - QRIS MPM (Acquirer) - SNAP: 47<br /> - Payment Gateway: 54<br />  | [default to "54"]
+**LatestTransactionStatus** | **string** | Category code for the status of the transaction. The values include:<br /> - 00 &#x3D; Success, the order has been successfully in final state and paid<br /> - 01 &#x3D; Initiated, the order has been created, but has not been paid<br /> - 02 &#x3D; Paying, the order is in process, not in final state, payment is success<br /> - 05 &#x3D; Cancelled, the order has been closed<br /> - 07 &#x3D; Not found, the order is not found<br />  | 
 **TransactionStatusDesc** | Pointer to **string** | Description of transaction status | [optional] 
 **OriginalResponseCode** | Pointer to **string** | Original response code | [optional] 
 **OriginalResponseMessage** | Pointer to **string** | Original response message | [optional] 
 **SessionId** | Pointer to **string** | Session identifier | [optional] 
 **RequestID** | Pointer to **string** | Transaction request identifier | [optional] 
-**TransAmount** | Pointer to [**Money**](Money.md) |  | [optional] 
-**Amount** | Pointer to [**Money**](Money.md) |  | [optional] 
-**FeeAmount** | Pointer to [**Money**](Money.md) |  | [optional] 
-**PaidTime** | Pointer to **string** | Payment timestamp in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time) | [optional] 
-**Title** | Pointer to **string** | Brief description of transaction | [optional] 
-**AdditionalInfo** | Pointer to [**QueryPaymentResponseAdditionalInfo**](QueryPaymentResponseAdditionalInfo.md) |  | [optional] 
+**TransAmount** | Pointer to [**Money**](Money.md) | Trans amount. Present if transaction found. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | [optional] 
+**Amount** | Pointer to [**Money**](Money.md) | Amount. Present if transaction found. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | [optional] 
+**FeeAmount** | Pointer to [**Money**](Money.md) | Fee amount. Present if transaction found. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | [optional] 
+**PaidTime** | Pointer to **string** | Transaction paid time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time). Present if transaction is paid | [optional] 
+**Title** | Pointer to **string** | Brief description. Present if transaction found | [optional] 
+**AdditionalInfo** | Pointer to [**QueryPaymentResponseAdditionalInfo**](QueryPaymentResponseAdditionalInfo.md) | Additional information | [optional] 
 
 ## Methods
 

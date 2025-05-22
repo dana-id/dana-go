@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **SubMerchantId** | Pointer to **string** | Information of sub merchant identifier | [optional] 
 **Reason** | Pointer to **string** | Cancellation reason | [optional] 
 **ExternalStoreId** | Pointer to **string** | Store identifier to indicate to which store this payment belongs to | [optional] 
-**Amount** | Pointer to [**Money**](Money.md) | Amount. Contains two sub fields - Value (Transaction amount, including the cents) and Currency (Currency code based on ISO 4217) | [optional] 
+**Amount** | Pointer to [**Money**](Money.md) | Amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | [optional] 
 **AdditionalInfo** | Pointer to **map[string]interface{}** | Additional information | [optional] 
 
 ## Methods

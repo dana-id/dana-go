@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MerchantId** | Pointer to **string** | Merchant identifier | [optional] 
-**Buyer** | Pointer to [**Buyer**](Buyer.md) |  | [optional] 
-**Seller** | Pointer to [**Seller**](Seller.md) |  | [optional] 
-**AmountDetail** | Pointer to [**AmountDetail**](AmountDetail.md) |  | [optional] 
-**TimeDetail** | Pointer to [**TimeDetail**](TimeDetail.md) |  | [optional] 
+**Buyer** | Pointer to [**Buyer**](Buyer.md) | Additional information of buyer | [optional] 
+**Seller** | Pointer to [**Seller**](Seller.md) | Additional information of seller | [optional] 
+**AmountDetail** | Pointer to [**AmountDetail**](AmountDetail.md) | Additional information of amount detail. Present if transaction found | [optional] 
+**TimeDetail** | Pointer to [**TimeDetail**](TimeDetail.md) | Additional information of time detail. Present if transaction found | [optional] 
 **Goods** | Pointer to [**[]Goods**](Goods.md) | Additional information of goods | [optional] 
 **ShippingInfo** | Pointer to [**[]ShippingInfo**](ShippingInfo.md) | Additional information of shipping | [optional] 
 **OrderMemo** | Pointer to **string** | Additional information of memo | [optional] 
-**PaymentViews** | Pointer to [**[]PaymentView**](PaymentView.md) | Additional information of payment views | [optional] 
+**PaymentViews** | Pointer to [**[]PaymentView**](PaymentView.md) | Additional information of payment views. Present if transaction found | [optional] 
 **ExtendInfo** | Pointer to **string** | Additional information of extend | [optional] 
-**StatusDetail** | Pointer to [**StatusDetail**](StatusDetail.md) |  | [optional] 
+**StatusDetail** | Pointer to [**StatusDetail**](StatusDetail.md) | Additional information of status detail | [optional] 
 **CloseReason** | Pointer to **string** | Additional information of close reason | [optional] 
-**VirtualAccountInfo** | Pointer to [**VirtualAccountInfo**](VirtualAccountInfo.md) |  | [optional] 
+**VirtualAccountInfo** | Pointer to [**VirtualAccountInfo**](VirtualAccountInfo.md) | Additional information of virtual account. Only use for Payment Gateway service | [optional] 
+**MerchantId** | Pointer to **string** | Merchant identifier | [optional] 
 
 ## Methods
 
@@ -36,31 +36,6 @@ will change when the set of required properties is changed
 NewQueryPaymentResponseAdditionalInfoWithDefaults instantiates a new QueryPaymentResponseAdditionalInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMerchantId
-
-`func (o *QueryPaymentResponseAdditionalInfo) GetMerchantId() string`
-
-GetMerchantId returns the MerchantId field if non-nil, zero value otherwise.
-
-### GetMerchantIdOk
-
-`func (o *QueryPaymentResponseAdditionalInfo) GetMerchantIdOk() (*string, bool)`
-
-GetMerchantIdOk returns a tuple with the MerchantId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMerchantId
-
-`func (o *QueryPaymentResponseAdditionalInfo) SetMerchantId(v string)`
-
-SetMerchantId sets MerchantId field to given value.
-
-### HasMerchantId
-
-`func (o *QueryPaymentResponseAdditionalInfo) HasMerchantId() bool`
-
-HasMerchantId returns a boolean if a field has been set.
 
 ### GetBuyer
 
@@ -361,6 +336,31 @@ SetVirtualAccountInfo sets VirtualAccountInfo field to given value.
 `func (o *QueryPaymentResponseAdditionalInfo) HasVirtualAccountInfo() bool`
 
 HasVirtualAccountInfo returns a boolean if a field has been set.
+
+### GetMerchantId
+
+`func (o *QueryPaymentResponseAdditionalInfo) GetMerchantId() string`
+
+GetMerchantId returns the MerchantId field if non-nil, zero value otherwise.
+
+### GetMerchantIdOk
+
+`func (o *QueryPaymentResponseAdditionalInfo) GetMerchantIdOk() (*string, bool)`
+
+GetMerchantIdOk returns a tuple with the MerchantId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantId
+
+`func (o *QueryPaymentResponseAdditionalInfo) SetMerchantId(v string)`
+
+SetMerchantId sets MerchantId field to given value.
+
+### HasMerchantId
+
+`func (o *QueryPaymentResponseAdditionalInfo) HasMerchantId() bool`
+
+HasMerchantId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

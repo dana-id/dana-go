@@ -22,8 +22,11 @@ var _ utils.MappedNullable = &PromoInfo{}
 
 // PromoInfo struct for PromoInfo
 type PromoInfo struct {
+	// Promo amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	PromoAmount Money `json:"promoAmount"`
+	// Promo identifier
 	PromoId string `json:"promoId"`
+	// Type's of promo, value always DIRECT_DISCOUNT
 	PromoType string `json:"promoType"`
 }
 

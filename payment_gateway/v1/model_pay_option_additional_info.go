@@ -20,7 +20,9 @@ var _ utils.MappedNullable = &PayOptionAdditionalInfo{}
 
 // PayOptionAdditionalInfo struct for PayOptionAdditionalInfo
 type PayOptionAdditionalInfo struct {
+	// User's phone number
 	PhoneNumber *string `json:"phoneNumber,omitempty"`
+	// Payment code that used for payment with virtual account
 	PaymentCode *string `json:"paymentCode,omitempty"`
 	PromoInfos []PromoInfo `json:"promoInfos,omitempty"`
 }

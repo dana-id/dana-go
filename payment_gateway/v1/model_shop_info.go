@@ -20,21 +20,21 @@ var _ utils.MappedNullable = &ShopInfo{}
 
 // ShopInfo struct for ShopInfo
 type ShopInfo struct {
-	// Shop identifier (required if externalShopId is blank)
+	// Information of shop identifier. Required if externalShopId is blank
 	ShopId *string `json:"shopId,omitempty"`
-	// External shop identifier (required if shopId is blank)
+	// Information of external shop identifier. Required if shopId is blank
 	ExternalShopId *string `json:"externalShopId,omitempty"`
-	// Operator identifier
+	// Information of operator identifier
 	OperatorId *string `json:"operatorId,omitempty"`
-	// Shop address
+	// Information of shop address
 	ShopAddress *string `json:"shopAddress,omitempty"`
-	// Division identifier
+	// Information of division identifier
 	DivisionId *string `json:"divisionId,omitempty"`
-	// External division identifier
+	// Information of external division identifier
 	ExternalDivisionId *string `json:"externalDivisionId,omitempty"`
-	// Division type
+	// Information of division type
 	DivisionType *string `json:"divisionType,omitempty"`
-	// Shop name
+	// Information of shop name
 	ShopName *string `json:"shopName,omitempty"`
 }
 

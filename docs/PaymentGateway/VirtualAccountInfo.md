@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**VirtualAccountCode** | **string** | Virtual account code (required if payMethod is VIRTUAL_ACCOUNT) | 
-**VirtualAccountExpiryTime** | **string** | Expiry time of virtual account in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time) | 
-**Signature** | **string** | Signature of virtual account | 
+**VirtualAccountCode** | Pointer to **string** | Virtual account code. Present if successfully processed and payment method is VIRTUAL_ACCOUNT | [optional] 
+**VirtualAccountExpiryTime** | Pointer to **string** | Expiry time of virtual account, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time). Present if successfully processed and payment method is VIRTUAL_ACCOUNT | [optional] 
+**Signature** | Pointer to **string** | Signature of virtual account. Present if successfully processed and payment method is VIRTUAL_ACCOUNT | [optional] 
 
 ## Methods
 
 ### NewVirtualAccountInfo
 
-`func NewVirtualAccountInfo(virtualAccountCode string, virtualAccountExpiryTime string, signature string, ) *VirtualAccountInfo`
+`func NewVirtualAccountInfo() *VirtualAccountInfo`
 
 NewVirtualAccountInfo instantiates a new VirtualAccountInfo object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +46,11 @@ and a boolean to check if the value has been set.
 
 SetVirtualAccountCode sets VirtualAccountCode field to given value.
 
+### HasVirtualAccountCode
+
+`func (o *VirtualAccountInfo) HasVirtualAccountCode() bool`
+
+HasVirtualAccountCode returns a boolean if a field has been set.
 
 ### GetVirtualAccountExpiryTime
 
@@ -66,6 +71,11 @@ and a boolean to check if the value has been set.
 
 SetVirtualAccountExpiryTime sets VirtualAccountExpiryTime field to given value.
 
+### HasVirtualAccountExpiryTime
+
+`func (o *VirtualAccountInfo) HasVirtualAccountExpiryTime() bool`
+
+HasVirtualAccountExpiryTime returns a boolean if a field has been set.
 
 ### GetSignature
 
@@ -86,6 +96,11 @@ and a boolean to check if the value has been set.
 
 SetSignature sets Signature field to given value.
 
+### HasSignature
+
+`func (o *VirtualAccountInfo) HasSignature() bool`
+
+HasSignature returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

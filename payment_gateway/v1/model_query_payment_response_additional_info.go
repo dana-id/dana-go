@@ -20,11 +20,13 @@ var _ utils.MappedNullable = &QueryPaymentResponseAdditionalInfo{}
 
 // QueryPaymentResponseAdditionalInfo struct for QueryPaymentResponseAdditionalInfo
 type QueryPaymentResponseAdditionalInfo struct {
-	// Merchant identifier
-	MerchantId *string `json:"merchantId,omitempty"`
+	// Additional information of buyer
 	Buyer *Buyer `json:"buyer,omitempty"`
+	// Additional information of seller
 	Seller *Seller `json:"seller,omitempty"`
+	// Additional information of amount detail. Present if transaction found
 	AmountDetail *AmountDetail `json:"amountDetail,omitempty"`
+	// Additional information of time detail. Present if transaction found
 	TimeDetail *TimeDetail `json:"timeDetail,omitempty"`
 	// Additional information of goods
 	Goods []Goods `json:"goods,omitempty"`
@@ -32,14 +34,18 @@ type QueryPaymentResponseAdditionalInfo struct {
 	ShippingInfo []ShippingInfo `json:"shippingInfo,omitempty"`
 	// Additional information of memo
 	OrderMemo *string `json:"orderMemo,omitempty"`
-	// Additional information of payment views
+	// Additional information of payment views. Present if transaction found
 	PaymentViews []PaymentView `json:"paymentViews,omitempty"`
 	// Additional information of extend
 	ExtendInfo *string `json:"extendInfo,omitempty"`
+	// Additional information of status detail
 	StatusDetail *StatusDetail `json:"statusDetail,omitempty"`
 	// Additional information of close reason
 	CloseReason *string `json:"closeReason,omitempty"`
+	// Additional information of virtual account. Only use for Payment Gateway service
 	VirtualAccountInfo *VirtualAccountInfo `json:"virtualAccountInfo,omitempty"`
+	// Merchant identifier
+	MerchantId *string `json:"merchantId,omitempty"`
 }
 
 // NewQueryPaymentResponseAdditionalInfo instantiates a new QueryPaymentResponseAdditionalInfo object
@@ -57,38 +63,6 @@ func NewQueryPaymentResponseAdditionalInfo() *QueryPaymentResponseAdditionalInfo
 func NewQueryPaymentResponseAdditionalInfoWithDefaults() *QueryPaymentResponseAdditionalInfo {
 	this := QueryPaymentResponseAdditionalInfo{}
 	return &this
-}
-
-// GetMerchantId returns the MerchantId field value if set, zero value otherwise.
-func (o *QueryPaymentResponseAdditionalInfo) GetMerchantId() string {
-	if o == nil || utils.IsNil(o.MerchantId) {
-		var ret string
-		return ret
-	}
-	return *o.MerchantId
-}
-
-// GetMerchantIdOk returns a tuple with the MerchantId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *QueryPaymentResponseAdditionalInfo) GetMerchantIdOk() (*string, bool) {
-	if o == nil || utils.IsNil(o.MerchantId) {
-		return nil, false
-	}
-	return o.MerchantId, true
-}
-
-// HasMerchantId returns a boolean if a field has been set.
-func (o *QueryPaymentResponseAdditionalInfo) HasMerchantId() bool {
-	if o != nil && !utils.IsNil(o.MerchantId) {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantId gets a reference to the given string and assigns it to the MerchantId field.
-func (o *QueryPaymentResponseAdditionalInfo) SetMerchantId(v string) {
-	o.MerchantId = &v
 }
 
 // GetBuyer returns the Buyer field value if set, zero value otherwise.
@@ -475,6 +449,38 @@ func (o *QueryPaymentResponseAdditionalInfo) SetVirtualAccountInfo(v VirtualAcco
 	o.VirtualAccountInfo = &v
 }
 
+// GetMerchantId returns the MerchantId field value if set, zero value otherwise.
+func (o *QueryPaymentResponseAdditionalInfo) GetMerchantId() string {
+	if o == nil || utils.IsNil(o.MerchantId) {
+		var ret string
+		return ret
+	}
+	return *o.MerchantId
+}
+
+// GetMerchantIdOk returns a tuple with the MerchantId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryPaymentResponseAdditionalInfo) GetMerchantIdOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.MerchantId) {
+		return nil, false
+	}
+	return o.MerchantId, true
+}
+
+// HasMerchantId returns a boolean if a field has been set.
+func (o *QueryPaymentResponseAdditionalInfo) HasMerchantId() bool {
+	if o != nil && !utils.IsNil(o.MerchantId) {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantId gets a reference to the given string and assigns it to the MerchantId field.
+func (o *QueryPaymentResponseAdditionalInfo) SetMerchantId(v string) {
+	o.MerchantId = &v
+}
+
 func (o QueryPaymentResponseAdditionalInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -485,9 +491,6 @@ func (o QueryPaymentResponseAdditionalInfo) MarshalJSON() ([]byte, error) {
 
 func (o QueryPaymentResponseAdditionalInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !utils.IsNil(o.MerchantId) {
-		toSerialize["merchantId"] = o.MerchantId
-	}
 	if !utils.IsNil(o.Buyer) {
 		toSerialize["buyer"] = o.Buyer
 	}
@@ -523,6 +526,9 @@ func (o QueryPaymentResponseAdditionalInfo) ToMap() (map[string]interface{}, err
 	}
 	if !utils.IsNil(o.VirtualAccountInfo) {
 		toSerialize["virtualAccountInfo"] = o.VirtualAccountInfo
+	}
+	if !utils.IsNil(o.MerchantId) {
+		toSerialize["merchantId"] = o.MerchantId
 	}
 	return toSerialize, nil
 }

@@ -24,13 +24,13 @@ var _ utils.MappedNullable = &FinishNotifyPaymentInfo{}
 type FinishNotifyPaymentInfo struct {
 	// Cashier request identifier
 	CashierRequestId string `json:"cashierRequestId"`
-	// Time of paid transaction (format in YYYY-MM-DDTHH:mm:ss+07:00)
+	// Information of paid time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
 	PaidTime string `json:"paidTime" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
-	// Information of pay options
+	// Information of pay option. Refer to payOptionInfos for the detailed
 	PayOptionInfos []PayOptionInfo `json:"payOptionInfos"`
 	// Extend information of pay request
 	PayRequestExtendInfo *string `json:"payRequestExtendInfo,omitempty"`
-	// Additional extended information
+	// Extend information
 	ExtendInfo *string `json:"extendInfo,omitempty"`
 }
 

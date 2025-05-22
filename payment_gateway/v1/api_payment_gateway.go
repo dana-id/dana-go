@@ -62,7 +62,7 @@ func (r ApiCancelOrderRequest) Execute() (*CancelOrderResponse, *http.Response, 
 }
 
 /*
-CancelOrder Cancel Order API
+CancelOrder Cancel Order - Payment Gateway
 
 This API is used to cancel the order from merchant's platform to DANA
 
@@ -93,7 +93,7 @@ func (a *PaymentGatewayAPIService) CancelOrderExecute(r ApiCancelOrderRequest) (
 		}
 	}
 
-	localVarPath := localBasePath + "/v1.0/debit/cancel.htm"
+	localVarPath := localBasePath + "/payment-gateway/v1.0/debit/cancel.htm"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -195,7 +195,7 @@ func (r ApiConsultPayRequest) Execute() (*ConsultPayResponse, *http.Response, er
 }
 
 /*
-ConsultPay Consult Pay API
+ConsultPay Consult Pay - Payment Gateway
 
 This API is used to consult the list of payment methods or payment channels that user has and used in certain transactions or orders
 
@@ -328,9 +328,9 @@ func (r ApiCreateOrderRequest) Execute() (*CreateOrderResponse, *http.Response, 
 }
 
 /*
-CreateOrder Create Payment Order
+CreateOrder Create Order - Payment Gateway
 
-Create an order to process a payment through DANA Payment Gateway
+This API is used for merchant to create order in DANA side
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateOrderRequest
@@ -359,7 +359,7 @@ func (a *PaymentGatewayAPIService) CreateOrderExecute(r ApiCreateOrderRequest) (
 		}
 	}
 
-	localVarPath := localBasePath + "/v1.0/payment-gateway/payment.htm"
+	localVarPath := localBasePath + "/payment-gateway/v1.0/debit/payment-host-to-host.htm"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -451,15 +451,19 @@ type ApiQueryPaymentRequest struct {
 	queryPaymentRequest *QueryPaymentRequest
 }
 
+func (r ApiQueryPaymentRequest) QueryPaymentRequest(queryPaymentRequest QueryPaymentRequest) ApiQueryPaymentRequest {
+	r.queryPaymentRequest = &queryPaymentRequest
+	return r
+}
 
 func (r ApiQueryPaymentRequest) Execute() (*QueryPaymentResponse, *http.Response, error) {
 	return r.ApiService.QueryPaymentExecute(r)
 }
 
 /*
-QueryPayment Query Payment
+QueryPayment Query Payment - Payment Gateway
 
-Inquiry payment status and information from merchant’s platform to DANA
+This API is used to inquiry payment status and information from merchant's platform to DANA
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiQueryPaymentRequest
@@ -488,7 +492,7 @@ func (a *PaymentGatewayAPIService) QueryPaymentExecute(r ApiQueryPaymentRequest)
 		}
 	}
 
-	localVarPath := localBasePath + "/v1.0/debit/status.htm"
+	localVarPath := localBasePath + "/payment-gateway/v1.0/debit/status.htm"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -516,14 +520,6 @@ func (a *PaymentGatewayAPIService) QueryPaymentExecute(r ApiQueryPaymentRequest)
 	}
 	// body params
 	localVarPostBody = r.queryPaymentRequest
-	// Ensure businessScenario is set
-	if r.queryPaymentRequest != nil {
-		if r.queryPaymentRequest.AdditionalInfo == nil {
-			r.queryPaymentRequest.AdditionalInfo = &QueryPaymentRequestAdditionalInfo{}
-		}
-		val := "PAYMENT_GATEWAY"
-		r.queryPaymentRequest.AdditionalInfo.BusinessScenario = &val
-	}
 	// Set API Key Authentication headers using centralized utility function
 	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
 		// Process request body for authentication if present
@@ -598,7 +594,7 @@ func (r ApiRefundOrderRequest) Execute() (*RefundOrderResponse, *http.Response, 
 }
 
 /*
-RefundOrder Refund Order API
+RefundOrder Refund Order - Payment Gateway
 
 This API is used to refund the order from merchant's platform to DANA
 
@@ -629,7 +625,7 @@ func (a *PaymentGatewayAPIService) RefundOrderExecute(r ApiRefundOrderRequest) (
 		}
 	}
 
-	localVarPath := localBasePath + "/v1.0/debit/refund.htm"
+	localVarPath := localBasePath + "/payment-gateway/v1.0/debit/refund.htm"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -714,18 +710,4 @@ func (a *PaymentGatewayAPIService) RefundOrderExecute(r ApiRefundOrderRequest) (
 		}
 	}
 		return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-// Custom setter for QueryPaymentRequest with businessScenario logic
-func (r ApiQueryPaymentRequest) QueryPaymentRequest(queryPaymentRequest QueryPaymentRequest) ApiQueryPaymentRequest {
-	r.queryPaymentRequest = &queryPaymentRequest
-	// Always set businessScenario to PAYMENT_GATEWAY
-	if r.queryPaymentRequest != nil {
-		if r.queryPaymentRequest.AdditionalInfo == nil {
-			r.queryPaymentRequest.AdditionalInfo = &QueryPaymentRequestAdditionalInfo{}
-		}
-		val := "PAYMENT_GATEWAY"
-		r.queryPaymentRequest.AdditionalInfo.BusinessScenario = &val
-	}
-	return r
 }

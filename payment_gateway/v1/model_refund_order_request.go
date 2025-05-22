@@ -32,16 +32,17 @@ type RefundOrderRequest struct {
 	OriginalPartnerReferenceNo string `json:"originalPartnerReferenceNo"`
 	// Original external identifier on header message
 	OriginalExternalId *string `json:"originalExternalId,omitempty"`
-	// DANA's capture identifier. Use to refund the corresponding capture order
+	// DANA's capture identifier. Use to refund the corresponding capture order. Required if auth payment scenario
 	OriginalCaptureNo *string `json:"originalCaptureNo,omitempty"`
 	// Reference number from merchant for the refund
 	PartnerRefundNo string `json:"partnerRefundNo"`
-	// Refund amount. Contains two sub-fields - 1. Value (Transaction amount, including the cents) and 2. Currency (Currency code based on ISO)
+	// Refund amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	RefundAmount Money `json:"refundAmount"`
 	// Store identifier to indicate to which store this payment belongs to
 	ExternalStoreId *string `json:"externalStoreId,omitempty"`
 	// Refund reason
 	Reason *string `json:"reason,omitempty"`
+	// Additional information
 	AdditionalInfo *RefundOrderRequestAdditionalInfo `json:"additionalInfo,omitempty"`
 }
 
