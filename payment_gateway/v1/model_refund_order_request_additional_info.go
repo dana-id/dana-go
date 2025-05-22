@@ -18,26 +18,26 @@ import (
 // checks if the RefundOrderRequestAdditionalInfo type satisfies the MappedNullable interface at compile time
 var _ utils.MappedNullable = &RefundOrderRequestAdditionalInfo{}
 
-// RefundOrderRequestAdditionalInfo Additional information
+// RefundOrderRequestAdditionalInfo struct for RefundOrderRequestAdditionalInfo
 type RefundOrderRequestAdditionalInfo struct {
 	// Additional information of payout account number. This param need to be filled if want to refund to specific payout account not that specified by DANA
 	PayoutAccountNo *string `json:"payoutAccountNo,omitempty"`
 	// Additional information of refund applied time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
 	RefundAppliedTime *string `json:"refundAppliedTime,omitempty"`
-	// Additional information of actor type, refer to ActorTypeEnum
+	// Additional information of actor type. The enums:<br> * USER - User<br> * MERCHANT - Merchant<br * MERCHANT_OPERATOR - Merchant operator<br> * BACK_OFFICE - Back office<br> * SYSTEM - System<br> 
 	ActorType *string `json:"actorType,omitempty"`
 	// Additional information of return charge to payer
 	ReturnChargeToPayer *string `json:"returnChargeToPayer,omitempty"`
 	// Additional information of destination
 	Destination *string `json:"destination,omitempty"`
 	// Additional information of environment
-	EnvInfo map[string]interface{} `json:"envInfo,omitempty"`
+	EnvInfo *EnvInfo `json:"envInfo,omitempty"`
 	// Additional information of audit
-	AuditInfo map[string]interface{} `json:"auditInfo,omitempty"`
+	AuditInfo *AuditInfo `json:"auditInfo,omitempty"`
 	// Additional information of actor context
-	ActorContext map[string]interface{} `json:"actorContext,omitempty"`
+	ActorContext *ActorContext `json:"actorContext,omitempty"`
 	// Additional information of refund option bill
-	RefundOptionBill []map[string]interface{} `json:"refundOptionBill,omitempty"`
+	RefundOptionBill []RefundOptionBill `json:"refundOptionBill,omitempty"`
 	// Additional information of extend
 	ExtendInfo *string `json:"extendInfo,omitempty"`
 	// Additional information of async refund to determine the process of refund whether sync or async. The values is true/false
@@ -222,19 +222,19 @@ func (o *RefundOrderRequestAdditionalInfo) SetDestination(v string) {
 }
 
 // GetEnvInfo returns the EnvInfo field value if set, zero value otherwise.
-func (o *RefundOrderRequestAdditionalInfo) GetEnvInfo() map[string]interface{} {
+func (o *RefundOrderRequestAdditionalInfo) GetEnvInfo() EnvInfo {
 	if o == nil || utils.IsNil(o.EnvInfo) {
-		var ret map[string]interface{}
+		var ret EnvInfo
 		return ret
 	}
-	return o.EnvInfo
+	return *o.EnvInfo
 }
 
 // GetEnvInfoOk returns a tuple with the EnvInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RefundOrderRequestAdditionalInfo) GetEnvInfoOk() (map[string]interface{}, bool) {
+func (o *RefundOrderRequestAdditionalInfo) GetEnvInfoOk() (*EnvInfo, bool) {
 	if o == nil || utils.IsNil(o.EnvInfo) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.EnvInfo, true
 }
@@ -248,25 +248,25 @@ func (o *RefundOrderRequestAdditionalInfo) HasEnvInfo() bool {
 	return false
 }
 
-// SetEnvInfo gets a reference to the given map[string]interface{} and assigns it to the EnvInfo field.
-func (o *RefundOrderRequestAdditionalInfo) SetEnvInfo(v map[string]interface{}) {
-	o.EnvInfo = v
+// SetEnvInfo gets a reference to the given EnvInfo and assigns it to the EnvInfo field.
+func (o *RefundOrderRequestAdditionalInfo) SetEnvInfo(v EnvInfo) {
+	o.EnvInfo = &v
 }
 
 // GetAuditInfo returns the AuditInfo field value if set, zero value otherwise.
-func (o *RefundOrderRequestAdditionalInfo) GetAuditInfo() map[string]interface{} {
+func (o *RefundOrderRequestAdditionalInfo) GetAuditInfo() AuditInfo {
 	if o == nil || utils.IsNil(o.AuditInfo) {
-		var ret map[string]interface{}
+		var ret AuditInfo
 		return ret
 	}
-	return o.AuditInfo
+	return *o.AuditInfo
 }
 
 // GetAuditInfoOk returns a tuple with the AuditInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RefundOrderRequestAdditionalInfo) GetAuditInfoOk() (map[string]interface{}, bool) {
+func (o *RefundOrderRequestAdditionalInfo) GetAuditInfoOk() (*AuditInfo, bool) {
 	if o == nil || utils.IsNil(o.AuditInfo) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.AuditInfo, true
 }
@@ -280,25 +280,25 @@ func (o *RefundOrderRequestAdditionalInfo) HasAuditInfo() bool {
 	return false
 }
 
-// SetAuditInfo gets a reference to the given map[string]interface{} and assigns it to the AuditInfo field.
-func (o *RefundOrderRequestAdditionalInfo) SetAuditInfo(v map[string]interface{}) {
-	o.AuditInfo = v
+// SetAuditInfo gets a reference to the given AuditInfo and assigns it to the AuditInfo field.
+func (o *RefundOrderRequestAdditionalInfo) SetAuditInfo(v AuditInfo) {
+	o.AuditInfo = &v
 }
 
 // GetActorContext returns the ActorContext field value if set, zero value otherwise.
-func (o *RefundOrderRequestAdditionalInfo) GetActorContext() map[string]interface{} {
+func (o *RefundOrderRequestAdditionalInfo) GetActorContext() ActorContext {
 	if o == nil || utils.IsNil(o.ActorContext) {
-		var ret map[string]interface{}
+		var ret ActorContext
 		return ret
 	}
-	return o.ActorContext
+	return *o.ActorContext
 }
 
 // GetActorContextOk returns a tuple with the ActorContext field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RefundOrderRequestAdditionalInfo) GetActorContextOk() (map[string]interface{}, bool) {
+func (o *RefundOrderRequestAdditionalInfo) GetActorContextOk() (*ActorContext, bool) {
 	if o == nil || utils.IsNil(o.ActorContext) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.ActorContext, true
 }
@@ -312,15 +312,15 @@ func (o *RefundOrderRequestAdditionalInfo) HasActorContext() bool {
 	return false
 }
 
-// SetActorContext gets a reference to the given map[string]interface{} and assigns it to the ActorContext field.
-func (o *RefundOrderRequestAdditionalInfo) SetActorContext(v map[string]interface{}) {
-	o.ActorContext = v
+// SetActorContext gets a reference to the given ActorContext and assigns it to the ActorContext field.
+func (o *RefundOrderRequestAdditionalInfo) SetActorContext(v ActorContext) {
+	o.ActorContext = &v
 }
 
 // GetRefundOptionBill returns the RefundOptionBill field value if set, zero value otherwise.
-func (o *RefundOrderRequestAdditionalInfo) GetRefundOptionBill() []map[string]interface{} {
+func (o *RefundOrderRequestAdditionalInfo) GetRefundOptionBill() []RefundOptionBill {
 	if o == nil || utils.IsNil(o.RefundOptionBill) {
-		var ret []map[string]interface{}
+		var ret []RefundOptionBill
 		return ret
 	}
 	return o.RefundOptionBill
@@ -328,7 +328,7 @@ func (o *RefundOrderRequestAdditionalInfo) GetRefundOptionBill() []map[string]in
 
 // GetRefundOptionBillOk returns a tuple with the RefundOptionBill field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RefundOrderRequestAdditionalInfo) GetRefundOptionBillOk() ([]map[string]interface{}, bool) {
+func (o *RefundOrderRequestAdditionalInfo) GetRefundOptionBillOk() ([]RefundOptionBill, bool) {
 	if o == nil || utils.IsNil(o.RefundOptionBill) {
 		return nil, false
 	}
@@ -344,8 +344,8 @@ func (o *RefundOrderRequestAdditionalInfo) HasRefundOptionBill() bool {
 	return false
 }
 
-// SetRefundOptionBill gets a reference to the given []map[string]interface{} and assigns it to the RefundOptionBill field.
-func (o *RefundOrderRequestAdditionalInfo) SetRefundOptionBill(v []map[string]interface{}) {
+// SetRefundOptionBill gets a reference to the given []RefundOptionBill and assigns it to the RefundOptionBill field.
+func (o *RefundOrderRequestAdditionalInfo) SetRefundOptionBill(v []RefundOptionBill) {
 	o.RefundOptionBill = v
 }
 

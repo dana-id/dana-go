@@ -22,9 +22,9 @@ var _ utils.MappedNullable = &Money{}
 
 // Money struct for Money
 type Money struct {
-	// Value of amount. Following ISO-4217, for IDR the value includes 2 decimal digits separated with point e.g. IDR 10.000,- will be placed with 10000.00
+	// Value of amount. Following ISO-4217, for IDR the value includes 2 decimal digits separated with point e.g. ,IDR 10.000,- will be placed with 10000.00
 	Value string `json:"value"`
-	// Currency of money following ISO-4217
+	// Currency. Following ISO-4217
 	Currency string `json:"currency"`
 }
 

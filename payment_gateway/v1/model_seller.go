@@ -20,9 +20,13 @@ var _ utils.MappedNullable = &Seller{}
 
 // Seller struct for Seller
 type Seller struct {
+	// Type of external user. Required if externalUserId is filled
 	ExternalUserType *string `json:"externalUserType,omitempty"`
+	// Nickname, user's nick name in DANA's
 	Nickname *string `json:"nickname,omitempty"`
+	// External user identifier. Required if externalUserType is filled
 	ExternalUserId *string `json:"externalUserId,omitempty"`
+	// DANA's user identifier
 	UserId *string `json:"userId,omitempty"`
 }
 

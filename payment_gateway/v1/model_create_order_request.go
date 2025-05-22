@@ -17,7 +17,7 @@ import (
 	utils "github.com/dana-id/go_client/utils"
 )
 
-// CreateOrderRequest - This schema is a oneOf type with the following possible variants: - CreateOrderByApiRequest - CreateOrderByRedirectRequest
+// CreateOrderRequest - This schema is a oneOf type with the following possible variants:<br> - CreateOrderByApiRequest<br> - CreateOrderByRedirectRequest<br> 
 type CreateOrderRequest struct {
 	CreateOrderByApiRequest *CreateOrderByApiRequest
 	CreateOrderByRedirectRequest *CreateOrderByRedirectRequest

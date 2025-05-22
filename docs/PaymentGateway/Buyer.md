@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExternalUserType** | Pointer to **string** |  | [optional] 
-**Nickname** | Pointer to **string** |  | [optional] 
-**ExternalUserId** | Pointer to **string** |  | [optional] 
-**UserId** | Pointer to **string** |  | [optional] 
+**ExternalUserType** | Pointer to **string** | Type of external user. Required if externalUserId is filled | [optional] 
+**Nickname** | Pointer to **string** | Nickname, user&#39;s nick name in DANA&#39;s | [optional] 
+**ExternalUserId** | Pointer to **string** | External user identifier. Required if externalUserType is filled | [optional] 
+**UserId** | Pointer to **string** | DANA&#39;s user identifier | [optional] 
 
 ## Methods
 

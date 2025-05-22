@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Buyer** | [**Buyer**](Buyer.md) |  | 
-**EnvInfo** | [**EnvInfo**](EnvInfo.md) |  | 
-**MerchantTransType** | Pointer to **string** |  | [optional] 
+**Buyer** | [**Buyer**](Buyer.md) | Additional information of buyer | 
+**EnvInfo** | [**EnvInfo**](EnvInfo.md) | Additional information of environment info | 
+**MerchantTransType** | Pointer to **string** | Additional information of merchant transaction type | [optional] 
 
 ## Methods
 

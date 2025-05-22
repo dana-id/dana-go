@@ -22,21 +22,22 @@ var _ utils.MappedNullable = &Goods{}
 
 // Goods struct for Goods
 type Goods struct {
-	// Goods unit
-	Unit *string `json:"unit,omitempty"`
-	// Goods category
-	Category string `json:"category"`
-	Price Money `json:"price"`
-	// Shipment identifier provided by merchant
-	MerchantShippingId *string `json:"merchantShippingId,omitempty"`
 	// Goods identifier provided by merchant
 	MerchantGoodsId string `json:"merchantGoodsId"`
 	// Goods description
 	Description string `json:"description"`
-	// The URL of good’s snapshot web page
-	SnapshotUrl *string `json:"snapshotUrl,omitempty"`
+	// Goods category
+	Category string `json:"category"`
+	// Goods price. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
+	Price Money `json:"price"`
+	// Goods unit
+	Unit *string `json:"unit,omitempty"`
 	// Count of items
 	Quantity string `json:"quantity"`
+	// Shipment identifier provided by merchant
+	MerchantShippingId *string `json:"merchantShippingId,omitempty"`
+	// The URL of good's snapshot web page
+	SnapshotUrl *string `json:"snapshotUrl,omitempty"`
 	// Extend information
 	ExtendInfo *string `json:"extendInfo,omitempty"`
 }
@@ -47,12 +48,12 @@ type _Goods Goods
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGoods(category string, price Money, merchantGoodsId string, description string, quantity string) *Goods {
+func NewGoods(merchantGoodsId string, description string, category string, price Money, quantity string) *Goods {
 	this := Goods{}
-	this.Category = category
-	this.Price = price
 	this.MerchantGoodsId = merchantGoodsId
 	this.Description = description
+	this.Category = category
+	this.Price = price
 	this.Quantity = quantity
 	return &this
 }
@@ -63,118 +64,6 @@ func NewGoods(category string, price Money, merchantGoodsId string, description 
 func NewGoodsWithDefaults() *Goods {
 	this := Goods{}
 	return &this
-}
-
-// GetUnit returns the Unit field value if set, zero value otherwise.
-func (o *Goods) GetUnit() string {
-	if o == nil || utils.IsNil(o.Unit) {
-		var ret string
-		return ret
-	}
-	return *o.Unit
-}
-
-// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Goods) GetUnitOk() (*string, bool) {
-	if o == nil || utils.IsNil(o.Unit) {
-		return nil, false
-	}
-	return o.Unit, true
-}
-
-// HasUnit returns a boolean if a field has been set.
-func (o *Goods) HasUnit() bool {
-	if o != nil && !utils.IsNil(o.Unit) {
-		return true
-	}
-
-	return false
-}
-
-// SetUnit gets a reference to the given string and assigns it to the Unit field.
-func (o *Goods) SetUnit(v string) {
-	o.Unit = &v
-}
-
-// GetCategory returns the Category field value
-func (o *Goods) GetCategory() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Category
-}
-
-// GetCategoryOk returns a tuple with the Category field value
-// and a boolean to check if the value has been set.
-func (o *Goods) GetCategoryOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Category, true
-}
-
-// SetCategory sets field value
-func (o *Goods) SetCategory(v string) {
-	o.Category = v
-}
-
-// GetPrice returns the Price field value
-func (o *Goods) GetPrice() Money {
-	if o == nil {
-		var ret Money
-		return ret
-	}
-
-	return o.Price
-}
-
-// GetPriceOk returns a tuple with the Price field value
-// and a boolean to check if the value has been set.
-func (o *Goods) GetPriceOk() (*Money, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Price, true
-}
-
-// SetPrice sets field value
-func (o *Goods) SetPrice(v Money) {
-	o.Price = v
-}
-
-// GetMerchantShippingId returns the MerchantShippingId field value if set, zero value otherwise.
-func (o *Goods) GetMerchantShippingId() string {
-	if o == nil || utils.IsNil(o.MerchantShippingId) {
-		var ret string
-		return ret
-	}
-	return *o.MerchantShippingId
-}
-
-// GetMerchantShippingIdOk returns a tuple with the MerchantShippingId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Goods) GetMerchantShippingIdOk() (*string, bool) {
-	if o == nil || utils.IsNil(o.MerchantShippingId) {
-		return nil, false
-	}
-	return o.MerchantShippingId, true
-}
-
-// HasMerchantShippingId returns a boolean if a field has been set.
-func (o *Goods) HasMerchantShippingId() bool {
-	if o != nil && !utils.IsNil(o.MerchantShippingId) {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantShippingId gets a reference to the given string and assigns it to the MerchantShippingId field.
-func (o *Goods) SetMerchantShippingId(v string) {
-	o.MerchantShippingId = &v
 }
 
 // GetMerchantGoodsId returns the MerchantGoodsId field value
@@ -225,6 +114,142 @@ func (o *Goods) SetDescription(v string) {
 	o.Description = v
 }
 
+// GetCategory returns the Category field value
+func (o *Goods) GetCategory() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Category
+}
+
+// GetCategoryOk returns a tuple with the Category field value
+// and a boolean to check if the value has been set.
+func (o *Goods) GetCategoryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Category, true
+}
+
+// SetCategory sets field value
+func (o *Goods) SetCategory(v string) {
+	o.Category = v
+}
+
+// GetPrice returns the Price field value
+func (o *Goods) GetPrice() Money {
+	if o == nil {
+		var ret Money
+		return ret
+	}
+
+	return o.Price
+}
+
+// GetPriceOk returns a tuple with the Price field value
+// and a boolean to check if the value has been set.
+func (o *Goods) GetPriceOk() (*Money, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Price, true
+}
+
+// SetPrice sets field value
+func (o *Goods) SetPrice(v Money) {
+	o.Price = v
+}
+
+// GetUnit returns the Unit field value if set, zero value otherwise.
+func (o *Goods) GetUnit() string {
+	if o == nil || utils.IsNil(o.Unit) {
+		var ret string
+		return ret
+	}
+	return *o.Unit
+}
+
+// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Goods) GetUnitOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.Unit) {
+		return nil, false
+	}
+	return o.Unit, true
+}
+
+// HasUnit returns a boolean if a field has been set.
+func (o *Goods) HasUnit() bool {
+	if o != nil && !utils.IsNil(o.Unit) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnit gets a reference to the given string and assigns it to the Unit field.
+func (o *Goods) SetUnit(v string) {
+	o.Unit = &v
+}
+
+// GetQuantity returns the Quantity field value
+func (o *Goods) GetQuantity() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Quantity
+}
+
+// GetQuantityOk returns a tuple with the Quantity field value
+// and a boolean to check if the value has been set.
+func (o *Goods) GetQuantityOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Quantity, true
+}
+
+// SetQuantity sets field value
+func (o *Goods) SetQuantity(v string) {
+	o.Quantity = v
+}
+
+// GetMerchantShippingId returns the MerchantShippingId field value if set, zero value otherwise.
+func (o *Goods) GetMerchantShippingId() string {
+	if o == nil || utils.IsNil(o.MerchantShippingId) {
+		var ret string
+		return ret
+	}
+	return *o.MerchantShippingId
+}
+
+// GetMerchantShippingIdOk returns a tuple with the MerchantShippingId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Goods) GetMerchantShippingIdOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.MerchantShippingId) {
+		return nil, false
+	}
+	return o.MerchantShippingId, true
+}
+
+// HasMerchantShippingId returns a boolean if a field has been set.
+func (o *Goods) HasMerchantShippingId() bool {
+	if o != nil && !utils.IsNil(o.MerchantShippingId) {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantShippingId gets a reference to the given string and assigns it to the MerchantShippingId field.
+func (o *Goods) SetMerchantShippingId(v string) {
+	o.MerchantShippingId = &v
+}
+
 // GetSnapshotUrl returns the SnapshotUrl field value if set, zero value otherwise.
 func (o *Goods) GetSnapshotUrl() string {
 	if o == nil || utils.IsNil(o.SnapshotUrl) {
@@ -255,30 +280,6 @@ func (o *Goods) HasSnapshotUrl() bool {
 // SetSnapshotUrl gets a reference to the given string and assigns it to the SnapshotUrl field.
 func (o *Goods) SetSnapshotUrl(v string) {
 	o.SnapshotUrl = &v
-}
-
-// GetQuantity returns the Quantity field value
-func (o *Goods) GetQuantity() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Quantity
-}
-
-// GetQuantityOk returns a tuple with the Quantity field value
-// and a boolean to check if the value has been set.
-func (o *Goods) GetQuantityOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Quantity, true
-}
-
-// SetQuantity sets field value
-func (o *Goods) SetQuantity(v string) {
-	o.Quantity = v
 }
 
 // GetExtendInfo returns the ExtendInfo field value if set, zero value otherwise.
@@ -323,20 +324,20 @@ func (o Goods) MarshalJSON() ([]byte, error) {
 
 func (o Goods) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["merchantGoodsId"] = o.MerchantGoodsId
+	toSerialize["description"] = o.Description
+	toSerialize["category"] = o.Category
+	toSerialize["price"] = o.Price
 	if !utils.IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
-	toSerialize["category"] = o.Category
-	toSerialize["price"] = o.Price
+	toSerialize["quantity"] = o.Quantity
 	if !utils.IsNil(o.MerchantShippingId) {
 		toSerialize["merchantShippingId"] = o.MerchantShippingId
 	}
-	toSerialize["merchantGoodsId"] = o.MerchantGoodsId
-	toSerialize["description"] = o.Description
 	if !utils.IsNil(o.SnapshotUrl) {
 		toSerialize["snapshotUrl"] = o.SnapshotUrl
 	}
-	toSerialize["quantity"] = o.Quantity
 	if !utils.IsNil(o.ExtendInfo) {
 		toSerialize["extendInfo"] = o.ExtendInfo
 	}
@@ -348,10 +349,10 @@ func (o *Goods) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"category",
-		"price",
 		"merchantGoodsId",
 		"description",
+		"category",
+		"price",
 		"quantity",
 	}
 

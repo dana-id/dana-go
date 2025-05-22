@@ -9,12 +9,12 @@ Name | Type | Description | Notes
 **OriginalReferenceNo** | Pointer to **string** | Original transaction identifier on DANA system | [optional] 
 **OriginalPartnerReferenceNo** | **string** | Original transaction identifier on partner system | 
 **OriginalExternalId** | Pointer to **string** | Original external identifier on header message | [optional] 
-**OriginalCaptureNo** | Pointer to **string** | DANA&#39;s capture identifier. Use to refund the corresponding capture order | [optional] 
+**OriginalCaptureNo** | Pointer to **string** | DANA&#39;s capture identifier. Use to refund the corresponding capture order. Required if auth payment scenario | [optional] 
 **PartnerRefundNo** | **string** | Reference number from merchant for the refund | 
-**RefundAmount** | [**Money**](Money.md) | Refund amount. Contains two sub-fields - 1. Value (Transaction amount, including the cents) and 2. Currency (Currency code based on ISO) | 
+**RefundAmount** | [**Money**](Money.md) | Refund amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | 
 **ExternalStoreId** | Pointer to **string** | Store identifier to indicate to which store this payment belongs to | [optional] 
 **Reason** | Pointer to **string** | Refund reason | [optional] 
-**AdditionalInfo** | Pointer to [**RefundOrderRequestAdditionalInfo**](RefundOrderRequestAdditionalInfo.md) |  | [optional] 
+**AdditionalInfo** | Pointer to [**RefundOrderRequestAdditionalInfo**](RefundOrderRequestAdditionalInfo.md) | Additional information | [optional] 
 
 ## Methods
 

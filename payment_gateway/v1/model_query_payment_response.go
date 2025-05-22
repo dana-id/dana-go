@@ -22,19 +22,19 @@ var _ utils.MappedNullable = &QueryPaymentResponse{}
 
 // QueryPaymentResponse struct for QueryPaymentResponse
 type QueryPaymentResponse struct {
-	// Refer to response code list:<br> * 2005500 - Successful<br> * 4005500 - Bad Request - Retry request with proper parameter<br> * 4005501 - Invalid Field Format - Retry request with proper parameter<br> * 4005502 - Invalid Mandatory Field - Retry request with proper parameter<br> * 4015500 - Unauthorized. [reason] - Retry request with proper parameter<br> * 4015501 - Invalid Token (B2B) - Retry request with proper parameter<br> * 4045501 - Transaction Not Found - Try to create a new order<br> * 4295500 - Too Many Requests - Retry request periodically<br> * 5005500 - General Error - Retry request periodically<br> * 5005501 - Internal Server Error - Retry request periodically<br> 
+	// Response code. Refer to https://dashboard.dana.id/api-docs/read/126#HTML-API-QueryPayment-ResponseCodeandMessage
 	ResponseCode string `json:"responseCode"`
-	// Refer to response code list 
+	// Response message. Refer to https://dashboard.dana.id/api-docs/read/126#HTML-API-QueryPayment-ResponseCodeandMessage
 	ResponseMessage string `json:"responseMessage"`
-	// Original transaction identifier on partner system
+	// Original transaction identifier on partner system. Present if transaction found
 	OriginalPartnerReferenceNo *string `json:"originalPartnerReferenceNo,omitempty"`
-	// Original transaction identifier on DANA system
+	// Original transaction identifier on DANA system. Present if transaction found
 	OriginalReferenceNo *string `json:"originalReferenceNo,omitempty"`
 	// Original external identifier on header message
 	OriginalExternalId *string `json:"originalExternalId,omitempty"`
-	// Transaction type indicator:<br> - IPG Cashier Pay - SNAP: 54<br> - QRIS CPM (Acquirer) - SNAP: 60<br> - QRIS MPM (Acquirer) - SNAP: 47<br> - Payment Gateway: 54<br> 
+	// Transaction type indicator is based on the service code of the original transaction request:<br> - IPG Cashier Pay - SNAP: 54<br> - QRIS CPM (Acquirer) - SNAP: 60<br> - QRIS MPM (Acquirer) - SNAP: 47<br> - Payment Gateway: 54<br> 
 	ServiceCode string `json:"serviceCode"`
-	// Status code:<br> - 00 = Success. Order has been successfully in final state and paid<br> - 01 = Initiated. Waiting for payment. Mark Payment as Pending<br> - 02 = Paying. The order is in process, not in final state, payment is success. Mark Payment as Success<br> - 05 = Cancelled. Order has been cancelled. Mark Payment as Failed<br> - 07 = Not found. Order is not found. Mark Payment as Failed<br> 
+	// Category code for the status of the transaction. The values include:<br> - 00 = Success, the order has been successfully in final state and paid<br> - 01 = Initiated, the order has been created, but has not been paid<br> - 02 = Paying, the order is in process, not in final state, payment is success<br> - 05 = Cancelled, the order has been closed<br> - 07 = Not found, the order is not found<br> 
 	LatestTransactionStatus string `json:"latestTransactionStatus"`
 	// Description of transaction status
 	TransactionStatusDesc *string `json:"transactionStatusDesc,omitempty"`
@@ -46,13 +46,17 @@ type QueryPaymentResponse struct {
 	SessionId *string `json:"sessionId,omitempty"`
 	// Transaction request identifier
 	RequestID *string `json:"requestID,omitempty"`
+	// Trans amount. Present if transaction found. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	TransAmount *Money `json:"transAmount,omitempty"`
+	// Amount. Present if transaction found. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	Amount *Money `json:"amount,omitempty"`
+	// Fee amount. Present if transaction found. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	FeeAmount *Money `json:"feeAmount,omitempty"`
-	// Payment timestamp in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time)
+	// Transaction paid time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time). Present if transaction is paid
 	PaidTime *string `json:"paidTime,omitempty" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
-	// Brief description of transaction
+	// Brief description. Present if transaction found
 	Title *string `json:"title,omitempty"`
+	// Additional information
 	AdditionalInfo *QueryPaymentResponseAdditionalInfo `json:"additionalInfo,omitempty"`
 }
 

@@ -38,10 +38,7 @@ func SetSnapHeaders(headerParams map[string]string, apiKey *config.APIKey, body 
 		headerParams["X-PARTNER-ID"] = apiKey.X_PARTNER_ID
 	}
 
-	// Set CHANNEL-ID header
-	if apiKey.CHANNEL_ID != "" {
-		headerParams["CHANNEL-ID"] = apiKey.CHANNEL_ID
-	}
+	headerParams["CHANNEL-ID"] = "95221"
 
 	runtimeHeaders := getRuntimeHeaders(body, apiKey, method, endpoint)
 
@@ -104,7 +101,6 @@ func generateSignature(body string, apiKey *config.APIKey, method string, endpoi
 
 	// Use only the path from the URL for signing
 	urlPath := parsedURL.Path
-	urlPath = editPath(urlPath)
 
 	// Format the string to sign:
 	// "<HTTP METHOD>:<RELATIVE PATH URL>:<LOWERCASE_HEX_ENCODED_SHA_256(MINIFIED_HTTP_BODY)>:<X-TIMESTAMP>"
@@ -227,14 +223,4 @@ func checkPublicKeyMatch(privateKey *rsa.PrivateKey, expectedPubKeyStr string) (
 	// Compare the two public keys
 	keysEqual := expectedRsaPub.N.Cmp(privateKey.PublicKey.N) == 0 && expectedRsaPub.E == privateKey.PublicKey.E
 	return keysEqual, nil
-}
-
-func editPath(path string) string {
-	RESOURCE_PATH_TO_EDIT := []string{"/payment-gateway/v1.0/debit/status.htm"}
-
-	if StrContains(RESOURCE_PATH_TO_EDIT, path) {
-		return strings.Replace(path, "/payment-gateway/v1.0", "/v1.0", 1)
-	}
-
-	return path
 }

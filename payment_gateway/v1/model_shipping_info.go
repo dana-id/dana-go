@@ -22,39 +22,40 @@ var _ utils.MappedNullable = &ShippingInfo{}
 
 // ShippingInfo struct for ShippingInfo
 type ShippingInfo struct {
-	ChargeAmount *Money `json:"chargeAmount,omitempty"`
-	// Last name
-	LastName string `json:"lastName"`
-	// Number of tracking
-	TrackingNo *string `json:"trackingNo,omitempty"`
-	// Name of country
-	CountryName string `json:"countryName"`
 	// Merchant shipping identifier
 	MerchantShippingId string `json:"merchantShippingId"`
+	// Number of tracking
+	TrackingNo *string `json:"trackingNo,omitempty"`
+	// Information of carrier
+	Carrier *string `json:"carrier,omitempty"`
+	// Promo amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
+	ChargeAmount *Money `json:"chargeAmount,omitempty"`
+	// Name of country
+	CountryName string `json:"countryName"`
+	// Name of state
+	StateName string `json:"stateName"`
 	// Name of city
 	CityName string `json:"cityName"`
+	// Name of area
+	AreaName *string `json:"areaName,omitempty"`
 	// Information of address 1
 	Address1 string `json:"address1"`
 	// Information of address 2
 	Address2 *string `json:"address2,omitempty"`
-	// Phone number
-	PhoneNo *string `json:"phoneNo,omitempty"`
-	// Name of area
-	AreaName *string `json:"areaName,omitempty"`
-	// Email
-	Email *string `json:"email,omitempty"`
-	// Zip code
-	ZipCode string `json:"zipCode"`
-	// Name of state
-	StateName string `json:"stateName"`
-	// Fax number
-	FaxNo *string `json:"faxNo,omitempty"`
-	// Information of carrier
-	Carrier *string `json:"carrier,omitempty"`
 	// First name
 	FirstName string `json:"firstName"`
+	// Last name
+	LastName string `json:"lastName"`
 	// Mobile number
 	MobileNo *string `json:"mobileNo,omitempty"`
+	// Phone number
+	PhoneNo *string `json:"phoneNo,omitempty"`
+	// Zip code
+	ZipCode string `json:"zipCode"`
+	// Email
+	Email *string `json:"email,omitempty"`
+	// Fax number
+	FaxNo *string `json:"faxNo,omitempty"`
 }
 
 type _ShippingInfo ShippingInfo
@@ -63,16 +64,16 @@ type _ShippingInfo ShippingInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewShippingInfo(lastName string, countryName string, merchantShippingId string, cityName string, address1 string, zipCode string, stateName string, firstName string) *ShippingInfo {
+func NewShippingInfo(merchantShippingId string, countryName string, stateName string, cityName string, address1 string, firstName string, lastName string, zipCode string) *ShippingInfo {
 	this := ShippingInfo{}
-	this.LastName = lastName
-	this.CountryName = countryName
 	this.MerchantShippingId = merchantShippingId
+	this.CountryName = countryName
+	this.StateName = stateName
 	this.CityName = cityName
 	this.Address1 = address1
-	this.ZipCode = zipCode
-	this.StateName = stateName
 	this.FirstName = firstName
+	this.LastName = lastName
+	this.ZipCode = zipCode
 	return &this
 }
 
@@ -84,60 +85,28 @@ func NewShippingInfoWithDefaults() *ShippingInfo {
 	return &this
 }
 
-// GetChargeAmount returns the ChargeAmount field value if set, zero value otherwise.
-func (o *ShippingInfo) GetChargeAmount() Money {
-	if o == nil || utils.IsNil(o.ChargeAmount) {
-		var ret Money
-		return ret
-	}
-	return *o.ChargeAmount
-}
-
-// GetChargeAmountOk returns a tuple with the ChargeAmount field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ShippingInfo) GetChargeAmountOk() (*Money, bool) {
-	if o == nil || utils.IsNil(o.ChargeAmount) {
-		return nil, false
-	}
-	return o.ChargeAmount, true
-}
-
-// HasChargeAmount returns a boolean if a field has been set.
-func (o *ShippingInfo) HasChargeAmount() bool {
-	if o != nil && !utils.IsNil(o.ChargeAmount) {
-		return true
-	}
-
-	return false
-}
-
-// SetChargeAmount gets a reference to the given Money and assigns it to the ChargeAmount field.
-func (o *ShippingInfo) SetChargeAmount(v Money) {
-	o.ChargeAmount = &v
-}
-
-// GetLastName returns the LastName field value
-func (o *ShippingInfo) GetLastName() string {
+// GetMerchantShippingId returns the MerchantShippingId field value
+func (o *ShippingInfo) GetMerchantShippingId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.LastName
+	return o.MerchantShippingId
 }
 
-// GetLastNameOk returns a tuple with the LastName field value
+// GetMerchantShippingIdOk returns a tuple with the MerchantShippingId field value
 // and a boolean to check if the value has been set.
-func (o *ShippingInfo) GetLastNameOk() (*string, bool) {
+func (o *ShippingInfo) GetMerchantShippingIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.LastName, true
+	return &o.MerchantShippingId, true
 }
 
-// SetLastName sets field value
-func (o *ShippingInfo) SetLastName(v string) {
-	o.LastName = v
+// SetMerchantShippingId sets field value
+func (o *ShippingInfo) SetMerchantShippingId(v string) {
+	o.MerchantShippingId = v
 }
 
 // GetTrackingNo returns the TrackingNo field value if set, zero value otherwise.
@@ -172,6 +141,70 @@ func (o *ShippingInfo) SetTrackingNo(v string) {
 	o.TrackingNo = &v
 }
 
+// GetCarrier returns the Carrier field value if set, zero value otherwise.
+func (o *ShippingInfo) GetCarrier() string {
+	if o == nil || utils.IsNil(o.Carrier) {
+		var ret string
+		return ret
+	}
+	return *o.Carrier
+}
+
+// GetCarrierOk returns a tuple with the Carrier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ShippingInfo) GetCarrierOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.Carrier) {
+		return nil, false
+	}
+	return o.Carrier, true
+}
+
+// HasCarrier returns a boolean if a field has been set.
+func (o *ShippingInfo) HasCarrier() bool {
+	if o != nil && !utils.IsNil(o.Carrier) {
+		return true
+	}
+
+	return false
+}
+
+// SetCarrier gets a reference to the given string and assigns it to the Carrier field.
+func (o *ShippingInfo) SetCarrier(v string) {
+	o.Carrier = &v
+}
+
+// GetChargeAmount returns the ChargeAmount field value if set, zero value otherwise.
+func (o *ShippingInfo) GetChargeAmount() Money {
+	if o == nil || utils.IsNil(o.ChargeAmount) {
+		var ret Money
+		return ret
+	}
+	return *o.ChargeAmount
+}
+
+// GetChargeAmountOk returns a tuple with the ChargeAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ShippingInfo) GetChargeAmountOk() (*Money, bool) {
+	if o == nil || utils.IsNil(o.ChargeAmount) {
+		return nil, false
+	}
+	return o.ChargeAmount, true
+}
+
+// HasChargeAmount returns a boolean if a field has been set.
+func (o *ShippingInfo) HasChargeAmount() bool {
+	if o != nil && !utils.IsNil(o.ChargeAmount) {
+		return true
+	}
+
+	return false
+}
+
+// SetChargeAmount gets a reference to the given Money and assigns it to the ChargeAmount field.
+func (o *ShippingInfo) SetChargeAmount(v Money) {
+	o.ChargeAmount = &v
+}
+
 // GetCountryName returns the CountryName field value
 func (o *ShippingInfo) GetCountryName() string {
 	if o == nil {
@@ -196,28 +229,28 @@ func (o *ShippingInfo) SetCountryName(v string) {
 	o.CountryName = v
 }
 
-// GetMerchantShippingId returns the MerchantShippingId field value
-func (o *ShippingInfo) GetMerchantShippingId() string {
+// GetStateName returns the StateName field value
+func (o *ShippingInfo) GetStateName() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.MerchantShippingId
+	return o.StateName
 }
 
-// GetMerchantShippingIdOk returns a tuple with the MerchantShippingId field value
+// GetStateNameOk returns a tuple with the StateName field value
 // and a boolean to check if the value has been set.
-func (o *ShippingInfo) GetMerchantShippingIdOk() (*string, bool) {
+func (o *ShippingInfo) GetStateNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.MerchantShippingId, true
+	return &o.StateName, true
 }
 
-// SetMerchantShippingId sets field value
-func (o *ShippingInfo) SetMerchantShippingId(v string) {
-	o.MerchantShippingId = v
+// SetStateName sets field value
+func (o *ShippingInfo) SetStateName(v string) {
+	o.StateName = v
 }
 
 // GetCityName returns the CityName field value
@@ -242,6 +275,38 @@ func (o *ShippingInfo) GetCityNameOk() (*string, bool) {
 // SetCityName sets field value
 func (o *ShippingInfo) SetCityName(v string) {
 	o.CityName = v
+}
+
+// GetAreaName returns the AreaName field value if set, zero value otherwise.
+func (o *ShippingInfo) GetAreaName() string {
+	if o == nil || utils.IsNil(o.AreaName) {
+		var ret string
+		return ret
+	}
+	return *o.AreaName
+}
+
+// GetAreaNameOk returns a tuple with the AreaName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ShippingInfo) GetAreaNameOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.AreaName) {
+		return nil, false
+	}
+	return o.AreaName, true
+}
+
+// HasAreaName returns a boolean if a field has been set.
+func (o *ShippingInfo) HasAreaName() bool {
+	if o != nil && !utils.IsNil(o.AreaName) {
+		return true
+	}
+
+	return false
+}
+
+// SetAreaName gets a reference to the given string and assigns it to the AreaName field.
+func (o *ShippingInfo) SetAreaName(v string) {
+	o.AreaName = &v
 }
 
 // GetAddress1 returns the Address1 field value
@@ -300,214 +365,6 @@ func (o *ShippingInfo) SetAddress2(v string) {
 	o.Address2 = &v
 }
 
-// GetPhoneNo returns the PhoneNo field value if set, zero value otherwise.
-func (o *ShippingInfo) GetPhoneNo() string {
-	if o == nil || utils.IsNil(o.PhoneNo) {
-		var ret string
-		return ret
-	}
-	return *o.PhoneNo
-}
-
-// GetPhoneNoOk returns a tuple with the PhoneNo field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ShippingInfo) GetPhoneNoOk() (*string, bool) {
-	if o == nil || utils.IsNil(o.PhoneNo) {
-		return nil, false
-	}
-	return o.PhoneNo, true
-}
-
-// HasPhoneNo returns a boolean if a field has been set.
-func (o *ShippingInfo) HasPhoneNo() bool {
-	if o != nil && !utils.IsNil(o.PhoneNo) {
-		return true
-	}
-
-	return false
-}
-
-// SetPhoneNo gets a reference to the given string and assigns it to the PhoneNo field.
-func (o *ShippingInfo) SetPhoneNo(v string) {
-	o.PhoneNo = &v
-}
-
-// GetAreaName returns the AreaName field value if set, zero value otherwise.
-func (o *ShippingInfo) GetAreaName() string {
-	if o == nil || utils.IsNil(o.AreaName) {
-		var ret string
-		return ret
-	}
-	return *o.AreaName
-}
-
-// GetAreaNameOk returns a tuple with the AreaName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ShippingInfo) GetAreaNameOk() (*string, bool) {
-	if o == nil || utils.IsNil(o.AreaName) {
-		return nil, false
-	}
-	return o.AreaName, true
-}
-
-// HasAreaName returns a boolean if a field has been set.
-func (o *ShippingInfo) HasAreaName() bool {
-	if o != nil && !utils.IsNil(o.AreaName) {
-		return true
-	}
-
-	return false
-}
-
-// SetAreaName gets a reference to the given string and assigns it to the AreaName field.
-func (o *ShippingInfo) SetAreaName(v string) {
-	o.AreaName = &v
-}
-
-// GetEmail returns the Email field value if set, zero value otherwise.
-func (o *ShippingInfo) GetEmail() string {
-	if o == nil || utils.IsNil(o.Email) {
-		var ret string
-		return ret
-	}
-	return *o.Email
-}
-
-// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ShippingInfo) GetEmailOk() (*string, bool) {
-	if o == nil || utils.IsNil(o.Email) {
-		return nil, false
-	}
-	return o.Email, true
-}
-
-// HasEmail returns a boolean if a field has been set.
-func (o *ShippingInfo) HasEmail() bool {
-	if o != nil && !utils.IsNil(o.Email) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmail gets a reference to the given string and assigns it to the Email field.
-func (o *ShippingInfo) SetEmail(v string) {
-	o.Email = &v
-}
-
-// GetZipCode returns the ZipCode field value
-func (o *ShippingInfo) GetZipCode() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ZipCode
-}
-
-// GetZipCodeOk returns a tuple with the ZipCode field value
-// and a boolean to check if the value has been set.
-func (o *ShippingInfo) GetZipCodeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ZipCode, true
-}
-
-// SetZipCode sets field value
-func (o *ShippingInfo) SetZipCode(v string) {
-	o.ZipCode = v
-}
-
-// GetStateName returns the StateName field value
-func (o *ShippingInfo) GetStateName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.StateName
-}
-
-// GetStateNameOk returns a tuple with the StateName field value
-// and a boolean to check if the value has been set.
-func (o *ShippingInfo) GetStateNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.StateName, true
-}
-
-// SetStateName sets field value
-func (o *ShippingInfo) SetStateName(v string) {
-	o.StateName = v
-}
-
-// GetFaxNo returns the FaxNo field value if set, zero value otherwise.
-func (o *ShippingInfo) GetFaxNo() string {
-	if o == nil || utils.IsNil(o.FaxNo) {
-		var ret string
-		return ret
-	}
-	return *o.FaxNo
-}
-
-// GetFaxNoOk returns a tuple with the FaxNo field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ShippingInfo) GetFaxNoOk() (*string, bool) {
-	if o == nil || utils.IsNil(o.FaxNo) {
-		return nil, false
-	}
-	return o.FaxNo, true
-}
-
-// HasFaxNo returns a boolean if a field has been set.
-func (o *ShippingInfo) HasFaxNo() bool {
-	if o != nil && !utils.IsNil(o.FaxNo) {
-		return true
-	}
-
-	return false
-}
-
-// SetFaxNo gets a reference to the given string and assigns it to the FaxNo field.
-func (o *ShippingInfo) SetFaxNo(v string) {
-	o.FaxNo = &v
-}
-
-// GetCarrier returns the Carrier field value if set, zero value otherwise.
-func (o *ShippingInfo) GetCarrier() string {
-	if o == nil || utils.IsNil(o.Carrier) {
-		var ret string
-		return ret
-	}
-	return *o.Carrier
-}
-
-// GetCarrierOk returns a tuple with the Carrier field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ShippingInfo) GetCarrierOk() (*string, bool) {
-	if o == nil || utils.IsNil(o.Carrier) {
-		return nil, false
-	}
-	return o.Carrier, true
-}
-
-// HasCarrier returns a boolean if a field has been set.
-func (o *ShippingInfo) HasCarrier() bool {
-	if o != nil && !utils.IsNil(o.Carrier) {
-		return true
-	}
-
-	return false
-}
-
-// SetCarrier gets a reference to the given string and assigns it to the Carrier field.
-func (o *ShippingInfo) SetCarrier(v string) {
-	o.Carrier = &v
-}
-
 // GetFirstName returns the FirstName field value
 func (o *ShippingInfo) GetFirstName() string {
 	if o == nil {
@@ -530,6 +387,30 @@ func (o *ShippingInfo) GetFirstNameOk() (*string, bool) {
 // SetFirstName sets field value
 func (o *ShippingInfo) SetFirstName(v string) {
 	o.FirstName = v
+}
+
+// GetLastName returns the LastName field value
+func (o *ShippingInfo) GetLastName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.LastName
+}
+
+// GetLastNameOk returns a tuple with the LastName field value
+// and a boolean to check if the value has been set.
+func (o *ShippingInfo) GetLastNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LastName, true
+}
+
+// SetLastName sets field value
+func (o *ShippingInfo) SetLastName(v string) {
+	o.LastName = v
 }
 
 // GetMobileNo returns the MobileNo field value if set, zero value otherwise.
@@ -564,6 +445,126 @@ func (o *ShippingInfo) SetMobileNo(v string) {
 	o.MobileNo = &v
 }
 
+// GetPhoneNo returns the PhoneNo field value if set, zero value otherwise.
+func (o *ShippingInfo) GetPhoneNo() string {
+	if o == nil || utils.IsNil(o.PhoneNo) {
+		var ret string
+		return ret
+	}
+	return *o.PhoneNo
+}
+
+// GetPhoneNoOk returns a tuple with the PhoneNo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ShippingInfo) GetPhoneNoOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.PhoneNo) {
+		return nil, false
+	}
+	return o.PhoneNo, true
+}
+
+// HasPhoneNo returns a boolean if a field has been set.
+func (o *ShippingInfo) HasPhoneNo() bool {
+	if o != nil && !utils.IsNil(o.PhoneNo) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhoneNo gets a reference to the given string and assigns it to the PhoneNo field.
+func (o *ShippingInfo) SetPhoneNo(v string) {
+	o.PhoneNo = &v
+}
+
+// GetZipCode returns the ZipCode field value
+func (o *ShippingInfo) GetZipCode() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ZipCode
+}
+
+// GetZipCodeOk returns a tuple with the ZipCode field value
+// and a boolean to check if the value has been set.
+func (o *ShippingInfo) GetZipCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ZipCode, true
+}
+
+// SetZipCode sets field value
+func (o *ShippingInfo) SetZipCode(v string) {
+	o.ZipCode = v
+}
+
+// GetEmail returns the Email field value if set, zero value otherwise.
+func (o *ShippingInfo) GetEmail() string {
+	if o == nil || utils.IsNil(o.Email) {
+		var ret string
+		return ret
+	}
+	return *o.Email
+}
+
+// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ShippingInfo) GetEmailOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.Email) {
+		return nil, false
+	}
+	return o.Email, true
+}
+
+// HasEmail returns a boolean if a field has been set.
+func (o *ShippingInfo) HasEmail() bool {
+	if o != nil && !utils.IsNil(o.Email) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmail gets a reference to the given string and assigns it to the Email field.
+func (o *ShippingInfo) SetEmail(v string) {
+	o.Email = &v
+}
+
+// GetFaxNo returns the FaxNo field value if set, zero value otherwise.
+func (o *ShippingInfo) GetFaxNo() string {
+	if o == nil || utils.IsNil(o.FaxNo) {
+		var ret string
+		return ret
+	}
+	return *o.FaxNo
+}
+
+// GetFaxNoOk returns a tuple with the FaxNo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ShippingInfo) GetFaxNoOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.FaxNo) {
+		return nil, false
+	}
+	return o.FaxNo, true
+}
+
+// HasFaxNo returns a boolean if a field has been set.
+func (o *ShippingInfo) HasFaxNo() bool {
+	if o != nil && !utils.IsNil(o.FaxNo) {
+		return true
+	}
+
+	return false
+}
+
+// SetFaxNo gets a reference to the given string and assigns it to the FaxNo field.
+func (o *ShippingInfo) SetFaxNo(v string) {
+	o.FaxNo = &v
+}
+
 func (o ShippingInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -574,40 +575,40 @@ func (o ShippingInfo) MarshalJSON() ([]byte, error) {
 
 func (o ShippingInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !utils.IsNil(o.ChargeAmount) {
-		toSerialize["chargeAmount"] = o.ChargeAmount
-	}
-	toSerialize["lastName"] = o.LastName
+	toSerialize["merchantShippingId"] = o.MerchantShippingId
 	if !utils.IsNil(o.TrackingNo) {
 		toSerialize["trackingNo"] = o.TrackingNo
-	}
-	toSerialize["countryName"] = o.CountryName
-	toSerialize["merchantShippingId"] = o.MerchantShippingId
-	toSerialize["cityName"] = o.CityName
-	toSerialize["address1"] = o.Address1
-	if !utils.IsNil(o.Address2) {
-		toSerialize["address2"] = o.Address2
-	}
-	if !utils.IsNil(o.PhoneNo) {
-		toSerialize["phoneNo"] = o.PhoneNo
-	}
-	if !utils.IsNil(o.AreaName) {
-		toSerialize["areaName"] = o.AreaName
-	}
-	if !utils.IsNil(o.Email) {
-		toSerialize["email"] = o.Email
-	}
-	toSerialize["zipCode"] = o.ZipCode
-	toSerialize["stateName"] = o.StateName
-	if !utils.IsNil(o.FaxNo) {
-		toSerialize["faxNo"] = o.FaxNo
 	}
 	if !utils.IsNil(o.Carrier) {
 		toSerialize["carrier"] = o.Carrier
 	}
+	if !utils.IsNil(o.ChargeAmount) {
+		toSerialize["chargeAmount"] = o.ChargeAmount
+	}
+	toSerialize["countryName"] = o.CountryName
+	toSerialize["stateName"] = o.StateName
+	toSerialize["cityName"] = o.CityName
+	if !utils.IsNil(o.AreaName) {
+		toSerialize["areaName"] = o.AreaName
+	}
+	toSerialize["address1"] = o.Address1
+	if !utils.IsNil(o.Address2) {
+		toSerialize["address2"] = o.Address2
+	}
 	toSerialize["firstName"] = o.FirstName
+	toSerialize["lastName"] = o.LastName
 	if !utils.IsNil(o.MobileNo) {
 		toSerialize["mobileNo"] = o.MobileNo
+	}
+	if !utils.IsNil(o.PhoneNo) {
+		toSerialize["phoneNo"] = o.PhoneNo
+	}
+	toSerialize["zipCode"] = o.ZipCode
+	if !utils.IsNil(o.Email) {
+		toSerialize["email"] = o.Email
+	}
+	if !utils.IsNil(o.FaxNo) {
+		toSerialize["faxNo"] = o.FaxNo
 	}
 	return toSerialize, nil
 }
@@ -617,14 +618,14 @@ func (o *ShippingInfo) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"lastName",
-		"countryName",
 		"merchantShippingId",
+		"countryName",
+		"stateName",
 		"cityName",
 		"address1",
-		"zipCode",
-		"stateName",
 		"firstName",
+		"lastName",
+		"zipCode",
 	}
 
 	allProperties := make(map[string]interface{})

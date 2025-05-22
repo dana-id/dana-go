@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Unit** | Pointer to **string** | Goods unit | [optional] 
-**Category** | **string** | Goods category | 
-**Price** | [**Money**](Money.md) |  | 
-**MerchantShippingId** | Pointer to **string** | Shipment identifier provided by merchant | [optional] 
 **MerchantGoodsId** | **string** | Goods identifier provided by merchant | 
 **Description** | **string** | Goods description | 
-**SnapshotUrl** | Pointer to **string** | The URL of good’s snapshot web page | [optional] 
+**Category** | **string** | Goods category | 
+**Price** | [**Money**](Money.md) | Goods price. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | 
+**Unit** | Pointer to **string** | Goods unit | [optional] 
 **Quantity** | **string** | Count of items | 
+**MerchantShippingId** | Pointer to **string** | Shipment identifier provided by merchant | [optional] 
+**SnapshotUrl** | Pointer to **string** | The URL of good&#39;s snapshot web page | [optional] 
 **ExtendInfo** | Pointer to **string** | Extend information | [optional] 
 
 ## Methods
 
 ### NewGoods
 
-`func NewGoods(category string, price Money, merchantGoodsId string, description string, quantity string, ) *Goods`
+`func NewGoods(merchantGoodsId string, description string, category string, price Money, quantity string, ) *Goods`
 
 NewGoods instantiates a new Goods object
 This constructor will assign default values to properties that have it defined,
@@ -32,96 +32,6 @@ will change when the set of required properties is changed
 NewGoodsWithDefaults instantiates a new Goods object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetUnit
-
-`func (o *Goods) GetUnit() string`
-
-GetUnit returns the Unit field if non-nil, zero value otherwise.
-
-### GetUnitOk
-
-`func (o *Goods) GetUnitOk() (*string, bool)`
-
-GetUnitOk returns a tuple with the Unit field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUnit
-
-`func (o *Goods) SetUnit(v string)`
-
-SetUnit sets Unit field to given value.
-
-### HasUnit
-
-`func (o *Goods) HasUnit() bool`
-
-HasUnit returns a boolean if a field has been set.
-
-### GetCategory
-
-`func (o *Goods) GetCategory() string`
-
-GetCategory returns the Category field if non-nil, zero value otherwise.
-
-### GetCategoryOk
-
-`func (o *Goods) GetCategoryOk() (*string, bool)`
-
-GetCategoryOk returns a tuple with the Category field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCategory
-
-`func (o *Goods) SetCategory(v string)`
-
-SetCategory sets Category field to given value.
-
-
-### GetPrice
-
-`func (o *Goods) GetPrice() Money`
-
-GetPrice returns the Price field if non-nil, zero value otherwise.
-
-### GetPriceOk
-
-`func (o *Goods) GetPriceOk() (*Money, bool)`
-
-GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPrice
-
-`func (o *Goods) SetPrice(v Money)`
-
-SetPrice sets Price field to given value.
-
-
-### GetMerchantShippingId
-
-`func (o *Goods) GetMerchantShippingId() string`
-
-GetMerchantShippingId returns the MerchantShippingId field if non-nil, zero value otherwise.
-
-### GetMerchantShippingIdOk
-
-`func (o *Goods) GetMerchantShippingIdOk() (*string, bool)`
-
-GetMerchantShippingIdOk returns a tuple with the MerchantShippingId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMerchantShippingId
-
-`func (o *Goods) SetMerchantShippingId(v string)`
-
-SetMerchantShippingId sets MerchantShippingId field to given value.
-
-### HasMerchantShippingId
-
-`func (o *Goods) HasMerchantShippingId() bool`
-
-HasMerchantShippingId returns a boolean if a field has been set.
 
 ### GetMerchantGoodsId
 
@@ -163,6 +73,116 @@ and a boolean to check if the value has been set.
 SetDescription sets Description field to given value.
 
 
+### GetCategory
+
+`func (o *Goods) GetCategory() string`
+
+GetCategory returns the Category field if non-nil, zero value otherwise.
+
+### GetCategoryOk
+
+`func (o *Goods) GetCategoryOk() (*string, bool)`
+
+GetCategoryOk returns a tuple with the Category field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCategory
+
+`func (o *Goods) SetCategory(v string)`
+
+SetCategory sets Category field to given value.
+
+
+### GetPrice
+
+`func (o *Goods) GetPrice() Money`
+
+GetPrice returns the Price field if non-nil, zero value otherwise.
+
+### GetPriceOk
+
+`func (o *Goods) GetPriceOk() (*Money, bool)`
+
+GetPriceOk returns a tuple with the Price field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrice
+
+`func (o *Goods) SetPrice(v Money)`
+
+SetPrice sets Price field to given value.
+
+
+### GetUnit
+
+`func (o *Goods) GetUnit() string`
+
+GetUnit returns the Unit field if non-nil, zero value otherwise.
+
+### GetUnitOk
+
+`func (o *Goods) GetUnitOk() (*string, bool)`
+
+GetUnitOk returns a tuple with the Unit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnit
+
+`func (o *Goods) SetUnit(v string)`
+
+SetUnit sets Unit field to given value.
+
+### HasUnit
+
+`func (o *Goods) HasUnit() bool`
+
+HasUnit returns a boolean if a field has been set.
+
+### GetQuantity
+
+`func (o *Goods) GetQuantity() string`
+
+GetQuantity returns the Quantity field if non-nil, zero value otherwise.
+
+### GetQuantityOk
+
+`func (o *Goods) GetQuantityOk() (*string, bool)`
+
+GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuantity
+
+`func (o *Goods) SetQuantity(v string)`
+
+SetQuantity sets Quantity field to given value.
+
+
+### GetMerchantShippingId
+
+`func (o *Goods) GetMerchantShippingId() string`
+
+GetMerchantShippingId returns the MerchantShippingId field if non-nil, zero value otherwise.
+
+### GetMerchantShippingIdOk
+
+`func (o *Goods) GetMerchantShippingIdOk() (*string, bool)`
+
+GetMerchantShippingIdOk returns a tuple with the MerchantShippingId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantShippingId
+
+`func (o *Goods) SetMerchantShippingId(v string)`
+
+SetMerchantShippingId sets MerchantShippingId field to given value.
+
+### HasMerchantShippingId
+
+`func (o *Goods) HasMerchantShippingId() bool`
+
+HasMerchantShippingId returns a boolean if a field has been set.
+
 ### GetSnapshotUrl
 
 `func (o *Goods) GetSnapshotUrl() string`
@@ -187,26 +207,6 @@ SetSnapshotUrl sets SnapshotUrl field to given value.
 `func (o *Goods) HasSnapshotUrl() bool`
 
 HasSnapshotUrl returns a boolean if a field has been set.
-
-### GetQuantity
-
-`func (o *Goods) GetQuantity() string`
-
-GetQuantity returns the Quantity field if non-nil, zero value otherwise.
-
-### GetQuantityOk
-
-`func (o *Goods) GetQuantityOk() (*string, bool)`
-
-GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetQuantity
-
-`func (o *Goods) SetQuantity(v string)`
-
-SetQuantity sets Quantity field to given value.
-
 
 ### GetExtendInfo
 

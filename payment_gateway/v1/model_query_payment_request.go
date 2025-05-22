@@ -22,16 +22,17 @@ var _ utils.MappedNullable = &QueryPaymentRequest{}
 
 // QueryPaymentRequest struct for QueryPaymentRequest
 type QueryPaymentRequest struct {
-	// Original transaction identifier on partner system
+	// Original transaction identifier on partner system. Required if originalReferenceNo is not filled
 	OriginalPartnerReferenceNo *string `json:"originalPartnerReferenceNo,omitempty"`
-	// Original transaction identifier on DANA system
+	// Original transaction identifier on DANA system. Required if originalPartnerReferenceNo is not filled
 	OriginalReferenceNo *string `json:"originalReferenceNo,omitempty"`
 	// Original external identifier on header message
 	OriginalExternalId *string `json:"originalExternalId,omitempty"`
 	// Transaction type indicator is based on the service code of the original transaction request:<br> - IPG Cashier Pay - SNAP: 54<br> - QRIS CPM (Acquirer) - SNAP: 60<br> - QRIS MPM (Acquirer) - SNAP: 47<br> - Payment Gateway: 54<br> 
 	ServiceCode string `json:"serviceCode"`
-	// Transaction date in format YYYY-MM-DDTHH:mm:ss+07:00 (GMT+7, Jakarta time)
+	// Transaction date, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
 	TransactionDate *string `json:"transactionDate,omitempty" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
+	// Amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
 	Amount *Money `json:"amount,omitempty"`
 	// Merchant identifier that is unique per each merchant
 	MerchantId string `json:"merchantId"`
@@ -39,7 +40,8 @@ type QueryPaymentRequest struct {
 	SubMerchantId *string `json:"subMerchantId,omitempty"`
 	// Store identifier to indicate to which store this payment belongs to
 	ExternalStoreId *string `json:"externalStoreId,omitempty"`
-	AdditionalInfo *QueryPaymentRequestAdditionalInfo `json:"additionalInfo,omitempty"`
+	// Additional information
+	AdditionalInfo map[string]interface{} `json:"additionalInfo,omitempty"`
 }
 
 type _QueryPaymentRequest QueryPaymentRequest
@@ -338,19 +340,19 @@ func (o *QueryPaymentRequest) SetExternalStoreId(v string) {
 }
 
 // GetAdditionalInfo returns the AdditionalInfo field value if set, zero value otherwise.
-func (o *QueryPaymentRequest) GetAdditionalInfo() QueryPaymentRequestAdditionalInfo {
+func (o *QueryPaymentRequest) GetAdditionalInfo() map[string]interface{} {
 	if o == nil || utils.IsNil(o.AdditionalInfo) {
-		var ret QueryPaymentRequestAdditionalInfo
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.AdditionalInfo
+	return o.AdditionalInfo
 }
 
 // GetAdditionalInfoOk returns a tuple with the AdditionalInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryPaymentRequest) GetAdditionalInfoOk() (*QueryPaymentRequestAdditionalInfo, bool) {
+func (o *QueryPaymentRequest) GetAdditionalInfoOk() (map[string]interface{}, bool) {
 	if o == nil || utils.IsNil(o.AdditionalInfo) {
-		return nil, false
+		return map[string]interface{}{}, false
 	}
 	return o.AdditionalInfo, true
 }
@@ -364,9 +366,9 @@ func (o *QueryPaymentRequest) HasAdditionalInfo() bool {
 	return false
 }
 
-// SetAdditionalInfo gets a reference to the given QueryPaymentRequestAdditionalInfo and assigns it to the AdditionalInfo field.
-func (o *QueryPaymentRequest) SetAdditionalInfo(v QueryPaymentRequestAdditionalInfo) {
-	o.AdditionalInfo = &v
+// SetAdditionalInfo gets a reference to the given map[string]interface{} and assigns it to the AdditionalInfo field.
+func (o *QueryPaymentRequest) SetAdditionalInfo(v map[string]interface{}) {
+	o.AdditionalInfo = v
 }
 
 func (o QueryPaymentRequest) MarshalJSON() ([]byte, error) {

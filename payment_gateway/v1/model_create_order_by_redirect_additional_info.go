@@ -22,9 +22,13 @@ var _ utils.MappedNullable = &CreateOrderByRedirectAdditionalInfo{}
 
 // CreateOrderByRedirectAdditionalInfo struct for CreateOrderByRedirectAdditionalInfo
 type CreateOrderByRedirectAdditionalInfo struct {
+	// Additional information of merchant category code. This parameter is used to identify the type of business in which a merchant is engaged. Refer to Details of https://dashboard.dana.id/api-docs/read/197#OpenAPI-MerchantCategoryCode
 	Mcc string `json:"mcc"`
+	// Additional information of extend such as partner passthrough and risk information
 	ExtendInfo *string `json:"extendInfo,omitempty"`
+	// Additional information of environment info
 	EnvInfo EnvInfo `json:"envInfo"`
+	// Additional information of order
 	Order *OrderRedirectObject `json:"order,omitempty"`
 }
 

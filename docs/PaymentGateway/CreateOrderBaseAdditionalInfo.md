@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Mcc** | **string** |  | 
-**ExtendInfo** | Pointer to **string** |  | [optional] 
-**EnvInfo** | [**EnvInfo**](EnvInfo.md) |  | 
+**Mcc** | **string** | Additional information of merchant category code. This parameter is used to identify the type of business in which a merchant is engaged. Refer to Details of https://dashboard.dana.id/api-docs/read/197#OpenAPI-MerchantCategoryCode | 
+**ExtendInfo** | Pointer to **string** | Additional information of extend such as partner passthrough and risk information | [optional] 
+**EnvInfo** | [**EnvInfo**](EnvInfo.md) | Additional information of environment info | 
 
 ## Methods
 

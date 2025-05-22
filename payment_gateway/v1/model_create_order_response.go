@@ -22,17 +22,20 @@ var _ utils.MappedNullable = &CreateOrderResponse{}
 
 // CreateOrderResponse struct for CreateOrderResponse
 type CreateOrderResponse struct {
-	// Response code for the transaction result. Example values include:<br> * 2005400 - Successful<br> * 4005400 - Bad Request - Retry request with proper parameter<br> * 4005401 - Invalid Field Format - Retry request with proper parameter<br> * 4005402 - Invalid Mandatory Field - Retry request with proper parameter<br> * 4015400 - Unauthorized. Invalid Signature - Retry request with proper parameter<br> * 4035402 - Exceeds Transaction Amount Limit - Try to adjust the order amount<br> * 4035405 - Do Not Honor - Retry request with proper parameter or can contact DANA to check the user/account status<br> * 4035415 - Transaction Not Permitted - Retry request periodically or consult to DANA<br> * 4045408 - Invalid Merchant - Retry request with proper parameter<br> * 4045418 - Inconsistent Request - Retry with proper parameter<br> * 4295400 - Too Many Requests - Retry request periodically by sending same request payload<br> * 5005400 - General Error - Retry request periodically<br> * 5005401 - Internal Server Error - Retry request periodically by sending same request payload<br> 
+	// Response code. Refer to https://dashboard.dana.id/api-docs/read/243#paymentgatewayprod-paymentRedirect-ResponseCodeandMessage
 	ResponseCode string `json:"responseCode"`
-	// Message corresponding to the response code
+	// Response message. Refer to https://dashboard.dana.id/api-docs/read/243#paymentgatewayprod-paymentRedirect-ResponseCodeandMessage
 	ResponseMessage string `json:"responseMessage"`
-	// Transaction identifier on DANA system (present if successfully processed)
+	// Transaction identifier on DANA system. Present if successfully processed
 	ReferenceNo *string `json:"referenceNo,omitempty"`
 	// Transaction identifier on partner system
 	PartnerReferenceNo string `json:"partnerReferenceNo"`
-	// Checkout URL (present if payment method is not OVO/Virtual Account/QRIS)
+	// Checkout URLs. Present if successfully processed and payment method is not OVO/Virtual Account/QRIS
 	WebRedirectUrl *string `json:"webRedirectUrl,omitempty"`
+	// Additional information
 	AdditionalInfo *CreateOrderResponseAdditionalInfo `json:"additionalInfo,omitempty"`
+	// External order identifier
+	ExternalOrderId *string `json:"externalOrderId,omitempty"`
 }
 
 type _CreateOrderResponse CreateOrderResponse
@@ -225,6 +228,38 @@ func (o *CreateOrderResponse) SetAdditionalInfo(v CreateOrderResponseAdditionalI
 	o.AdditionalInfo = &v
 }
 
+// GetExternalOrderId returns the ExternalOrderId field value if set, zero value otherwise.
+func (o *CreateOrderResponse) GetExternalOrderId() string {
+	if o == nil || utils.IsNil(o.ExternalOrderId) {
+		var ret string
+		return ret
+	}
+	return *o.ExternalOrderId
+}
+
+// GetExternalOrderIdOk returns a tuple with the ExternalOrderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrderResponse) GetExternalOrderIdOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.ExternalOrderId) {
+		return nil, false
+	}
+	return o.ExternalOrderId, true
+}
+
+// HasExternalOrderId returns a boolean if a field has been set.
+func (o *CreateOrderResponse) HasExternalOrderId() bool {
+	if o != nil && !utils.IsNil(o.ExternalOrderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalOrderId gets a reference to the given string and assigns it to the ExternalOrderId field.
+func (o *CreateOrderResponse) SetExternalOrderId(v string) {
+	o.ExternalOrderId = &v
+}
+
 func (o CreateOrderResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -246,6 +281,9 @@ func (o CreateOrderResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !utils.IsNil(o.AdditionalInfo) {
 		toSerialize["additionalInfo"] = o.AdditionalInfo
+	}
+	if !utils.IsNil(o.ExternalOrderId) {
+		toSerialize["externalOrderId"] = o.ExternalOrderId
 	}
 	return toSerialize, nil
 }

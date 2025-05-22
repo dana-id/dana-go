@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PromoAmount** | [**Money**](Money.md) |  | 
-**PromoId** | **string** |  | 
-**PromoType** | **string** |  | [default to "DIRECT_DISCOUNT"]
+**PromoAmount** | [**Money**](Money.md) | Promo amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | 
+**PromoId** | **string** | Promo identifier | 
+**PromoType** | **string** | Type&#39;s of promo, value always DIRECT_DISCOUNT | [default to "DIRECT_DISCOUNT"]
 
 ## Methods
 

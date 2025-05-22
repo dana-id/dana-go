@@ -20,10 +20,13 @@ import (
 // checks if the ConsultPayRequestAdditionalInfo type satisfies the MappedNullable interface at compile time
 var _ utils.MappedNullable = &ConsultPayRequestAdditionalInfo{}
 
-// ConsultPayRequestAdditionalInfo Additional information
+// ConsultPayRequestAdditionalInfo struct for ConsultPayRequestAdditionalInfo
 type ConsultPayRequestAdditionalInfo struct {
+	// Additional information of buyer
 	Buyer Buyer `json:"buyer"`
+	// Additional information of environment info
 	EnvInfo EnvInfo `json:"envInfo"`
+	// Additional information of merchant transaction type
 	MerchantTransType *string `json:"merchantTransType,omitempty"`
 }
 

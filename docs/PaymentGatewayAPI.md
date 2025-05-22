@@ -4,11 +4,11 @@ All URIs are relative to http://api.sandbox.dana.id for sandbox environment and 
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelOrder**](PaymentGatewayAPI.md#CancelOrder) | **Post** /v1.0/debit/cancel.htm | Cancel Order API
-[**ConsultPay**](PaymentGatewayAPI.md#ConsultPay) | **Post** /v1.0/payment-gateway/consult-pay.htm | Consult Pay API
-[**CreateOrder**](PaymentGatewayAPI.md#CreateOrder) | **Post** /v1.0/payment-gateway/payment.htm | Create Payment Order
-[**QueryPayment**](PaymentGatewayAPI.md#QueryPayment) | **Post** /v1.0/debit/status.htm | Query Payment
-[**RefundOrder**](PaymentGatewayAPI.md#RefundOrder) | **Post** /v1.0/debit/refund.htm | Refund Order API
+[**CancelOrder**](PaymentGatewayAPI.md#CancelOrder) | **Post** /payment-gateway/v1.0/debit/cancel.htm | Cancel Order - Payment Gateway
+[**ConsultPay**](PaymentGatewayAPI.md#ConsultPay) | **Post** /v1.0/payment-gateway/consult-pay.htm | Consult Pay - Payment Gateway
+[**CreateOrder**](PaymentGatewayAPI.md#CreateOrder) | **Post** /payment-gateway/v1.0/debit/payment-host-to-host.htm | Create Order - Payment Gateway
+[**QueryPayment**](PaymentGatewayAPI.md#QueryPayment) | **Post** /payment-gateway/v1.0/debit/status.htm | Query Payment - Payment Gateway
+[**RefundOrder**](PaymentGatewayAPI.md#RefundOrder) | **Post** /payment-gateway/v1.0/debit/refund.htm | Refund Order - Payment Gateway
 
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > CancelOrderResponse CancelOrder(ctx).CancelOrderRequest(cancelOrderRequest).Execute()
 
-Cancel Order API
+Cancel Order - Payment Gateway
 
 
 
@@ -26,11 +26,12 @@ Cancel Order API
 package main
 
 import (
+	ipg "github.com/dana-id/go_client/ipg/v1"
 	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
 	"os"
-	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
+	ipg "github.com/dana-id/go_client/ipg/v1"
 	"github.com/dana-id/go_client/config"
 )
 
@@ -47,7 +48,6 @@ func main() {
 	configuration.APIKey = &config.APIKey{
 		ENV:          config.ENV_SANDBOX,
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
-		CHANNEL_ID:   os.Getenv("CHANNEL_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
@@ -74,11 +74,11 @@ Other parameters are passed through a pointer to a apiCancelOrderRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cancelOrderRequest** | [**CancelOrderRequest**](PaymentGateway/CancelOrderRequest.md) |  | 
+ **cancelOrderRequest** | [**CancelOrderRequest**](Ipg/CancelOrderRequest.md) |  | 
 
 ### Return type
 
-[**CancelOrderResponse**](PaymentGateway/CancelOrderResponse.md)
+[**CancelOrderResponse**](Ipg/CancelOrderResponse.md)
 
 ### Authorization
 
@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 
 > ConsultPayResponse ConsultPay(ctx).ConsultPayRequest(consultPayRequest).Execute()
 
-Consult Pay API
+Consult Pay - Payment Gateway
 
 
 
@@ -108,11 +108,12 @@ Consult Pay API
 package main
 
 import (
+	ipg "github.com/dana-id/go_client/ipg/v1"
 	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
 	"os"
-	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
+	ipg "github.com/dana-id/go_client/ipg/v1"
 	"github.com/dana-id/go_client/config"
 )
 
@@ -129,7 +130,6 @@ func main() {
 	configuration.APIKey = &config.APIKey{
 		ENV:          config.ENV_SANDBOX,
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
-		CHANNEL_ID:   os.Getenv("CHANNEL_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
@@ -156,11 +156,11 @@ Other parameters are passed through a pointer to a apiConsultPayRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **consultPayRequest** | [**ConsultPayRequest**](PaymentGateway/ConsultPayRequest.md) |  | 
+ **consultPayRequest** | [**ConsultPayRequest**](Ipg/ConsultPayRequest.md) |  | 
 
 ### Return type
 
-[**ConsultPayResponse**](PaymentGateway/ConsultPayResponse.md)
+[**ConsultPayResponse**](Ipg/ConsultPayResponse.md)
 
 ### Authorization
 
@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 
 > CreateOrderResponse CreateOrder(ctx).CreateOrderRequest(createOrderRequest).Execute()
 
-Create Payment Order
+Create Order - Payment Gateway
 
 
 
@@ -190,11 +190,12 @@ Create Payment Order
 package main
 
 import (
+	ipg "github.com/dana-id/go_client/ipg/v1"
 	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
 	"os"
-	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
+	ipg "github.com/dana-id/go_client/ipg/v1"
 	"github.com/dana-id/go_client/config"
 )
 
@@ -211,7 +212,6 @@ func main() {
 	configuration.APIKey = &config.APIKey{
 		ENV:          config.ENV_SANDBOX,
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
-		CHANNEL_ID:   os.Getenv("CHANNEL_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
@@ -238,11 +238,11 @@ Other parameters are passed through a pointer to a apiCreateOrderRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createOrderRequest** | [**CreateOrderRequest**](PaymentGateway/CreateOrderRequest.md) |  | 
+ **createOrderRequest** | [**CreateOrderRequest**](Ipg/CreateOrderRequest.md) |  | 
 
 ### Return type
 
-[**CreateOrderResponse**](PaymentGateway/CreateOrderResponse.md)
+[**CreateOrderResponse**](Ipg/CreateOrderResponse.md)
 
 ### Authorization
 
@@ -262,7 +262,7 @@ Name | Type | Description  | Notes
 
 > QueryPaymentResponse QueryPayment(ctx).QueryPaymentRequest(queryPaymentRequest).Execute()
 
-Query Payment
+Query Payment - Payment Gateway
 
 
 
@@ -272,11 +272,12 @@ Query Payment
 package main
 
 import (
+	ipg "github.com/dana-id/go_client/ipg/v1"
 	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
 	"os"
-	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
+	ipg "github.com/dana-id/go_client/ipg/v1"
 	"github.com/dana-id/go_client/config"
 )
 
@@ -293,7 +294,6 @@ func main() {
 	configuration.APIKey = &config.APIKey{
 		ENV:          config.ENV_SANDBOX,
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
-		CHANNEL_ID:   os.Getenv("CHANNEL_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
@@ -320,11 +320,11 @@ Other parameters are passed through a pointer to a apiQueryPaymentRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **queryPaymentRequest** | [**QueryPaymentRequest**](PaymentGateway/QueryPaymentRequest.md) |  | 
+ **queryPaymentRequest** | [**QueryPaymentRequest**](Ipg/QueryPaymentRequest.md) |  | 
 
 ### Return type
 
-[**QueryPaymentResponse**](PaymentGateway/QueryPaymentResponse.md)
+[**QueryPaymentResponse**](Ipg/QueryPaymentResponse.md)
 
 ### Authorization
 
@@ -344,7 +344,7 @@ Name | Type | Description  | Notes
 
 > RefundOrderResponse RefundOrder(ctx).RefundOrderRequest(refundOrderRequest).Execute()
 
-Refund Order API
+Refund Order - Payment Gateway
 
 
 
@@ -354,11 +354,12 @@ Refund Order API
 package main
 
 import (
+	ipg "github.com/dana-id/go_client/ipg/v1"
 	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
 	"os"
-	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
+	ipg "github.com/dana-id/go_client/ipg/v1"
 	"github.com/dana-id/go_client/config"
 )
 
@@ -375,7 +376,6 @@ func main() {
 	configuration.APIKey = &config.APIKey{
 		ENV:          config.ENV_SANDBOX,
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
-		CHANNEL_ID:   os.Getenv("CHANNEL_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
@@ -402,11 +402,11 @@ Other parameters are passed through a pointer to a apiRefundOrderRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refundOrderRequest** | [**RefundOrderRequest**](PaymentGateway/RefundOrderRequest.md) |  | 
+ **refundOrderRequest** | [**RefundOrderRequest**](Ipg/RefundOrderRequest.md) |  | 
 
 ### Return type
 
-[**RefundOrderResponse**](PaymentGateway/RefundOrderResponse.md)
+[**RefundOrderResponse**](Ipg/RefundOrderResponse.md)
 
 ### Authorization
 

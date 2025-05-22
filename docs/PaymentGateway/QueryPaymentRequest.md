@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OriginalPartnerReferenceNo** | Pointer to **string** | Original transaction identifier on partner system | [optional] 
-**OriginalReferenceNo** | Pointer to **string** | Original transaction identifier on DANA system | [optional] 
+**OriginalPartnerReferenceNo** | Pointer to **string** | Original transaction identifier on partner system. Required if originalReferenceNo is not filled | [optional] 
+**OriginalReferenceNo** | Pointer to **string** | Original transaction identifier on DANA system. Required if originalPartnerReferenceNo is not filled | [optional] 
 **OriginalExternalId** | Pointer to **string** | Original external identifier on header message | [optional] 
 **ServiceCode** | **string** | Transaction type indicator is based on the service code of the original transaction request:<br /> - IPG Cashier Pay - SNAP: 54<br /> - QRIS CPM (Acquirer) - SNAP: 60<br /> - QRIS MPM (Acquirer) - SNAP: 47<br /> - Payment Gateway: 54<br />  | [default to "54"]
-**TransactionDate** | Pointer to **string** | Transaction date in format YYYY-MM-DDTHH:mm:ss+07:00 (GMT+7, Jakarta time) | [optional] 
-**Amount** | Pointer to [**Money**](Money.md) |  | [optional] 
+**TransactionDate** | Pointer to **string** | Transaction date, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
+**Amount** | Pointer to [**Money**](Money.md) | Amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | [optional] 
 **MerchantId** | **string** | Merchant identifier that is unique per each merchant | 
 **SubMerchantId** | Pointer to **string** | Information of sub merchant identifier | [optional] 
 **ExternalStoreId** | Pointer to **string** | Store identifier to indicate to which store this payment belongs to | [optional] 
-**AdditionalInfo** | Pointer to [**QueryPaymentRequestAdditionalInfo**](QueryPaymentRequestAdditionalInfo.md) |  | [optional] 
+**AdditionalInfo** | Pointer to **map[string]interface{}** | Additional information | [optional] 
 
 ## Methods
 
@@ -251,20 +251,20 @@ HasExternalStoreId returns a boolean if a field has been set.
 
 ### GetAdditionalInfo
 
-`func (o *QueryPaymentRequest) GetAdditionalInfo() QueryPaymentRequestAdditionalInfo`
+`func (o *QueryPaymentRequest) GetAdditionalInfo() map[string]interface{}`
 
 GetAdditionalInfo returns the AdditionalInfo field if non-nil, zero value otherwise.
 
 ### GetAdditionalInfoOk
 
-`func (o *QueryPaymentRequest) GetAdditionalInfoOk() (*QueryPaymentRequestAdditionalInfo, bool)`
+`func (o *QueryPaymentRequest) GetAdditionalInfoOk() (*map[string]interface{}, bool)`
 
 GetAdditionalInfoOk returns a tuple with the AdditionalInfo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAdditionalInfo
 
-`func (o *QueryPaymentRequest) SetAdditionalInfo(v QueryPaymentRequestAdditionalInfo)`
+`func (o *QueryPaymentRequest) SetAdditionalInfo(v map[string]interface{})`
 
 SetAdditionalInfo sets AdditionalInfo field to given value.
 

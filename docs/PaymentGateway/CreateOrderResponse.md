@@ -4,12 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResponseCode** | **string** | Response code for the transaction result. Example values include:<br /> * 2005400 - Successful<br /> * 4005400 - Bad Request - Retry request with proper parameter<br /> * 4005401 - Invalid Field Format - Retry request with proper parameter<br /> * 4005402 - Invalid Mandatory Field - Retry request with proper parameter<br /> * 4015400 - Unauthorized. Invalid Signature - Retry request with proper parameter<br /> * 4035402 - Exceeds Transaction Amount Limit - Try to adjust the order amount<br /> * 4035405 - Do Not Honor - Retry request with proper parameter or can contact DANA to check the user/account status<br /> * 4035415 - Transaction Not Permitted - Retry request periodically or consult to DANA<br /> * 4045408 - Invalid Merchant - Retry request with proper parameter<br /> * 4045418 - Inconsistent Request - Retry with proper parameter<br /> * 4295400 - Too Many Requests - Retry request periodically by sending same request payload<br /> * 5005400 - General Error - Retry request periodically<br /> * 5005401 - Internal Server Error - Retry request periodically by sending same request payload<br />  | 
-**ResponseMessage** | **string** | Message corresponding to the response code | 
-**ReferenceNo** | Pointer to **string** | Transaction identifier on DANA system (present if successfully processed) | [optional] 
+**ResponseCode** | **string** | Response code. Refer to https://dashboard.dana.id/api-docs/read/243#paymentgatewayprod-paymentRedirect-ResponseCodeandMessage | 
+**ResponseMessage** | **string** | Response message. Refer to https://dashboard.dana.id/api-docs/read/243#paymentgatewayprod-paymentRedirect-ResponseCodeandMessage | 
+**ReferenceNo** | Pointer to **string** | Transaction identifier on DANA system. Present if successfully processed | [optional] 
 **PartnerReferenceNo** | **string** | Transaction identifier on partner system | 
-**WebRedirectUrl** | Pointer to **string** | Checkout URL (present if payment method is not OVO/Virtual Account/QRIS) | [optional] 
-**AdditionalInfo** | Pointer to [**CreateOrderResponseAdditionalInfo**](CreateOrderResponseAdditionalInfo.md) |  | [optional] 
+**WebRedirectUrl** | Pointer to **string** | Checkout URLs. Present if successfully processed and payment method is not OVO/Virtual Account/QRIS | [optional] 
+**AdditionalInfo** | Pointer to [**CreateOrderResponseAdditionalInfo**](CreateOrderResponseAdditionalInfo.md) | Additional information | [optional] 
+**ExternalOrderId** | Pointer to **string** | External order identifier | [optional] 
 
 ## Methods
 
@@ -164,6 +165,31 @@ SetAdditionalInfo sets AdditionalInfo field to given value.
 `func (o *CreateOrderResponse) HasAdditionalInfo() bool`
 
 HasAdditionalInfo returns a boolean if a field has been set.
+
+### GetExternalOrderId
+
+`func (o *CreateOrderResponse) GetExternalOrderId() string`
+
+GetExternalOrderId returns the ExternalOrderId field if non-nil, zero value otherwise.
+
+### GetExternalOrderIdOk
+
+`func (o *CreateOrderResponse) GetExternalOrderIdOk() (*string, bool)`
+
+GetExternalOrderIdOk returns a tuple with the ExternalOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalOrderId
+
+`func (o *CreateOrderResponse) SetExternalOrderId(v string)`
+
+SetExternalOrderId sets ExternalOrderId field to given value.
+
+### HasExternalOrderId
+
+`func (o *CreateOrderResponse) HasExternalOrderId() bool`
+
+HasExternalOrderId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

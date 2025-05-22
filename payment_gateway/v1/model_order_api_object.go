@@ -22,12 +22,19 @@ var _ utils.MappedNullable = &OrderApiObject{}
 
 // OrderApiObject struct for OrderApiObject
 type OrderApiObject struct {
+	// Additional information of order title
 	OrderTitle string `json:"orderTitle"`
+	// Additional information of merchant transaction type
 	MerchantTransType *string `json:"merchantTransType,omitempty"`
+	// Additional information of buyer
 	Buyer *Buyer `json:"buyer,omitempty"`
+	// Additional information of goods
 	Goods []Goods `json:"goods,omitempty"`
+	// Additional information of shipping info
 	ShippingInfo []ShippingInfo `json:"shippingInfo,omitempty"`
+	// Additional information of extend
 	ExtendInfo *string `json:"extendInfo,omitempty"`
+	// For Payment Gateway scenario, need to fill it as API
 	Scenario *string `json:"scenario,omitempty"`
 }
 

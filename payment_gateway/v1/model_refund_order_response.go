@@ -22,9 +22,9 @@ var _ utils.MappedNullable = &RefundOrderResponse{}
 
 // RefundOrderResponse struct for RefundOrderResponse
 type RefundOrderResponse struct {
-	// Refer to response code list
+	// Response code. Refer to https://dashboard.dana.id/api-docs/read/127#HTML-API-RefundOrder-ResponseCodeandMessage
 	ResponseCode string `json:"responseCode"`
-	// Refer to response code list
+	// Response message. Refer to https://dashboard.dana.id/api-docs/read/127#HTML-API-RefundOrder-ResponseCodeandMessage
 	ResponseMessage string `json:"responseMessage"`
 	// Original transaction identifier on DANA system
 	OriginalReferenceNo *string `json:"originalReferenceNo,omitempty"`

@@ -22,8 +22,11 @@ var _ utils.MappedNullable = &UrlParam{}
 
 // UrlParam struct for UrlParam
 type UrlParam struct {
+	// URL link
 	Url string `json:"url"`
+	// Url param. The enums:<br> * PAY_RETURN - When finish payment, DANA will notify to the URL that has been defined by<br> * NOTIFICATION - After the payment, the user will be redirected to merchant page, this is mandatory<br> 
 	Type string `json:"type"`
+	// Deeplink URL or not
 	IsDeeplink string `json:"isDeeplink"`
 }
 

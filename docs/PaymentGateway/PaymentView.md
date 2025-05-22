@@ -5,16 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CashierRequestId** | Pointer to **string** | Cashier request identifier | [optional] 
-**PaidTime** | Pointer to **string** | Paid time in format YYYY-MM-DDTHH:mm:ss+07:00 (Jakarta time) | [optional] 
-**PayOptionInfos** | Pointer to [**[]PayOptionInfo**](PayOptionInfo.md) | Information of pay options | [optional] 
+**PaidTime** | Pointer to **string** | Information of paid time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
+**PayOptionInfos** | [**[]PayOptionInfo**](PayOptionInfo.md) | Information of pay option | 
 **PayRequestExtendInfo** | Pointer to **string** | Extend information of pay request | [optional] 
-**ExtendInfo** | Pointer to **string** | Additional extend information | [optional] 
+**ExtendInfo** | Pointer to **string** | Extend information | [optional] 
 
 ## Methods
 
 ### NewPaymentView
 
-`func NewPaymentView() *PaymentView`
+`func NewPaymentView(payOptionInfos []PayOptionInfo, ) *PaymentView`
 
 NewPaymentView instantiates a new PaymentView object
 This constructor will assign default values to properties that have it defined,
@@ -98,11 +98,6 @@ and a boolean to check if the value has been set.
 
 SetPayOptionInfos sets PayOptionInfos field to given value.
 
-### HasPayOptionInfos
-
-`func (o *PaymentView) HasPayOptionInfos() bool`
-
-HasPayOptionInfos returns a boolean if a field has been set.
 
 ### GetPayRequestExtendInfo
 

@@ -33,17 +33,6 @@ const (
     PAYOPTION_VIRTUAL_ACCOUNT_PERMATA_ Payoption = "VIRTUAL_ACCOUNT_PERMATA"
 )
 
-type Type string
-const (
-    TYPE_PAY_RETURN_ Type = "PAY_RETURN"
-    TYPE_NOTIFICATION_ Type = "NOTIFICATION"
-)
-
-type Businessscenario string
-const (
-    BUSINESSSCENARIO_PAYMENT_GATEWAY_ Businessscenario = "PAYMENT_GATEWAY"
-)
-
 type Acquirementstatus string
 const (
     ACQUIREMENTSTATUS_INIT_ Acquirementstatus = "INIT"
@@ -52,6 +41,15 @@ const (
     ACQUIREMENTSTATUS_PAYING_ Acquirementstatus = "PAYING"
     ACQUIREMENTSTATUS_MERCHANT_ACCEPT_ Acquirementstatus = "MERCHANT_ACCEPT"
     ACQUIREMENTSTATUS_CANCELLED_ Acquirementstatus = "CANCELLED"
+)
+
+type Actortype string
+const (
+    ACTORTYPE_USER_ Actortype = "USER"
+    ACTORTYPE_MERCHANT_ Actortype = "MERCHANT"
+    ACTORTYPE_MERCHANT_OPERATOR_ Actortype = "MERCHANT_OPERATOR"
+    ACTORTYPE_BACK_OFFICE_ Actortype = "BACK_OFFICE"
+    ACTORTYPE_SYSTEM_ Actortype = "SYSTEM"
 )
 
 type Sourceplatform string
@@ -73,5 +71,11 @@ const (
     ORDERTERMINALTYPE_WEB_ Orderterminaltype = "WEB"
     ORDERTERMINALTYPE_WAP_ Orderterminaltype = "WAP"
     ORDERTERMINALTYPE_SYSTEM_ Orderterminaltype = "SYSTEM"
+)
+
+type Type string
+const (
+    TYPE_PAY_RETURN_ Type = "PAY_RETURN"
+    TYPE_NOTIFICATION_ Type = "NOTIFICATION"
 )
 
