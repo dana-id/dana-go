@@ -107,14 +107,14 @@ func generateSignature(body string, apiKey *config.APIKey, method string, endpoi
 	data := fmt.Sprintf("%s:%s:%s:%s", method, urlPath, hashedPayload, timestamp)
 
 	// Get usable private key
-	privateKeyData, err := getUsablePrivateKey(apiKey)
+	privateKeyData, err := GetUsablePrivateKey(apiKey)
 	if err != nil || privateKeyData == nil {
 		fmt.Println("Failed to get usable private key:", err)
 		return ""
 	}
 
 	// Generate signature
-	signature, err := signWithPrivateKey([]byte(data), privateKeyData)
+	signature, err := SignWithPrivateKey([]byte(data), privateKeyData)
 	if err != nil {
 		fmt.Println("Failed to generate signature:", err)
 		return ""
@@ -128,9 +128,9 @@ func hasPrefix(s, prefix string) bool {
 	return len(s) >= len(prefix) && s[0:len(prefix)] == prefix
 }
 
-// getUsablePrivateKey retrieves and prepares the private key from either direct input or file path
+// GetUsablePrivateKey retrieves and prepares the private key from either direct input or file path
 // Private key path is the preferred method as it avoids issues with newlines and formatting
-func getUsablePrivateKey(apiKey *config.APIKey) ([]byte, error) {
+func GetUsablePrivateKey(apiKey *config.APIKey) ([]byte, error) {
 	// Check if we have conflicting config
 	if apiKey.PRIVATE_KEY != "" && apiKey.PRIVATE_KEY_PATH != "" {
 		return nil, fmt.Errorf("conflicting private key config: both PRIVATE_KEY and PRIVATE_KEY_PATH provided")
@@ -165,8 +165,8 @@ func getUsablePrivateKey(apiKey *config.APIKey) ([]byte, error) {
 	return nil, errors.New("no private key or private key path provided")
 }
 
-// signWithPrivateKey generates an RSA signature using the provided private key
-func signWithPrivateKey(data []byte, privateKeyPEM []byte) (string, error) {
+// SignWithPrivateKey generates an RSA signature using the provided private key
+func SignWithPrivateKey(data []byte, privateKeyPEM []byte) (string, error) {
 	// Parse the private key
 	block, _ := pem.Decode(privateKeyPEM)
 	if block == nil {
