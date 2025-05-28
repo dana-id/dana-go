@@ -15,10 +15,13 @@
 package fixtures
 
 import (
+	"crypto/sha256"
+	"fmt"
 	"os"
 	"time"
 
 	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
+	utils "github.com/dana-id/go_client/utils"
 )
 
 // GetMerchantId returns the merchant ID from environment or a default value
@@ -83,8 +86,8 @@ func GetCreateOrderByApiRequest() payment_gateway.CreateOrderByApiRequest {
 	// Add payment options
 	request.PayOptionDetails = []payment_gateway.PayOptionDetail{
 		{
-			PayMethod: string(payment_gateway.PAYMETHOD_VIRTUAL_ACCOUNT_),
-			PayOption: string(payment_gateway.PAYOPTION_VIRTUAL_ACCOUNT_BNI_),
+			PayMethod: string(payment_gateway.PAYMETHOD_BALANCE_),
+			PayOption: "",
 			TransAmount: payment_gateway.Money{
 				Value:    "222000.00",
 				Currency: "IDR",
@@ -171,3 +174,33 @@ func GetCancelOrderRequest(orderRequest *payment_gateway.CreateOrderByApiRequest
 // 		},
 // 	}
 // }
+
+// GenerateSnapAuthHeaders creates the X-SIGNATURE and X-TIMESTAMP headers for a request.
+func GenerateSnapAuthHeaders(method, resourcePath, body string) (map[string]string, error) {
+	jkt, errLoadLocation := time.LoadLocation("Asia/Jakarta")
+	var jktTime time.Time
+	if errLoadLocation != nil {
+		now := time.Now().UTC()
+		jktTime = now.Add(7 * time.Hour)
+	} else {
+		jktTime = time.Now().In(jkt)
+	}
+	timestamp := jktTime.Format("2006-01-02T15:04:05+07:00")
+
+	bodyHasher := sha256.New()
+	bodyHasher.Write([]byte(body))
+	hashedPayload := fmt.Sprintf("%x", bodyHasher.Sum(nil))
+
+	stringToSign := fmt.Sprintf("%s:%s:%s:%s", method, resourcePath, hashedPayload, timestamp)
+
+	signature, err := utils.SignWithPrivateKey([]byte(stringToSign), []byte(os.Getenv("WEBHOOK_PRIVATE_KEY")))
+	if err != nil {
+		return nil, fmt.Errorf("GenerateSnapAuthHeaders: failed to sign data: %w", err)
+	}
+
+	headers := map[string]string{
+		"X-TIMESTAMP": timestamp,
+		"X-SIGNATURE": signature,
+	}
+	return headers, nil
+}

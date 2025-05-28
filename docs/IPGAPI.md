@@ -1,22 +1,24 @@
-# PaymentGatewayAPI
+# IPGAPI
 
 All URIs are relative to http://api.sandbox.dana.id for sandbox environment and https://api.saas.dana.id for production environment
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelOrder**](PaymentGatewayAPI.md#CancelOrder) | **Post** /payment-gateway/v1.0/debit/cancel.htm | Cancel Order - Payment Gateway
-[**ConsultPay**](PaymentGatewayAPI.md#ConsultPay) | **Post** /v1.0/payment-gateway/consult-pay.htm | Consult Pay - Payment Gateway
-[**CreateOrder**](PaymentGatewayAPI.md#CreateOrder) | **Post** /payment-gateway/v1.0/debit/payment-host-to-host.htm | Create Order - Payment Gateway
-[**QueryPayment**](PaymentGatewayAPI.md#QueryPayment) | **Post** /payment-gateway/v1.0/debit/status.htm | Query Payment - Payment Gateway
-[**RefundOrder**](PaymentGatewayAPI.md#RefundOrder) | **Post** /payment-gateway/v1.0/debit/refund.htm | Refund Order - Payment Gateway
+[**AccountUnbinding**](IPGAPI.md#AccountUnbinding) | **Post** /v1.0/registration-account-unbinding.htm | Account unbinding - Binding
+[**ApplyOTT**](IPGAPI.md#ApplyOTT) | **Post** /rest/v1.1/qr/apply-ott | Apply OTT - IPG
+[**ApplyToken**](IPGAPI.md#ApplyToken) | **Post** /v1.0/access-token/b2b2c.htm | Apply Token, required by Apply OTT - Binding
+[**CancelOrder**](IPGAPI.md#CancelOrder) | **Post** /v1.0/debit/cancel.htm | Cancel Order - IPG
+[**IpgPayment**](IPGAPI.md#IpgPayment) | **Post** /rest/redirection/v1.0/debit/payment-host-to-host | IPG payment - IPG
+[**QueryPayment**](IPGAPI.md#QueryPayment) | **Post** /rest/v1.1/debit/status | Query Payment - IPG
+[**RefundOrder**](IPGAPI.md#RefundOrder) | **Post** /v1.0/debit/refund.htm | Refund Order - IPG
 
 
 
-## CancelOrder
+## AccountUnbinding
 
-> CancelOrderResponse CancelOrder(ctx).CancelOrderRequest(cancelOrderRequest).Execute()
+> AccountUnbindingResponse AccountUnbinding(ctx).AccountUnbindingRequest(accountUnbindingRequest).Execute()
 
-Cancel Order - Payment Gateway
+Account unbinding - Binding
 
 
 
@@ -26,7 +28,249 @@ Cancel Order - Payment Gateway
 package main
 
 import (
+	dana "github.com/dana-id/go_client"
+	"context"
+	"fmt"
+	"os"
 	ipg "github.com/dana-id/go_client/ipg/v1"
+	"github.com/dana-id/go_client/config"
+)
+
+func main() {
+	// Define request struct directly (example)
+	request := payment_gateway.AccountUnbindingRequest{
+		// Fill in required fields here, e.g.:
+		// Field1: "value1",
+		// Field2: "value2",
+	}
+
+	configuration := config.NewConfiguration()
+	// Set API keys
+	configuration.APIKey = &config.APIKey{
+		ENV:          config.ENV_SANDBOX,
+		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
+		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
+		ORIGIN:       os.Getenv("ORIGIN"),
+		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+	}
+	apiClient := dana.NewAPIClient(configuration)
+	_, r, err := apiClient.PaymentGatewayAPI.AccountUnbinding(context.Background()).AccountUnbindingRequest(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.AccountUnbinding``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AccountUnbinding`: AccountUnbindingResponse
+	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.AccountUnbinding`: %v\n", r.Body)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAccountUnbindingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **accountUnbindingRequest** | [**AccountUnbindingRequest**](Ipg/AccountUnbindingRequest.md) |  | 
+
+### Return type
+
+[**AccountUnbindingResponse**](Ipg/AccountUnbindingResponse.md)
+
+### Authorization
+
+[X_PARTNER_ID](../README.md#X_PARTNER_ID), [PRIVATE_KEY](../README.md#PRIVATE_KEY), [PRIVATE_KEY_PATH](../README.md#PRIVATE_KEY_PATH), [ENV](../README.md#ENV)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ApplyOTT
+
+> ApplyOTTResponse ApplyOTT(ctx).ApplyOTTRequest(applyOTTRequest).Execute()
+
+Apply OTT - IPG
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	dana "github.com/dana-id/go_client"
+	"context"
+	"fmt"
+	"os"
+	ipg "github.com/dana-id/go_client/ipg/v1"
+	"github.com/dana-id/go_client/config"
+)
+
+func main() {
+	// Define request struct directly (example)
+	request := payment_gateway.ApplyOTTRequest{
+		// Fill in required fields here, e.g.:
+		// Field1: "value1",
+		// Field2: "value2",
+	}
+
+	configuration := config.NewConfiguration()
+	// Set API keys
+	configuration.APIKey = &config.APIKey{
+		ENV:          config.ENV_SANDBOX,
+		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
+		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
+		ORIGIN:       os.Getenv("ORIGIN"),
+		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+	}
+	apiClient := dana.NewAPIClient(configuration)
+	_, r, err := apiClient.PaymentGatewayAPI.ApplyOTT(context.Background()).ApplyOTTRequest(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.ApplyOTT``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ApplyOTT`: ApplyOTTResponse
+	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.ApplyOTT`: %v\n", r.Body)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiApplyOTTRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applyOTTRequest** | [**ApplyOTTRequest**](Ipg/ApplyOTTRequest.md) |  | 
+
+### Return type
+
+[**ApplyOTTResponse**](Ipg/ApplyOTTResponse.md)
+
+### Authorization
+
+[ORIGIN](../README.md#ORIGIN), [X_PARTNER_ID](../README.md#X_PARTNER_ID), [CHANNEL_ID](../README.md#CHANNEL_ID), [PRIVATE_KEY](../README.md#PRIVATE_KEY), [PRIVATE_KEY_PATH](../README.md#PRIVATE_KEY_PATH), [ENV](../README.md#ENV)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ApplyToken
+
+> ApplyTokenResponse ApplyToken(ctx).ApplyTokenRequest(applyTokenRequest).Execute()
+
+Apply Token, required by Apply OTT - Binding
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	dana "github.com/dana-id/go_client"
+	"context"
+	"fmt"
+	"os"
+	ipg "github.com/dana-id/go_client/ipg/v1"
+	"github.com/dana-id/go_client/config"
+)
+
+func main() {
+	// Define request struct directly (example)
+	request := payment_gateway.ApplyTokenRequest{
+		// Fill in required fields here, e.g.:
+		// Field1: "value1",
+		// Field2: "value2",
+	}
+
+	configuration := config.NewConfiguration()
+	// Set API keys
+	configuration.APIKey = &config.APIKey{
+		ENV:          config.ENV_SANDBOX,
+		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
+		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
+		ORIGIN:       os.Getenv("ORIGIN"),
+		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+	}
+	apiClient := dana.NewAPIClient(configuration)
+	_, r, err := apiClient.PaymentGatewayAPI.ApplyToken(context.Background()).ApplyTokenRequest(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.ApplyToken``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ApplyToken`: ApplyTokenResponse
+	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.ApplyToken`: %v\n", r.Body)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiApplyTokenRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applyTokenRequest** | [**ApplyTokenRequest**](Ipg/ApplyTokenRequest.md) |  | 
+
+### Return type
+
+[**ApplyTokenResponse**](Ipg/ApplyTokenResponse.md)
+
+### Authorization
+
+[X_PARTNER_ID](../README.md#X_PARTNER_ID), [PRIVATE_KEY](../README.md#PRIVATE_KEY), [PRIVATE_KEY_PATH](../README.md#PRIVATE_KEY_PATH), [ENV](../README.md#ENV)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CancelOrder
+
+> CancelOrderResponse CancelOrder(ctx).CancelOrderRequest(cancelOrderRequest).Execute()
+
+Cancel Order - IPG
+
+
+
+### Example
+
+```go
+package main
+
+import (
 	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
@@ -94,11 +338,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ConsultPay
+## IpgPayment
 
-> ConsultPayResponse ConsultPay(ctx).ConsultPayRequest(consultPayRequest).Execute()
+> IPGPaymentResponse IpgPayment(ctx).IPGPaymentRequest(iPGPaymentRequest).Execute()
 
-Consult Pay - Payment Gateway
+IPG payment - IPG
 
 
 
@@ -108,7 +352,6 @@ Consult Pay - Payment Gateway
 package main
 
 import (
-	ipg "github.com/dana-id/go_client/ipg/v1"
 	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
@@ -119,7 +362,7 @@ import (
 
 func main() {
 	// Define request struct directly (example)
-	request := payment_gateway.ConsultPayRequest{
+	request := payment_gateway.IpgPaymentRequest{
 		// Fill in required fields here, e.g.:
 		// Field1: "value1",
 		// Field2: "value2",
@@ -135,13 +378,13 @@ func main() {
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
 	}
 	apiClient := dana.NewAPIClient(configuration)
-	_, r, err := apiClient.PaymentGatewayAPI.ConsultPay(context.Background()).ConsultPayRequest(request).Execute()
+	_, r, err := apiClient.PaymentGatewayAPI.IpgPayment(context.Background()).IpgPaymentRequest(request).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.ConsultPay``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.IpgPayment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ConsultPay`: ConsultPayResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.ConsultPay`: %v\n", r.Body)
+	// response from `IpgPayment`: IPGPaymentResponse
+	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.IpgPayment`: %v\n", r.Body)
 }
 ```
 
@@ -151,98 +394,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiConsultPayRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiIpgPaymentRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **consultPayRequest** | [**ConsultPayRequest**](Ipg/ConsultPayRequest.md) |  | 
+ **iPGPaymentRequest** | [**IPGPaymentRequest**](Ipg/IPGPaymentRequest.md) |  | 
 
 ### Return type
 
-[**ConsultPayResponse**](Ipg/ConsultPayResponse.md)
-
-### Authorization
-
-[ORIGIN](../README.md#ORIGIN), [X_PARTNER_ID](../README.md#X_PARTNER_ID), [CHANNEL_ID](../README.md#CHANNEL_ID), [PRIVATE_KEY](../README.md#PRIVATE_KEY), [PRIVATE_KEY_PATH](../README.md#PRIVATE_KEY_PATH), [ENV](../README.md#ENV)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateOrder
-
-> CreateOrderResponse CreateOrder(ctx).CreateOrderRequest(createOrderRequest).Execute()
-
-Create Order - Payment Gateway
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	ipg "github.com/dana-id/go_client/ipg/v1"
-	dana "github.com/dana-id/go_client"
-	"context"
-	"fmt"
-	"os"
-	ipg "github.com/dana-id/go_client/ipg/v1"
-	"github.com/dana-id/go_client/config"
-)
-
-func main() {
-	// Define request struct directly (example)
-	request := payment_gateway.CreateOrderRequest{
-		// Fill in required fields here, e.g.:
-		// Field1: "value1",
-		// Field2: "value2",
-	}
-
-	configuration := config.NewConfiguration()
-	// Set API keys
-	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
-		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
-		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
-		ORIGIN:       os.Getenv("ORIGIN"),
-		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
-	}
-	apiClient := dana.NewAPIClient(configuration)
-	_, r, err := apiClient.PaymentGatewayAPI.CreateOrder(context.Background()).CreateOrderRequest(request).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.CreateOrder``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreateOrder`: CreateOrderResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.CreateOrder`: %v\n", r.Body)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateOrderRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createOrderRequest** | [**CreateOrderRequest**](Ipg/CreateOrderRequest.md) |  | 
-
-### Return type
-
-[**CreateOrderResponse**](Ipg/CreateOrderResponse.md)
+[**IPGPaymentResponse**](Ipg/IPGPaymentResponse.md)
 
 ### Authorization
 
@@ -262,7 +423,7 @@ Name | Type | Description  | Notes
 
 > QueryPaymentResponse QueryPayment(ctx).QueryPaymentRequest(queryPaymentRequest).Execute()
 
-Query Payment - Payment Gateway
+Query Payment - IPG
 
 
 
@@ -272,7 +433,6 @@ Query Payment - Payment Gateway
 package main
 
 import (
-	ipg "github.com/dana-id/go_client/ipg/v1"
 	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
@@ -344,7 +504,7 @@ Name | Type | Description  | Notes
 
 > RefundOrderResponse RefundOrder(ctx).RefundOrderRequest(refundOrderRequest).Execute()
 
-Refund Order - Payment Gateway
+Refund Order - IPG
 
 
 
@@ -354,7 +514,6 @@ Refund Order - Payment Gateway
 package main
 
 import (
-	ipg "github.com/dana-id/go_client/ipg/v1"
 	dana "github.com/dana-id/go_client"
 	"context"
 	"fmt"
@@ -426,12 +585,12 @@ Name | Type | Description  | Notes
 ## acquirementStatus
 | Value | Description |
 |-------|-------------|
-| `INIT` | Order is created but not paid yet |
-| `SUCCESS` | Order is succeeded |
-| `CLOSED` | Order is closed |
-| `PAYING` | Order is paid but not finish |
-| `MERCHANT_ACCEPT` | Order is accepted by merchant after order is paid for PAY-CONFIRM |
-| `CANCELLED` | Order is cancelled |
+| `INIT` |  |
+| `SUCCESS` |  |
+| `CLOSED` |  |
+| `PAYING` |  |
+| `MERCHANT_ACCEPT` |  |
+| `CANCELLED` |  |
 
 
 ## actorType
@@ -467,7 +626,6 @@ Name | Type | Description  | Notes
 | `DIRECT_DEBIT_DEBIT_CARD` | Payment method with direct debit of debit card |
 | `ONLINE_CREDIT` | Payment method with online Credit |
 | `LOAN_CREDIT` | Payment method with DANA Cicil |
-| `NETWORK_PAY` | Payment method with e-wallet |
 
 
 ## payOption
@@ -485,6 +643,30 @@ Name | Type | Description  | Notes
 | `VIRTUAL_ACCOUNT_BTPN` | Payment method with BTPN virtual account |
 | `VIRTUAL_ACCOUNT_CIMB` | Payment method with CIMB virtual account |
 | `VIRTUAL_ACCOUNT_PERMATA` | Payment method with Permata virtual account |
+
+
+## promoType
+| Value | Description |
+|-------|-------------|
+| `CASH_BACK` |  |
+| `DISCOUNT` |  |
+| `VOUCHER` |  |
+| `POINT` |  |
+
+
+## serviceScenario
+| Value | Description |
+|-------|-------------|
+| `SCAN_AND_PAY` |  |
+| `EXIT_AND_PAY` |  |
+| `EMAS_PURCHASE` |  |
+
+
+## serviceType
+| Value | Description |
+|-------|-------------|
+| `PARKING` |  |
+| `INVESTMENT` |  |
 
 
 ## sourcePlatform
@@ -521,7 +703,6 @@ This section demonstrates how to securely verify and parse DANA webhook notifica
 package main
 
 import (
-	ipg "github.com/dana-id/go_client/ipg/v1"
 	dana "github.com/dana-id/go_client"
 	"bytes"
 	"fmt"
