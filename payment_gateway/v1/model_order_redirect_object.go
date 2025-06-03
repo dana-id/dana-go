@@ -34,6 +34,10 @@ type OrderRedirectObject struct {
 	ShippingInfo []ShippingInfo `json:"shippingInfo,omitempty"`
 	// Additional information of extend
 	ExtendInfo *string `json:"extendInfo,omitempty"`
+	// Additional information of created time
+	CreatedTime *string `json:"createdTime,omitempty"`
+	// Additional information of order
+	OrderMemo *string `json:"orderMemo,omitempty"`
 	// For Payment Gateway Drop-in scenario, need to fill it as REDIRECT
 	Scenario *string `json:"scenario,omitempty"`
 }
@@ -242,6 +246,70 @@ func (o *OrderRedirectObject) SetExtendInfo(v string) {
 	o.ExtendInfo = &v
 }
 
+// GetCreatedTime returns the CreatedTime field value if set, zero value otherwise.
+func (o *OrderRedirectObject) GetCreatedTime() string {
+	if o == nil || utils.IsNil(o.CreatedTime) {
+		var ret string
+		return ret
+	}
+	return *o.CreatedTime
+}
+
+// GetCreatedTimeOk returns a tuple with the CreatedTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderRedirectObject) GetCreatedTimeOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.CreatedTime) {
+		return nil, false
+	}
+	return o.CreatedTime, true
+}
+
+// HasCreatedTime returns a boolean if a field has been set.
+func (o *OrderRedirectObject) HasCreatedTime() bool {
+	if o != nil && !utils.IsNil(o.CreatedTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedTime gets a reference to the given string and assigns it to the CreatedTime field.
+func (o *OrderRedirectObject) SetCreatedTime(v string) {
+	o.CreatedTime = &v
+}
+
+// GetOrderMemo returns the OrderMemo field value if set, zero value otherwise.
+func (o *OrderRedirectObject) GetOrderMemo() string {
+	if o == nil || utils.IsNil(o.OrderMemo) {
+		var ret string
+		return ret
+	}
+	return *o.OrderMemo
+}
+
+// GetOrderMemoOk returns a tuple with the OrderMemo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderRedirectObject) GetOrderMemoOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.OrderMemo) {
+		return nil, false
+	}
+	return o.OrderMemo, true
+}
+
+// HasOrderMemo returns a boolean if a field has been set.
+func (o *OrderRedirectObject) HasOrderMemo() bool {
+	if o != nil && !utils.IsNil(o.OrderMemo) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrderMemo gets a reference to the given string and assigns it to the OrderMemo field.
+func (o *OrderRedirectObject) SetOrderMemo(v string) {
+	o.OrderMemo = &v
+}
+
 // GetScenario returns the Scenario field value if set, zero value otherwise.
 func (o *OrderRedirectObject) GetScenario() string {
 	if o == nil || utils.IsNil(o.Scenario) {
@@ -299,6 +367,12 @@ func (o OrderRedirectObject) ToMap() (map[string]interface{}, error) {
 	}
 	if !utils.IsNil(o.ExtendInfo) {
 		toSerialize["extendInfo"] = o.ExtendInfo
+	}
+	if !utils.IsNil(o.CreatedTime) {
+		toSerialize["createdTime"] = o.CreatedTime
+	}
+	if !utils.IsNil(o.OrderMemo) {
+		toSerialize["orderMemo"] = o.OrderMemo
 	}
 	if !utils.IsNil(o.Scenario) {
 		toSerialize["scenario"] = o.Scenario
