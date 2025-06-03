@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Goods** | Pointer to [**[]Goods**](Goods.md) | Additional information of goods | [optional] 
 **ShippingInfo** | Pointer to [**[]ShippingInfo**](ShippingInfo.md) | Additional information of shipping info | [optional] 
 **ExtendInfo** | Pointer to **string** | Additional information of extend | [optional] 
+**CreatedTime** | Pointer to **string** | Additional information of created time | [optional] 
+**OrderMemo** | Pointer to **string** | Additional information of order | [optional] 
 
 ## Methods
 
@@ -174,6 +176,56 @@ SetExtendInfo sets ExtendInfo field to given value.
 `func (o *OrderBase) HasExtendInfo() bool`
 
 HasExtendInfo returns a boolean if a field has been set.
+
+### GetCreatedTime
+
+`func (o *OrderBase) GetCreatedTime() string`
+
+GetCreatedTime returns the CreatedTime field if non-nil, zero value otherwise.
+
+### GetCreatedTimeOk
+
+`func (o *OrderBase) GetCreatedTimeOk() (*string, bool)`
+
+GetCreatedTimeOk returns a tuple with the CreatedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedTime
+
+`func (o *OrderBase) SetCreatedTime(v string)`
+
+SetCreatedTime sets CreatedTime field to given value.
+
+### HasCreatedTime
+
+`func (o *OrderBase) HasCreatedTime() bool`
+
+HasCreatedTime returns a boolean if a field has been set.
+
+### GetOrderMemo
+
+`func (o *OrderBase) GetOrderMemo() string`
+
+GetOrderMemo returns the OrderMemo field if non-nil, zero value otherwise.
+
+### GetOrderMemoOk
+
+`func (o *OrderBase) GetOrderMemoOk() (*string, bool)`
+
+GetOrderMemoOk returns a tuple with the OrderMemo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderMemo
+
+`func (o *OrderBase) SetOrderMemo(v string)`
+
+SetOrderMemo sets OrderMemo field to given value.
+
+### HasOrderMemo
+
+`func (o *OrderBase) HasOrderMemo() bool`
+
+HasOrderMemo returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

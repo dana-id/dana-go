@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Goods** | Pointer to [**[]Goods**](Goods.md) | Additional information of goods | [optional] 
 **ShippingInfo** | Pointer to [**[]ShippingInfo**](ShippingInfo.md) | Additional information of shipping info | [optional] 
 **ExtendInfo** | Pointer to **string** | Additional information of extend | [optional] 
+**CreatedTime** | Pointer to **string** | Additional information of created time | [optional] 
+**OrderMemo** | Pointer to **string** | Additional information of order | [optional] 
 **Scenario** | Pointer to **string** | For Payment Gateway scenario, need to fill it as API | [optional] 
 
 ## Methods
@@ -175,6 +177,56 @@ SetExtendInfo sets ExtendInfo field to given value.
 `func (o *OrderApiObject) HasExtendInfo() bool`
 
 HasExtendInfo returns a boolean if a field has been set.
+
+### GetCreatedTime
+
+`func (o *OrderApiObject) GetCreatedTime() string`
+
+GetCreatedTime returns the CreatedTime field if non-nil, zero value otherwise.
+
+### GetCreatedTimeOk
+
+`func (o *OrderApiObject) GetCreatedTimeOk() (*string, bool)`
+
+GetCreatedTimeOk returns a tuple with the CreatedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedTime
+
+`func (o *OrderApiObject) SetCreatedTime(v string)`
+
+SetCreatedTime sets CreatedTime field to given value.
+
+### HasCreatedTime
+
+`func (o *OrderApiObject) HasCreatedTime() bool`
+
+HasCreatedTime returns a boolean if a field has been set.
+
+### GetOrderMemo
+
+`func (o *OrderApiObject) GetOrderMemo() string`
+
+GetOrderMemo returns the OrderMemo field if non-nil, zero value otherwise.
+
+### GetOrderMemoOk
+
+`func (o *OrderApiObject) GetOrderMemoOk() (*string, bool)`
+
+GetOrderMemoOk returns a tuple with the OrderMemo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderMemo
+
+`func (o *OrderApiObject) SetOrderMemo(v string)`
+
+SetOrderMemo sets OrderMemo field to given value.
+
+### HasOrderMemo
+
+`func (o *OrderApiObject) HasOrderMemo() bool`
+
+HasOrderMemo returns a boolean if a field has been set.
 
 ### GetScenario
 
