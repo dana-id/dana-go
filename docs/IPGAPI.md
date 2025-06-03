@@ -626,6 +626,7 @@ Name | Type | Description  | Notes
 | `DIRECT_DEBIT_DEBIT_CARD` | Payment method with direct debit of debit card |
 | `ONLINE_CREDIT` | Payment method with online Credit |
 | `LOAN_CREDIT` | Payment method with DANA Cicil |
+| `NETWORK_PAY` | Payment method with e-wallet |
 
 
 ## payOption
