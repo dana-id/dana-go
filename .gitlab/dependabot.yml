@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # To keep dependencies up to date for the Go SDK
+  - package-ecosystem: "gomod" # Specifies the package manager to use for Go modules
+    directory: "/"
+    commit-message:
+      prefix: "dependabot"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "go"
+    reviewers:
+      - "rangga.putra"
