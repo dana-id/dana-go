@@ -28,12 +28,12 @@ Account unbinding - Binding
 package main
 
 import (
-	dana "github.com/dana-id/go_client"
+	dana "github.com/dana-id/dana-go"
 	"context"
 	"fmt"
 	"os"
-	ipg "github.com/dana-id/go_client/ipg/v1"
-	"github.com/dana-id/go_client/config"
+	ipg "github.com/dana-id/dana-go/ipg/v1"
+	"github.com/dana-id/dana-go/config"
 )
 
 func main() {
@@ -109,12 +109,12 @@ Apply OTT - IPG
 package main
 
 import (
-	dana "github.com/dana-id/go_client"
+	dana "github.com/dana-id/dana-go"
 	"context"
 	"fmt"
 	"os"
-	ipg "github.com/dana-id/go_client/ipg/v1"
-	"github.com/dana-id/go_client/config"
+	ipg "github.com/dana-id/dana-go/ipg/v1"
+	"github.com/dana-id/dana-go/config"
 )
 
 func main() {
@@ -190,12 +190,12 @@ Apply Token, required by Apply OTT - Binding
 package main
 
 import (
-	dana "github.com/dana-id/go_client"
+	dana "github.com/dana-id/dana-go"
 	"context"
 	"fmt"
 	"os"
-	ipg "github.com/dana-id/go_client/ipg/v1"
-	"github.com/dana-id/go_client/config"
+	ipg "github.com/dana-id/dana-go/ipg/v1"
+	"github.com/dana-id/dana-go/config"
 )
 
 func main() {
@@ -271,12 +271,12 @@ Cancel Order - IPG
 package main
 
 import (
-	dana "github.com/dana-id/go_client"
+	dana "github.com/dana-id/dana-go"
 	"context"
 	"fmt"
 	"os"
-	ipg "github.com/dana-id/go_client/ipg/v1"
-	"github.com/dana-id/go_client/config"
+	ipg "github.com/dana-id/dana-go/ipg/v1"
+	"github.com/dana-id/dana-go/config"
 )
 
 func main() {
@@ -352,12 +352,12 @@ IPG payment - IPG
 package main
 
 import (
-	dana "github.com/dana-id/go_client"
+	dana "github.com/dana-id/dana-go"
 	"context"
 	"fmt"
 	"os"
-	ipg "github.com/dana-id/go_client/ipg/v1"
-	"github.com/dana-id/go_client/config"
+	ipg "github.com/dana-id/dana-go/ipg/v1"
+	"github.com/dana-id/dana-go/config"
 )
 
 func main() {
@@ -433,12 +433,12 @@ Query Payment - IPG
 package main
 
 import (
-	dana "github.com/dana-id/go_client"
+	dana "github.com/dana-id/dana-go"
 	"context"
 	"fmt"
 	"os"
-	ipg "github.com/dana-id/go_client/ipg/v1"
-	"github.com/dana-id/go_client/config"
+	ipg "github.com/dana-id/dana-go/ipg/v1"
+	"github.com/dana-id/dana-go/config"
 )
 
 func main() {
@@ -514,12 +514,12 @@ Refund Order - IPG
 package main
 
 import (
-	dana "github.com/dana-id/go_client"
+	dana "github.com/dana-id/dana-go"
 	"context"
 	"fmt"
 	"os"
-	ipg "github.com/dana-id/go_client/ipg/v1"
-	"github.com/dana-id/go_client/config"
+	ipg "github.com/dana-id/dana-go/ipg/v1"
+	"github.com/dana-id/dana-go/config"
 )
 
 func main() {
@@ -704,23 +704,29 @@ This section demonstrates how to securely verify and parse DANA webhook notifica
 package main
 
 import (
-	dana "github.com/dana-id/go_client"
+	dana "github.com/dana-id/dana-go"
 	"bytes"
 	"fmt"
 	"io"
 	"net/http"
 	"os"
 
-	ipg "github.com/dana-id/go_client/ipg/v1"
-	ipg "github.com/dana-id/go_client/ipg/v1"
+	ipg "github.com/dana-id/dana-go/ipg/v1"
+	ipg "github.com/dana-id/dana-go/ipg/v1"
 )
 
 // This function would be your actual webhook handler in a real application.
 func webhookNotificationHandler(req *http.Request) {
 	// 1. Initialize the WebhookParser
-	danaPublicKeyPEM := os.Getenv("DANA_PUBLIC_KEY")
+	// You can provide the public key directly as a string or via a file path.
+	// The parser will prioritize publicKeyPath if both are provided.
+	// Option 1: Provide public key as a string
+	// danaPublicKeyPEM := os.Getenv("DANA_PUBLIC_KEY")
+	// parser, err := webhook.NewWebhookParser(&danaPublicKeyPEM, nil)
 
-	parser, err := webhook.NewWebhookParser(danaPublicKeyPEM)
+	// Option 2: Provide path to public key file 
+	danaPublicKeyPath := os.Getenv("DANA_PUBLIC_KEY_PATH") // e.g., "/path/to/your/dana_public_key.pem"
+	parser, err := webhook.NewWebhookParser(nil, &danaPublicKeyPath)
 	if err != nil {
 		fmt.Printf("Error creating WebhookParser: %v\n", err)
 		return
@@ -776,10 +782,11 @@ The `WebhookParser` is part of the `webhook` package.
 **Constructor:**
 
 ```go
-func NewWebhookParser(gatewayPublicKeyPEM string) (*WebhookParser, error)
+func NewWebhookParser(publicKey *string, publicKeyPath *string) (*WebhookParser, error)
 ```
-- `gatewayPublicKeyPEM` (string): The DANA gateway's public key in PEM format. Used to verify the webhook signature.
-- **Returns:** A pointer to a `WebhookParser` instance and an error if the public key is invalid.
+- `publicKey` (*string): Optional. The DANA gateway's public key as a PEM formatted string. This is used if `publicKeyPath` is not provided or is empty.
+- `publicKeyPath` (*string): Optional. The file path to the DANA gateway's public key PEM file. If provided, this will be prioritized over the `publicKey` string.
+- **Returns:** A pointer to a `WebhookParser` instance and an error if the public key cannot be loaded or is invalid.
 
 **Method:**
 
@@ -790,7 +797,7 @@ func (p *WebhookParser) ParseWebhook(httpMethod string, relativePathURL string, 
 - `relativePathURL` (string): The relative URL path of the webhook endpoint that received the notification (e.g., `/v1.0/debit/notify`).
 - `headers` (map[string]string): A map containing the HTTP request headers. This map must include `X-SIGNATURE` and `X-TIMESTAMP` headers provided by DANA for signature verification.
 - `body` (string): The raw JSON string payload from the webhook request body.
-- **Returns:** A pointer to a `model.FinishNotify` struct containing the parsed and verified webhook data, or an error if parsing or signature verification fails.
+- **Returns:** A pointer to a `model.FinishNotifyRequest` struct containing the parsed and verified webhook data, or an error if parsing or signature verification fails.
 
 
 ## Security Notes
@@ -803,5 +810,5 @@ The following webhook notification models may be received:
 
 Model | Description
 ------------- | -------------
-[**FinishNotify**](PaymentGateway/FinishNotify.md) | Represents the standard notification payload for payment events.
+[**FinishNotifyRequest**](Ipg/FinishNotifyRequest.md) | Represents the standard notification payload for payment events.
 

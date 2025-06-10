@@ -18,8 +18,8 @@ import (
 	"context"
 	"os"
 
-	dana "github.com/dana-id/go_client"
-	"github.com/dana-id/go_client/config"
+	dana "github.com/dana-id/dana-go"
+	"github.com/dana-id/dana-go/config"
 )
 
 // ApiClient fixture structure

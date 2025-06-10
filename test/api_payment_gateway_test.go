@@ -20,13 +20,13 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/dana-id/go_client/test/fixtures"
+	"github.com/dana-id/dana-go/test/fixtures"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
-	webhook "github.com/dana-id/go_client/webhook"
+	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
+	webhook "github.com/dana-id/dana-go/webhook"
 )
 
 func init() {
@@ -266,7 +266,8 @@ func TestWebhookParser_ParseWebhook(t *testing.T) {
 	assert.NotEmpty(t, generatedHeaders["X-SIGNATURE"], "X-SIGNATURE should not be empty")
 	assert.NotEmpty(t, generatedHeaders["X-TIMESTAMP"], "X-TIMESTAMP should not be empty")
 
-	parser, err := webhook.NewWebhookParser(os.Getenv("WEBHOOK_PUBLIC_KEY"))
+	publicKey := os.Getenv("WEBHOOK_PUBLIC_KEY")
+	parser, err := webhook.NewWebhookParser(&publicKey, nil)
 	assert.NoError(t, err, "Error creating WebhookParser")
 	assert.NotNil(t, parser, "WebhookParser should not be nil")
 

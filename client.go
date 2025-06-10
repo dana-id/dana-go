@@ -31,10 +31,10 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 
-	common "github.com/dana-id/go_client/common"
-	config "github.com/dana-id/go_client/config"
-	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
-	exceptions "github.com/dana-id/go_client/exceptions"
+	common "github.com/dana-id/dana-go/common"
+	config "github.com/dana-id/dana-go/config"
+	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
+	exceptions "github.com/dana-id/dana-go/exceptions"
 )
 
 var (

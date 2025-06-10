@@ -12,7 +12,7 @@ package payment_gateway
 
 import (
 	"encoding/json"
-	utils "github.com/dana-id/go_client/utils"
+	utils "github.com/dana-id/dana-go/utils"
 )
 
 // checks if the ConsultPayResponse type satisfies the MappedNullable interface at compile time

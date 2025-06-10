@@ -1,4 +1,4 @@
-module github.com/dana-id/go_client
+module github.com/dana-id/dana-go
 
 go 1.18
 
