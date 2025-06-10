@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"net/url"
 
-	config "github.com/dana-id/go_client/config"
+	config "github.com/dana-id/dana-go/config"
 )
 
 // This package provides common interfaces and types used across the Dana API client

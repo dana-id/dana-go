@@ -7,7 +7,7 @@ SDK for DANA API (https://dashboard.dana.id/api-docs)
 Install the following dependencies:
 
 ```sh
-go get github.com/dana-id/go_client
+go get github.com/dana-id/dana-go
 ```
 
 

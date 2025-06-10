@@ -1,6 +1,7 @@
 package webhook
 
 import (
+	"bytes"
 	"crypto"
 	"crypto/rsa"
 	"crypto/sha256"
@@ -10,18 +11,95 @@ import (
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
+	"os"
+	"strings"
 
-	payment_gateway "github.com/dana-id/go_client/payment_gateway/v1"
+	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
 )
 
 type WebhookParser struct {
 	publicKey *rsa.PublicKey
 }
 
-func NewWebhookParser(gatewayPublicKeyPEM string) (*WebhookParser, error) {
-	block, _ := pem.Decode([]byte(gatewayPublicKeyPEM))
+// normalizePEMKey takes a raw key content string and attempts to normalize it into a standard PEM format byte slice.
+// It handles env-style PEMs (with literal \\n), raw PEMs, and minified/semi-minified keys.
+func normalizePEMKey(keyContent string) ([]byte, error) {
+
+	hasBeginMarkerPreCheck := strings.Contains(keyContent, "-----BEGIN")
+	hasEndMarkerPreCheck := strings.Contains(keyContent, "-----END")
+	hasLiteralNewline := strings.Contains(keyContent, "\\n")
+
+	if hasLiteralNewline {
+		if hasBeginMarkerPreCheck && hasEndMarkerPreCheck {
+			keyContent = strings.ReplaceAll(keyContent, "\\n", "\n")
+		} else {
+			keyContent = strings.ReplaceAll(keyContent, "\\n", "")
+		}
+	}
+
+	hasBeginMarker := strings.Contains(keyContent, "-----BEGIN")
+	hasEndMarker := strings.Contains(keyContent, "-----END")
+
+	if hasBeginMarker && hasEndMarker {
+		return []byte(keyContent), nil
+	} else if !hasBeginMarker && !hasEndMarker {
+		base64KeyData := strings.ReplaceAll(keyContent, "\n", "")
+		base64KeyData = strings.TrimSpace(base64KeyData)
+
+		if base64KeyData == "" {
+			return nil, fmt.Errorf("key content is empty after processing and removing markers/newlines")
+		}
+
+		keyTypeHeader := "PUBLIC KEY"
+
+		var pemBuffer bytes.Buffer
+		pemBuffer.WriteString(fmt.Sprintf("-----BEGIN %s-----\n", keyTypeHeader))
+		for i := 0; i < len(base64KeyData); i += 64 {
+			end := i + 64
+			if end > len(base64KeyData) {
+				end = len(base64KeyData)
+			}
+			pemBuffer.WriteString(base64KeyData[i:end])
+			pemBuffer.WriteString("\n")
+		}
+		pemBuffer.WriteString(fmt.Sprintf("-----END %s-----\n", keyTypeHeader))
+		return pemBuffer.Bytes(), nil
+	} else {
+		return nil, fmt.Errorf(
+			"invalid key format: Key has incomplete PEM markers or an unrecognized structure. "+
+				"Ensure the key is a valid file path, a full PEM string (multi-line or env-style with \\n), "+
+				"or a base64 key data string (with or without newlines, without PEM markers). Processed input: '%s'", keyContent)
+	}
+}
+
+func NewWebhookParser(publicKey *string, publicKeyPath *string) (*WebhookParser, error) {
+	var keyInputContent string
+
+	if publicKeyPath != nil && *publicKeyPath != "" {
+		fileBytes, errReadFile := os.ReadFile(*publicKeyPath)
+		if errReadFile != nil {
+			return nil, fmt.Errorf("failed to read key from file path '%s': %w", *publicKeyPath, errReadFile)
+		}
+		keyInputContent = string(fileBytes)
+	} else if publicKey != nil && *publicKey != "" {
+		keyInputContent = *publicKey
+	} else {
+		return nil, fmt.Errorf("either 'publicKey' or 'publicKeyPath' must be provided")
+	}
+
+	keyInputContent = strings.TrimSpace(keyInputContent)
+	if keyInputContent == "" {
+		return nil, fmt.Errorf("key content is empty after processing input")
+	}
+
+	normalizedPEM, err := normalizePEMKey(keyInputContent)
+	if err != nil {
+		return nil, fmt.Errorf("failed to normalize gateway public key: %w\nOriginal input string (or file content): %s", err, keyInputContent)
+	}
+
+	block, _ := pem.Decode(normalizedPEM)
 	if block == nil {
-		return nil, fmt.Errorf("failed to parse PEM block containing the public key")
+		return nil, fmt.Errorf("failed to parse PEM block containing the public key. Processed key:\n%s", string(normalizedPEM))
 	}
 
 	pub, err := x509.ParsePKIXPublicKey(block.Bytes)

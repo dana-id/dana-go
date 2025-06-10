@@ -158,7 +158,7 @@ semgrep-sast:
   before_script:
     - apk add --no-cache gcc musl-dev git
     - echo "Adding replace directive to go.mod for local testing"
-    - echo "replace github.com/dana-id/go_client => ../" >> go.mod
+    - echo "replace github.com/dana-id/dana-go => ../" >> go.mod
     - cat go.mod
   script:
     - go version
@@ -166,7 +166,7 @@ semgrep-sast:
     - go test ./test -v
   after_script:
     - echo "Removing replace directive from go.mod"
-    - sed -i '/replace github.com\/dana-id\/go_client =>/d' go.mod
+    - sed -i '/replace github.com\/dana-id\/dana-go =>/d' go.mod
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
@@ -241,17 +241,17 @@ integration-test:
         echo "Setting up local package in go.mod"
         
         # Remove any existing replace directive
-        sed -i '/replace github.com\/dana-id\/go_client =>/d' test/go/go.mod
+        sed -i '/replace github.com\/dana-id\/dana-go =>/d' test/go/go.mod
         
         # Add replace directive to use local package
-        echo "replace github.com/dana-id/go_client => /tmp/dana-go-test/dana-go-api-client" >> test/go/go.mod
+        echo "replace github.com/dana-id/dana-go => /tmp/dana-go-test/dana-go-api-client" >> test/go/go.mod
         
         echo "Updated go.mod with local package replace directive:"
         cat test/go/go.mod
         
         # Modify run-test.sh to avoid downloading packages
         echo "Removing go get commands from run-test.sh"
-        sed -i 's|go get -u github.com/dana-id/go_client|# Using local package instead|g' run-test.sh
+        sed -i 's|go get -u github.com/dana-id/dana-go|# Using local package instead|g' run-test.sh
         
         echo "Modified run-test.sh:"
         grep -n "go get" run-test.sh || echo "No go get commands found in run-test.sh"
@@ -315,7 +315,7 @@ publish-to-github:
   needs:
     - job: verify-rc-integration
   variables:
-    GITHUB_REPO: "dana-id/go_client"
+    GITHUB_REPO: "dana-id/dana-go"
   before_script:
     - apk add --no-cache git rsync
     - git config --global user.name "GitLab CI"
@@ -350,7 +350,7 @@ publish-to-github:
     - git push https://oauth2:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git ${CI_COMMIT_TAG}
     # After push, verify module is available through proxy.golang.org
     - export TAG=${CI_COMMIT_TAG#v}
-    - GOPROXY=proxy.golang.org go list -m github.com/dana-id/go_client@${CI_COMMIT_TAG}
+    - GOPROXY=proxy.golang.org go list -m github.com/dana-id/dana-go@${CI_COMMIT_TAG}
   rules:
     - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'
       when: on_success
