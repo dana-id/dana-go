@@ -1,3 +1,17 @@
+// Copyright 2025 PT Espay Debit Indonesia Koe
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package utils
 
 import (
@@ -7,6 +21,7 @@ import (
 	"crypto/sha256"
 	"crypto/x509"
 	"encoding/base64"
+	"encoding/json"
 	"encoding/pem"
 	"errors"
 	"fmt"
@@ -19,10 +34,32 @@ import (
 	uuid "github.com/google/uuid"
 )
 
+// Header constants
+const (
+	HeaderOrigin                = "ORIGIN"
+	HeaderChannelID             = "CHANNEL-ID"
+	HeaderXPartnerID            = "X-PARTNER-ID"
+	HeaderXClientKey            = "X-CLIENT-KEY"
+	HeaderXTimestamp            = "X-TIMESTAMP"
+	HeaderXSignature            = "X-SIGNATURE"
+	HeaderXExternalID           = "X-EXTERNAL-ID"
+	HeaderAuthorizationCustomer = "Authorization-Customer"
+	HeaderXIPAddress            = "X-IP-ADDRESS"
+	HeaderXDeviceID             = "X-DEVICE-ID"
+	HeaderXLatitude             = "X-LATITUDE"
+	HeaderXLongitude            = "X-LONGITUDE"
+)
+
+// Scenario constants
+const (
+	ScenarioApplyToken       = "apply_token"
+	ScenarioApplyOTT         = "apply_ott"
+	ScenarioUnbindingAccount = "unbinding_account"
+)
+
 // SetSnapHeaders applies all Snap API authentication headers to the provided headers map
 // This centralized function helps avoid duplicate authentication code across API methods
-func SetSnapHeaders(headerParams map[string]string, apiKey *config.APIKey, body string, method string, endpoint string) {
-
+func SetSnapHeaders(headerParams map[string]string, apiKey *config.APIKey, body string, method string, endpoint string, opts ...string) {
 	if apiKey == nil {
 		ReportError("API key is required for authentication")
 		return
@@ -30,18 +67,32 @@ func SetSnapHeaders(headerParams map[string]string, apiKey *config.APIKey, body 
 
 	// Set ORIGIN header
 	if apiKey.ORIGIN != "" {
-		headerParams["ORIGIN"] = apiKey.ORIGIN
+		headerParams[HeaderOrigin] = apiKey.ORIGIN
 	}
 
-	// Set X-PARTNER-ID header
-	if apiKey.X_PARTNER_ID != "" {
-		headerParams["X-PARTNER-ID"] = apiKey.X_PARTNER_ID
+	// Set CHANNEL-ID header
+	headerParams[HeaderChannelID] = "95221"
+
+	// Get scenario from opts if provided
+	var scenario string
+	if len(opts) > 0 && opts[0] != "" {
+		scenario = opts[0]
 	}
 
-	headerParams["CHANNEL-ID"] = "95221"
+	switch scenario {
+	case ScenarioApplyToken:
+		// Apply-Token uses X-CLIENT-KEY instead of X-PARTNER-ID
+		if apiKey.X_PARTNER_ID != "" {
+			headerParams[HeaderXClientKey] = apiKey.X_PARTNER_ID
+		}
+	default:
+		// Other scenarios retain X-PARTNER-ID
+		if apiKey.X_PARTNER_ID != "" {
+			headerParams[HeaderXPartnerID] = apiKey.X_PARTNER_ID
+		}
+	}
 
-	runtimeHeaders := getRuntimeHeaders(body, apiKey, method, endpoint)
-
+	runtimeHeaders := getRuntimeHeaders(body, apiKey, method, endpoint, scenario)
 	for k, v := range runtimeHeaders {
 		headerParams[k] = v
 	}
@@ -56,7 +107,7 @@ func SetSnapHeaders(headerParams map[string]string, apiKey *config.APIKey, body 
 	}
 }
 
-func getRuntimeHeaders(body string, apiKey *config.APIKey, method string, endpoint string) map[string]string {
+func getRuntimeHeaders(body string, apiKey *config.APIKey, method string, endpoint string, scenario string) map[string]string {
 	// Define Jakarta location (GMT+7)
 	jkt, err := time.LoadLocation("Asia/Jakarta")
 
@@ -73,38 +124,65 @@ func getRuntimeHeaders(body string, apiKey *config.APIKey, method string, endpoi
 
 	timestamp := jktTime.Format("2006-01-02T15:04:05+07:00")
 
-	// Format in ISO 8601 with fixed +07:00 timezone indicator for Jakarta
-	return map[string]string{
-		"X-TIMESTAMP":   timestamp,
-		"X-EXTERNAL-ID": uuid.New().String(),
-		"X-SIGNATURE":   generateSignature(body, apiKey, method, endpoint, timestamp),
+	baseHeaders := map[string]string{
+		HeaderXTimestamp: timestamp,
+	}
+
+	switch scenario {
+	case ScenarioApplyToken:
+		clientKey := apiKey.X_PARTNER_ID
+		baseHeaders[HeaderXSignature] = generateSignature(body, apiKey, method, endpoint, timestamp, scenario)
+		baseHeaders[HeaderXClientKey] = clientKey
+		return baseHeaders
+
+	case ScenarioApplyOTT, ScenarioUnbindingAccount:
+		baseHeaders[HeaderXExternalID] = uuid.New().String()
+		baseHeaders[HeaderXSignature] = generateSignature(body, apiKey, method, endpoint, timestamp, scenario)
+
+		extractAdditionalHeaders(baseHeaders, body)
+		return baseHeaders
+
+	default:
+		baseHeaders[HeaderXExternalID] = uuid.New().String()
+		baseHeaders[HeaderXSignature] = generateSignature(body, apiKey, method, endpoint, timestamp, scenario)
+		return baseHeaders
 	}
 }
 
-func generateSignature(body string, apiKey *config.APIKey, method string, endpoint string, timestamp string) string {
+func generateSignature(body string, apiKey *config.APIKey, method string, endpoint string, timestamp string, scenario string) string {
 	// Validate we have the required data
 	if apiKey == nil {
 		return ""
 	}
 
-	// Calculate SHA-256 hash of the request body
-	hash := sha256.New()
-	hash.Write([]byte(body))
-	hashedPayload := fmt.Sprintf("%x", hash.Sum(nil))
+	var data string
 
-	// Extract just the path component from the full URL
-	parsedURL, err := url.Parse(endpoint)
-	if err != nil {
-		fmt.Println("Error parsing URL:", err)
-		return ""
+	// Handle apply_token scenario differently
+	if scenario == ScenarioApplyToken {
+		// Apply token signature: "<clientKey>|<timestamp>"
+		clientKey := apiKey.X_PARTNER_ID
+		data = fmt.Sprintf("%s|%s", clientKey, timestamp)
+	} else {
+		// Standard SNAP signature
+		// Calculate SHA-256 hash of the request body
+		hash := sha256.New()
+		hash.Write([]byte(body))
+		hashedPayload := fmt.Sprintf("%x", hash.Sum(nil))
+
+		// Extract just the path component from the full URL
+		parsedURL, err := url.Parse(endpoint)
+		if err != nil {
+			fmt.Println("Error parsing URL:", err)
+			return ""
+		}
+
+		// Use only the path from the URL for signing
+		urlPath := parsedURL.Path
+
+		// Format the string to sign:
+		// "<HTTP METHOD>:<RELATIVE PATH URL>:<LOWERCASE_HEX_ENCODED_SHA_256(MINIFIED_HTTP_BODY)>:<X-TIMESTAMP>"
+		data = fmt.Sprintf("%s:%s:%s:%s", method, urlPath, hashedPayload, timestamp)
 	}
-
-	// Use only the path from the URL for signing
-	urlPath := parsedURL.Path
-
-	// Format the string to sign:
-	// "<HTTP METHOD>:<RELATIVE PATH URL>:<LOWERCASE_HEX_ENCODED_SHA_256(MINIFIED_HTTP_BODY)>:<X-TIMESTAMP>"
-	data := fmt.Sprintf("%s:%s:%s:%s", method, urlPath, hashedPayload, timestamp)
 
 	// Get usable private key
 	privateKeyData, err := GetUsablePrivateKey(apiKey)
@@ -223,4 +301,34 @@ func checkPublicKeyMatch(privateKey *rsa.PrivateKey, expectedPubKeyStr string) (
 	// Compare the two public keys
 	keysEqual := expectedRsaPub.N.Cmp(privateKey.PublicKey.N) == 0 && expectedRsaPub.E == privateKey.PublicKey.E
 	return keysEqual, nil
+}
+
+func extractAdditionalHeaders(headers map[string]string, body string) {
+	if body == "" {
+		return
+	}
+	var payload struct {
+		AdditionalInfo map[string]interface{} `json:"additionalInfo"`
+	}
+	if err := json.Unmarshal([]byte(body), &payload); err != nil {
+		return // silently ignore parse errors
+	}
+
+	if info := payload.AdditionalInfo; info != nil {
+		if v, ok := info["accessToken"].(string); ok && v != "" {
+			headers[HeaderAuthorizationCustomer] = fmt.Sprintf("Bearer %s", v)
+		}
+		if v, ok := info["endUserIpAddress"].(string); ok && v != "" {
+			headers[HeaderXIPAddress] = v
+		}
+		if v, ok := info["deviceId"].(string); ok && v != "" {
+			headers[HeaderXDeviceID] = v
+		}
+		if v, ok := info["latitude"].(string); ok && v != "" {
+			headers[HeaderXLatitude] = v
+		}
+		if v, ok := info["longitude"].(string); ok && v != "" {
+			headers[HeaderXLongitude] = v
+		}
+	}
 }

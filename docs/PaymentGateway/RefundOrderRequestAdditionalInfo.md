@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PayoutAccountNo** | Pointer to **string** | Additional information of payout account number. This param need to be filled if want to refund to specific payout account not that specified by DANA | [optional] 
 **RefundAppliedTime** | Pointer to **string** | Additional information of refund applied time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
-**ActorType** | Pointer to **string** | Additional information of actor type. The enums:<br /> * USER - User<br /> * MERCHANT - Merchant&lt;br * MERCHANT_OPERATOR - Merchant operator<br /> * BACK_OFFICE - Back office<br /> * SYSTEM - System<br />  | [optional] 
+**ActorType** | Pointer to **string** | Additional information of actor type. The enums:<br /> * USER - User<br /> * MERCHANT - Merchant<br /> * MERCHANT_OPERATOR - Merchant operator<br /> * BACK_OFFICE - Back office<br /> * SYSTEM - System<br />  | [optional] 
 **ReturnChargeToPayer** | Pointer to **string** | Additional information of return charge to payer | [optional] 
 **Destination** | Pointer to **string** | Additional information of destination | [optional] 
 **EnvInfo** | Pointer to [**EnvInfo**](EnvInfo.md) | Additional information of environment | [optional] 

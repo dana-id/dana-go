@@ -16,4 +16,5 @@ go get github.com/dana-id/dana-go
 API | Description
 ------------- | -------------
 [**PaymentGatewayApi**](docs/PaymentGatewayAPI.md) | API for doing operations in DANA Payment Gateway (Gapura)
-[**IPGApi**](docs/IPGApi.md) | API for enabling the user to make payment from merchant’s platform with redirecting to DANA’s platform
+[**WidgetApi**](docs/WidgetAPI.md) | API for enabling the user to make payment from merchant’s platform with redirecting to DANA’s platform
+[**DisbursementApi**](docs/DisbursementAPI.md) | API for enabling the user to disburse money to merchant’s platform

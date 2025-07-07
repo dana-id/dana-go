@@ -11,14 +11,13 @@ Method | HTTP request | Description
 [**RefundOrder**](PaymentGatewayAPI.md#RefundOrder) | **Post** /payment-gateway/v1.0/debit/refund.htm | Refund Order - Payment Gateway
 
 
+## Additional Documentation
+
+* [Enum Types](#enum-types) - List of available enum constants
+* [Webhook Parser](#webhookparser) - Webhook handling
+
 
 ## CancelOrder
-
-> CancelOrderResponse CancelOrder(ctx).CancelOrderRequest(cancelOrderRequest).Execute()
-
-Cancel Order - Payment Gateway
-
-
 
 ### Example
 
@@ -26,16 +25,28 @@ Cancel Order - Payment Gateway
 package main
 
 import (
-	ipg "github.com/dana-id/dana-go/ipg/v1"
-	dana "github.com/dana-id/dana-go"
 	"context"
 	"fmt"
 	"os"
-	ipg "github.com/dana-id/dana-go/ipg/v1"
+	dana "github.com/dana-id/dana-go"
 	"github.com/dana-id/dana-go/config"
+	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
 )
 
 func main() {
+	
+	// Configuring api client
+	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
+	configuration := config.NewConfiguration()
+	configuration.APIKey = &config.APIKey{
+		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
+		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
+		ORIGIN:       os.Getenv("ORIGIN"),
+		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+	}
+	apiClient := dana.NewAPIClient(configuration)
+	
 	// Define request struct directly (example)
 	request := payment_gateway.CancelOrderRequest{
 		// Fill in required fields here, e.g.:
@@ -43,16 +54,6 @@ func main() {
 		// Field2: "value2",
 	}
 
-	configuration := config.NewConfiguration()
-	// Set API keys
-	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
-		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
-		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
-		ORIGIN:       os.Getenv("ORIGIN"),
-		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
-	}
-	apiClient := dana.NewAPIClient(configuration)
 	_, r, err := apiClient.PaymentGatewayAPI.CancelOrder(context.Background()).CancelOrderRequest(request).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.CancelOrder``: %v\n", err)
@@ -63,44 +64,20 @@ func main() {
 }
 ```
 
-### Path Parameters
+### Payload
 
+Payload is passed through a pointer to CancelOrderRequest (struct with type ApiCancelOrderRequest)
 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCancelOrderRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **cancelOrderRequest** | [**CancelOrderRequest**](Ipg/CancelOrderRequest.md) |  | 
+[**CancelOrderRequest**](PaymentGateway/CancelOrderRequest.md)
 
 ### Return type
 
-[**CancelOrderResponse**](Ipg/CancelOrderResponse.md)
-
-### Authorization
-
-[ORIGIN](../README.md#ORIGIN), [X_PARTNER_ID](../README.md#X_PARTNER_ID), [CHANNEL_ID](../README.md#CHANNEL_ID), [PRIVATE_KEY](../README.md#PRIVATE_KEY), [PRIVATE_KEY_PATH](../README.md#PRIVATE_KEY_PATH)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
+[**CancelOrderResponse**](PaymentGateway/CancelOrderResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## ConsultPay
-
-> ConsultPayResponse ConsultPay(ctx).ConsultPayRequest(consultPayRequest).Execute()
-
-Consult Pay - Payment Gateway
-
-
 
 ### Example
 
@@ -108,16 +85,28 @@ Consult Pay - Payment Gateway
 package main
 
 import (
-	ipg "github.com/dana-id/dana-go/ipg/v1"
-	dana "github.com/dana-id/dana-go"
 	"context"
 	"fmt"
 	"os"
-	ipg "github.com/dana-id/dana-go/ipg/v1"
+	dana "github.com/dana-id/dana-go"
 	"github.com/dana-id/dana-go/config"
+	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
 )
 
 func main() {
+	
+	// Configuring api client
+	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
+	configuration := config.NewConfiguration()
+	configuration.APIKey = &config.APIKey{
+		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
+		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
+		ORIGIN:       os.Getenv("ORIGIN"),
+		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+	}
+	apiClient := dana.NewAPIClient(configuration)
+	
 	// Define request struct directly (example)
 	request := payment_gateway.ConsultPayRequest{
 		// Fill in required fields here, e.g.:
@@ -125,16 +114,6 @@ func main() {
 		// Field2: "value2",
 	}
 
-	configuration := config.NewConfiguration()
-	// Set API keys
-	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
-		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
-		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
-		ORIGIN:       os.Getenv("ORIGIN"),
-		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
-	}
-	apiClient := dana.NewAPIClient(configuration)
 	_, r, err := apiClient.PaymentGatewayAPI.ConsultPay(context.Background()).ConsultPayRequest(request).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.ConsultPay``: %v\n", err)
@@ -145,44 +124,20 @@ func main() {
 }
 ```
 
-### Path Parameters
+### Payload
 
+Payload is passed through a pointer to ConsultPayRequest (struct with type ApiConsultPayRequest)
 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiConsultPayRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **consultPayRequest** | [**ConsultPayRequest**](Ipg/ConsultPayRequest.md) |  | 
+[**ConsultPayRequest**](PaymentGateway/ConsultPayRequest.md)
 
 ### Return type
 
-[**ConsultPayResponse**](Ipg/ConsultPayResponse.md)
-
-### Authorization
-
-[ORIGIN](../README.md#ORIGIN), [X_PARTNER_ID](../README.md#X_PARTNER_ID), [CHANNEL_ID](../README.md#CHANNEL_ID), [PRIVATE_KEY](../README.md#PRIVATE_KEY), [PRIVATE_KEY_PATH](../README.md#PRIVATE_KEY_PATH), [ENV](../README.md#ENV)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
+[**ConsultPayResponse**](PaymentGateway/ConsultPayResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## CreateOrder
-
-> CreateOrderResponse CreateOrder(ctx).CreateOrderRequest(createOrderRequest).Execute()
-
-Create Order - Payment Gateway
-
-
 
 ### Example
 
@@ -190,16 +145,28 @@ Create Order - Payment Gateway
 package main
 
 import (
-	ipg "github.com/dana-id/dana-go/ipg/v1"
-	dana "github.com/dana-id/dana-go"
 	"context"
 	"fmt"
 	"os"
-	ipg "github.com/dana-id/dana-go/ipg/v1"
+	dana "github.com/dana-id/dana-go"
 	"github.com/dana-id/dana-go/config"
+	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
 )
 
 func main() {
+	
+	// Configuring api client
+	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
+	configuration := config.NewConfiguration()
+	configuration.APIKey = &config.APIKey{
+		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
+		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
+		ORIGIN:       os.Getenv("ORIGIN"),
+		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+	}
+	apiClient := dana.NewAPIClient(configuration)
+	
 	// Define request struct directly (example)
 	request := payment_gateway.CreateOrderRequest{
 		// Fill in required fields here, e.g.:
@@ -207,16 +174,6 @@ func main() {
 		// Field2: "value2",
 	}
 
-	configuration := config.NewConfiguration()
-	// Set API keys
-	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
-		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
-		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
-		ORIGIN:       os.Getenv("ORIGIN"),
-		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
-	}
-	apiClient := dana.NewAPIClient(configuration)
 	_, r, err := apiClient.PaymentGatewayAPI.CreateOrder(context.Background()).CreateOrderRequest(request).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.CreateOrder``: %v\n", err)
@@ -227,44 +184,20 @@ func main() {
 }
 ```
 
-### Path Parameters
+### Payload
 
+Payload is passed through a pointer to CreateOrderRequest (struct with type ApiCreateOrderRequest)
 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateOrderRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createOrderRequest** | [**CreateOrderRequest**](Ipg/CreateOrderRequest.md) |  | 
+[**CreateOrderRequest**](PaymentGateway/CreateOrderRequest.md)
 
 ### Return type
 
-[**CreateOrderResponse**](Ipg/CreateOrderResponse.md)
-
-### Authorization
-
-[ORIGIN](../README.md#ORIGIN), [X_PARTNER_ID](../README.md#X_PARTNER_ID), [CHANNEL_ID](../README.md#CHANNEL_ID), [PRIVATE_KEY](../README.md#PRIVATE_KEY), [PRIVATE_KEY_PATH](../README.md#PRIVATE_KEY_PATH), [ENV](../README.md#ENV)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
+[**CreateOrderResponse**](PaymentGateway/CreateOrderResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## QueryPayment
-
-> QueryPaymentResponse QueryPayment(ctx).QueryPaymentRequest(queryPaymentRequest).Execute()
-
-Query Payment - Payment Gateway
-
-
 
 ### Example
 
@@ -272,16 +205,28 @@ Query Payment - Payment Gateway
 package main
 
 import (
-	ipg "github.com/dana-id/dana-go/ipg/v1"
-	dana "github.com/dana-id/dana-go"
 	"context"
 	"fmt"
 	"os"
-	ipg "github.com/dana-id/dana-go/ipg/v1"
+	dana "github.com/dana-id/dana-go"
 	"github.com/dana-id/dana-go/config"
+	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
 )
 
 func main() {
+	
+	// Configuring api client
+	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
+	configuration := config.NewConfiguration()
+	configuration.APIKey = &config.APIKey{
+		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
+		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
+		ORIGIN:       os.Getenv("ORIGIN"),
+		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+	}
+	apiClient := dana.NewAPIClient(configuration)
+	
 	// Define request struct directly (example)
 	request := payment_gateway.QueryPaymentRequest{
 		// Fill in required fields here, e.g.:
@@ -289,16 +234,6 @@ func main() {
 		// Field2: "value2",
 	}
 
-	configuration := config.NewConfiguration()
-	// Set API keys
-	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
-		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
-		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
-		ORIGIN:       os.Getenv("ORIGIN"),
-		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
-	}
-	apiClient := dana.NewAPIClient(configuration)
 	_, r, err := apiClient.PaymentGatewayAPI.QueryPayment(context.Background()).QueryPaymentRequest(request).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.QueryPayment``: %v\n", err)
@@ -309,44 +244,20 @@ func main() {
 }
 ```
 
-### Path Parameters
+### Payload
 
+Payload is passed through a pointer to QueryPaymentRequest (struct with type ApiQueryPaymentRequest)
 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiQueryPaymentRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **queryPaymentRequest** | [**QueryPaymentRequest**](Ipg/QueryPaymentRequest.md) |  | 
+[**QueryPaymentRequest**](PaymentGateway/QueryPaymentRequest.md)
 
 ### Return type
 
-[**QueryPaymentResponse**](Ipg/QueryPaymentResponse.md)
-
-### Authorization
-
-[ORIGIN](../README.md#ORIGIN), [X_PARTNER_ID](../README.md#X_PARTNER_ID), [CHANNEL_ID](../README.md#CHANNEL_ID), [PRIVATE_KEY](../README.md#PRIVATE_KEY), [PRIVATE_KEY_PATH](../README.md#PRIVATE_KEY_PATH)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
+[**QueryPaymentResponse**](PaymentGateway/QueryPaymentResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## RefundOrder
-
-> RefundOrderResponse RefundOrder(ctx).RefundOrderRequest(refundOrderRequest).Execute()
-
-Refund Order - Payment Gateway
-
-
 
 ### Example
 
@@ -354,16 +265,28 @@ Refund Order - Payment Gateway
 package main
 
 import (
-	ipg "github.com/dana-id/dana-go/ipg/v1"
-	dana "github.com/dana-id/dana-go"
 	"context"
 	"fmt"
 	"os"
-	ipg "github.com/dana-id/dana-go/ipg/v1"
+	dana "github.com/dana-id/dana-go"
 	"github.com/dana-id/dana-go/config"
+	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
 )
 
 func main() {
+	
+	// Configuring api client
+	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
+	configuration := config.NewConfiguration()
+	configuration.APIKey = &config.APIKey{
+		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
+		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
+		ORIGIN:       os.Getenv("ORIGIN"),
+		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+	}
+	apiClient := dana.NewAPIClient(configuration)
+	
 	// Define request struct directly (example)
 	request := payment_gateway.RefundOrderRequest{
 		// Fill in required fields here, e.g.:
@@ -371,16 +294,6 @@ func main() {
 		// Field2: "value2",
 	}
 
-	configuration := config.NewConfiguration()
-	// Set API keys
-	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
-		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
-		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
-		ORIGIN:       os.Getenv("ORIGIN"),
-		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
-	}
-	apiClient := dana.NewAPIClient(configuration)
 	_, r, err := apiClient.PaymentGatewayAPI.RefundOrder(context.Background()).RefundOrderRequest(request).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.RefundOrder``: %v\n", err)
@@ -391,38 +304,27 @@ func main() {
 }
 ```
 
-### Path Parameters
+### Payload
 
+Payload is passed through a pointer to RefundOrderRequest (struct with type ApiRefundOrderRequest)
 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRefundOrderRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **refundOrderRequest** | [**RefundOrderRequest**](Ipg/RefundOrderRequest.md) |  | 
+[**RefundOrderRequest**](PaymentGateway/RefundOrderRequest.md)
 
 ### Return type
 
-[**RefundOrderResponse**](Ipg/RefundOrderResponse.md)
-
-### Authorization
-
-[ORIGIN](../README.md#ORIGIN), [X_PARTNER_ID](../README.md#X_PARTNER_ID), [CHANNEL_ID](../README.md#CHANNEL_ID), [PRIVATE_KEY](../README.md#PRIVATE_KEY), [PRIVATE_KEY_PATH](../README.md#PRIVATE_KEY_PATH)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
+[**RefundOrderResponse**](PaymentGateway/RefundOrderResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 # Enum Types
+
+```go
+import payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
+
+ipg := string(payment_gateway.SOURCEPLATFORM_IPG_)
+```
+
 ## acquirementStatus
 | Value | Description |
 |-------|-------------|
@@ -438,7 +340,7 @@ Name | Type | Description  | Notes
 | Value | Description |
 |-------|-------------|
 | `USER` | User |
-| `MERCHANT` | Merchant<br |
+| `MERCHANT` | Merchant |
 | `MERCHANT_OPERATOR` | Merchant operator |
 | `BACK_OFFICE` | Back office |
 | `SYSTEM` | System |
@@ -521,16 +423,13 @@ This section demonstrates how to securely verify and parse DANA webhook notifica
 package main
 
 import (
-	ipg "github.com/dana-id/dana-go/ipg/v1"
-	dana "github.com/dana-id/dana-go"
 	"bytes"
 	"fmt"
 	"io"
 	"net/http"
 	"os"
 
-	ipg "github.com/dana-id/dana-go/ipg/v1"
-	ipg "github.com/dana-id/dana-go/ipg/v1"
+	webhook "github.com/dana-id/dana-go/webhook"
 )
 
 // This function would be your actual webhook handler in a real application.
@@ -538,6 +437,7 @@ func webhookNotificationHandler(req *http.Request) {
 	// 1. Initialize the WebhookParser
 	// You can provide the public key directly as a string or via a file path.
 	// The parser will prioritize publicKeyPath if both are provided.
+
 	// Option 1: Provide public key as a string
 	// danaPublicKeyPEM := os.Getenv("DANA_PUBLIC_KEY")
 	// parser, err := webhook.NewWebhookParser(&danaPublicKeyPEM, nil)
@@ -609,7 +509,7 @@ func NewWebhookParser(publicKey *string, publicKeyPath *string) (*WebhookParser,
 **Method:**
 
 ```go
-func (p *WebhookParser) ParseWebhook(httpMethod string, relativePathURL string, headers map[string]string, body string) (*model.FinishNotify, error)
+func (p *WebhookParser) ParseWebhook(httpMethod string, relativePathURL string, headers map[string]string, body string) (*webhook.FinishNotify, error)
 ```
 - `httpMethod` (string): The HTTP method of the incoming webhook request (e.g., `http.MethodPost`).
 - `relativePathURL` (string): The relative URL path of the webhook endpoint that received the notification (e.g., `/v1.0/debit/notify`).
@@ -628,5 +528,5 @@ The following webhook notification models may be received:
 
 Model | Description
 ------------- | -------------
-[**FinishNotifyRequest**](Ipg/FinishNotifyRequest.md) | Represents the standard notification payload for payment events.
+[**FinishNotifyRequest**](FinishNotify/FinishNotifyRequest.md) | Represents the standard notification payload for payment events.
 

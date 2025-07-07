@@ -1,3 +1,17 @@
+// Copyright 2025 PT Espay Debit Indonesia Koe
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package webhook
 
 import (
@@ -13,8 +27,6 @@ import (
 	"fmt"
 	"os"
 	"strings"
-
-	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
 )
 
 type WebhookParser struct {
@@ -159,7 +171,7 @@ func (p *WebhookParser) ParseWebhook(
 	relativePathURL string,
 	headers HeaderGetter,
 	body string,
-) (*payment_gateway.FinishNotifyRequest, error) {
+) (*FinishNotifyRequest, error) {
 	xSignature := headers.Get("X-SIGNATURE")
 	xTimestamp := headers.Get("X-TIMESTAMP")
 
@@ -187,7 +199,7 @@ func (p *WebhookParser) ParseWebhook(
 		return nil, fmt.Errorf("error during signature verification: %w. StringToVerify: '%s'", err, stringToVerify)
 	}
 
-	var payload payment_gateway.FinishNotifyRequest
+	var payload FinishNotifyRequest
 	if err := json.Unmarshal([]byte(body), &payload); err != nil {
 		return nil, fmt.Errorf("failed to unmarshal JSON body into FinishNotifyRequest: %w", err)
 	}

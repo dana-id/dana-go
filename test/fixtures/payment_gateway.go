@@ -22,6 +22,7 @@ import (
 
 	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
 	utils "github.com/dana-id/dana-go/utils"
+	"github.com/google/uuid"
 )
 
 // GetMerchantId returns the merchant ID from environment or a default value
@@ -97,8 +98,86 @@ func GetCreateOrderByApiRequest() payment_gateway.CreateOrderByApiRequest {
 
 	// Add additional info
 	envInfo := payment_gateway.EnvInfo{
-		SourcePlatform: "IPG",
-		TerminalType:   "SYSTEM",
+		SourcePlatform: string(payment_gateway.SOURCEPLATFORM_IPG_),
+		TerminalType:   string(payment_gateway.TERMINALTYPE_SYSTEM_),
+	}
+
+	orderInfo := payment_gateway.OrderApiObject{
+		OrderTitle:        "Test Product",
+		Scenario:          strPtr("API"),
+		MerchantTransType: strPtr("SPECIAL_MOVIE"),
+	}
+
+	request.AdditionalInfo = &payment_gateway.CreateOrderByApiAdditionalInfo{
+		Order:   &orderInfo,
+		Mcc:     "5732",
+		EnvInfo: envInfo,
+	}
+
+	return request
+}
+
+// GetCreateOrderByApiPaidRequest returns a fixture for CreateOrderByApiRequest
+func GetCreateOrderByApiPaidRequest() payment_gateway.CreateOrderByApiRequest {
+	// Generate a unique partner reference number based on timestamp
+	partnerRefNo := uuid.New().String()
+
+	// Calculate valid date 1 day from now
+	validUpTo := time.Now().Add(24 * time.Hour).Format("2026-01-02T15:04:05-07:00")
+
+	// Helper for string pointer
+	strPtr := func(s string) *string {
+		return &s
+	}
+
+	// Create request with essential fields
+	request := payment_gateway.CreateOrderByApiRequest{
+		PartnerReferenceNo: partnerRefNo,
+		MerchantId:         GetMerchantId(),
+		Amount: payment_gateway.Money{
+			Value:    "50001.00",
+			Currency: "IDR",
+		},
+		ValidUpTo: strPtr(validUpTo),
+	}
+
+	// Add URL parameters
+	request.UrlParams = []payment_gateway.UrlParam{
+		{
+			Url:        "https://example.com/return",
+			Type:       "PAY_RETURN",
+			IsDeeplink: "N",
+		},
+		{
+			Url:        "https://example.com/notify",
+			Type:       "NOTIFICATION",
+			IsDeeplink: "N",
+		},
+	}
+
+	// Add payment options
+	request.PayOptionDetails = []payment_gateway.PayOptionDetail{
+		{
+			PayMethod: string(payment_gateway.PAYMETHOD_NETWORK_PAY_),
+			PayOption: string(payment_gateway.PAYOPTION_NETWORK_PAY_PG_GOPAY_),
+			TransAmount: payment_gateway.Money{
+				Value:    "50001.00",
+				Currency: "IDR",
+			},
+			FeeAmount: &payment_gateway.Money{
+				Value:    "1000.00",
+				Currency: "IDR",
+			},
+			AdditionalInfo: &payment_gateway.PayOptionAdditionalInfo{
+				PhoneNumber: strPtr("08123456789"),
+			},
+		},
+	}
+
+	// Add additional info
+	envInfo := payment_gateway.EnvInfo{
+		SourcePlatform: string(payment_gateway.SOURCEPLATFORM_IPG_),
+		TerminalType:   string(payment_gateway.TERMINALTYPE_SYSTEM_),
 	}
 
 	orderInfo := payment_gateway.OrderApiObject{
@@ -147,33 +226,31 @@ func GetCancelOrderRequest(orderRequest *payment_gateway.CreateOrderByApiRequest
 }
 
 // GetRefundOrderRequest returns a fixture for RefundOrderRequest
-// func GetRefundOrderRequest(orderRequest *payment_gateway.CreateOrderByApiRequest) payment_gateway.RefundOrderRequest {
-// 	// Generate a unique partner refund number based on timestamp
-// 	partnerRefundNo := "REFUND-" + time.Now().Format("20060102150405")
+func GetRefundOrderRequest(orderRequest *payment_gateway.CreateOrderByApiRequest) payment_gateway.RefundOrderRequest {
+	// Generate a unique partner refund number based on timestamp
+	// partnerRefundNo := "REFUND-" + time.Now().Format("20060102150405")
 
-// 	// Helper for string pointer
-// 	strPtr := func(s string) *string {
-// 		return &s
-// 	}
+	// Helper for string pointer
+	strPtr := func(s string) *string {
+		return &s
+	}
 
-// 	return payment_gateway.RefundOrderRequest{
-// 		MerchantId:                 GetMerchantId(),
-// 		OriginalPartnerReferenceNo: orderRequest.GetPartnerReferenceNo(),
-// 		PartnerRefundNo:            partnerRefundNo,
-// 		RefundAmount: payment_gateway.Money{
-// 			Value:    "10000.00",
-// 			Currency: "IDR",
-// 		},
-// 		Reason: strPtr("Test refund"),
-// 		// Add additional info as a map with the required fields for the special case
-// 		AdditionalInfo: map[string]interface{}{
-// 			"payoutAccountNo": "20050000000001503276",
-// 			"actorType":       "BACK_OFFICE",
-// 			"deviceId":       "TEST-DEVICE-ID",
-// 			"terminalType":   "WEB",
-// 		},
-// 	}
-// }
+	return payment_gateway.RefundOrderRequest{
+		MerchantId:                 GetMerchantId(),
+		OriginalPartnerReferenceNo: orderRequest.GetPartnerReferenceNo(),
+		PartnerRefundNo:            orderRequest.GetPartnerReferenceNo(),
+		RefundAmount: payment_gateway.Money{
+			Value:    "50001.00",
+			Currency: "IDR",
+		},
+		Reason: strPtr("Customer complain"),
+		// Add additional info as a map with the required fields for the special case
+		AdditionalInfo: &payment_gateway.RefundOrderRequestAdditionalInfo{
+			PayoutAccountNo: strPtr("20050000000001503276"),
+			ActorType:       strPtr("BACK_OFFICE"),
+		},
+	}
+}
 
 // GenerateSnapAuthHeaders creates the X-SIGNATURE and X-TIMESTAMP headers for a request.
 func GenerateSnapAuthHeaders(method, resourcePath, body string) (map[string]string, error) {
