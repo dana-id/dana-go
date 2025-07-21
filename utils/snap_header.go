@@ -234,13 +234,45 @@ func GetUsablePrivateKey(apiKey *config.APIKey) ([]byte, error) {
 
 		return privateKeyBytes, nil
 	} else if apiKey.PRIVATE_KEY != "" {
-		// Replace escaped newlines with actual newlines
-		privateKey := strings.ReplaceAll(apiKey.PRIVATE_KEY, "\\n", "\n")
+		// Convert to proper PEM format if needed
+		privateKey := ConvertToPEM(apiKey.PRIVATE_KEY, "PRIVATE")
 
 		return []byte(privateKey), nil
 	}
 
 	return nil, errors.New("no private key or private key path provided")
+}
+
+// ConvertToPEM converts a key string to PEM format if it's not already in that format
+func ConvertToPEM(key string, keyType string) string {
+	header := fmt.Sprintf("-----BEGIN %s KEY-----", keyType)
+	footer := fmt.Sprintf("-----END %s KEY-----", keyType)
+	delimiter := "\n"
+
+	// Check if the key is already in PEM format
+	if strings.Contains(key, header) && strings.Contains(key, footer) {
+		// Just ensure newlines are properly formatted
+		return strings.ReplaceAll(key, "\\n", delimiter)
+	}
+
+	// Replace any escaped newlines with actual newlines first
+	key = strings.ReplaceAll(key, "\\n", "")
+	
+	// Split the key into 64-character chunks
+	chunks := []string{}
+	for i := 0; i < len(key); i += 64 {
+		end := i + 64
+		if end > len(key) {
+			end = len(key)
+		}
+		chunks = append(chunks, key[i:end])
+	}
+	
+	// Join chunks with newline delimiter
+	body := strings.Join(chunks, delimiter)
+	
+	// Return the formatted PEM key
+	return header + delimiter + body + delimiter + footer
 }
 
 // SignWithPrivateKey generates an RSA signature using the provided private key

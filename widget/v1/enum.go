@@ -47,6 +47,23 @@ const (
     ACQUIREMENTSTATUS_CANCELLED_ Acquirementstatus = "CANCELLED"
 )
 
+type Resourcetype string
+const (
+    RESOURCETYPE_BALANCE_ Resourcetype = "BALANCE"
+    RESOURCETYPE_TRANSACTION_URL_ Resourcetype = "TRANSACTION_URL"
+    RESOURCETYPE_MASK_DANA_ID_ Resourcetype = "MASK_DANA_ID"
+    RESOURCETYPE_TOPUP_URL_ Resourcetype = "TOPUP_URL"
+    RESOURCETYPE_OTT_ Resourcetype = "OTT"
+    RESOURCETYPE_USER_KYC_ Resourcetype = "USER_KYC"
+)
+
+type Resultstatus string
+const (
+    RESULTSTATUS_S_ Resultstatus = "S"
+    RESULTSTATUS_F_ Resultstatus = "F"
+    RESULTSTATUS_U_ Resultstatus = "U"
+)
+
 type Sourceplatform string
 const (
     SOURCEPLATFORM_IPG_ Sourceplatform = "IPG"

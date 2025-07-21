@@ -463,6 +463,140 @@ func (a *WidgetAPIService) ApplyTokenExecute(r ApiApplyTokenRequest) (*ApplyToke
 	}
 		return localVarReturnValue, localVarHTTPResponse, nil
 }
+type ApiBalanceInquiryRequest struct {
+	ctx context.Context
+	ApiService *WidgetAPIService
+	balanceInquiryRequest *BalanceInquiryRequest
+}
+
+func (r ApiBalanceInquiryRequest) BalanceInquiryRequest(balanceInquiryRequest BalanceInquiryRequest) ApiBalanceInquiryRequest {
+	r.balanceInquiryRequest = &balanceInquiryRequest
+	return r
+}
+
+func (r ApiBalanceInquiryRequest) Execute() (*BalanceInquiryResponse, *http.Response, error) {
+	return r.ApiService.BalanceInquiryExecute(r)
+}
+
+/*
+BalanceInquiry Balance Inquiry
+
+This API is used to query user's DANA account balance via merchant
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiBalanceInquiryRequest
+*/
+func (a *WidgetAPIService) BalanceInquiry(ctx context.Context) ApiBalanceInquiryRequest {
+	return ApiBalanceInquiryRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BalanceInquiryResponse
+func (a *WidgetAPIService) BalanceInquiryExecute(r ApiBalanceInquiryRequest) (*BalanceInquiryResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []common.FormFile
+		localVarReturnValue  *BalanceInquiryResponse
+	)
+
+	localBasePath, err := a.GetConfig().ServerURLWithContext(r.ctx, "WidgetAPIService.BalanceInquiry")
+	if err != nil {
+		return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+			ErrorMsg: err.Error(),
+		}
+	}
+
+	localVarPath := localBasePath + "/v1.0/balance-inquiry.htm"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.balanceInquiryRequest == nil {
+		return localVarReturnValue, nil, utils.ReportError("balanceInquiryRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := utils.SelectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := utils.SelectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.balanceInquiryRequest
+	// Set API Key Authentication headers using centralized utility function
+	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
+		// Process request body for authentication if present
+		var dataForSnapStr string
+		dst := &bytes.Buffer{}
+		dataForSnap, err := json.Marshal(localVarPostBody)
+		if err != nil {
+			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+				ErrorMsg: fmt.Sprintf("Failed to marshal request: %v", err),
+			}
+		}
+
+		err = json.Compact(dst, dataForSnap)
+		if err != nil {
+			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+				ErrorMsg: err.Error(),
+			}
+		}
+		dataForSnapStr = string(dst.Bytes())
+
+		// Default B2B signature scenario
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+	}
+	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.CallAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &exceptions.GenericOpenAPIError{
+			RawBody:  localVarBody,
+			ErrorMsg: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	// Return body data
+	
+	if localVarHTTPResponse.StatusCode >= 200 && localVarHTTPResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err == nil { 
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
+	}
+		return localVarReturnValue, localVarHTTPResponse, nil
+}
 type ApiCancelOrderRequest struct {
 	ctx context.Context
 	ApiService *WidgetAPIService
@@ -672,6 +806,140 @@ func (a *WidgetAPIService) QueryPaymentExecute(r ApiQueryPaymentRequest) (*Query
 	}
 	// body params
 	localVarPostBody = r.queryPaymentRequest
+	// Set API Key Authentication headers using centralized utility function
+	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
+		// Process request body for authentication if present
+		var dataForSnapStr string
+		dst := &bytes.Buffer{}
+		dataForSnap, err := json.Marshal(localVarPostBody)
+		if err != nil {
+			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+				ErrorMsg: fmt.Sprintf("Failed to marshal request: %v", err),
+			}
+		}
+
+		err = json.Compact(dst, dataForSnap)
+		if err != nil {
+			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+				ErrorMsg: err.Error(),
+			}
+		}
+		dataForSnapStr = string(dst.Bytes())
+
+		// Default B2B signature scenario
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+	}
+	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.CallAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &exceptions.GenericOpenAPIError{
+			RawBody:  localVarBody,
+			ErrorMsg: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	// Return body data
+	
+	if localVarHTTPResponse.StatusCode >= 200 && localVarHTTPResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err == nil { 
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
+	}
+		return localVarReturnValue, localVarHTTPResponse, nil
+}
+type ApiQueryUserProfileRequest struct {
+	ctx context.Context
+	ApiService *WidgetAPIService
+	queryUserProfileRequest *QueryUserProfileRequest
+}
+
+func (r ApiQueryUserProfileRequest) QueryUserProfileRequest(queryUserProfileRequest QueryUserProfileRequest) ApiQueryUserProfileRequest {
+	r.queryUserProfileRequest = &queryUserProfileRequest
+	return r
+}
+
+func (r ApiQueryUserProfileRequest) Execute() (*QueryUserProfileResponse, *http.Response, error) {
+	return r.ApiService.QueryUserProfileExecute(r)
+}
+
+/*
+QueryUserProfile Query User Profile
+
+The API is used to query user profile such as DANA balance (unit in IDR), masked DANA phone number, KYC or OTT (one time token) between merchant server and DANA's server
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiQueryUserProfileRequest
+*/
+func (a *WidgetAPIService) QueryUserProfile(ctx context.Context) ApiQueryUserProfileRequest {
+	return ApiQueryUserProfileRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return QueryUserProfileResponse
+func (a *WidgetAPIService) QueryUserProfileExecute(r ApiQueryUserProfileRequest) (*QueryUserProfileResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []common.FormFile
+		localVarReturnValue  *QueryUserProfileResponse
+	)
+
+	localBasePath, err := a.GetConfig().ServerURLWithContext(r.ctx, "WidgetAPIService.QueryUserProfile")
+	if err != nil {
+		return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+			ErrorMsg: err.Error(),
+		}
+	}
+
+	localVarPath := localBasePath + "/dana/member/query/queryUserProfile.htm"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.queryUserProfileRequest == nil {
+		return localVarReturnValue, nil, utils.ReportError("queryUserProfileRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := utils.SelectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := utils.SelectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.queryUserProfileRequest
 	// Set API Key Authentication headers using centralized utility function
 	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
 		// Process request body for authentication if present

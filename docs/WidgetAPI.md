@@ -9,8 +9,10 @@ Method | HTTP request | Description
 [**AccountUnbinding**](WidgetAPI.md#AccountUnbinding) | **Post** /v1.0/registration-account-unbinding.htm | Account unbinding - Binding
 [**ApplyOTT**](WidgetAPI.md#ApplyOTT) | **Post** /rest/v1.1/qr/apply-ott | Apply OTT - Widget
 [**ApplyToken**](WidgetAPI.md#ApplyToken) | **Post** /v1.0/access-token/b2b2c.htm | Apply Token, required by Apply OTT - Binding
+[**BalanceInquiry**](WidgetAPI.md#BalanceInquiry) | **Post** /v1.0/balance-inquiry.htm | Balance Inquiry
 [**CancelOrder**](WidgetAPI.md#CancelOrder) | **Post** /v1.0/debit/cancel.htm | Cancel Order - Widget
 [**QueryPayment**](WidgetAPI.md#QueryPayment) | **Post** /rest/v1.1/debit/status | Query Payment - Widget
+[**QueryUserProfile**](WidgetAPI.md#QueryUserProfile) | **Post** /dana/member/query/queryUserProfile.htm | Query User Profile
 [**RefundOrder**](WidgetAPI.md#RefundOrder) | **Post** /v1.0/debit/refund.htm | Refund Order - Widget
 [**WidgetPayment**](WidgetAPI.md#WidgetPayment) | **Post** /rest/redirection/v1.0/debit/payment-host-to-host | Widget Payment - Widget
 
@@ -198,6 +200,65 @@ Payload is passed through a pointer to ApplyTokenRequest (struct with type ApiAp
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 
 
+## BalanceInquiry
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	dana "github.com/dana-id/dana-go"
+	"github.com/dana-id/dana-go/config"
+	widget "github.com/dana-id/dana-go/widget/v1"
+)
+
+func main() {
+	
+	// Configuring api client
+	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
+	configuration := config.NewConfiguration()
+	configuration.APIKey = &config.APIKey{
+		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
+		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
+		ORIGIN:       os.Getenv("ORIGIN"),
+		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+	}
+	apiClient := dana.NewAPIClient(configuration)
+	
+	// Define request struct directly (example)
+	request := widget.BalanceInquiryRequest{
+		// Fill in required fields here, e.g.:
+		// Field1: "value1",
+		// Field2: "value2",
+	}
+	_, r, err := apiClient.WidgetAPI.BalanceInquiry(context.Background()).BalanceInquiryRequest(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WidgetAPI.BalanceInquiry``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `BalanceInquiry`: BalanceInquiryResponse
+	fmt.Fprintf(os.Stdout, "Response from `WidgetAPI.BalanceInquiry`: %v\n", r.Body)
+}
+```
+
+### Payload
+
+Payload is passed through a pointer to BalanceInquiryRequest (struct with type ApiBalanceInquiryRequest)
+
+[**BalanceInquiryRequest**](Widget/BalanceInquiryRequest.md)
+
+### Return type
+
+[**BalanceInquiryResponse**](Widget/BalanceInquiryResponse.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+
+
 ## CancelOrder
 
 ### Example
@@ -312,6 +373,65 @@ Payload is passed through a pointer to QueryPaymentRequest (struct with type Api
 ### Return type
 
 [**QueryPaymentResponse**](Widget/QueryPaymentResponse.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+
+
+## QueryUserProfile
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	dana "github.com/dana-id/dana-go"
+	"github.com/dana-id/dana-go/config"
+	widget "github.com/dana-id/dana-go/widget/v1"
+)
+
+func main() {
+	
+	// Configuring api client
+	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
+	configuration := config.NewConfiguration()
+	configuration.APIKey = &config.APIKey{
+		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
+		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
+		ORIGIN:       os.Getenv("ORIGIN"),
+		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+	}
+	apiClient := dana.NewAPIClient(configuration)
+	
+	// Define request struct directly (example)
+	request := widget.QueryUserProfileRequest{
+		// Fill in required fields here, e.g.:
+		// Field1: "value1",
+		// Field2: "value2",
+	}
+	_, r, err := apiClient.WidgetAPI.QueryUserProfile(context.Background()).QueryUserProfileRequest(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WidgetAPI.QueryUserProfile``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `QueryUserProfile`: QueryUserProfileResponse
+	fmt.Fprintf(os.Stdout, "Response from `WidgetAPI.QueryUserProfile`: %v\n", r.Body)
+}
+```
+
+### Payload
+
+Payload is passed through a pointer to QueryUserProfileRequest (struct with type ApiQueryUserProfileRequest)
+
+[**QueryUserProfileRequest**](Widget/QueryUserProfileRequest.md)
+
+### Return type
+
+[**QueryUserProfileResponse**](Widget/QueryUserProfileResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 
@@ -513,6 +633,25 @@ ipg := string(widget.SOURCEPLATFORM_IPG_)
 | `DISCOUNT` |  |
 | `VOUCHER` |  |
 | `POINT` |  |
+
+
+## resourceType
+| Value | Description |
+|-------|-------------|
+| `BALANCE` |  |
+| `TRANSACTION_URL` |  |
+| `MASK_DANA_ID` |  |
+| `TOPUP_URL` |  |
+| `OTT` |  |
+| `USER_KYC` |  |
+
+
+## resultStatus
+| Value | Description |
+|-------|-------------|
+| `S` |  |
+| `F` |  |
+| `U` |  |
 
 
 ## serviceScenario

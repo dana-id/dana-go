@@ -6,7 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**BankAccountInquiry**](DisbursementAPI.md#BankAccountInquiry) | **Post** /v1.0/emoney/bank-account-inquiry.htm | Transfer to Bank Account Inquiry
 [**DanaAccountInquiry**](DisbursementAPI.md#DanaAccountInquiry) | **Post** /v1.0/emoney/account-inquiry.htm | DANA Account Inquiry
-[**QueryMerchantResource**](DisbursementAPI.md#QueryMerchantResource) | **Post** /merchant/queryMerchantResource.htm | Member – Merchant Open API Check Disbursement Account
 [**TransferToBank**](DisbursementAPI.md#TransferToBank) | **Post** /v1.0/emoney/transfer-bank.htm | Transfer to Bank
 [**TransferToBankInquiryStatus**](DisbursementAPI.md#TransferToBankInquiryStatus) | **Post** /v1.0/emoney/transfer-bank-status.htm | Transfer to Bank Inquiry Status
 [**TransferToDana**](DisbursementAPI.md#TransferToDana) | **Post** /v1.0/emoney/topup.htm | Transfer to DANA
@@ -135,66 +134,6 @@ Payload is passed through a pointer to DanaAccountInquiryRequest (struct with ty
 ### Return type
 
 [**DanaAccountInquiryResponse**](Disbursement/DanaAccountInquiryResponse.md)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-
-
-## QueryMerchantResource
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	dana "github.com/dana-id/dana-go"
-	"github.com/dana-id/dana-go/config"
-	disbursement "github.com/dana-id/dana-go/disbursement/v1"
-)
-
-func main() {
-	
-	// Configuring api client
-	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
-	configuration := config.NewConfiguration()
-	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
-		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
-		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
-		ORIGIN:       os.Getenv("ORIGIN"),
-		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
-	}
-	apiClient := dana.NewAPIClient(configuration)
-	
-	// Define request struct directly (example)
-	request := disbursement.QueryMerchantResourceRequest{
-		// Fill in required fields here, e.g.:
-		// Field1: "value1",
-		// Field2: "value2",
-	}
-
-	_, r, err := apiClient.DisbursementAPI.QueryMerchantResource(context.Background()).QueryMerchantResourceRequest(request).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DisbursementAPI.QueryMerchantResource`: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `QueryMerchantResource`: QueryMerchantResourceResponse
-	fmt.Fprintf(os.Stdout, "Response from `DisbursementAPI.QueryMerchantResource`: %v\n", r.Body)
-}
-```
-
-### Payload
-
-Payload is passed through a pointer to QueryMerchantResourceRequest (struct with type ApiQueryMerchantResourceRequest)
-
-[**QueryMerchantResourceRequest**](Disbursement/QueryMerchantResourceRequest.md)
-
-### Return type
-
-[**QueryMerchantResourceResponse**](Disbursement/QueryMerchantResourceResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 
@@ -511,22 +450,6 @@ ipg := string(disbursement.SOURCEPLATFORM_IPG_)
 | `VIRTUAL_ACCOUNT_BTPN` | Payment method with BTPN virtual account |
 | `VIRTUAL_ACCOUNT_CIMB` | Payment method with CIMB virtual account |
 | `VIRTUAL_ACCOUNT_PERMATA` | Payment method with Permata virtual account |
-
-
-## resourceType
-| Value | Description |
-|-------|-------------|
-| `MERCHANT_DEPOSIT_BALANCE` |  |
-| `MERCHANT_AVAILABLE_BALANCE` |  |
-| `MERCHANT_TOTAL_BALANCE` |  |
-
-
-## resultStatus
-| Value | Description |
-|-------|-------------|
-| `S` |  |
-| `F` |  |
-| `U` |  |
 
 
 ## sourcePlatform

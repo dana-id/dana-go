@@ -28,20 +28,6 @@ const (
     LATESTTRANSACTIONSTATUS_07_ Latesttransactionstatus = "07"
 )
 
-type Resultstatus string
-const (
-    RESULTSTATUS_S_ Resultstatus = "S"
-    RESULTSTATUS_F_ Resultstatus = "F"
-    RESULTSTATUS_U_ Resultstatus = "U"
-)
-
-type Resourcetype string
-const (
-    RESOURCETYPE_MERCHANT_DEPOSIT_BALANCE_ Resourcetype = "MERCHANT_DEPOSIT_BALANCE"
-    RESOURCETYPE_MERCHANT_AVAILABLE_BALANCE_ Resourcetype = "MERCHANT_AVAILABLE_BALANCE"
-    RESOURCETYPE_MERCHANT_TOTAL_BALANCE_ Resourcetype = "MERCHANT_TOTAL_BALANCE"
-)
-
 type Sourceplatform string
 const (
     SOURCEPLATFORM_IPG_ Sourceplatform = "IPG"
