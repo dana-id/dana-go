@@ -15,6 +15,7 @@
 package utils
 
 import (
+	"bytes"
 	"crypto"
 	"crypto/rand"
 	"crypto/rsa"
@@ -235,12 +236,63 @@ func GetUsablePrivateKey(apiKey *config.APIKey) ([]byte, error) {
 		return privateKeyBytes, nil
 	} else if apiKey.PRIVATE_KEY != "" {
 		// Convert to proper PEM format if needed
-		privateKey := ConvertToPEM(apiKey.PRIVATE_KEY, "PRIVATE")
+		privateKey, err := normalizePEMKey(apiKey.PRIVATE_KEY)
+		if err != nil {
+			return nil, fmt.Errorf("failed to normalize private key: %v", err)
+		}
 
 		return []byte(privateKey), nil
 	}
 
 	return nil, errors.New("no private key or private key path provided")
+}
+func normalizePEMKey(keyContent string) ([]byte, error) {
+
+	hasBeginMarkerPreCheck := strings.Contains(keyContent, "-----BEGIN")
+	hasEndMarkerPreCheck := strings.Contains(keyContent, "-----END")
+	hasLiteralNewline := strings.Contains(keyContent, "\\n")
+
+	if hasLiteralNewline {
+		if hasBeginMarkerPreCheck && hasEndMarkerPreCheck {
+			keyContent = strings.ReplaceAll(keyContent, "\\n", "\n")
+		} else {
+			keyContent = strings.ReplaceAll(keyContent, "\\n", "")
+		}
+	}
+
+	hasBeginMarker := strings.Contains(keyContent, "-----BEGIN")
+	hasEndMarker := strings.Contains(keyContent, "-----END")
+
+	if hasBeginMarker && hasEndMarker {
+		return []byte(keyContent), nil
+	} else if !hasBeginMarker && !hasEndMarker {
+		base64KeyData := strings.ReplaceAll(keyContent, "\n", "")
+		base64KeyData = strings.TrimSpace(base64KeyData)
+
+		if base64KeyData == "" {
+			return nil, fmt.Errorf("key content is empty after processing and removing markers/newlines")
+		}
+
+		keyTypeHeader := "PRIVATE KEY"
+
+		var pemBuffer bytes.Buffer
+		pemBuffer.WriteString(fmt.Sprintf("-----BEGIN %s-----\n", keyTypeHeader))
+		for i := 0; i < len(base64KeyData); i += 64 {
+			end := i + 64
+			if end > len(base64KeyData) {
+				end = len(base64KeyData)
+			}
+			pemBuffer.WriteString(base64KeyData[i:end])
+			pemBuffer.WriteString("\n")
+		}
+		pemBuffer.WriteString(fmt.Sprintf("-----END %s-----\n", keyTypeHeader))
+		return pemBuffer.Bytes(), nil
+	} else {
+		return nil, fmt.Errorf(
+			"invalid key format: Key has incomplete PEM markers or an unrecognized structure. "+
+				"Ensure the key is a valid file path, a full PEM string (multi-line or env-style with \\n), "+
+				"or a base64 key data string (with or without newlines, without PEM markers). Processed input: '%s'", keyContent)
+	}
 }
 
 // ConvertToPEM converts a key string to PEM format if it's not already in that format
@@ -257,7 +309,7 @@ func ConvertToPEM(key string, keyType string) string {
 
 	// Replace any escaped newlines with actual newlines first
 	key = strings.ReplaceAll(key, "\\n", "")
-	
+
 	// Split the key into 64-character chunks
 	chunks := []string{}
 	for i := 0; i < len(key); i += 64 {
@@ -267,10 +319,10 @@ func ConvertToPEM(key string, keyType string) string {
 		}
 		chunks = append(chunks, key[i:end])
 	}
-	
+
 	// Join chunks with newline delimiter
 	body := strings.Join(chunks, delimiter)
-	
+
 	// Return the formatted PEM key
 	return header + delimiter + body + delimiter + footer
 }

@@ -37,17 +37,18 @@ import (
 
 	common "github.com/dana-id/dana-go/common"
 	config "github.com/dana-id/dana-go/config"
-	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
-	exceptions "github.com/dana-id/dana-go/exceptions"
-	widget "github.com/dana-id/dana-go/widget/v1"
 	disbursement "github.com/dana-id/dana-go/disbursement/v1"
+	exceptions "github.com/dana-id/dana-go/exceptions"
+	merchant_management "github.com/dana-id/dana-go/merchant_management/v1"
+	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
+	widget "github.com/dana-id/dana-go/widget/v1"
 )
 
 var (
 	JsonCheck       = regexp.MustCompile(`(?i:(?:application|text)/(?:[^;]+\+)?json)`)
 	XmlCheck        = regexp.MustCompile(`(?i:(?:application|text)/(?:[^;]+\+)?xml)`)
 	queryParamSplit = regexp.MustCompile(`(^|&)([^&]+)`)
-	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
+	queryDescape    = strings.NewReplacer("%5B", "[", "%5D", "]")
 )
 
 // APIClient manages communication with the Payment Gateway API API v1.0.0
@@ -58,9 +59,10 @@ type APIClient struct {
 
 	// API Services
 
-	PaymentGatewayAPI *payment_gateway.PaymentGatewayAPIService
-	WidgetAPI         *widget.WidgetAPIService
-	DisbursementAPI   *disbursement.DisbursementAPIService
+	PaymentGatewayAPI     *payment_gateway.PaymentGatewayAPIService
+	WidgetAPI             *widget.WidgetAPIService
+	DisbursementAPI       *disbursement.DisbursementAPIService
+	MerchantManagementAPI *merchant_management.MerchantManagementAPIService
 }
 
 // service is the base service implementation that can be embedded by specific services
@@ -84,6 +86,7 @@ func NewAPIClient(cfg *config.Configuration) *APIClient {
 	c.PaymentGatewayAPI = payment_gateway.NewPaymentGatewayAPIService(c)
 	c.WidgetAPI = widget.NewWidgetAPIService(c)
 	c.DisbursementAPI = disbursement.NewDisbursementAPIService(c)
+	c.MerchantManagementAPI = merchant_management.NewMerchantManagementAPIService(c)
 	return c
 }
 
@@ -99,19 +102,19 @@ func (c *APIClient) executeRequestImpl(
 	formParams url.Values,
 	formFiles []common.FormFile,
 	result interface{}) (*http.Response, error) {
-	
+
 	// Prepare the request
 	req, err := c.prepareRequestImpl(ctx, path, method, postBody, headerParams, queryParams, formParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
-	
+
 	// Call the API
 	resp, err := c.callAPIImpl(req)
 	if err != nil || resp == nil {
 		return resp, err
 	}
-	
+
 	// Read the body
 	body, err := io.ReadAll(resp.Body)
 	resp.Body.Close()
@@ -119,7 +122,7 @@ func (c *APIClient) executeRequestImpl(
 	if err != nil {
 		return resp, err
 	}
-	
+
 	// Handle error status codes
 	if resp.StatusCode >= 300 {
 		return resp, &exceptions.GenericOpenAPIError{
@@ -127,7 +130,7 @@ func (c *APIClient) executeRequestImpl(
 			ErrorMsg: resp.Status,
 		}
 	}
-	
+
 	// Decode response into result
 	if result != nil {
 		err = c.decodeImpl(result, body, resp.Header.Get("Content-Type"))
@@ -138,7 +141,7 @@ func (c *APIClient) executeRequestImpl(
 			}
 		}
 	}
-	
+
 	return resp, nil
 }
 
@@ -190,12 +193,12 @@ func (c *APIClient) CallAPI(request *http.Request) (*http.Response, error) {
 // GetConfig returns the configuration that was used to initialize the APIClient
 func (c *APIClient) GetConfig() *config.Configuration {
 	cfg := &config.Configuration{
-		UserAgent:      c.cfg.UserAgent,
-		Debug:          c.cfg.Debug,
-		DefaultHeader:  c.cfg.DefaultHeader,
-		Servers:        c.cfg.Servers,
-		APIKey:         c.cfg.APIKey, // Make sure to copy the APIKey
-		HTTPClient:     c.cfg.HTTPClient,
+		UserAgent:        c.cfg.UserAgent,
+		Debug:            c.cfg.Debug,
+		DefaultHeader:    c.cfg.DefaultHeader,
+		Servers:          c.cfg.Servers,
+		APIKey:           c.cfg.APIKey, // Make sure to copy the APIKey
+		HTTPClient:       c.cfg.HTTPClient,
 		OperationServers: c.cfg.OperationServers,
 	}
 	return cfg
@@ -252,11 +255,11 @@ func (c *APIClient) prepareRequestImpl(
 				w.Boundary()
 				part, err := w.CreateFormFile(formFile.FormFileName, filepath.Base(formFile.FileName))
 				if err != nil {
-						return nil, err
+					return nil, err
 				}
 				_, err = part.Write(formFile.FileBytes)
 				if err != nil {
-						return nil, err
+					return nil, err
 				}
 			}
 		}
@@ -439,26 +442,26 @@ func (c *APIClient) decodeImpl(v interface{}, b []byte, contentType string) (err
 }
 
 func UnmarshalJson(input []byte, result interface{}) error {
-    tempMap := make(map[string]interface{})
-    if err := json.Unmarshal(input, &tempMap); err != nil {
-        return err
-    }
+	tempMap := make(map[string]interface{})
+	if err := json.Unmarshal(input, &tempMap); err != nil {
+		return err
+	}
 
-    var md mapstructure.Metadata
-    decoder, err := mapstructure.NewDecoder(
-        &mapstructure.DecoderConfig{
-            Metadata: &md,
-            Result:   result,
-        })
-    if err != nil {
-        return err
-    }
+	var md mapstructure.Metadata
+	decoder, err := mapstructure.NewDecoder(
+		&mapstructure.DecoderConfig{
+			Metadata: &md,
+			Result:   result,
+		})
+	if err != nil {
+		return err
+	}
 
-    if err := decoder.Decode(tempMap); err != nil {
-        return err
-    }
+	if err := decoder.Decode(tempMap); err != nil {
+		return err
+	}
 
-    return nil
+	return nil
 }
 
 // Add a file to the multipart request

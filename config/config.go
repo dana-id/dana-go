@@ -34,6 +34,10 @@ type APIKey struct {
 	CHANNEL_ID       string
 	PRIVATE_KEY      string
 	PRIVATE_KEY_PATH string
+	// OPEN_API specific fields
+	CLIENT_SECRET string
+	CLIENT_ID     string
+	ACCESS_TOKEN  string
 }
 
 // ServerVariable stores the information about a server variable
