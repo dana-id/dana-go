@@ -40,7 +40,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -100,7 +101,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -160,7 +162,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -220,7 +223,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -280,7 +284,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -340,7 +345,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
 		ORIGIN:       os.Getenv("ORIGIN"),

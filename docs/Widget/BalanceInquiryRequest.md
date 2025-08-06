@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PartnerReferenceNo** | Pointer to **string** | Unique transaction identifier on partner system which assigned to each transaction<br /> Notes:<br /> If the partner receives a timeout or an unexpected response from DANA and partner expects to perform retry request to DANA, please use the partnerReferenceNo that is the same as the one used in the transaction request process before  | [optional] 
 **BalanceTypes** | Pointer to **[]string** | Information of balance types to specify which balance type expected to be returned. Will return all available balance type if this parameter empty | [optional] 
-**AdditionalInfo** | Pointer to [**BalanceInquiryRequestAdditionalInfo**](BalanceInquiryRequestAdditionalInfo.md) |  | [optional] 
+**AdditionalInfo** | [**BalanceInquiryRequestAdditionalInfo**](BalanceInquiryRequestAdditionalInfo.md) | Additional information | 
 
 ## Methods
 
 ### NewBalanceInquiryRequest
 
-`func NewBalanceInquiryRequest() *BalanceInquiryRequest`
+`func NewBalanceInquiryRequest(additionalInfo BalanceInquiryRequestAdditionalInfo, ) *BalanceInquiryRequest`
 
 NewBalanceInquiryRequest instantiates a new BalanceInquiryRequest object
 This constructor will assign default values to properties that have it defined,
@@ -96,11 +96,6 @@ and a boolean to check if the value has been set.
 
 SetAdditionalInfo sets AdditionalInfo field to given value.
 
-### HasAdditionalInfo
-
-`func (o *BalanceInquiryRequest) HasAdditionalInfo() bool`
-
-HasAdditionalInfo returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

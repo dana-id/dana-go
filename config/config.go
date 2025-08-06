@@ -29,6 +29,7 @@ const (
 // APIKey struct to store all Dana API keys
 type APIKey struct {
 	ENV              string
+	DANA_ENV         string
 	ORIGIN           string
 	X_PARTNER_ID     string
 	CHANNEL_ID       string
@@ -145,7 +146,7 @@ func (c *Configuration) ServerURLWithContext(ctx context.Context, endpoint strin
 		return "", fmt.Errorf("no server configuration available for endpoint: %s", endpoint)
 	}
 
-	if c.APIKey.ENV == ENV_PRODUCTION {
+	if c.APIKey.DANA_ENV == ENV_PRODUCTION || c.APIKey.ENV == ENV_PRODUCTION {
 		return sc.URL(1, nil)
 	}
 	return sc.URL(0, nil)

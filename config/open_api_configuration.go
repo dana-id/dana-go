@@ -14,7 +14,6 @@
 
 package config
 
-
 import (
 	"context"
 	"fmt"
@@ -60,6 +59,7 @@ func NewOpenApiConfigurationWithAuth(auth *OpenApiAuthSettings) *OpenApiConfigur
 	cfg.APIKey.CLIENT_SECRET = auth.ClientSecret
 	cfg.APIKey.CLIENT_ID = auth.ClientID
 	cfg.APIKey.ENV = auth.Env
+	cfg.APIKey.DANA_ENV = auth.Env
 	cfg.APIKey.ACCESS_TOKEN = auth.AccessToken
 	cfg.APIKey.PRIVATE_KEY = auth.PrivateKey
 	cfg.APIKey.PRIVATE_KEY_PATH = auth.PrivateKeyPath
@@ -206,11 +206,11 @@ func (c *OpenApiConfiguration) Validate() error {
 	}
 
 	if c.OpenApiAuth.Env == "" {
-		return fmt.Errorf("ENV is required for OPEN_API configuration")
+		return fmt.Errorf("ENV or DANA_ENV is required for OPEN_API configuration")
 	}
 
 	if c.OpenApiAuth.Env != ENV_SANDBOX && c.OpenApiAuth.Env != ENV_PRODUCTION {
-		return fmt.Errorf("ENV must be either %s or %s", ENV_SANDBOX, ENV_PRODUCTION)
+		return fmt.Errorf("ENV or DANA_ENV must be either %s or %s", ENV_SANDBOX, ENV_PRODUCTION)
 	}
 
 	return nil

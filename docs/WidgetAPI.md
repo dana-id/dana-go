@@ -21,6 +21,8 @@ Method | HTTP request | Description
 
 * [Enum Types](#enum-types) - List of available enum constants
 * [Webhook Parser](#webhookparser) - Webhook handling documentation
+* [OAuth URL Generation](#oauth-url-generation) - Generate OAuth URLs for authorization
+* [Complete Payment URL Generation](#complete-payment-url-generation) - Generate URL to complete the payment by combining webRedirectUrl with OTT token
 
 
 ## AccountUnbinding
@@ -45,7 +47,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -104,7 +107,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -163,7 +167,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -222,7 +227,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -281,7 +287,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -340,7 +347,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -399,7 +407,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -458,7 +467,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -517,7 +527,8 @@ func main() {
 	// Api client should be singleton, can reuse the apiClient for multiple requests in various operations
 	configuration := config.NewConfiguration()
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -810,4 +821,80 @@ The following webhook notification models may be received:
 Model | Description
 ------------- | -------------
 [**FinishNotifyRequest**](FinishNotify/FinishNotifyRequest.md) | Represents the standard notification payload for webhook payment events.
+
+
+# OAuth URL Generation
+
+This section demonstrates how to generate OAuth URLs for widget authorization using the Go SDK.
+
+## Example
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/dana-team/dana-go-api-client/widget/v1"
+	"github.com/dana-team/dana-go-api-client/widget/v1/model"
+)
+
+func main() {
+	// Set up OAuth2 URL data
+	oauth2UrlData := &model.Oauth2UrlData{
+		RedirectUrl: "https://google.com",
+		MerchantId:  merchantId,
+		SeamlessData: map[string]interface{}{
+			"mobileNumber": "087875849373",
+		},
+	}
+
+	// Generate the OAuth URL
+	oauthUrl := widget.GenerateOauthUrl(oauth2UrlData, privateKey)
+	fmt.Println("Generated OAuth URL:", oauthUrl)
+}
+```
+
+The generated URL can be used to redirect users to DANA's authorization page.
+
+# Complete Payment URL Generation
+
+You can generate URL to complete the payment by combining the webRedirectUrl from a WidgetPaymentResponse with an OTT token from an ApplyOTTResponse.
+
+## Example
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/dana-team/dana-go-api-client/widget/v1"
+	"github.com/dana-team/dana-go-api-client/widget/v1/model"
+)
+
+func main() {
+	// Example response from createWidgetPayment
+	widgetPaymentResponse := &model.WidgetPaymentResponse{
+		WebRedirectUrl: "https://example.com/payment?token=abc123",
+	}
+	// This should be from createPayment Widget API
+
+	// Example response from applyOTT
+	applyOTTResponse := &model.ApplyOTTResponse{
+		UserResources: []model.UserResource{
+			{
+				Value: "ott_token_value",
+			},
+		},
+	}
+	// This should be from applyOTT Widget API
+
+	// Generate the payment URL
+	paymentUrl := widget.GenerateCompletePaymentUrl(widgetPaymentResponse, applyOTTResponse)
+	fmt.Println("Generated Complete Payment URL:", paymentUrl)
+}
+```
+
+The generated URL can be used to redirect users to DANA's payment page.
 

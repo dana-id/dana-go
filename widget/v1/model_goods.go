@@ -37,6 +37,8 @@ var _ utils.MappedNullable = &Goods{}
 
 // Goods struct for Goods
 type Goods struct {
+	// Goods name
+	Name string `json:"name"`
 	// Goods identifier provided by merchant
 	MerchantGoodsId string `json:"merchantGoodsId"`
 	// Goods description
@@ -63,8 +65,9 @@ type _Goods Goods
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGoods(merchantGoodsId string, description string, category string, price Money, quantity string) *Goods {
+func NewGoods(name string, merchantGoodsId string, description string, category string, price Money, quantity string) *Goods {
 	this := Goods{}
+	this.Name = name
 	this.MerchantGoodsId = merchantGoodsId
 	this.Description = description
 	this.Category = category
@@ -79,6 +82,30 @@ func NewGoods(merchantGoodsId string, description string, category string, price
 func NewGoodsWithDefaults() *Goods {
 	this := Goods{}
 	return &this
+}
+
+// GetName returns the Name field value
+func (o *Goods) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *Goods) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *Goods) SetName(v string) {
+	o.Name = v
 }
 
 // GetMerchantGoodsId returns the MerchantGoodsId field value
@@ -339,6 +366,7 @@ func (o Goods) MarshalJSON() ([]byte, error) {
 
 func (o Goods) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["name"] = o.Name
 	toSerialize["merchantGoodsId"] = o.MerchantGoodsId
 	toSerialize["description"] = o.Description
 	toSerialize["category"] = o.Category
@@ -364,6 +392,7 @@ func (o *Goods) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"name",
 		"merchantGoodsId",
 		"description",
 		"category",

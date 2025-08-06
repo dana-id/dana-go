@@ -35,10 +35,18 @@ import (
 // checks if the BalanceInquiryRequestAdditionalInfo type satisfies the MappedNullable interface at compile time
 var _ utils.MappedNullable = &BalanceInquiryRequestAdditionalInfo{}
 
-// BalanceInquiryRequestAdditionalInfo Additional information
+// BalanceInquiryRequestAdditionalInfo struct for BalanceInquiryRequestAdditionalInfo
 type BalanceInquiryRequestAdditionalInfo struct {
-	// Contains customer token, which has been obtained from binding process, refer to Account Binding & Unbinding documentation 
+	// Contains customer token, which has been obtained from binding process
 	AccessToken string `json:"accessToken"`
+	// IP address of the end user (customer) using IPv4 format
+	EndUserIpAddress *string `json:"endUserIpAddress,omitempty"`
+	// Device identification on which the API services is currently being accessed by the end user (customer)
+	DeviceId string `json:"deviceId"`
+	// Location on which the API services is currently being accessed by the end user (customer), refer to ISO 6709 standard representation of geographic point location by coordinates
+	Latitude *string `json:"latitude,omitempty" validate:"regexp=^[-+]?[0-9]{1,2}([.][0-9]{1,4})?$"`
+	// Location on which the API services is currently being accessed by the end user (customer), refer to ISO 6709 Standard representation of geographic point location by coordinates
+	Longitude *string `json:"longitude,omitempty" validate:"regexp=^[-+]?[0-9]{1,2}([.][0-9]{1,4})?$"`
 }
 
 type _BalanceInquiryRequestAdditionalInfo BalanceInquiryRequestAdditionalInfo
@@ -47,9 +55,10 @@ type _BalanceInquiryRequestAdditionalInfo BalanceInquiryRequestAdditionalInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBalanceInquiryRequestAdditionalInfo(accessToken string) *BalanceInquiryRequestAdditionalInfo {
+func NewBalanceInquiryRequestAdditionalInfo(accessToken string, deviceId string) *BalanceInquiryRequestAdditionalInfo {
 	this := BalanceInquiryRequestAdditionalInfo{}
 	this.AccessToken = accessToken
+	this.DeviceId = deviceId
 	return &this
 }
 
@@ -85,6 +94,126 @@ func (o *BalanceInquiryRequestAdditionalInfo) SetAccessToken(v string) {
 	o.AccessToken = v
 }
 
+// GetEndUserIpAddress returns the EndUserIpAddress field value if set, zero value otherwise.
+func (o *BalanceInquiryRequestAdditionalInfo) GetEndUserIpAddress() string {
+	if o == nil || utils.IsNil(o.EndUserIpAddress) {
+		var ret string
+		return ret
+	}
+	return *o.EndUserIpAddress
+}
+
+// GetEndUserIpAddressOk returns a tuple with the EndUserIpAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BalanceInquiryRequestAdditionalInfo) GetEndUserIpAddressOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.EndUserIpAddress) {
+		return nil, false
+	}
+	return o.EndUserIpAddress, true
+}
+
+// HasEndUserIpAddress returns a boolean if a field has been set.
+func (o *BalanceInquiryRequestAdditionalInfo) HasEndUserIpAddress() bool {
+	if o != nil && !utils.IsNil(o.EndUserIpAddress) {
+		return true
+	}
+
+	return false
+}
+
+// SetEndUserIpAddress gets a reference to the given string and assigns it to the EndUserIpAddress field.
+func (o *BalanceInquiryRequestAdditionalInfo) SetEndUserIpAddress(v string) {
+	o.EndUserIpAddress = &v
+}
+
+// GetDeviceId returns the DeviceId field value
+func (o *BalanceInquiryRequestAdditionalInfo) GetDeviceId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.DeviceId
+}
+
+// GetDeviceIdOk returns a tuple with the DeviceId field value
+// and a boolean to check if the value has been set.
+func (o *BalanceInquiryRequestAdditionalInfo) GetDeviceIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DeviceId, true
+}
+
+// SetDeviceId sets field value
+func (o *BalanceInquiryRequestAdditionalInfo) SetDeviceId(v string) {
+	o.DeviceId = v
+}
+
+// GetLatitude returns the Latitude field value if set, zero value otherwise.
+func (o *BalanceInquiryRequestAdditionalInfo) GetLatitude() string {
+	if o == nil || utils.IsNil(o.Latitude) {
+		var ret string
+		return ret
+	}
+	return *o.Latitude
+}
+
+// GetLatitudeOk returns a tuple with the Latitude field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BalanceInquiryRequestAdditionalInfo) GetLatitudeOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.Latitude) {
+		return nil, false
+	}
+	return o.Latitude, true
+}
+
+// HasLatitude returns a boolean if a field has been set.
+func (o *BalanceInquiryRequestAdditionalInfo) HasLatitude() bool {
+	if o != nil && !utils.IsNil(o.Latitude) {
+		return true
+	}
+
+	return false
+}
+
+// SetLatitude gets a reference to the given string and assigns it to the Latitude field.
+func (o *BalanceInquiryRequestAdditionalInfo) SetLatitude(v string) {
+	o.Latitude = &v
+}
+
+// GetLongitude returns the Longitude field value if set, zero value otherwise.
+func (o *BalanceInquiryRequestAdditionalInfo) GetLongitude() string {
+	if o == nil || utils.IsNil(o.Longitude) {
+		var ret string
+		return ret
+	}
+	return *o.Longitude
+}
+
+// GetLongitudeOk returns a tuple with the Longitude field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BalanceInquiryRequestAdditionalInfo) GetLongitudeOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.Longitude) {
+		return nil, false
+	}
+	return o.Longitude, true
+}
+
+// HasLongitude returns a boolean if a field has been set.
+func (o *BalanceInquiryRequestAdditionalInfo) HasLongitude() bool {
+	if o != nil && !utils.IsNil(o.Longitude) {
+		return true
+	}
+
+	return false
+}
+
+// SetLongitude gets a reference to the given string and assigns it to the Longitude field.
+func (o *BalanceInquiryRequestAdditionalInfo) SetLongitude(v string) {
+	o.Longitude = &v
+}
+
 func (o BalanceInquiryRequestAdditionalInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -96,6 +225,16 @@ func (o BalanceInquiryRequestAdditionalInfo) MarshalJSON() ([]byte, error) {
 func (o BalanceInquiryRequestAdditionalInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["accessToken"] = o.AccessToken
+	if !utils.IsNil(o.EndUserIpAddress) {
+		toSerialize["endUserIpAddress"] = o.EndUserIpAddress
+	}
+	toSerialize["deviceId"] = o.DeviceId
+	if !utils.IsNil(o.Latitude) {
+		toSerialize["latitude"] = o.Latitude
+	}
+	if !utils.IsNil(o.Longitude) {
+		toSerialize["longitude"] = o.Longitude
+	}
 	return toSerialize, nil
 }
 
@@ -105,6 +244,7 @@ func (o *BalanceInquiryRequestAdditionalInfo) UnmarshalJSON(data []byte) (err er
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"accessToken",
+		"deviceId",
 	}
 
 	allProperties := make(map[string]interface{})

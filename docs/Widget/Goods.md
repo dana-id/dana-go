@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Name** | **string** | Goods name | 
 **MerchantGoodsId** | **string** | Goods identifier provided by merchant | 
 **Description** | **string** | Goods description | 
 **Category** | **string** | Goods category | 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewGoods
 
-`func NewGoods(merchantGoodsId string, description string, category string, price Money, quantity string, ) *Goods`
+`func NewGoods(name string, merchantGoodsId string, description string, category string, price Money, quantity string, ) *Goods`
 
 NewGoods instantiates a new Goods object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +33,26 @@ will change when the set of required properties is changed
 NewGoodsWithDefaults instantiates a new Goods object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetName
+
+`func (o *Goods) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *Goods) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *Goods) SetName(v string)`
+
+SetName sets Name field to given value.
+
 
 ### GetMerchantGoodsId
 

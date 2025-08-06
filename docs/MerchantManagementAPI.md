@@ -47,7 +47,8 @@ func main() {
 	configuration := config.NewConfiguration()
 	// Set API keys
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -128,7 +129,8 @@ func main() {
 	configuration := config.NewConfiguration()
 	// Set API keys
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -209,7 +211,8 @@ func main() {
 	configuration := config.NewConfiguration()
 	// Set API keys
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -290,7 +293,8 @@ func main() {
 	configuration := config.NewConfiguration()
 	// Set API keys
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -371,7 +375,8 @@ func main() {
 	configuration := config.NewConfiguration()
 	// Set API keys
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -452,7 +457,8 @@ func main() {
 	configuration := config.NewConfiguration()
 	// Set API keys
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),
@@ -533,7 +539,8 @@ func main() {
 	configuration := config.NewConfiguration()
 	// Set API keys
 	configuration.APIKey = &config.APIKey{
-		ENV:          config.ENV_SANDBOX,
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
 		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
 		ORIGIN:       os.Getenv("ORIGIN"),

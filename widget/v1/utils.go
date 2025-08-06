@@ -24,13 +24,14 @@ import (
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
+	mathrand "math/rand"
 	"net/url"
 	"os"
 	"strings"
 	"time"
 
 	"github.com/google/uuid"
-	
+
 	"github.com/dana-id/dana-go/utils"
 )
 
@@ -74,35 +75,42 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 	externalId := GenerateExternalId(data.ExternalId)
 
 	merchantId := data.MerchantId
+	if merchantId == "" {
+		merchantId = os.Getenv("MERCHANT_ID")
+	}
 
 	// Generate timestamp in Jakarta time format
 	timestamp := GenerateTimestamp()
 
 	// Build URL with required parameters
-	urlParams := url.Values{}
-	urlParams.Add("partnerId", partnerId)
-	urlParams.Add("scopes", scopes)
-	urlParams.Add("externalId", externalId)
-	urlParams.Add("channelId", channelId)
-	urlParams.Add("redirectUrl", data.RedirectUrl)
-	urlParams.Add("timestamp", timestamp)
-	urlParams.Add("state", state)
-	urlParams.Add("isSnapBI", "true")
+	var params []string
+
+	// Add parameters without URL encoding
+	params = append(params, "partnerId="+partnerId)
+	params = append(params, "scopes="+scopes)
+	params = append(params, "externalId="+externalId)
+	params = append(params, "channelId="+channelId)
+
+	// Add parameters with URL encoding
+	params = append(params, "redirectUrl="+url.QueryEscape(data.RedirectUrl))
+	params = append(params, "timestamp="+url.QueryEscape(timestamp))
+	params = append(params, "state="+state)
+	params = append(params, "isSnapBI=true")
 
 	if merchantId != "" {
-		urlParams.Add("merchantId", merchantId)
+		params = append(params, "merchantId="+merchantId)
 	}
 
 	if data.SubMerchantId != nil && *data.SubMerchantId != "" {
-		urlParams.Add("subMerchantId", *data.SubMerchantId)
+		params = append(params, "subMerchantId="+*data.SubMerchantId)
 	}
 
 	if data.Lang != nil && *data.Lang != "" {
-		urlParams.Add("lang", *data.Lang)
+		params = append(params, "lang="+*data.Lang)
 	}
 
 	if data.AllowRegistration != nil && *data.AllowRegistration != "" {
-		urlParams.Add("allowRegistration", *data.AllowRegistration)
+		params = append(params, "allowRegistration="+*data.AllowRegistration)
 	}
 
 	if data.SeamlessData != nil {
@@ -111,7 +119,7 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 		if err != nil {
 			return "", fmt.Errorf("error marshaling seamlessData: %v", err)
 		}
-		urlParams.Add("seamlessData", string(seamlessDataBytes))
+		params = append(params, "seamlessData="+url.QueryEscape(string(seamlessDataBytes)))
 
 		// Get private key from environment
 		privateKey := os.Getenv("PRIVATE_KEY")
@@ -122,22 +130,59 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 				return "", fmt.Errorf("error generating seamlessSign: %v", err)
 			}
 			if seamlessSign != "" {
-				urlParams.Add("seamlessSign", seamlessSign)
+				params = append(params, "seamlessSign="+seamlessSign)
 			}
 		}
 	}
 
-	return fmt.Sprintf("%s?%s", baseUrl, urlParams.Encode()), nil
+	// Join all parameters with & and append to base URL
+	queryString := strings.Join(params, "&")
+	return fmt.Sprintf("%s?%s", baseUrl, queryString), nil
 }
 
-// GenerateChannelId generates a channel ID
+// GenerateChannelId generates a channel ID in Jakarta time format (GMT+7): YYYYMMDDHHmmssSSSnnnnnnn
 func GenerateChannelId() string {
-	return fmt.Sprintf("widget-%d", time.Now().UnixNano())
+	// Get current time
+	now := time.Now()
+
+	// Add 7 hours to get Jakarta time (GMT+7)
+	jakartaTime := now.Add(7 * time.Hour)
+
+	// Format: YYYYMMDDHHmmssSSSnnnnnnn
+	year := jakartaTime.Format("2006")
+	month := jakartaTime.Format("01")
+	day := jakartaTime.Format("02")
+	hours := jakartaTime.Format("15")
+	minutes := jakartaTime.Format("04")
+	seconds := jakartaTime.Format("05")
+
+	// Go doesn't directly format milliseconds with padded zeros, so we extract and format them
+	milliseconds := fmt.Sprintf("%03d", jakartaTime.Nanosecond()/1000000)
+
+	// Generate a random 7-digit number for the nanopart
+	mathrand.Seed(time.Now().UnixNano())
+	nanopart := fmt.Sprintf("%07d", mathrand.Intn(10000000))
+
+	return fmt.Sprintf("%s%s%s%s%s%s%s%s", year, month, day, hours, minutes, seconds, milliseconds, nanopart)
 }
 
-// GenerateScopes generates the OAuth scopes
+// GenerateScopes generates the OAuth scopes based on environment
 func GenerateScopes() string {
-	return "APP_AUTH,QUERY_BALANCE"
+	// Use environment variable or default to sandbox
+	env := os.Getenv("ENV")
+	if env == "" {
+		env = os.Getenv("DANA_ENV")
+	}
+	if env == "" {
+		env = "sandbox"
+	}
+
+	// Return different scopes based on environment
+	if strings.ToLower(env) != "production" {
+		return "CASHIER,AGREEMENT_PAY,QUERY_BALANCE,DEFAULT_BASIC_PROFILE,MINI_DANA"
+	} else {
+		return "CASHIER"
+	}
 }
 
 // GenerateExternalId generates an external ID based on input or creates a new one
@@ -152,10 +197,8 @@ func GenerateExternalId(input string) string {
 
 // GenerateTimestamp generates a timestamp in Jakarta time format
 func GenerateTimestamp() string {
-	// Jakarta is UTC+7
 	jakarta, _ := time.LoadLocation("Asia/Jakarta")
 	if jakarta == nil {
-		// Fallback if location is not available
 		now := time.Now().UTC().Add(7 * time.Hour)
 		return strings.Replace(now.Format(time.RFC3339), "Z", "+07:00", 1)
 	}
@@ -192,7 +235,7 @@ func GenerateSeamlessSign(seamlessData interface{}, privateKey string) (string, 
 	}
 
 	// URL encode the signature
-	return url.QueryEscape(signature), nil
+	return signature, nil
 }
 
 // signData signs data with the given private key using RSA-SHA256
@@ -211,7 +254,7 @@ func signData(data []byte, privateKeyPEM []byte) (string, error) {
 		if pkcs8Err != nil {
 			return "", fmt.Errorf("failed to parse private key: %v", pkcs8Err)
 		}
-		
+
 		// Convert to RSA private key
 		rsaKey, ok := pkcs8Key.(*rsa.PrivateKey)
 		if !ok {
@@ -233,4 +276,25 @@ func signData(data []byte, privateKeyPEM []byte) (string, error) {
 
 	// Convert to Base64
 	return base64.StdEncoding.EncodeToString(signature), nil
+}
+
+// GenerateCompletePaymentUrl combines the webRedirectUrl from WidgetPaymentResponse with the OTT token from ApplyOTTResponse
+func GenerateCompletePaymentUrl(widgetPaymentResponse *WidgetPaymentResponse, applyOTTResponse *ApplyOTTResponse) string {
+	// Check for nil pointers
+	if widgetPaymentResponse == nil || applyOTTResponse == nil {
+		return ""
+	}
+
+	// Get the WebRedirectUrl value safely
+	webRedirectUrl := widgetPaymentResponse.GetWebRedirectUrl()
+
+	// Check if there are user resources and safely access the first one's value
+	if len(applyOTTResponse.UserResources) == 0 || applyOTTResponse.UserResources[0].Value == nil {
+		return webRedirectUrl
+	}
+
+	ott := *applyOTTResponse.UserResources[0].Value
+
+	// Combine the URL with the OTT token
+	return fmt.Sprintf("%s&ott=%s", webRedirectUrl, ott)
 }

@@ -102,6 +102,7 @@ func SetSnapHeaders(headerParams map[string]string, apiKey *config.APIKey, body 
 	for k := range headerParams {
 		// Check for keys that start with sensitive prefixes (case insensitive)
 		if hasPrefix(k, "PRIVATE") || hasPrefix(k, "private") ||
+			hasPrefix(k, "DANA_ENV") || hasPrefix(k, "dana_env") ||
 			hasPrefix(k, "ENV") || hasPrefix(k, "env") {
 			delete(headerParams, k)
 		}

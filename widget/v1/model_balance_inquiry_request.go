@@ -27,6 +27,8 @@ API version: 1.0.0
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 	utils "github.com/dana-id/dana-go/utils"
 )
 
@@ -39,15 +41,19 @@ type BalanceInquiryRequest struct {
 	PartnerReferenceNo *string `json:"partnerReferenceNo,omitempty"`
 	// Information of balance types to specify which balance type expected to be returned. Will return all available balance type if this parameter empty
 	BalanceTypes []string `json:"balanceTypes,omitempty"`
-	AdditionalInfo *BalanceInquiryRequestAdditionalInfo `json:"additionalInfo,omitempty"`
+	// Additional information
+	AdditionalInfo BalanceInquiryRequestAdditionalInfo `json:"additionalInfo"`
 }
+
+type _BalanceInquiryRequest BalanceInquiryRequest
 
 // NewBalanceInquiryRequest instantiates a new BalanceInquiryRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBalanceInquiryRequest() *BalanceInquiryRequest {
+func NewBalanceInquiryRequest(additionalInfo BalanceInquiryRequestAdditionalInfo) *BalanceInquiryRequest {
 	this := BalanceInquiryRequest{}
+	this.AdditionalInfo = additionalInfo
 	return &this
 }
 
@@ -123,36 +129,28 @@ func (o *BalanceInquiryRequest) SetBalanceTypes(v []string) {
 	o.BalanceTypes = v
 }
 
-// GetAdditionalInfo returns the AdditionalInfo field value if set, zero value otherwise.
+// GetAdditionalInfo returns the AdditionalInfo field value
 func (o *BalanceInquiryRequest) GetAdditionalInfo() BalanceInquiryRequestAdditionalInfo {
-	if o == nil || utils.IsNil(o.AdditionalInfo) {
+	if o == nil {
 		var ret BalanceInquiryRequestAdditionalInfo
 		return ret
 	}
-	return *o.AdditionalInfo
+
+	return o.AdditionalInfo
 }
 
-// GetAdditionalInfoOk returns a tuple with the AdditionalInfo field value if set, nil otherwise
+// GetAdditionalInfoOk returns a tuple with the AdditionalInfo field value
 // and a boolean to check if the value has been set.
 func (o *BalanceInquiryRequest) GetAdditionalInfoOk() (*BalanceInquiryRequestAdditionalInfo, bool) {
-	if o == nil || utils.IsNil(o.AdditionalInfo) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdditionalInfo, true
+	return &o.AdditionalInfo, true
 }
 
-// HasAdditionalInfo returns a boolean if a field has been set.
-func (o *BalanceInquiryRequest) HasAdditionalInfo() bool {
-	if o != nil && !utils.IsNil(o.AdditionalInfo) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdditionalInfo gets a reference to the given BalanceInquiryRequestAdditionalInfo and assigns it to the AdditionalInfo field.
+// SetAdditionalInfo sets field value
 func (o *BalanceInquiryRequest) SetAdditionalInfo(v BalanceInquiryRequestAdditionalInfo) {
-	o.AdditionalInfo = &v
+	o.AdditionalInfo = v
 }
 
 func (o BalanceInquiryRequest) MarshalJSON() ([]byte, error) {
@@ -171,10 +169,45 @@ func (o BalanceInquiryRequest) ToMap() (map[string]interface{}, error) {
 	if !utils.IsNil(o.BalanceTypes) {
 		toSerialize["balanceTypes"] = o.BalanceTypes
 	}
-	if !utils.IsNil(o.AdditionalInfo) {
-		toSerialize["additionalInfo"] = o.AdditionalInfo
-	}
+	toSerialize["additionalInfo"] = o.AdditionalInfo
 	return toSerialize, nil
+}
+
+func (o *BalanceInquiryRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"additionalInfo",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varBalanceInquiryRequest := _BalanceInquiryRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varBalanceInquiryRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BalanceInquiryRequest(varBalanceInquiryRequest)
+
+	return err
 }
 
 type NullableBalanceInquiryRequest struct {

@@ -82,6 +82,7 @@ func SetOpenApiHeaders(headerParams map[string]string, apiKey *config.APIKey, bo
 	for k := range headerParams {
 		// Check for keys that start with sensitive prefixes (case insensitive)
 		if hasOpenApiPrefix(k, "PRIVATE") || hasOpenApiPrefix(k, "private") ||
+			hasOpenApiPrefix(k, "DANA_ENV") || hasOpenApiPrefix(k, "dana_env") ||
 			hasOpenApiPrefix(k, "ENV") || hasOpenApiPrefix(k, "env") {
 			delete(headerParams, k)
 		}
@@ -144,8 +145,8 @@ func GenerateOpenApiSignature(body string, apiKey *config.APIKey) (string, error
 }
 
 func GetOpenApiGeneratedHeaders(body string, apiKey *config.APIKey, functionName string) map[string]string {
-	if apiKey.ENV == "" {
-		fmt.Errorf("ENV is required for OPEN_API authentication")
+	if apiKey.DANA_ENV == "" && apiKey.ENV == "" {
+		fmt.Errorf("DANA_ENV or ENV is required for OPEN_API authentication")
 		return nil
 	}
 
