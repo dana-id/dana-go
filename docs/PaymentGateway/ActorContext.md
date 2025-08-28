@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActorId** | Pointer to **string** | Actor identifier | [optional] 
-**ActorType** | Pointer to **string** | Actor type. The enums:<br /> * USER - User<br /> * MERCHANT - Merchant&lt;br * MERCHANT_OPERATOR - Merchant operator<br /> * BACK_OFFICE - Back office<br /> * SYSTEM - System<br />  | [optional] 
+**ActorType** | Pointer to **string** | Actor type. The enums:<br /> * USER - User<br /> * MERCHANT - Merchant<br /> * MERCHANT_OPERATOR - Merchant operator<br /> * BACK_OFFICE - Back office<br /> * SYSTEM - System<br />  | [optional] 
 
 ## Methods
 

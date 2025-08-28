@@ -88,6 +88,7 @@ func (o *UrlParam) GetUrlOk() (*string, bool) {
 
 // SetUrl sets field value
 func (o *UrlParam) SetUrl(v string) {
+
 	o.Url = v
 }
 
@@ -112,6 +113,7 @@ func (o *UrlParam) GetTypeOk() (*string, bool) {
 
 // SetType sets field value
 func (o *UrlParam) SetType(v string) {
+
 	o.Type = v
 }
 
@@ -136,6 +138,7 @@ func (o *UrlParam) GetIsDeeplinkOk() (*string, bool) {
 
 // SetIsDeeplink sets field value
 func (o *UrlParam) SetIsDeeplink(v string) {
+
 	o.IsDeeplink = v
 }
 

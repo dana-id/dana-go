@@ -98,6 +98,7 @@ func (o *PaymentView) HasCashierRequestId() bool {
 
 // SetCashierRequestId gets a reference to the given string and assigns it to the CashierRequestId field.
 func (o *PaymentView) SetCashierRequestId(v string) {
+
 	o.CashierRequestId = &v
 }
 
@@ -130,6 +131,7 @@ func (o *PaymentView) HasPaidTime() bool {
 
 // SetPaidTime gets a reference to the given string and assigns it to the PaidTime field.
 func (o *PaymentView) SetPaidTime(v string) {
+
 	o.PaidTime = &v
 }
 
@@ -154,6 +156,7 @@ func (o *PaymentView) GetPayOptionInfosOk() ([]PayOptionInfo, bool) {
 
 // SetPayOptionInfos sets field value
 func (o *PaymentView) SetPayOptionInfos(v []PayOptionInfo) {
+
 	o.PayOptionInfos = v
 }
 
@@ -186,6 +189,7 @@ func (o *PaymentView) HasPayRequestExtendInfo() bool {
 
 // SetPayRequestExtendInfo gets a reference to the given string and assigns it to the PayRequestExtendInfo field.
 func (o *PaymentView) SetPayRequestExtendInfo(v string) {
+
 	o.PayRequestExtendInfo = &v
 }
 
@@ -218,6 +222,7 @@ func (o *PaymentView) HasExtendInfo() bool {
 
 // SetExtendInfo gets a reference to the given string and assigns it to the ExtendInfo field.
 func (o *PaymentView) SetExtendInfo(v string) {
+
 	o.ExtendInfo = &v
 }
 

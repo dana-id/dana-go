@@ -85,6 +85,7 @@ func (o *CreateOrderResponseAdditionalInfo) HasPaymentCode() bool {
 
 // SetPaymentCode gets a reference to the given string and assigns it to the PaymentCode field.
 func (o *CreateOrderResponseAdditionalInfo) SetPaymentCode(v string) {
+
 	o.PaymentCode = &v
 }
 

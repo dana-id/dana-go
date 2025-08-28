@@ -558,8 +558,8 @@ func (a *WidgetAPIService) BalanceInquiryExecute(r ApiBalanceInquiryRequest) (*B
 		}
 		dataForSnapStr = string(dst.Bytes())
 
-		// Default B2B signature scenario
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		// SNAP signature scenario: BALANCE INQUIRY
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "balance_inquiry")
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

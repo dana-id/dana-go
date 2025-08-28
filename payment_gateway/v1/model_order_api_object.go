@@ -98,6 +98,7 @@ func (o *OrderApiObject) GetOrderTitleOk() (*string, bool) {
 
 // SetOrderTitle sets field value
 func (o *OrderApiObject) SetOrderTitle(v string) {
+
 	o.OrderTitle = v
 }
 
@@ -130,6 +131,7 @@ func (o *OrderApiObject) HasMerchantTransType() bool {
 
 // SetMerchantTransType gets a reference to the given string and assigns it to the MerchantTransType field.
 func (o *OrderApiObject) SetMerchantTransType(v string) {
+
 	o.MerchantTransType = &v
 }
 
@@ -162,6 +164,7 @@ func (o *OrderApiObject) HasBuyer() bool {
 
 // SetBuyer gets a reference to the given Buyer and assigns it to the Buyer field.
 func (o *OrderApiObject) SetBuyer(v Buyer) {
+
 	o.Buyer = &v
 }
 
@@ -194,6 +197,7 @@ func (o *OrderApiObject) HasGoods() bool {
 
 // SetGoods gets a reference to the given []Goods and assigns it to the Goods field.
 func (o *OrderApiObject) SetGoods(v []Goods) {
+
 	o.Goods = v
 }
 
@@ -226,6 +230,7 @@ func (o *OrderApiObject) HasShippingInfo() bool {
 
 // SetShippingInfo gets a reference to the given []ShippingInfo and assigns it to the ShippingInfo field.
 func (o *OrderApiObject) SetShippingInfo(v []ShippingInfo) {
+
 	o.ShippingInfo = v
 }
 
@@ -258,6 +263,7 @@ func (o *OrderApiObject) HasExtendInfo() bool {
 
 // SetExtendInfo gets a reference to the given string and assigns it to the ExtendInfo field.
 func (o *OrderApiObject) SetExtendInfo(v string) {
+
 	o.ExtendInfo = &v
 }
 
@@ -290,6 +296,7 @@ func (o *OrderApiObject) HasCreatedTime() bool {
 
 // SetCreatedTime gets a reference to the given string and assigns it to the CreatedTime field.
 func (o *OrderApiObject) SetCreatedTime(v string) {
+
 	o.CreatedTime = &v
 }
 
@@ -322,6 +329,7 @@ func (o *OrderApiObject) HasOrderMemo() bool {
 
 // SetOrderMemo gets a reference to the given string and assigns it to the OrderMemo field.
 func (o *OrderApiObject) SetOrderMemo(v string) {
+
 	o.OrderMemo = &v
 }
 
@@ -354,6 +362,7 @@ func (o *OrderApiObject) HasScenario() bool {
 
 // SetScenario gets a reference to the given string and assigns it to the Scenario field.
 func (o *OrderApiObject) SetScenario(v string) {
+
 	o.Scenario = &v
 }
 

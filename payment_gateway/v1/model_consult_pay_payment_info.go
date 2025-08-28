@@ -86,6 +86,7 @@ func (o *ConsultPayPaymentInfo) GetPayMethodOk() (*string, bool) {
 
 // SetPayMethod sets field value
 func (o *ConsultPayPaymentInfo) SetPayMethod(v string) {
+
 	o.PayMethod = v
 }
 
@@ -118,6 +119,7 @@ func (o *ConsultPayPaymentInfo) HasPayOption() bool {
 
 // SetPayOption gets a reference to the given string and assigns it to the PayOption field.
 func (o *ConsultPayPaymentInfo) SetPayOption(v string) {
+
 	o.PayOption = &v
 }
 
@@ -150,6 +152,7 @@ func (o *ConsultPayPaymentInfo) HasPromoInfos() bool {
 
 // SetPromoInfos gets a reference to the given []PromoInfo and assigns it to the PromoInfos field.
 func (o *ConsultPayPaymentInfo) SetPromoInfos(v []PromoInfo) {
+
 	o.PromoInfos = v
 }
 

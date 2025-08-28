@@ -89,6 +89,7 @@ func (o *ConsultPayResponse) HasResponseCode() bool {
 
 // SetResponseCode gets a reference to the given string and assigns it to the ResponseCode field.
 func (o *ConsultPayResponse) SetResponseCode(v string) {
+
 	o.ResponseCode = &v
 }
 
@@ -121,6 +122,7 @@ func (o *ConsultPayResponse) HasResponseMessage() bool {
 
 // SetResponseMessage gets a reference to the given string and assigns it to the ResponseMessage field.
 func (o *ConsultPayResponse) SetResponseMessage(v string) {
+
 	o.ResponseMessage = &v
 }
 
@@ -153,6 +155,7 @@ func (o *ConsultPayResponse) HasPaymentInfos() bool {
 
 // SetPaymentInfos gets a reference to the given []ConsultPayPaymentInfo and assigns it to the PaymentInfos field.
 func (o *ConsultPayResponse) SetPaymentInfos(v []ConsultPayPaymentInfo) {
+
 	o.PaymentInfos = v
 }
 

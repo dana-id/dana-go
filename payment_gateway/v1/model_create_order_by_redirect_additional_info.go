@@ -89,6 +89,7 @@ func (o *CreateOrderByRedirectAdditionalInfo) GetMccOk() (*string, bool) {
 
 // SetMcc sets field value
 func (o *CreateOrderByRedirectAdditionalInfo) SetMcc(v string) {
+
 	o.Mcc = v
 }
 
@@ -121,6 +122,7 @@ func (o *CreateOrderByRedirectAdditionalInfo) HasExtendInfo() bool {
 
 // SetExtendInfo gets a reference to the given string and assigns it to the ExtendInfo field.
 func (o *CreateOrderByRedirectAdditionalInfo) SetExtendInfo(v string) {
+
 	o.ExtendInfo = &v
 }
 
@@ -145,6 +147,7 @@ func (o *CreateOrderByRedirectAdditionalInfo) GetEnvInfoOk() (*EnvInfo, bool) {
 
 // SetEnvInfo sets field value
 func (o *CreateOrderByRedirectAdditionalInfo) SetEnvInfo(v EnvInfo) {
+
 	o.EnvInfo = v
 }
 
@@ -177,6 +180,7 @@ func (o *CreateOrderByRedirectAdditionalInfo) HasOrder() bool {
 
 // SetOrder gets a reference to the given OrderRedirectObject and assigns it to the Order field.
 func (o *CreateOrderByRedirectAdditionalInfo) SetOrder(v OrderRedirectObject) {
+
 	o.Order = &v
 }
 

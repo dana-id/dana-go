@@ -109,6 +109,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasBuyer() bool {
 
 // SetBuyer gets a reference to the given Buyer and assigns it to the Buyer field.
 func (o *QueryPaymentResponseAdditionalInfo) SetBuyer(v Buyer) {
+
 	o.Buyer = &v
 }
 
@@ -141,6 +142,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasSeller() bool {
 
 // SetSeller gets a reference to the given Seller and assigns it to the Seller field.
 func (o *QueryPaymentResponseAdditionalInfo) SetSeller(v Seller) {
+
 	o.Seller = &v
 }
 
@@ -173,6 +175,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasAmountDetail() bool {
 
 // SetAmountDetail gets a reference to the given AmountDetail and assigns it to the AmountDetail field.
 func (o *QueryPaymentResponseAdditionalInfo) SetAmountDetail(v AmountDetail) {
+
 	o.AmountDetail = &v
 }
 
@@ -205,6 +208,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasTimeDetail() bool {
 
 // SetTimeDetail gets a reference to the given TimeDetail and assigns it to the TimeDetail field.
 func (o *QueryPaymentResponseAdditionalInfo) SetTimeDetail(v TimeDetail) {
+
 	o.TimeDetail = &v
 }
 
@@ -237,6 +241,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasGoods() bool {
 
 // SetGoods gets a reference to the given []Goods and assigns it to the Goods field.
 func (o *QueryPaymentResponseAdditionalInfo) SetGoods(v []Goods) {
+
 	o.Goods = v
 }
 
@@ -269,6 +274,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasShippingInfo() bool {
 
 // SetShippingInfo gets a reference to the given []ShippingInfo and assigns it to the ShippingInfo field.
 func (o *QueryPaymentResponseAdditionalInfo) SetShippingInfo(v []ShippingInfo) {
+
 	o.ShippingInfo = v
 }
 
@@ -301,6 +307,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasOrderMemo() bool {
 
 // SetOrderMemo gets a reference to the given string and assigns it to the OrderMemo field.
 func (o *QueryPaymentResponseAdditionalInfo) SetOrderMemo(v string) {
+
 	o.OrderMemo = &v
 }
 
@@ -333,6 +340,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasPaymentViews() bool {
 
 // SetPaymentViews gets a reference to the given []PaymentView and assigns it to the PaymentViews field.
 func (o *QueryPaymentResponseAdditionalInfo) SetPaymentViews(v []PaymentView) {
+
 	o.PaymentViews = v
 }
 
@@ -365,6 +373,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasExtendInfo() bool {
 
 // SetExtendInfo gets a reference to the given string and assigns it to the ExtendInfo field.
 func (o *QueryPaymentResponseAdditionalInfo) SetExtendInfo(v string) {
+
 	o.ExtendInfo = &v
 }
 
@@ -397,6 +406,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasStatusDetail() bool {
 
 // SetStatusDetail gets a reference to the given StatusDetail and assigns it to the StatusDetail field.
 func (o *QueryPaymentResponseAdditionalInfo) SetStatusDetail(v StatusDetail) {
+
 	o.StatusDetail = &v
 }
 
@@ -429,6 +439,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasCloseReason() bool {
 
 // SetCloseReason gets a reference to the given string and assigns it to the CloseReason field.
 func (o *QueryPaymentResponseAdditionalInfo) SetCloseReason(v string) {
+
 	o.CloseReason = &v
 }
 
@@ -461,6 +472,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasVirtualAccountInfo() bool {
 
 // SetVirtualAccountInfo gets a reference to the given VirtualAccountInfo and assigns it to the VirtualAccountInfo field.
 func (o *QueryPaymentResponseAdditionalInfo) SetVirtualAccountInfo(v VirtualAccountInfo) {
+
 	o.VirtualAccountInfo = &v
 }
 
@@ -493,6 +505,7 @@ func (o *QueryPaymentResponseAdditionalInfo) HasMerchantId() bool {
 
 // SetMerchantId gets a reference to the given string and assigns it to the MerchantId field.
 func (o *QueryPaymentResponseAdditionalInfo) SetMerchantId(v string) {
+
 	o.MerchantId = &v
 }
 

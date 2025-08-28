@@ -26,6 +26,7 @@ API version: 1.0.0
 
 
 import (
+	"time"
 	"encoding/json"
 	"bytes"
 	"fmt"
@@ -49,7 +50,7 @@ type CreateOrderByApiRequest struct {
 	Amount Money `json:"amount"`
 	// Store identifier to indicate to which store this payment belongs to
 	ExternalStoreId *string `json:"externalStoreId,omitempty"`
-	// The time when the payment will be automatically expired, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
+	// The time when the payment will be automatically expired, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) and cannot be more than one week in the future.
 	ValidUpTo *string `json:"validUpTo,omitempty" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
 	// Payment method(s) that cannot be used for this
 	DisabledPayMethods *string `json:"disabledPayMethods,omitempty"`
@@ -101,6 +102,7 @@ func (o *CreateOrderByApiRequest) GetPayOptionDetailsOk() ([]PayOptionDetail, bo
 
 // SetPayOptionDetails sets field value
 func (o *CreateOrderByApiRequest) SetPayOptionDetails(v []PayOptionDetail) {
+
 	o.PayOptionDetails = v
 }
 
@@ -133,6 +135,7 @@ func (o *CreateOrderByApiRequest) HasAdditionalInfo() bool {
 
 // SetAdditionalInfo gets a reference to the given CreateOrderByApiAdditionalInfo and assigns it to the AdditionalInfo field.
 func (o *CreateOrderByApiRequest) SetAdditionalInfo(v CreateOrderByApiAdditionalInfo) {
+
 	o.AdditionalInfo = &v
 }
 
@@ -157,6 +160,7 @@ func (o *CreateOrderByApiRequest) GetPartnerReferenceNoOk() (*string, bool) {
 
 // SetPartnerReferenceNo sets field value
 func (o *CreateOrderByApiRequest) SetPartnerReferenceNo(v string) {
+
 	o.PartnerReferenceNo = v
 }
 
@@ -181,6 +185,7 @@ func (o *CreateOrderByApiRequest) GetMerchantIdOk() (*string, bool) {
 
 // SetMerchantId sets field value
 func (o *CreateOrderByApiRequest) SetMerchantId(v string) {
+
 	o.MerchantId = v
 }
 
@@ -213,6 +218,7 @@ func (o *CreateOrderByApiRequest) HasSubMerchantId() bool {
 
 // SetSubMerchantId gets a reference to the given string and assigns it to the SubMerchantId field.
 func (o *CreateOrderByApiRequest) SetSubMerchantId(v string) {
+
 	o.SubMerchantId = &v
 }
 
@@ -237,6 +243,7 @@ func (o *CreateOrderByApiRequest) GetAmountOk() (*Money, bool) {
 
 // SetAmount sets field value
 func (o *CreateOrderByApiRequest) SetAmount(v Money) {
+
 	o.Amount = v
 }
 
@@ -269,6 +276,7 @@ func (o *CreateOrderByApiRequest) HasExternalStoreId() bool {
 
 // SetExternalStoreId gets a reference to the given string and assigns it to the ExternalStoreId field.
 func (o *CreateOrderByApiRequest) SetExternalStoreId(v string) {
+
 	o.ExternalStoreId = &v
 }
 
@@ -301,6 +309,29 @@ func (o *CreateOrderByApiRequest) HasValidUpTo() bool {
 
 // SetValidUpTo gets a reference to the given string and assigns it to the ValidUpTo field.
 func (o *CreateOrderByApiRequest) SetValidUpTo(v string) {
+	// Validate that validUpTo date is not more than one week in the future
+	if !utils.IsNil(v) {
+		// Parse the input date
+		inputDate, err := time.Parse(time.RFC3339, v)
+		if err != nil {
+			panic(fmt.Errorf("invalid date format for validUpTo. Expected format: YYYY-MM-DDTHH:mm:ss+07:00"))
+		}
+
+		// Create Jakarta timezone object (GMT+7)
+		jakartaTz, _ := time.LoadLocation("Asia/Jakarta")
+		
+		// Current date in Jakarta timezone
+		currentDate := time.Now().In(jakartaTz)
+		
+		// Maximum allowed date (current date + 7 days)
+		maxDate := currentDate.AddDate(0, 0, 7)
+		
+		// Check if the input date exceeds the maximum allowed date
+		if inputDate.After(maxDate) {
+			panic(fmt.Errorf("validUpTo date cannot be more than one week in the future"))
+		}
+	}
+
 	o.ValidUpTo = &v
 }
 
@@ -333,6 +364,7 @@ func (o *CreateOrderByApiRequest) HasDisabledPayMethods() bool {
 
 // SetDisabledPayMethods gets a reference to the given string and assigns it to the DisabledPayMethods field.
 func (o *CreateOrderByApiRequest) SetDisabledPayMethods(v string) {
+
 	o.DisabledPayMethods = &v
 }
 
@@ -357,6 +389,7 @@ func (o *CreateOrderByApiRequest) GetUrlParamsOk() ([]UrlParam, bool) {
 
 // SetUrlParams sets field value
 func (o *CreateOrderByApiRequest) SetUrlParams(v []UrlParam) {
+
 	o.UrlParams = v
 }
 

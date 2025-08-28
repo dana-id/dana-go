@@ -121,6 +121,7 @@ func (o *ShippingInfo) GetMerchantShippingIdOk() (*string, bool) {
 
 // SetMerchantShippingId sets field value
 func (o *ShippingInfo) SetMerchantShippingId(v string) {
+
 	o.MerchantShippingId = v
 }
 
@@ -153,6 +154,7 @@ func (o *ShippingInfo) HasTrackingNo() bool {
 
 // SetTrackingNo gets a reference to the given string and assigns it to the TrackingNo field.
 func (o *ShippingInfo) SetTrackingNo(v string) {
+
 	o.TrackingNo = &v
 }
 
@@ -185,6 +187,7 @@ func (o *ShippingInfo) HasCarrier() bool {
 
 // SetCarrier gets a reference to the given string and assigns it to the Carrier field.
 func (o *ShippingInfo) SetCarrier(v string) {
+
 	o.Carrier = &v
 }
 
@@ -217,6 +220,7 @@ func (o *ShippingInfo) HasChargeAmount() bool {
 
 // SetChargeAmount gets a reference to the given Money and assigns it to the ChargeAmount field.
 func (o *ShippingInfo) SetChargeAmount(v Money) {
+
 	o.ChargeAmount = &v
 }
 
@@ -241,6 +245,7 @@ func (o *ShippingInfo) GetCountryNameOk() (*string, bool) {
 
 // SetCountryName sets field value
 func (o *ShippingInfo) SetCountryName(v string) {
+
 	o.CountryName = v
 }
 
@@ -265,6 +270,7 @@ func (o *ShippingInfo) GetStateNameOk() (*string, bool) {
 
 // SetStateName sets field value
 func (o *ShippingInfo) SetStateName(v string) {
+
 	o.StateName = v
 }
 
@@ -289,6 +295,7 @@ func (o *ShippingInfo) GetCityNameOk() (*string, bool) {
 
 // SetCityName sets field value
 func (o *ShippingInfo) SetCityName(v string) {
+
 	o.CityName = v
 }
 
@@ -321,6 +328,7 @@ func (o *ShippingInfo) HasAreaName() bool {
 
 // SetAreaName gets a reference to the given string and assigns it to the AreaName field.
 func (o *ShippingInfo) SetAreaName(v string) {
+
 	o.AreaName = &v
 }
 
@@ -345,6 +353,7 @@ func (o *ShippingInfo) GetAddress1Ok() (*string, bool) {
 
 // SetAddress1 sets field value
 func (o *ShippingInfo) SetAddress1(v string) {
+
 	o.Address1 = v
 }
 
@@ -377,6 +386,7 @@ func (o *ShippingInfo) HasAddress2() bool {
 
 // SetAddress2 gets a reference to the given string and assigns it to the Address2 field.
 func (o *ShippingInfo) SetAddress2(v string) {
+
 	o.Address2 = &v
 }
 
@@ -401,6 +411,7 @@ func (o *ShippingInfo) GetFirstNameOk() (*string, bool) {
 
 // SetFirstName sets field value
 func (o *ShippingInfo) SetFirstName(v string) {
+
 	o.FirstName = v
 }
 
@@ -425,6 +436,7 @@ func (o *ShippingInfo) GetLastNameOk() (*string, bool) {
 
 // SetLastName sets field value
 func (o *ShippingInfo) SetLastName(v string) {
+
 	o.LastName = v
 }
 
@@ -457,6 +469,7 @@ func (o *ShippingInfo) HasMobileNo() bool {
 
 // SetMobileNo gets a reference to the given string and assigns it to the MobileNo field.
 func (o *ShippingInfo) SetMobileNo(v string) {
+
 	o.MobileNo = &v
 }
 
@@ -489,6 +502,7 @@ func (o *ShippingInfo) HasPhoneNo() bool {
 
 // SetPhoneNo gets a reference to the given string and assigns it to the PhoneNo field.
 func (o *ShippingInfo) SetPhoneNo(v string) {
+
 	o.PhoneNo = &v
 }
 
@@ -513,6 +527,7 @@ func (o *ShippingInfo) GetZipCodeOk() (*string, bool) {
 
 // SetZipCode sets field value
 func (o *ShippingInfo) SetZipCode(v string) {
+
 	o.ZipCode = v
 }
 
@@ -545,6 +560,7 @@ func (o *ShippingInfo) HasEmail() bool {
 
 // SetEmail gets a reference to the given string and assigns it to the Email field.
 func (o *ShippingInfo) SetEmail(v string) {
+
 	o.Email = &v
 }
 
@@ -577,6 +593,7 @@ func (o *ShippingInfo) HasFaxNo() bool {
 
 // SetFaxNo gets a reference to the given string and assigns it to the FaxNo field.
 func (o *ShippingInfo) SetFaxNo(v string) {
+
 	o.FaxNo = &v
 }
 

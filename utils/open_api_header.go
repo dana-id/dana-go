@@ -62,6 +62,11 @@ func SetOpenApiHeaders(headerParams map[string]string, apiKey *config.APIKey, bo
 		return
 	}
 
+	if apiKey.CLIENT_SECRET == "" {
+		fmt.Errorf("Client secret is required for OPEN_API authentication")
+		return
+	}
+
 	// Get runtime headers with signature
 	runtimeHeaders, signature := GetOpenApiGeneratedAuthWithSignature(
 		body, apiKey, functionName,

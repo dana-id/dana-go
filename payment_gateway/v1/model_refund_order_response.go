@@ -106,6 +106,7 @@ func (o *RefundOrderResponse) GetResponseCodeOk() (*string, bool) {
 
 // SetResponseCode sets field value
 func (o *RefundOrderResponse) SetResponseCode(v string) {
+
 	o.ResponseCode = v
 }
 
@@ -130,6 +131,7 @@ func (o *RefundOrderResponse) GetResponseMessageOk() (*string, bool) {
 
 // SetResponseMessage sets field value
 func (o *RefundOrderResponse) SetResponseMessage(v string) {
+
 	o.ResponseMessage = v
 }
 
@@ -162,6 +164,7 @@ func (o *RefundOrderResponse) HasOriginalReferenceNo() bool {
 
 // SetOriginalReferenceNo gets a reference to the given string and assigns it to the OriginalReferenceNo field.
 func (o *RefundOrderResponse) SetOriginalReferenceNo(v string) {
+
 	o.OriginalReferenceNo = &v
 }
 
@@ -186,6 +189,7 @@ func (o *RefundOrderResponse) GetOriginalPartnerReferenceNoOk() (*string, bool) 
 
 // SetOriginalPartnerReferenceNo sets field value
 func (o *RefundOrderResponse) SetOriginalPartnerReferenceNo(v string) {
+
 	o.OriginalPartnerReferenceNo = v
 }
 
@@ -218,6 +222,7 @@ func (o *RefundOrderResponse) HasOriginalExternalId() bool {
 
 // SetOriginalExternalId gets a reference to the given string and assigns it to the OriginalExternalId field.
 func (o *RefundOrderResponse) SetOriginalExternalId(v string) {
+
 	o.OriginalExternalId = &v
 }
 
@@ -250,6 +255,7 @@ func (o *RefundOrderResponse) HasOriginalCaptureNo() bool {
 
 // SetOriginalCaptureNo gets a reference to the given string and assigns it to the OriginalCaptureNo field.
 func (o *RefundOrderResponse) SetOriginalCaptureNo(v string) {
+
 	o.OriginalCaptureNo = &v
 }
 
@@ -282,6 +288,7 @@ func (o *RefundOrderResponse) HasRefundNo() bool {
 
 // SetRefundNo gets a reference to the given string and assigns it to the RefundNo field.
 func (o *RefundOrderResponse) SetRefundNo(v string) {
+
 	o.RefundNo = &v
 }
 
@@ -306,6 +313,7 @@ func (o *RefundOrderResponse) GetPartnerRefundNoOk() (*string, bool) {
 
 // SetPartnerRefundNo sets field value
 func (o *RefundOrderResponse) SetPartnerRefundNo(v string) {
+
 	o.PartnerRefundNo = v
 }
 
@@ -330,6 +338,7 @@ func (o *RefundOrderResponse) GetRefundAmountOk() (*Money, bool) {
 
 // SetRefundAmount sets field value
 func (o *RefundOrderResponse) SetRefundAmount(v Money) {
+
 	o.RefundAmount = v
 }
 
@@ -362,6 +371,7 @@ func (o *RefundOrderResponse) HasRefundTime() bool {
 
 // SetRefundTime gets a reference to the given string and assigns it to the RefundTime field.
 func (o *RefundOrderResponse) SetRefundTime(v string) {
+
 	o.RefundTime = &v
 }
 
@@ -394,6 +404,7 @@ func (o *RefundOrderResponse) HasAdditionalInfo() bool {
 
 // SetAdditionalInfo gets a reference to the given map[string]interface{} and assigns it to the AdditionalInfo field.
 func (o *RefundOrderResponse) SetAdditionalInfo(v map[string]interface{}) {
+
 	o.AdditionalInfo = v
 }
 

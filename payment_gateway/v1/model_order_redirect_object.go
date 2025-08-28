@@ -98,6 +98,7 @@ func (o *OrderRedirectObject) GetOrderTitleOk() (*string, bool) {
 
 // SetOrderTitle sets field value
 func (o *OrderRedirectObject) SetOrderTitle(v string) {
+
 	o.OrderTitle = v
 }
 
@@ -130,6 +131,7 @@ func (o *OrderRedirectObject) HasMerchantTransType() bool {
 
 // SetMerchantTransType gets a reference to the given string and assigns it to the MerchantTransType field.
 func (o *OrderRedirectObject) SetMerchantTransType(v string) {
+
 	o.MerchantTransType = &v
 }
 
@@ -162,6 +164,7 @@ func (o *OrderRedirectObject) HasBuyer() bool {
 
 // SetBuyer gets a reference to the given Buyer and assigns it to the Buyer field.
 func (o *OrderRedirectObject) SetBuyer(v Buyer) {
+
 	o.Buyer = &v
 }
 
@@ -194,6 +197,7 @@ func (o *OrderRedirectObject) HasGoods() bool {
 
 // SetGoods gets a reference to the given []Goods and assigns it to the Goods field.
 func (o *OrderRedirectObject) SetGoods(v []Goods) {
+
 	o.Goods = v
 }
 
@@ -226,6 +230,7 @@ func (o *OrderRedirectObject) HasShippingInfo() bool {
 
 // SetShippingInfo gets a reference to the given []ShippingInfo and assigns it to the ShippingInfo field.
 func (o *OrderRedirectObject) SetShippingInfo(v []ShippingInfo) {
+
 	o.ShippingInfo = v
 }
 
@@ -258,6 +263,7 @@ func (o *OrderRedirectObject) HasExtendInfo() bool {
 
 // SetExtendInfo gets a reference to the given string and assigns it to the ExtendInfo field.
 func (o *OrderRedirectObject) SetExtendInfo(v string) {
+
 	o.ExtendInfo = &v
 }
 
@@ -290,6 +296,7 @@ func (o *OrderRedirectObject) HasCreatedTime() bool {
 
 // SetCreatedTime gets a reference to the given string and assigns it to the CreatedTime field.
 func (o *OrderRedirectObject) SetCreatedTime(v string) {
+
 	o.CreatedTime = &v
 }
 
@@ -322,6 +329,7 @@ func (o *OrderRedirectObject) HasOrderMemo() bool {
 
 // SetOrderMemo gets a reference to the given string and assigns it to the OrderMemo field.
 func (o *OrderRedirectObject) SetOrderMemo(v string) {
+
 	o.OrderMemo = &v
 }
 
@@ -354,6 +362,7 @@ func (o *OrderRedirectObject) HasScenario() bool {
 
 // SetScenario gets a reference to the given string and assigns it to the Scenario field.
 func (o *OrderRedirectObject) SetScenario(v string) {
+
 	o.Scenario = &v
 }
 

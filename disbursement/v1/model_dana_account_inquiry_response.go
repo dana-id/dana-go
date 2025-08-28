@@ -52,7 +52,7 @@ type DanaAccountInquiryResponse struct {
 	// Customer account name
 	CustomerName string `json:"customerName"`
 	// Limitation of transfer to DANA balance for customer per month
-	CustomerMonthlyLimit *float32 `json:"customerMonthlyLimit,omitempty"`
+	CustomerMonthlyInLimit *string `json:"customerMonthlyInLimit,omitempty"`
 	// Minimal amount. Contains two sub-fields:<br> 1. Value: Amount, including the cents<br> 2. Currency: Currency code based on ISO 
 	MinAmount Money `json:"minAmount"`
 	// Maximal amount. Contains two sub-fields:<br> 1. Value: Amount, including the cents<br> 2. Currency: Currency code based on ISO 
@@ -293,36 +293,36 @@ func (o *DanaAccountInquiryResponse) SetCustomerName(v string) {
 	o.CustomerName = v
 }
 
-// GetCustomerMonthlyLimit returns the CustomerMonthlyLimit field value if set, zero value otherwise.
-func (o *DanaAccountInquiryResponse) GetCustomerMonthlyLimit() float32 {
-	if o == nil || utils.IsNil(o.CustomerMonthlyLimit) {
-		var ret float32
+// GetCustomerMonthlyInLimit returns the CustomerMonthlyInLimit field value if set, zero value otherwise.
+func (o *DanaAccountInquiryResponse) GetCustomerMonthlyInLimit() string {
+	if o == nil || utils.IsNil(o.CustomerMonthlyInLimit) {
+		var ret string
 		return ret
 	}
-	return *o.CustomerMonthlyLimit
+	return *o.CustomerMonthlyInLimit
 }
 
-// GetCustomerMonthlyLimitOk returns a tuple with the CustomerMonthlyLimit field value if set, nil otherwise
+// GetCustomerMonthlyInLimitOk returns a tuple with the CustomerMonthlyInLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DanaAccountInquiryResponse) GetCustomerMonthlyLimitOk() (*float32, bool) {
-	if o == nil || utils.IsNil(o.CustomerMonthlyLimit) {
+func (o *DanaAccountInquiryResponse) GetCustomerMonthlyInLimitOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.CustomerMonthlyInLimit) {
 		return nil, false
 	}
-	return o.CustomerMonthlyLimit, true
+	return o.CustomerMonthlyInLimit, true
 }
 
-// HasCustomerMonthlyLimit returns a boolean if a field has been set.
-func (o *DanaAccountInquiryResponse) HasCustomerMonthlyLimit() bool {
-	if o != nil && !utils.IsNil(o.CustomerMonthlyLimit) {
+// HasCustomerMonthlyInLimit returns a boolean if a field has been set.
+func (o *DanaAccountInquiryResponse) HasCustomerMonthlyInLimit() bool {
+	if o != nil && !utils.IsNil(o.CustomerMonthlyInLimit) {
 		return true
 	}
 
 	return false
 }
 
-// SetCustomerMonthlyLimit gets a reference to the given float32 and assigns it to the CustomerMonthlyLimit field.
-func (o *DanaAccountInquiryResponse) SetCustomerMonthlyLimit(v float32) {
-	o.CustomerMonthlyLimit = &v
+// SetCustomerMonthlyInLimit gets a reference to the given string and assigns it to the CustomerMonthlyInLimit field.
+func (o *DanaAccountInquiryResponse) SetCustomerMonthlyInLimit(v string) {
+	o.CustomerMonthlyInLimit = &v
 }
 
 // GetMinAmount returns the MinAmount field value
@@ -510,8 +510,8 @@ func (o DanaAccountInquiryResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["customerNumber"] = o.CustomerNumber
 	}
 	toSerialize["customerName"] = o.CustomerName
-	if !utils.IsNil(o.CustomerMonthlyLimit) {
-		toSerialize["customerMonthlyLimit"] = o.CustomerMonthlyLimit
+	if !utils.IsNil(o.CustomerMonthlyInLimit) {
+		toSerialize["customerMonthlyInLimit"] = o.CustomerMonthlyInLimit
 	}
 	toSerialize["minAmount"] = o.MinAmount
 	toSerialize["maxAmount"] = o.MaxAmount

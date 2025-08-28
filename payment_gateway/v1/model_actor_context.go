@@ -37,7 +37,7 @@ var _ utils.MappedNullable = &ActorContext{}
 type ActorContext struct {
 	// Actor identifier
 	ActorId *string `json:"actorId,omitempty"`
-	// Actor type. The enums:<br> * USER - User<br> * MERCHANT - Merchant<br * MERCHANT_OPERATOR - Merchant operator<br> * BACK_OFFICE - Back office<br> * SYSTEM - System<br> 
+	// Actor type. The enums:<br> * USER - User<br> * MERCHANT - Merchant<br> * MERCHANT_OPERATOR - Merchant operator<br> * BACK_OFFICE - Back office<br> * SYSTEM - System<br> 
 	ActorType *string `json:"actorType,omitempty"`
 }
 
@@ -87,6 +87,7 @@ func (o *ActorContext) HasActorId() bool {
 
 // SetActorId gets a reference to the given string and assigns it to the ActorId field.
 func (o *ActorContext) SetActorId(v string) {
+
 	o.ActorId = &v
 }
 
@@ -119,6 +120,7 @@ func (o *ActorContext) HasActorType() bool {
 
 // SetActorType gets a reference to the given string and assigns it to the ActorType field.
 func (o *ActorContext) SetActorType(v string) {
+
 	o.ActorType = &v
 }
 

@@ -42,12 +42,25 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 		env = "sandbox"
 	}
 
-	// Determine base URL based on environment
+	// Determine base URL based on environment and mode
 	var baseUrl string
-	if env == "sandbox" {
-		baseUrl = "https://m.sandbox.dana.id/n/ipg/oauth"
-	} else {
-		baseUrl = "https://m.dana.id/n/ipg/oauth"
+	mode := "API" // Default mode
+	if data.Mode != nil {
+		mode = *data.Mode
+	}
+	
+	if mode == "DEEPLINK" {
+		if env == "sandbox" {
+			baseUrl = "https://m.sandbox.dana.id/n/link/binding"
+		} else {
+			baseUrl = "https://link.dana.id/bindSnap"
+		}
+	} else { // API mode
+		if env == "sandbox" {
+			baseUrl = "https://m.sandbox.dana.id/n/ipg/oauth"
+		} else {
+			baseUrl = "https://m.dana.id/n/ipg/oauth"
+		}
 	}
 
 	// Get partner ID from environment
@@ -65,9 +78,6 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 		state = uuidStr
 	}
 
-	// Generate channel ID
-	channelId := GenerateChannelId()
-
 	// Generate scopes
 	scopes := GenerateScopes()
 
@@ -84,18 +94,35 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 
 	// Build URL with required parameters
 	var params []string
+	
+	// Variable to store requestId for DEEPLINK mode
+	var requestId string
 
-	// Add parameters without URL encoding
+	// Add common parameters
 	params = append(params, "partnerId="+partnerId)
 	params = append(params, "scopes="+scopes)
 	params = append(params, "externalId="+externalId)
-	params = append(params, "channelId="+channelId)
-
-	// Add parameters with URL encoding
-	params = append(params, "redirectUrl="+url.QueryEscape(data.RedirectUrl))
-	params = append(params, "timestamp="+url.QueryEscape(timestamp))
-	params = append(params, "state="+state)
-	params = append(params, "isSnapBI=true")
+	
+	if mode == "DEEPLINK" {
+		// Generate UUID request ID for DEEPLINK mode
+		requestId = uuid.New().String()
+		
+		// Add DEEPLINK specific parameters
+		params = append(params, "terminalType=WEB")
+		params = append(params, "requestId="+requestId)
+		params = append(params, "redirectUrl="+url.QueryEscape(data.RedirectUrl))
+		params = append(params, "state="+state)
+	} else { // API mode
+		// Generate channel ID for API mode
+		channelId := GenerateChannelId()
+		
+		// Add API specific parameters
+		params = append(params, "channelId="+channelId)
+		params = append(params, "redirectUrl="+url.QueryEscape(data.RedirectUrl))
+		params = append(params, "timestamp="+url.QueryEscape(timestamp))
+		params = append(params, "state="+state)
+		params = append(params, "isSnapBI=true")
+	}
 
 	if merchantId != "" {
 		params = append(params, "merchantId="+merchantId)
@@ -114,8 +141,38 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 	}
 
 	if data.SeamlessData != nil {
+		// Use a map for seamless data modifications
+		seamlessDataMap := make(map[string]interface{})
+		rawData := data.SeamlessData
+		
+		// Convert to JSON and back to ensure we have a map
+		seamlessDataBytes, err := json.Marshal(rawData)
+		if err != nil {
+			return "", fmt.Errorf("error marshaling seamlessData: %v", err)
+		}
+		
+		err = json.Unmarshal(seamlessDataBytes, &seamlessDataMap)
+		if err != nil {
+			return "", fmt.Errorf("error unmarshaling seamlessData: %v", err)
+		}
+		
+		// Handle mobile/mobileNumber conversion
+		if mobileNumber, ok := seamlessDataMap["mobileNumber"]; ok {
+			seamlessDataMap["mobile"] = mobileNumber
+			seamlessDataMap["mobileNumber"] = nil
+			delete(seamlessDataMap, "mobileNumber")
+		}
+		
+		// Add DEEPLINK specific data
+		if mode == "DEEPLINK" && requestId != "" {
+			seamlessDataMap["externalUid"] = externalId
+			seamlessDataMap["reqTime"] = timestamp
+			seamlessDataMap["verifiedTime"] = "0"
+			seamlessDataMap["reqMsgId"] = requestId
+		}
+		
 		// Convert seamlessData object to JSON string
-		seamlessDataBytes, err := json.Marshal(data.SeamlessData)
+		seamlessDataBytes, err = json.Marshal(seamlessDataMap)
 		if err != nil {
 			return "", fmt.Errorf("error marshaling seamlessData: %v", err)
 		}
@@ -125,7 +182,7 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 		privateKey := os.Getenv("PRIVATE_KEY")
 		if privateKey != "" {
 			// Calculate seamlessSign if private key is available
-			seamlessSign, err := GenerateSeamlessSign(data.SeamlessData, privateKey)
+			seamlessSign, err := GenerateSeamlessSign(seamlessDataMap, privateKey)
 			if err != nil {
 				return "", fmt.Errorf("error generating seamlessSign: %v", err)
 			}

@@ -48,7 +48,7 @@ type TransferToBankResponse struct {
 	// Transaction date, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
 	TransactionDate *string `json:"transactionDate,omitempty" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
 	// Reference number
-	ReferenceNumber string `json:"referenceNumber"`
+	ReferenceNumber *string `json:"referenceNumber,omitempty"`
 	// Additional information
 	AdditionalInfo map[string]interface{} `json:"additionalInfo,omitempty"`
 }
@@ -59,11 +59,10 @@ type _TransferToBankResponse TransferToBankResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransferToBankResponse(responseCode string, responseMessage string, referenceNumber string) *TransferToBankResponse {
+func NewTransferToBankResponse(responseCode string, responseMessage string) *TransferToBankResponse {
 	this := TransferToBankResponse{}
 	this.ResponseCode = responseCode
 	this.ResponseMessage = responseMessage
-	this.ReferenceNumber = referenceNumber
 	return &this
 }
 
@@ -219,28 +218,36 @@ func (o *TransferToBankResponse) SetTransactionDate(v string) {
 	o.TransactionDate = &v
 }
 
-// GetReferenceNumber returns the ReferenceNumber field value
+// GetReferenceNumber returns the ReferenceNumber field value if set, zero value otherwise.
 func (o *TransferToBankResponse) GetReferenceNumber() string {
-	if o == nil {
+	if o == nil || utils.IsNil(o.ReferenceNumber) {
 		var ret string
 		return ret
 	}
-
-	return o.ReferenceNumber
+	return *o.ReferenceNumber
 }
 
-// GetReferenceNumberOk returns a tuple with the ReferenceNumber field value
+// GetReferenceNumberOk returns a tuple with the ReferenceNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TransferToBankResponse) GetReferenceNumberOk() (*string, bool) {
-	if o == nil {
+	if o == nil || utils.IsNil(o.ReferenceNumber) {
 		return nil, false
 	}
-	return &o.ReferenceNumber, true
+	return o.ReferenceNumber, true
 }
 
-// SetReferenceNumber sets field value
+// HasReferenceNumber returns a boolean if a field has been set.
+func (o *TransferToBankResponse) HasReferenceNumber() bool {
+	if o != nil && !utils.IsNil(o.ReferenceNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetReferenceNumber gets a reference to the given string and assigns it to the ReferenceNumber field.
 func (o *TransferToBankResponse) SetReferenceNumber(v string) {
-	o.ReferenceNumber = v
+	o.ReferenceNumber = &v
 }
 
 // GetAdditionalInfo returns the AdditionalInfo field value if set, zero value otherwise.
@@ -296,7 +303,9 @@ func (o TransferToBankResponse) ToMap() (map[string]interface{}, error) {
 	if !utils.IsNil(o.TransactionDate) {
 		toSerialize["transactionDate"] = o.TransactionDate
 	}
-	toSerialize["referenceNumber"] = o.ReferenceNumber
+	if !utils.IsNil(o.ReferenceNumber) {
+		toSerialize["referenceNumber"] = o.ReferenceNumber
+	}
 	if !utils.IsNil(o.AdditionalInfo) {
 		toSerialize["additionalInfo"] = o.AdditionalInfo
 	}
@@ -310,7 +319,6 @@ func (o *TransferToBankResponse) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"responseCode",
 		"responseMessage",
-		"referenceNumber",
 	}
 
 	allProperties := make(map[string]interface{})

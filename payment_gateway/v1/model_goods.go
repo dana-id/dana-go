@@ -105,6 +105,7 @@ func (o *Goods) GetNameOk() (*string, bool) {
 
 // SetName sets field value
 func (o *Goods) SetName(v string) {
+
 	o.Name = v
 }
 
@@ -129,6 +130,7 @@ func (o *Goods) GetMerchantGoodsIdOk() (*string, bool) {
 
 // SetMerchantGoodsId sets field value
 func (o *Goods) SetMerchantGoodsId(v string) {
+
 	o.MerchantGoodsId = v
 }
 
@@ -153,6 +155,7 @@ func (o *Goods) GetDescriptionOk() (*string, bool) {
 
 // SetDescription sets field value
 func (o *Goods) SetDescription(v string) {
+
 	o.Description = v
 }
 
@@ -177,6 +180,7 @@ func (o *Goods) GetCategoryOk() (*string, bool) {
 
 // SetCategory sets field value
 func (o *Goods) SetCategory(v string) {
+
 	o.Category = v
 }
 
@@ -201,6 +205,7 @@ func (o *Goods) GetPriceOk() (*Money, bool) {
 
 // SetPrice sets field value
 func (o *Goods) SetPrice(v Money) {
+
 	o.Price = v
 }
 
@@ -233,6 +238,7 @@ func (o *Goods) HasUnit() bool {
 
 // SetUnit gets a reference to the given string and assigns it to the Unit field.
 func (o *Goods) SetUnit(v string) {
+
 	o.Unit = &v
 }
 
@@ -257,6 +263,7 @@ func (o *Goods) GetQuantityOk() (*string, bool) {
 
 // SetQuantity sets field value
 func (o *Goods) SetQuantity(v string) {
+
 	o.Quantity = v
 }
 
@@ -289,6 +296,7 @@ func (o *Goods) HasMerchantShippingId() bool {
 
 // SetMerchantShippingId gets a reference to the given string and assigns it to the MerchantShippingId field.
 func (o *Goods) SetMerchantShippingId(v string) {
+
 	o.MerchantShippingId = &v
 }
 
@@ -321,6 +329,7 @@ func (o *Goods) HasSnapshotUrl() bool {
 
 // SetSnapshotUrl gets a reference to the given string and assigns it to the SnapshotUrl field.
 func (o *Goods) SetSnapshotUrl(v string) {
+
 	o.SnapshotUrl = &v
 }
 
@@ -353,6 +362,7 @@ func (o *Goods) HasExtendInfo() bool {
 
 // SetExtendInfo gets a reference to the given string and assigns it to the ExtendInfo field.
 func (o *Goods) SetExtendInfo(v string) {
+
 	o.ExtendInfo = &v
 }
 

@@ -96,6 +96,7 @@ func (o *CreateOrderResponse) GetResponseCodeOk() (*string, bool) {
 
 // SetResponseCode sets field value
 func (o *CreateOrderResponse) SetResponseCode(v string) {
+
 	o.ResponseCode = v
 }
 
@@ -120,6 +121,7 @@ func (o *CreateOrderResponse) GetResponseMessageOk() (*string, bool) {
 
 // SetResponseMessage sets field value
 func (o *CreateOrderResponse) SetResponseMessage(v string) {
+
 	o.ResponseMessage = v
 }
 
@@ -152,6 +154,7 @@ func (o *CreateOrderResponse) HasReferenceNo() bool {
 
 // SetReferenceNo gets a reference to the given string and assigns it to the ReferenceNo field.
 func (o *CreateOrderResponse) SetReferenceNo(v string) {
+
 	o.ReferenceNo = &v
 }
 
@@ -176,6 +179,7 @@ func (o *CreateOrderResponse) GetPartnerReferenceNoOk() (*string, bool) {
 
 // SetPartnerReferenceNo sets field value
 func (o *CreateOrderResponse) SetPartnerReferenceNo(v string) {
+
 	o.PartnerReferenceNo = v
 }
 
@@ -208,6 +212,7 @@ func (o *CreateOrderResponse) HasWebRedirectUrl() bool {
 
 // SetWebRedirectUrl gets a reference to the given string and assigns it to the WebRedirectUrl field.
 func (o *CreateOrderResponse) SetWebRedirectUrl(v string) {
+
 	o.WebRedirectUrl = &v
 }
 
@@ -240,6 +245,7 @@ func (o *CreateOrderResponse) HasAdditionalInfo() bool {
 
 // SetAdditionalInfo gets a reference to the given CreateOrderResponseAdditionalInfo and assigns it to the AdditionalInfo field.
 func (o *CreateOrderResponse) SetAdditionalInfo(v CreateOrderResponseAdditionalInfo) {
+
 	o.AdditionalInfo = &v
 }
 
@@ -272,6 +278,7 @@ func (o *CreateOrderResponse) HasExternalOrderId() bool {
 
 // SetExternalOrderId gets a reference to the given string and assigns it to the ExternalOrderId field.
 func (o *CreateOrderResponse) SetExternalOrderId(v string) {
+
 	o.ExternalOrderId = &v
 }
 

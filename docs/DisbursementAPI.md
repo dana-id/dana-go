@@ -392,16 +392,6 @@ import disbursement "github.com/dana-id/dana-go/disbursement/v1"
 ipg := string(disbursement.SOURCEPLATFORM_IPG_)
 ```
 
-## actorType
-| Value | Description |
-|-------|-------------|
-| `USER` | User |
-| `MERCHANT` | Merchant<br |
-| `MERCHANT_OPERATOR` | Merchant operator |
-| `BACK_OFFICE` | Back office |
-| `SYSTEM` | System |
-
-
 ## latestTransactionStatus
 | Value | Description |
 |-------|-------------|
@@ -413,71 +403,6 @@ ipg := string(disbursement.SOURCEPLATFORM_IPG_)
 | `05` |  |
 | `06` |  |
 | `07` |  |
-
-
-## orderTerminalType
-| Value | Description |
-|-------|-------------|
-| `APP` | Mobile Application |
-| `WEB` | Browser Web |
-| `WAP` | Mobile Wap |
-| `SYSTEM` | System Call |
-
-
-## payMethod
-| Value | Description |
-|-------|-------------|
-| `BALANCE` | Payment method with balance |
-| `COUPON` | Payment method with coupon |
-| `NET_BANKING` | Payment method with internet banking |
-| `CREDIT_CARD` | Payment method with credit card |
-| `DEBIT_CARD` | Payment method with debit card |
-| `VIRTUAL_ACCOUNT` | Payment method with virtual account |
-| `OTC` | Payment method with OTC |
-| `DIRECT_DEBIT_CREDIT_CARD` | Payment method with direct debit of credit card |
-| `DIRECT_DEBIT_DEBIT_CARD` | Payment method with direct debit of debit card |
-| `ONLINE_CREDIT` | Payment method with online Credit |
-| `LOAN_CREDIT` | Payment method with DANA Cicil |
-| `NETWORK_PAY` | Payment method with e-wallet |
-
-
-## payOption
-| Value | Description |
-|-------|-------------|
-| `NETWORK_PAY_PG_SPAY` | Payment method with ShopeePay e-wallet |
-| `NETWORK_PAY_PG_OVO` | Payment method with OVO e-wallet |
-| `NETWORK_PAY_PG_GOPAY` | Payment method with GoPay e-wallet |
-| `NETWORK_PAY_PG_LINKAJA` | Payment method with LinkAja e-wallet |
-| `NETWORK_PAY_PG_CARD` | Payment method with Card |
-| `VIRTUAL_ACCOUNT_BCA` | Payment method with BCA virtual account |
-| `VIRTUAL_ACCOUNT_BNI` | Payment method with BNI virtual account |
-| `VIRTUAL_ACCOUNT_MANDIRI` | Payment method with Mandiri virtual account |
-| `VIRTUAL_ACCOUNT_BRI` | Payment method with BRI virtual account |
-| `VIRTUAL_ACCOUNT_BTPN` | Payment method with BTPN virtual account |
-| `VIRTUAL_ACCOUNT_CIMB` | Payment method with CIMB virtual account |
-| `VIRTUAL_ACCOUNT_PERMATA` | Payment method with Permata virtual account |
-
-
-## sourcePlatform
-| Value | Description |
-|-------|-------------|
-| `IPG` |  |
-
-
-## terminalType
-| Value | Description |
-|-------|-------------|
-| `APP` | Mobile Application |
-| `WEB` | Browser Web |
-| `WAP` | Mobile Wap |
-| `SYSTEM` | System Call |
-
-
-## type
-| Value | Description |
-|-------|-------------|
-| `PAY_RETURN` | When finish payment, DANA will notify to the URL that has been defined by |
-| `NOTIFICATION` | After the payment, the user will be redirected to merchant page, this is mandatory |
 
 
 

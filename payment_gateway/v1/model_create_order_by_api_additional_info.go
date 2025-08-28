@@ -89,6 +89,7 @@ func (o *CreateOrderByApiAdditionalInfo) GetMccOk() (*string, bool) {
 
 // SetMcc sets field value
 func (o *CreateOrderByApiAdditionalInfo) SetMcc(v string) {
+
 	o.Mcc = v
 }
 
@@ -121,6 +122,7 @@ func (o *CreateOrderByApiAdditionalInfo) HasExtendInfo() bool {
 
 // SetExtendInfo gets a reference to the given string and assigns it to the ExtendInfo field.
 func (o *CreateOrderByApiAdditionalInfo) SetExtendInfo(v string) {
+
 	o.ExtendInfo = &v
 }
 
@@ -145,6 +147,7 @@ func (o *CreateOrderByApiAdditionalInfo) GetEnvInfoOk() (*EnvInfo, bool) {
 
 // SetEnvInfo sets field value
 func (o *CreateOrderByApiAdditionalInfo) SetEnvInfo(v EnvInfo) {
+
 	o.EnvInfo = v
 }
 
@@ -177,6 +180,7 @@ func (o *CreateOrderByApiAdditionalInfo) HasOrder() bool {
 
 // SetOrder gets a reference to the given OrderApiObject and assigns it to the Order field.
 func (o *CreateOrderByApiAdditionalInfo) SetOrder(v OrderApiObject) {
+
 	o.Order = &v
 }
 

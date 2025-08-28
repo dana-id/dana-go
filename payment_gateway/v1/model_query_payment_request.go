@@ -111,6 +111,7 @@ func (o *QueryPaymentRequest) HasOriginalPartnerReferenceNo() bool {
 
 // SetOriginalPartnerReferenceNo gets a reference to the given string and assigns it to the OriginalPartnerReferenceNo field.
 func (o *QueryPaymentRequest) SetOriginalPartnerReferenceNo(v string) {
+
 	o.OriginalPartnerReferenceNo = &v
 }
 
@@ -143,6 +144,7 @@ func (o *QueryPaymentRequest) HasOriginalReferenceNo() bool {
 
 // SetOriginalReferenceNo gets a reference to the given string and assigns it to the OriginalReferenceNo field.
 func (o *QueryPaymentRequest) SetOriginalReferenceNo(v string) {
+
 	o.OriginalReferenceNo = &v
 }
 
@@ -175,6 +177,7 @@ func (o *QueryPaymentRequest) HasOriginalExternalId() bool {
 
 // SetOriginalExternalId gets a reference to the given string and assigns it to the OriginalExternalId field.
 func (o *QueryPaymentRequest) SetOriginalExternalId(v string) {
+
 	o.OriginalExternalId = &v
 }
 
@@ -199,6 +202,7 @@ func (o *QueryPaymentRequest) GetServiceCodeOk() (*string, bool) {
 
 // SetServiceCode sets field value
 func (o *QueryPaymentRequest) SetServiceCode(v string) {
+
 	o.ServiceCode = v
 }
 
@@ -231,6 +235,7 @@ func (o *QueryPaymentRequest) HasTransactionDate() bool {
 
 // SetTransactionDate gets a reference to the given string and assigns it to the TransactionDate field.
 func (o *QueryPaymentRequest) SetTransactionDate(v string) {
+
 	o.TransactionDate = &v
 }
 
@@ -263,6 +268,7 @@ func (o *QueryPaymentRequest) HasAmount() bool {
 
 // SetAmount gets a reference to the given Money and assigns it to the Amount field.
 func (o *QueryPaymentRequest) SetAmount(v Money) {
+
 	o.Amount = &v
 }
 
@@ -287,6 +293,7 @@ func (o *QueryPaymentRequest) GetMerchantIdOk() (*string, bool) {
 
 // SetMerchantId sets field value
 func (o *QueryPaymentRequest) SetMerchantId(v string) {
+
 	o.MerchantId = v
 }
 
@@ -319,6 +326,7 @@ func (o *QueryPaymentRequest) HasSubMerchantId() bool {
 
 // SetSubMerchantId gets a reference to the given string and assigns it to the SubMerchantId field.
 func (o *QueryPaymentRequest) SetSubMerchantId(v string) {
+
 	o.SubMerchantId = &v
 }
 
@@ -351,6 +359,7 @@ func (o *QueryPaymentRequest) HasExternalStoreId() bool {
 
 // SetExternalStoreId gets a reference to the given string and assigns it to the ExternalStoreId field.
 func (o *QueryPaymentRequest) SetExternalStoreId(v string) {
+
 	o.ExternalStoreId = &v
 }
 
@@ -383,6 +392,7 @@ func (o *QueryPaymentRequest) HasAdditionalInfo() bool {
 
 // SetAdditionalInfo gets a reference to the given map[string]interface{} and assigns it to the AdditionalInfo field.
 func (o *QueryPaymentRequest) SetAdditionalInfo(v map[string]interface{}) {
+
 	o.AdditionalInfo = v
 }
 

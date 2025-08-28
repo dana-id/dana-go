@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **SessionId** | Pointer to **string** | Session identifier | [optional] 
 **CustomerNumber** | Pointer to **string** | Customer account number, in format 628xxx | [optional] 
 **CustomerName** | **string** | Customer account name | 
-**CustomerMonthlyLimit** | Pointer to **float32** | Limitation of transfer to DANA balance for customer per month | [optional] 
+**CustomerMonthlyInLimit** | Pointer to **string** | Limitation of transfer to DANA balance for customer per month | [optional] 
 **MinAmount** | [**Money**](Money.md) | Minimal amount. Contains two sub-fields:<br /> 1. Value: Amount, including the cents<br /> 2. Currency: Currency code based on ISO  | 
 **MaxAmount** | [**Money**](Money.md) | Maximal amount. Contains two sub-fields:<br /> 1. Value: Amount, including the cents<br /> 2. Currency: Currency code based on ISO  | 
 **Amount** | [**Money**](Money.md) | Amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO  | 
@@ -198,30 +198,30 @@ and a boolean to check if the value has been set.
 SetCustomerName sets CustomerName field to given value.
 
 
-### GetCustomerMonthlyLimit
+### GetCustomerMonthlyInLimit
 
-`func (o *DanaAccountInquiryResponse) GetCustomerMonthlyLimit() float32`
+`func (o *DanaAccountInquiryResponse) GetCustomerMonthlyInLimit() string`
 
-GetCustomerMonthlyLimit returns the CustomerMonthlyLimit field if non-nil, zero value otherwise.
+GetCustomerMonthlyInLimit returns the CustomerMonthlyInLimit field if non-nil, zero value otherwise.
 
-### GetCustomerMonthlyLimitOk
+### GetCustomerMonthlyInLimitOk
 
-`func (o *DanaAccountInquiryResponse) GetCustomerMonthlyLimitOk() (*float32, bool)`
+`func (o *DanaAccountInquiryResponse) GetCustomerMonthlyInLimitOk() (*string, bool)`
 
-GetCustomerMonthlyLimitOk returns a tuple with the CustomerMonthlyLimit field if it's non-nil, zero value otherwise
+GetCustomerMonthlyInLimitOk returns a tuple with the CustomerMonthlyInLimit field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCustomerMonthlyLimit
+### SetCustomerMonthlyInLimit
 
-`func (o *DanaAccountInquiryResponse) SetCustomerMonthlyLimit(v float32)`
+`func (o *DanaAccountInquiryResponse) SetCustomerMonthlyInLimit(v string)`
 
-SetCustomerMonthlyLimit sets CustomerMonthlyLimit field to given value.
+SetCustomerMonthlyInLimit sets CustomerMonthlyInLimit field to given value.
 
-### HasCustomerMonthlyLimit
+### HasCustomerMonthlyInLimit
 
-`func (o *DanaAccountInquiryResponse) HasCustomerMonthlyLimit() bool`
+`func (o *DanaAccountInquiryResponse) HasCustomerMonthlyInLimit() bool`
 
-HasCustomerMonthlyLimit returns a boolean if a field has been set.
+HasCustomerMonthlyInLimit returns a boolean if a field has been set.
 
 ### GetMinAmount
 

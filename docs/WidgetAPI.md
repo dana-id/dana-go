@@ -584,14 +584,11 @@ ipg := string(widget.SOURCEPLATFORM_IPG_)
 | `CANCELLED` |  |
 
 
-## actorType
+## mode
 | Value | Description |
 |-------|-------------|
-| `USER` | User |
-| `MERCHANT` | Merchant<br |
-| `MERCHANT_OPERATOR` | Merchant operator |
-| `BACK_OFFICE` | Back office |
-| `SYSTEM` | System |
+| `API` |  |
+| `DEEPLINK` |  |
 
 
 ## orderTerminalType
@@ -618,6 +615,7 @@ ipg := string(widget.SOURCEPLATFORM_IPG_)
 | `ONLINE_CREDIT` | Payment method with online Credit |
 | `LOAN_CREDIT` | Payment method with DANA Cicil |
 | `NETWORK_PAY` | Payment method with e-wallet |
+| `CARD` | Payment method with Card |
 
 
 ## payOption
@@ -847,6 +845,7 @@ func main() {
 		SeamlessData: map[string]interface{}{
 			"mobileNumber": "087875849373",
 		},
+        Mode: "DEEPLINK", // or "API" (default value is "API")
 	}
 
 	// Generate the OAuth URL

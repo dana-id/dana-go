@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **PartnerReferenceNo** | **string** | Unique transaction identifier on partner system which assigned to each transaction<br /> Notes:<br /> If the partner receives a timeout or an unexpected response from DANA and partner expects to perform retry request to DANA, please use the partnerReferenceNo that is the same as the one used in the transaction request process before  | 
 **SessionId** | Pointer to **string** | Session identifier | [optional] 
 **CustomerNumber** | Pointer to **string** | Customer account number, in format 628xxx | [optional] 
+**CustomerName** | Pointer to **string** | Customer account name | [optional] 
 **Amount** | [**Money**](Money.md) | Amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO  | 
 **AdditionalInfo** | Pointer to **map[string]interface{}** | Additional information | [optional] 
 
@@ -166,6 +167,31 @@ SetCustomerNumber sets CustomerNumber field to given value.
 `func (o *TransferToDanaResponse) HasCustomerNumber() bool`
 
 HasCustomerNumber returns a boolean if a field has been set.
+
+### GetCustomerName
+
+`func (o *TransferToDanaResponse) GetCustomerName() string`
+
+GetCustomerName returns the CustomerName field if non-nil, zero value otherwise.
+
+### GetCustomerNameOk
+
+`func (o *TransferToDanaResponse) GetCustomerNameOk() (*string, bool)`
+
+GetCustomerNameOk returns a tuple with the CustomerName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomerName
+
+`func (o *TransferToDanaResponse) SetCustomerName(v string)`
+
+SetCustomerName sets CustomerName field to given value.
+
+### HasCustomerName
+
+`func (o *TransferToDanaResponse) HasCustomerName() bool`
+
+HasCustomerName returns a boolean if a field has been set.
 
 ### GetAmount
 

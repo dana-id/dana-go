@@ -87,6 +87,7 @@ func (o *AuditInfo) HasActionReason() bool {
 
 // SetActionReason gets a reference to the given string and assigns it to the ActionReason field.
 func (o *AuditInfo) SetActionReason(v string) {
+
 	o.ActionReason = &v
 }
 
@@ -119,6 +120,7 @@ func (o *AuditInfo) HasThirdClientId() bool {
 
 // SetThirdClientId gets a reference to the given string and assigns it to the ThirdClientId field.
 func (o *AuditInfo) SetThirdClientId(v string) {
+
 	o.ThirdClientId = &v
 }
 

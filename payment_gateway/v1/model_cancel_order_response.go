@@ -98,6 +98,7 @@ func (o *CancelOrderResponse) GetResponseCodeOk() (*string, bool) {
 
 // SetResponseCode sets field value
 func (o *CancelOrderResponse) SetResponseCode(v string) {
+
 	o.ResponseCode = v
 }
 
@@ -122,6 +123,7 @@ func (o *CancelOrderResponse) GetResponseMessageOk() (*string, bool) {
 
 // SetResponseMessage sets field value
 func (o *CancelOrderResponse) SetResponseMessage(v string) {
+
 	o.ResponseMessage = v
 }
 
@@ -154,6 +156,7 @@ func (o *CancelOrderResponse) HasOriginalReferenceNo() bool {
 
 // SetOriginalReferenceNo gets a reference to the given string and assigns it to the OriginalReferenceNo field.
 func (o *CancelOrderResponse) SetOriginalReferenceNo(v string) {
+
 	o.OriginalReferenceNo = &v
 }
 
@@ -178,6 +181,7 @@ func (o *CancelOrderResponse) GetOriginalPartnerReferenceNoOk() (*string, bool) 
 
 // SetOriginalPartnerReferenceNo sets field value
 func (o *CancelOrderResponse) SetOriginalPartnerReferenceNo(v string) {
+
 	o.OriginalPartnerReferenceNo = v
 }
 
@@ -210,6 +214,7 @@ func (o *CancelOrderResponse) HasOriginalExternalId() bool {
 
 // SetOriginalExternalId gets a reference to the given string and assigns it to the OriginalExternalId field.
 func (o *CancelOrderResponse) SetOriginalExternalId(v string) {
+
 	o.OriginalExternalId = &v
 }
 
@@ -242,6 +247,7 @@ func (o *CancelOrderResponse) HasCancelTime() bool {
 
 // SetCancelTime gets a reference to the given string and assigns it to the CancelTime field.
 func (o *CancelOrderResponse) SetCancelTime(v string) {
+
 	o.CancelTime = &v
 }
 
@@ -274,6 +280,7 @@ func (o *CancelOrderResponse) HasTransactionDate() bool {
 
 // SetTransactionDate gets a reference to the given string and assigns it to the TransactionDate field.
 func (o *CancelOrderResponse) SetTransactionDate(v string) {
+
 	o.TransactionDate = &v
 }
 
@@ -306,6 +313,7 @@ func (o *CancelOrderResponse) HasAdditionalInfo() bool {
 
 // SetAdditionalInfo gets a reference to the given map[string]interface{} and assigns it to the AdditionalInfo field.
 func (o *CancelOrderResponse) SetAdditionalInfo(v map[string]interface{}) {
+
 	o.AdditionalInfo = v
 }
 

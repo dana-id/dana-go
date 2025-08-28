@@ -37,7 +37,7 @@ var _ utils.MappedNullable = &PayOptionInfo{}
 
 // PayOptionInfo struct for PayOptionInfo
 type PayOptionInfo struct {
-	// Payment method name. The enums:<br>   * BALANCE - Payment method with balance<br>   * COUPON - Payment method with coupon<br>   * NET_BANKING - Payment method with internet banking<br>   * CREDIT_CARD - Payment method with credit card<br>   * DEBIT_CARD - Payment method with debit card<br>   * VIRTUAL_ACCOUNT - Payment method with virtual account<br>   * OTC - Payment method with OTC<br>   * DIRECT_DEBIT_CREDIT_CARD - Payment method with direct debit of credit card<br>   * DIRECT_DEBIT_DEBIT_CARD - Payment method with direct debit of debit card<br>   * ONLINE_CREDIT - Payment method with online Credit<br>   * LOAN_CREDIT - Payment method with DANA Cicil<br>   * NETWORK_PAY - Payment method with e-wallet 
+	// Payment method name. The enums:<br>   * BALANCE - Payment method with balance<br>   * COUPON - Payment method with coupon<br>   * NET_BANKING - Payment method with internet banking<br>   * CREDIT_CARD - Payment method with credit card<br>   * DEBIT_CARD - Payment method with debit card<br>   * VIRTUAL_ACCOUNT - Payment method with virtual account<br>   * OTC - Payment method with OTC<br>   * DIRECT_DEBIT_CREDIT_CARD - Payment method with direct debit of credit card<br>   * DIRECT_DEBIT_DEBIT_CARD - Payment method with direct debit of debit card<br>   * ONLINE_CREDIT - Payment method with online Credit<br>   * LOAN_CREDIT - Payment method with DANA Cicil<br>   * NETWORK_PAY - Payment method with e-wallet   * CARD - Payment method with Card 
 	PayMethod string `json:"payMethod"`
 	// Payment option which shows the provider of this payment. The enums:<br>   * NETWORK_PAY_PG_SPAY - Payment method with ShopeePay e-wallet<br>   * NETWORK_PAY_PG_OVO - Payment method with OVO e-wallet<br>   * NETWORK_PAY_PG_GOPAY - Payment method with GoPay e-wallet<br>   * NETWORK_PAY_PG_LINKAJA - Payment method with LinkAja e-wallet<br>   * NETWORK_PAY_PG_CARD - Payment method with Card<br>   * VIRTUAL_ACCOUNT_BCA - Payment method with BCA virtual account<br>   * VIRTUAL_ACCOUNT_BNI - Payment method with BNI virtual account<br>   * VIRTUAL_ACCOUNT_MANDIRI - Payment method with Mandiri virtual account<br>   * VIRTUAL_ACCOUNT_BRI - Payment method with BRI virtual account<br>   * VIRTUAL_ACCOUNT_BTPN - Payment method with BTPN virtual account<br>   * VIRTUAL_ACCOUNT_CIMB - Payment method with CIMB virtual account<br>   * VIRTUAL_ACCOUNT_PERMATA - Payment method with Permata virtual account<br> 
 	PayOption *string `json:"payOption,omitempty"`
@@ -96,6 +96,7 @@ func (o *PayOptionInfo) GetPayMethodOk() (*string, bool) {
 
 // SetPayMethod sets field value
 func (o *PayOptionInfo) SetPayMethod(v string) {
+
 	o.PayMethod = v
 }
 
@@ -128,6 +129,7 @@ func (o *PayOptionInfo) HasPayOption() bool {
 
 // SetPayOption gets a reference to the given string and assigns it to the PayOption field.
 func (o *PayOptionInfo) SetPayOption(v string) {
+
 	o.PayOption = &v
 }
 
@@ -160,6 +162,7 @@ func (o *PayOptionInfo) HasPayAmount() bool {
 
 // SetPayAmount gets a reference to the given Money and assigns it to the PayAmount field.
 func (o *PayOptionInfo) SetPayAmount(v Money) {
+
 	o.PayAmount = &v
 }
 
@@ -192,6 +195,7 @@ func (o *PayOptionInfo) HasTransAmount() bool {
 
 // SetTransAmount gets a reference to the given Money and assigns it to the TransAmount field.
 func (o *PayOptionInfo) SetTransAmount(v Money) {
+
 	o.TransAmount = &v
 }
 
@@ -224,6 +228,7 @@ func (o *PayOptionInfo) HasChargeAmount() bool {
 
 // SetChargeAmount gets a reference to the given Money and assigns it to the ChargeAmount field.
 func (o *PayOptionInfo) SetChargeAmount(v Money) {
+
 	o.ChargeAmount = &v
 }
 
@@ -256,6 +261,7 @@ func (o *PayOptionInfo) HasPayOptionBillExtendInfo() bool {
 
 // SetPayOptionBillExtendInfo gets a reference to the given string and assigns it to the PayOptionBillExtendInfo field.
 func (o *PayOptionInfo) SetPayOptionBillExtendInfo(v string) {
+
 	o.PayOptionBillExtendInfo = &v
 }
 
@@ -288,6 +294,7 @@ func (o *PayOptionInfo) HasExtendInfo() bool {
 
 // SetExtendInfo gets a reference to the given string and assigns it to the ExtendInfo field.
 func (o *PayOptionInfo) SetExtendInfo(v string) {
+
 	o.ExtendInfo = &v
 }
 
@@ -320,6 +327,7 @@ func (o *PayOptionInfo) HasPaymentCode() bool {
 
 // SetPaymentCode gets a reference to the given string and assigns it to the PaymentCode field.
 func (o *PayOptionInfo) SetPaymentCode(v string) {
+
 	o.PaymentCode = &v
 }
 

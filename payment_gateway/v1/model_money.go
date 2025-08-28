@@ -85,6 +85,7 @@ func (o *Money) GetValueOk() (*string, bool) {
 
 // SetValue sets field value
 func (o *Money) SetValue(v string) {
+
 	o.Value = v
 }
 
@@ -109,6 +110,7 @@ func (o *Money) GetCurrencyOk() (*string, bool) {
 
 // SetCurrency sets field value
 func (o *Money) SetCurrency(v string) {
+
 	o.Currency = v
 }
 

@@ -56,6 +56,7 @@ const (
 	ScenarioApplyToken       = "apply_token"
 	ScenarioApplyOTT         = "apply_ott"
 	ScenarioUnbindingAccount = "unbinding_account"
+	ScenarioBalanceInquiry   = "balance_inquiry"
 )
 
 // SetSnapHeaders applies all Snap API authentication headers to the provided headers map
@@ -137,7 +138,7 @@ func getRuntimeHeaders(body string, apiKey *config.APIKey, method string, endpoi
 		baseHeaders[HeaderXClientKey] = clientKey
 		return baseHeaders
 
-	case ScenarioApplyOTT, ScenarioUnbindingAccount:
+	case ScenarioApplyOTT, ScenarioUnbindingAccount, ScenarioBalanceInquiry:
 		baseHeaders[HeaderXExternalID] = uuid.New().String()
 		baseHeaders[HeaderXSignature] = generateSignature(body, apiKey, method, endpoint, timestamp, scenario)
 

@@ -49,6 +49,8 @@ type TransferToDanaResponse struct {
 	SessionId *string `json:"sessionId,omitempty"`
 	// Customer account number, in format 628xxx
 	CustomerNumber *string `json:"customerNumber,omitempty"`
+	// Customer account name
+	CustomerName *string `json:"customerName,omitempty"`
 	// Amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO 
 	Amount Money `json:"amount"`
 	// Additional information
@@ -246,6 +248,38 @@ func (o *TransferToDanaResponse) SetCustomerNumber(v string) {
 	o.CustomerNumber = &v
 }
 
+// GetCustomerName returns the CustomerName field value if set, zero value otherwise.
+func (o *TransferToDanaResponse) GetCustomerName() string {
+	if o == nil || utils.IsNil(o.CustomerName) {
+		var ret string
+		return ret
+	}
+	return *o.CustomerName
+}
+
+// GetCustomerNameOk returns a tuple with the CustomerName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransferToDanaResponse) GetCustomerNameOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.CustomerName) {
+		return nil, false
+	}
+	return o.CustomerName, true
+}
+
+// HasCustomerName returns a boolean if a field has been set.
+func (o *TransferToDanaResponse) HasCustomerName() bool {
+	if o != nil && !utils.IsNil(o.CustomerName) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomerName gets a reference to the given string and assigns it to the CustomerName field.
+func (o *TransferToDanaResponse) SetCustomerName(v string) {
+	o.CustomerName = &v
+}
+
 // GetAmount returns the Amount field value
 func (o *TransferToDanaResponse) GetAmount() Money {
 	if o == nil {
@@ -323,6 +357,9 @@ func (o TransferToDanaResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !utils.IsNil(o.CustomerNumber) {
 		toSerialize["customerNumber"] = o.CustomerNumber
+	}
+	if !utils.IsNil(o.CustomerName) {
+		toSerialize["customerName"] = o.CustomerName
 	}
 	toSerialize["amount"] = o.Amount
 	if !utils.IsNil(o.AdditionalInfo) {

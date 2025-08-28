@@ -86,6 +86,7 @@ func (o *StatusDetail) GetAcquirementStatusOk() (*string, bool) {
 
 // SetAcquirementStatus sets field value
 func (o *StatusDetail) SetAcquirementStatus(v string) {
+
 	o.AcquirementStatus = v
 }
 
@@ -118,6 +119,7 @@ func (o *StatusDetail) HasFrozen() bool {
 
 // SetFrozen gets a reference to the given string and assigns it to the Frozen field.
 func (o *StatusDetail) SetFrozen(v string) {
+
 	o.Frozen = &v
 }
 
@@ -150,6 +152,7 @@ func (o *StatusDetail) HasCancelled() bool {
 
 // SetCancelled gets a reference to the given string and assigns it to the Cancelled field.
 func (o *StatusDetail) SetCancelled(v string) {
+
 	o.Cancelled = &v
 }
 

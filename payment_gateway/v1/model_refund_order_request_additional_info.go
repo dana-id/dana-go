@@ -105,6 +105,7 @@ func (o *RefundOrderRequestAdditionalInfo) HasPayoutAccountNo() bool {
 
 // SetPayoutAccountNo gets a reference to the given string and assigns it to the PayoutAccountNo field.
 func (o *RefundOrderRequestAdditionalInfo) SetPayoutAccountNo(v string) {
+
 	o.PayoutAccountNo = &v
 }
 
@@ -137,6 +138,7 @@ func (o *RefundOrderRequestAdditionalInfo) HasRefundAppliedTime() bool {
 
 // SetRefundAppliedTime gets a reference to the given string and assigns it to the RefundAppliedTime field.
 func (o *RefundOrderRequestAdditionalInfo) SetRefundAppliedTime(v string) {
+
 	o.RefundAppliedTime = &v
 }
 
@@ -169,6 +171,7 @@ func (o *RefundOrderRequestAdditionalInfo) HasActorType() bool {
 
 // SetActorType gets a reference to the given string and assigns it to the ActorType field.
 func (o *RefundOrderRequestAdditionalInfo) SetActorType(v string) {
+
 	o.ActorType = &v
 }
 
@@ -201,6 +204,7 @@ func (o *RefundOrderRequestAdditionalInfo) HasReturnChargeToPayer() bool {
 
 // SetReturnChargeToPayer gets a reference to the given string and assigns it to the ReturnChargeToPayer field.
 func (o *RefundOrderRequestAdditionalInfo) SetReturnChargeToPayer(v string) {
+
 	o.ReturnChargeToPayer = &v
 }
 
@@ -233,6 +237,7 @@ func (o *RefundOrderRequestAdditionalInfo) HasDestination() bool {
 
 // SetDestination gets a reference to the given string and assigns it to the Destination field.
 func (o *RefundOrderRequestAdditionalInfo) SetDestination(v string) {
+
 	o.Destination = &v
 }
 
@@ -265,6 +270,7 @@ func (o *RefundOrderRequestAdditionalInfo) HasEnvInfo() bool {
 
 // SetEnvInfo gets a reference to the given EnvInfo and assigns it to the EnvInfo field.
 func (o *RefundOrderRequestAdditionalInfo) SetEnvInfo(v EnvInfo) {
+
 	o.EnvInfo = &v
 }
 
@@ -297,6 +303,7 @@ func (o *RefundOrderRequestAdditionalInfo) HasAuditInfo() bool {
 
 // SetAuditInfo gets a reference to the given AuditInfo and assigns it to the AuditInfo field.
 func (o *RefundOrderRequestAdditionalInfo) SetAuditInfo(v AuditInfo) {
+
 	o.AuditInfo = &v
 }
 
@@ -329,6 +336,7 @@ func (o *RefundOrderRequestAdditionalInfo) HasActorContext() bool {
 
 // SetActorContext gets a reference to the given ActorContext and assigns it to the ActorContext field.
 func (o *RefundOrderRequestAdditionalInfo) SetActorContext(v ActorContext) {
+
 	o.ActorContext = &v
 }
 
@@ -361,6 +369,7 @@ func (o *RefundOrderRequestAdditionalInfo) HasRefundOptionBill() bool {
 
 // SetRefundOptionBill gets a reference to the given []RefundOptionBill and assigns it to the RefundOptionBill field.
 func (o *RefundOrderRequestAdditionalInfo) SetRefundOptionBill(v []RefundOptionBill) {
+
 	o.RefundOptionBill = v
 }
 
@@ -393,6 +402,7 @@ func (o *RefundOrderRequestAdditionalInfo) HasExtendInfo() bool {
 
 // SetExtendInfo gets a reference to the given string and assigns it to the ExtendInfo field.
 func (o *RefundOrderRequestAdditionalInfo) SetExtendInfo(v string) {
+
 	o.ExtendInfo = &v
 }
 
@@ -425,6 +435,7 @@ func (o *RefundOrderRequestAdditionalInfo) HasAsyncRefund() bool {
 
 // SetAsyncRefund gets a reference to the given string and assigns it to the AsyncRefund field.
 func (o *RefundOrderRequestAdditionalInfo) SetAsyncRefund(v string) {
+
 	o.AsyncRefund = &v
 }
 

@@ -105,6 +105,7 @@ func (o *RefundOrderRequest) GetMerchantIdOk() (*string, bool) {
 
 // SetMerchantId sets field value
 func (o *RefundOrderRequest) SetMerchantId(v string) {
+
 	o.MerchantId = v
 }
 
@@ -137,6 +138,7 @@ func (o *RefundOrderRequest) HasSubMerchantId() bool {
 
 // SetSubMerchantId gets a reference to the given string and assigns it to the SubMerchantId field.
 func (o *RefundOrderRequest) SetSubMerchantId(v string) {
+
 	o.SubMerchantId = &v
 }
 
@@ -169,6 +171,7 @@ func (o *RefundOrderRequest) HasOriginalReferenceNo() bool {
 
 // SetOriginalReferenceNo gets a reference to the given string and assigns it to the OriginalReferenceNo field.
 func (o *RefundOrderRequest) SetOriginalReferenceNo(v string) {
+
 	o.OriginalReferenceNo = &v
 }
 
@@ -193,6 +196,7 @@ func (o *RefundOrderRequest) GetOriginalPartnerReferenceNoOk() (*string, bool) {
 
 // SetOriginalPartnerReferenceNo sets field value
 func (o *RefundOrderRequest) SetOriginalPartnerReferenceNo(v string) {
+
 	o.OriginalPartnerReferenceNo = v
 }
 
@@ -225,6 +229,7 @@ func (o *RefundOrderRequest) HasOriginalExternalId() bool {
 
 // SetOriginalExternalId gets a reference to the given string and assigns it to the OriginalExternalId field.
 func (o *RefundOrderRequest) SetOriginalExternalId(v string) {
+
 	o.OriginalExternalId = &v
 }
 
@@ -257,6 +262,7 @@ func (o *RefundOrderRequest) HasOriginalCaptureNo() bool {
 
 // SetOriginalCaptureNo gets a reference to the given string and assigns it to the OriginalCaptureNo field.
 func (o *RefundOrderRequest) SetOriginalCaptureNo(v string) {
+
 	o.OriginalCaptureNo = &v
 }
 
@@ -281,6 +287,7 @@ func (o *RefundOrderRequest) GetPartnerRefundNoOk() (*string, bool) {
 
 // SetPartnerRefundNo sets field value
 func (o *RefundOrderRequest) SetPartnerRefundNo(v string) {
+
 	o.PartnerRefundNo = v
 }
 
@@ -305,6 +312,7 @@ func (o *RefundOrderRequest) GetRefundAmountOk() (*Money, bool) {
 
 // SetRefundAmount sets field value
 func (o *RefundOrderRequest) SetRefundAmount(v Money) {
+
 	o.RefundAmount = v
 }
 
@@ -337,6 +345,7 @@ func (o *RefundOrderRequest) HasExternalStoreId() bool {
 
 // SetExternalStoreId gets a reference to the given string and assigns it to the ExternalStoreId field.
 func (o *RefundOrderRequest) SetExternalStoreId(v string) {
+
 	o.ExternalStoreId = &v
 }
 
@@ -369,6 +378,7 @@ func (o *RefundOrderRequest) HasReason() bool {
 
 // SetReason gets a reference to the given string and assigns it to the Reason field.
 func (o *RefundOrderRequest) SetReason(v string) {
+
 	o.Reason = &v
 }
 
@@ -401,6 +411,7 @@ func (o *RefundOrderRequest) HasAdditionalInfo() bool {
 
 // SetAdditionalInfo gets a reference to the given RefundOrderRequestAdditionalInfo and assigns it to the AdditionalInfo field.
 func (o *RefundOrderRequest) SetAdditionalInfo(v RefundOrderRequestAdditionalInfo) {
+
 	o.AdditionalInfo = &v
 }
 

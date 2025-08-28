@@ -88,6 +88,7 @@ func (o *PayOptionAdditionalInfo) HasPhoneNumber() bool {
 
 // SetPhoneNumber gets a reference to the given string and assigns it to the PhoneNumber field.
 func (o *PayOptionAdditionalInfo) SetPhoneNumber(v string) {
+
 	o.PhoneNumber = &v
 }
 
@@ -120,6 +121,7 @@ func (o *PayOptionAdditionalInfo) HasPaymentCode() bool {
 
 // SetPaymentCode gets a reference to the given string and assigns it to the PaymentCode field.
 func (o *PayOptionAdditionalInfo) SetPaymentCode(v string) {
+
 	o.PaymentCode = &v
 }
 
@@ -152,6 +154,7 @@ func (o *PayOptionAdditionalInfo) HasPromoInfos() bool {
 
 // SetPromoInfos gets a reference to the given []PromoInfo and assigns it to the PromoInfos field.
 func (o *PayOptionAdditionalInfo) SetPromoInfos(v []PromoInfo) {
+
 	o.PromoInfos = v
 }
 

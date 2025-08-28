@@ -91,6 +91,7 @@ func (o *Buyer) HasExternalUserType() bool {
 
 // SetExternalUserType gets a reference to the given string and assigns it to the ExternalUserType field.
 func (o *Buyer) SetExternalUserType(v string) {
+
 	o.ExternalUserType = &v
 }
 
@@ -123,6 +124,7 @@ func (o *Buyer) HasNickname() bool {
 
 // SetNickname gets a reference to the given string and assigns it to the Nickname field.
 func (o *Buyer) SetNickname(v string) {
+
 	o.Nickname = &v
 }
 
@@ -155,6 +157,7 @@ func (o *Buyer) HasExternalUserId() bool {
 
 // SetExternalUserId gets a reference to the given string and assigns it to the ExternalUserId field.
 func (o *Buyer) SetExternalUserId(v string) {
+
 	o.ExternalUserId = &v
 }
 
@@ -187,6 +190,7 @@ func (o *Buyer) HasUserId() bool {
 
 // SetUserId gets a reference to the given string and assigns it to the UserId field.
 func (o *Buyer) SetUserId(v string) {
+
 	o.UserId = &v
 }
 

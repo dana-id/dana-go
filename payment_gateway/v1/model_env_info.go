@@ -117,6 +117,7 @@ func (o *EnvInfo) HasSessionId() bool {
 
 // SetSessionId gets a reference to the given string and assigns it to the SessionId field.
 func (o *EnvInfo) SetSessionId(v string) {
+
 	o.SessionId = &v
 }
 
@@ -149,6 +150,7 @@ func (o *EnvInfo) HasTokenId() bool {
 
 // SetTokenId gets a reference to the given string and assigns it to the TokenId field.
 func (o *EnvInfo) SetTokenId(v string) {
+
 	o.TokenId = &v
 }
 
@@ -181,6 +183,7 @@ func (o *EnvInfo) HasWebsiteLanguage() bool {
 
 // SetWebsiteLanguage gets a reference to the given string and assigns it to the WebsiteLanguage field.
 func (o *EnvInfo) SetWebsiteLanguage(v string) {
+
 	o.WebsiteLanguage = &v
 }
 
@@ -213,6 +216,7 @@ func (o *EnvInfo) HasClientIp() bool {
 
 // SetClientIp gets a reference to the given string and assigns it to the ClientIp field.
 func (o *EnvInfo) SetClientIp(v string) {
+
 	o.ClientIp = &v
 }
 
@@ -245,6 +249,7 @@ func (o *EnvInfo) HasOsType() bool {
 
 // SetOsType gets a reference to the given string and assigns it to the OsType field.
 func (o *EnvInfo) SetOsType(v string) {
+
 	o.OsType = &v
 }
 
@@ -277,6 +282,7 @@ func (o *EnvInfo) HasAppVersion() bool {
 
 // SetAppVersion gets a reference to the given string and assigns it to the AppVersion field.
 func (o *EnvInfo) SetAppVersion(v string) {
+
 	o.AppVersion = &v
 }
 
@@ -309,6 +315,7 @@ func (o *EnvInfo) HasSdkVersion() bool {
 
 // SetSdkVersion gets a reference to the given string and assigns it to the SdkVersion field.
 func (o *EnvInfo) SetSdkVersion(v string) {
+
 	o.SdkVersion = &v
 }
 
@@ -333,6 +340,7 @@ func (o *EnvInfo) GetSourcePlatformOk() (*string, bool) {
 
 // SetSourcePlatform sets field value
 func (o *EnvInfo) SetSourcePlatform(v string) {
+
 	o.SourcePlatform = v
 }
 
@@ -365,6 +373,7 @@ func (o *EnvInfo) HasOrderOsType() bool {
 
 // SetOrderOsType gets a reference to the given string and assigns it to the OrderOsType field.
 func (o *EnvInfo) SetOrderOsType(v string) {
+
 	o.OrderOsType = &v
 }
 
@@ -397,6 +406,7 @@ func (o *EnvInfo) HasMerchantAppVersion() bool {
 
 // SetMerchantAppVersion gets a reference to the given string and assigns it to the MerchantAppVersion field.
 func (o *EnvInfo) SetMerchantAppVersion(v string) {
+
 	o.MerchantAppVersion = &v
 }
 
@@ -421,6 +431,7 @@ func (o *EnvInfo) GetTerminalTypeOk() (*string, bool) {
 
 // SetTerminalType sets field value
 func (o *EnvInfo) SetTerminalType(v string) {
+
 	o.TerminalType = v
 }
 
@@ -453,6 +464,7 @@ func (o *EnvInfo) HasOrderTerminalType() bool {
 
 // SetOrderTerminalType gets a reference to the given string and assigns it to the OrderTerminalType field.
 func (o *EnvInfo) SetOrderTerminalType(v string) {
+
 	o.OrderTerminalType = &v
 }
 
@@ -485,6 +497,7 @@ func (o *EnvInfo) HasExtendInfo() bool {
 
 // SetExtendInfo gets a reference to the given string and assigns it to the ExtendInfo field.
 func (o *EnvInfo) SetExtendInfo(v string) {
+
 	o.ExtendInfo = &v
 }
 
@@ -517,6 +530,7 @@ func (o *EnvInfo) HasClientKey() bool {
 
 // SetClientKey gets a reference to the given string and assigns it to the ClientKey field.
 func (o *EnvInfo) SetClientKey(v string) {
+
 	o.ClientKey = &v
 }
 

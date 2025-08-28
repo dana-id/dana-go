@@ -38,7 +38,7 @@ import (
 
 func main() {
 	// Define request struct directly (example)
-	request := payment_gateway.CreateDivisionRequest{
+	request := merchant_management.CreateDivisionRequest{
 		// Fill in required fields here, e.g.:
 		// Field1: "value1",
 		// Field2: "value2",
@@ -55,13 +55,13 @@ func main() {
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
 	}
 	apiClient := dana.NewAPIClient(configuration)
-	_, r, err := apiClient.PaymentGatewayAPI.CreateDivision(context.Background()).CreateDivisionRequest(request).Execute()
+	_, r, err := apiClient.MerchantManagementAPI.CreateDivision(context.Background()).CreateDivisionRequest(request).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.CreateDivision``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MerchantManagementAPI.CreateDivision``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `CreateDivision`: CreateDivisionResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.CreateDivision`: %v\n", r.Body)
+	fmt.Fprintf(os.Stdout, "Response from `MerchantManagementAPI.CreateDivision`: %v\n", r.Body)
 }
 ```
 
@@ -120,7 +120,7 @@ import (
 
 func main() {
 	// Define request struct directly (example)
-	request := payment_gateway.CreateShopRequest{
+	request := merchant_management.CreateShopRequest{
 		// Fill in required fields here, e.g.:
 		// Field1: "value1",
 		// Field2: "value2",
@@ -137,13 +137,13 @@ func main() {
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
 	}
 	apiClient := dana.NewAPIClient(configuration)
-	_, r, err := apiClient.PaymentGatewayAPI.CreateShop(context.Background()).CreateShopRequest(request).Execute()
+	_, r, err := apiClient.MerchantManagementAPI.CreateShop(context.Background()).CreateShopRequest(request).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.CreateShop``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MerchantManagementAPI.CreateShop``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `CreateShop`: CreateShopResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.CreateShop`: %v\n", r.Body)
+	fmt.Fprintf(os.Stdout, "Response from `MerchantManagementAPI.CreateShop`: %v\n", r.Body)
 }
 ```
 
@@ -202,7 +202,7 @@ import (
 
 func main() {
 	// Define request struct directly (example)
-	request := payment_gateway.QueryDivisionRequest{
+	request := merchant_management.QueryDivisionRequest{
 		// Fill in required fields here, e.g.:
 		// Field1: "value1",
 		// Field2: "value2",
@@ -219,13 +219,13 @@ func main() {
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
 	}
 	apiClient := dana.NewAPIClient(configuration)
-	_, r, err := apiClient.PaymentGatewayAPI.QueryDivision(context.Background()).QueryDivisionRequest(request).Execute()
+	_, r, err := apiClient.MerchantManagementAPI.QueryDivision(context.Background()).QueryDivisionRequest(request).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.QueryDivision``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MerchantManagementAPI.QueryDivision``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `QueryDivision`: QueryDivisionResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.QueryDivision`: %v\n", r.Body)
+	fmt.Fprintf(os.Stdout, "Response from `MerchantManagementAPI.QueryDivision`: %v\n", r.Body)
 }
 ```
 
@@ -284,7 +284,7 @@ import (
 
 func main() {
 	// Define request struct directly (example)
-	request := payment_gateway.QueryMerchantResourceRequest{
+	request := merchant_management.QueryMerchantResourceRequest{
 		// Fill in required fields here, e.g.:
 		// Field1: "value1",
 		// Field2: "value2",
@@ -301,13 +301,13 @@ func main() {
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
 	}
 	apiClient := dana.NewAPIClient(configuration)
-	_, r, err := apiClient.PaymentGatewayAPI.QueryMerchantResource(context.Background()).QueryMerchantResourceRequest(request).Execute()
+	_, r, err := apiClient.MerchantManagementAPI.QueryMerchantResource(context.Background()).QueryMerchantResourceRequest(request).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.QueryMerchantResource``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MerchantManagementAPI.QueryMerchantResource``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `QueryMerchantResource`: QueryMerchantResourceResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.QueryMerchantResource`: %v\n", r.Body)
+	fmt.Fprintf(os.Stdout, "Response from `MerchantManagementAPI.QueryMerchantResource`: %v\n", r.Body)
 }
 ```
 
@@ -366,7 +366,7 @@ import (
 
 func main() {
 	// Define request struct directly (example)
-	request := payment_gateway.QueryShopRequest{
+	request := merchant_management.QueryShopRequest{
 		// Fill in required fields here, e.g.:
 		// Field1: "value1",
 		// Field2: "value2",
@@ -383,13 +383,13 @@ func main() {
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
 	}
 	apiClient := dana.NewAPIClient(configuration)
-	_, r, err := apiClient.PaymentGatewayAPI.QueryShop(context.Background()).QueryShopRequest(request).Execute()
+	_, r, err := apiClient.MerchantManagementAPI.QueryShop(context.Background()).QueryShopRequest(request).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.QueryShop``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MerchantManagementAPI.QueryShop``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `QueryShop`: QueryShopResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.QueryShop`: %v\n", r.Body)
+	fmt.Fprintf(os.Stdout, "Response from `MerchantManagementAPI.QueryShop`: %v\n", r.Body)
 }
 ```
 
@@ -448,7 +448,7 @@ import (
 
 func main() {
 	// Define request struct directly (example)
-	request := payment_gateway.UpdateDivisionRequest{
+	request := merchant_management.UpdateDivisionRequest{
 		// Fill in required fields here, e.g.:
 		// Field1: "value1",
 		// Field2: "value2",
@@ -465,13 +465,13 @@ func main() {
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
 	}
 	apiClient := dana.NewAPIClient(configuration)
-	_, r, err := apiClient.PaymentGatewayAPI.UpdateDivision(context.Background()).UpdateDivisionRequest(request).Execute()
+	_, r, err := apiClient.MerchantManagementAPI.UpdateDivision(context.Background()).UpdateDivisionRequest(request).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.UpdateDivision``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MerchantManagementAPI.UpdateDivision``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `UpdateDivision`: UpdateDivisionResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.UpdateDivision`: %v\n", r.Body)
+	fmt.Fprintf(os.Stdout, "Response from `MerchantManagementAPI.UpdateDivision`: %v\n", r.Body)
 }
 ```
 
@@ -530,7 +530,7 @@ import (
 
 func main() {
 	// Define request struct directly (example)
-	request := payment_gateway.UpdateShopRequest{
+	request := merchant_management.UpdateShopRequest{
 		// Fill in required fields here, e.g.:
 		// Field1: "value1",
 		// Field2: "value2",
@@ -547,13 +547,13 @@ func main() {
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
 	}
 	apiClient := dana.NewAPIClient(configuration)
-	_, r, err := apiClient.PaymentGatewayAPI.UpdateShop(context.Background()).UpdateShopRequest(request).Execute()
+	_, r, err := apiClient.MerchantManagementAPI.UpdateShop(context.Background()).UpdateShopRequest(request).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PaymentGatewayAPI.UpdateShop``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `MerchantManagementAPI.UpdateShop``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `UpdateShop`: UpdateShopResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentGatewayAPI.UpdateShop`: %v\n", r.Body)
+	fmt.Fprintf(os.Stdout, "Response from `MerchantManagementAPI.UpdateShop`: %v\n", r.Body)
 }
 ```
 
@@ -595,16 +595,6 @@ import merchant_management "github.com/dana-id/dana-go/merchant_management/v1"
 
 ipg := string(merchant_management.SOURCEPLATFORM_IPG_)
 ```
-
-## actorType
-| Value | Description |
-|-------|-------------|
-| `USER` | User |
-| `MERCHANT` | Merchant<br |
-| `MERCHANT_OPERATOR` | Merchant operator |
-| `BACK_OFFICE` | Back office |
-| `SYSTEM` | System |
-
 
 ## businessEntity
 | Value | Description |
@@ -656,15 +646,6 @@ ipg := string(merchant_management.SOURCEPLATFORM_IPG_)
 | `false` |  |
 
 
-## orderTerminalType
-| Value | Description |
-|-------|-------------|
-| `APP` | Mobile Application |
-| `WEB` | Browser Web |
-| `WAP` | Mobile Wap |
-| `SYSTEM` | System Call |
-
-
 ## ownerIdType
 | Value | Description |
 |-------|-------------|
@@ -681,40 +662,6 @@ ipg := string(merchant_management.SOURCEPLATFORM_IPG_)
 | `MERCHANT` |  |
 | `DIVISION` |  |
 | `EXTERNAL_DIVISION` |  |
-
-
-## payMethod
-| Value | Description |
-|-------|-------------|
-| `BALANCE` | Payment method with balance |
-| `COUPON` | Payment method with coupon |
-| `NET_BANKING` | Payment method with internet banking |
-| `CREDIT_CARD` | Payment method with credit card |
-| `DEBIT_CARD` | Payment method with debit card |
-| `VIRTUAL_ACCOUNT` | Payment method with virtual account |
-| `OTC` | Payment method with OTC |
-| `DIRECT_DEBIT_CREDIT_CARD` | Payment method with direct debit of credit card |
-| `DIRECT_DEBIT_DEBIT_CARD` | Payment method with direct debit of debit card |
-| `ONLINE_CREDIT` | Payment method with online Credit |
-| `LOAN_CREDIT` | Payment method with DANA Cicil |
-| `NETWORK_PAY` | Payment method with e-wallet |
-
-
-## payOption
-| Value | Description |
-|-------|-------------|
-| `NETWORK_PAY_PG_SPAY` | Payment method with ShopeePay e-wallet |
-| `NETWORK_PAY_PG_OVO` | Payment method with OVO e-wallet |
-| `NETWORK_PAY_PG_GOPAY` | Payment method with GoPay e-wallet |
-| `NETWORK_PAY_PG_LINKAJA` | Payment method with LinkAja e-wallet |
-| `NETWORK_PAY_PG_CARD` | Payment method with Card |
-| `VIRTUAL_ACCOUNT_BCA` | Payment method with BCA virtual account |
-| `VIRTUAL_ACCOUNT_BNI` | Payment method with BNI virtual account |
-| `VIRTUAL_ACCOUNT_MANDIRI` | Payment method with Mandiri virtual account |
-| `VIRTUAL_ACCOUNT_BRI` | Payment method with BRI virtual account |
-| `VIRTUAL_ACCOUNT_BTPN` | Payment method with BTPN virtual account |
-| `VIRTUAL_ACCOUNT_CIMB` | Payment method with CIMB virtual account |
-| `VIRTUAL_ACCOUNT_PERMATA` | Payment method with Permata virtual account |
 
 
 ## pgDivisionFlag
@@ -776,28 +723,6 @@ ipg := string(merchant_management.SOURCEPLATFORM_IPG_)
 | `UKE` |  |
 | `UME` |  |
 | `UBE` |  |
-
-
-## sourcePlatform
-| Value | Description |
-|-------|-------------|
-| `IPG` |  |
-
-
-## terminalType
-| Value | Description |
-|-------|-------------|
-| `APP` | Mobile Application |
-| `WEB` | Browser Web |
-| `WAP` | Mobile Wap |
-| `SYSTEM` | System Call |
-
-
-## type
-| Value | Description |
-|-------|-------------|
-| `PAY_RETURN` | When finish payment, DANA will notify to the URL that has been defined by |
-| `NOTIFICATION` | After the payment, the user will be redirected to merchant page, this is mandatory |
 
 
 ## verified

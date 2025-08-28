@@ -94,6 +94,7 @@ func (o *AmountDetail) GetOrderAmountOk() (*Money, bool) {
 
 // SetOrderAmount sets field value
 func (o *AmountDetail) SetOrderAmount(v Money) {
+
 	o.OrderAmount = v
 }
 
@@ -126,6 +127,7 @@ func (o *AmountDetail) HasPayAmount() bool {
 
 // SetPayAmount gets a reference to the given Money and assigns it to the PayAmount field.
 func (o *AmountDetail) SetPayAmount(v Money) {
+
 	o.PayAmount = &v
 }
 
@@ -158,6 +160,7 @@ func (o *AmountDetail) HasVoidAmount() bool {
 
 // SetVoidAmount gets a reference to the given Money and assigns it to the VoidAmount field.
 func (o *AmountDetail) SetVoidAmount(v Money) {
+
 	o.VoidAmount = &v
 }
 
@@ -190,6 +193,7 @@ func (o *AmountDetail) HasConfirmAmount() bool {
 
 // SetConfirmAmount gets a reference to the given Money and assigns it to the ConfirmAmount field.
 func (o *AmountDetail) SetConfirmAmount(v Money) {
+
 	o.ConfirmAmount = &v
 }
 
@@ -222,6 +226,7 @@ func (o *AmountDetail) HasRefundAmount() bool {
 
 // SetRefundAmount gets a reference to the given Money and assigns it to the RefundAmount field.
 func (o *AmountDetail) SetRefundAmount(v Money) {
+
 	o.RefundAmount = &v
 }
 
@@ -254,6 +259,7 @@ func (o *AmountDetail) HasChargebackAmount() bool {
 
 // SetChargebackAmount gets a reference to the given Money and assigns it to the ChargebackAmount field.
 func (o *AmountDetail) SetChargebackAmount(v Money) {
+
 	o.ChargebackAmount = &v
 }
 
@@ -286,6 +292,7 @@ func (o *AmountDetail) HasChargeAmount() bool {
 
 // SetChargeAmount gets a reference to the given Money and assigns it to the ChargeAmount field.
 func (o *AmountDetail) SetChargeAmount(v Money) {
+
 	o.ChargeAmount = &v
 }
 

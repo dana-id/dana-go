@@ -87,6 +87,7 @@ func (o *ConsultPayRequestAdditionalInfo) GetBuyerOk() (*Buyer, bool) {
 
 // SetBuyer sets field value
 func (o *ConsultPayRequestAdditionalInfo) SetBuyer(v Buyer) {
+
 	o.Buyer = v
 }
 
@@ -111,6 +112,7 @@ func (o *ConsultPayRequestAdditionalInfo) GetEnvInfoOk() (*EnvInfo, bool) {
 
 // SetEnvInfo sets field value
 func (o *ConsultPayRequestAdditionalInfo) SetEnvInfo(v EnvInfo) {
+
 	o.EnvInfo = v
 }
 
@@ -143,6 +145,7 @@ func (o *ConsultPayRequestAdditionalInfo) HasMerchantTransType() bool {
 
 // SetMerchantTransType gets a reference to the given string and assigns it to the MerchantTransType field.
 func (o *ConsultPayRequestAdditionalInfo) SetMerchantTransType(v string) {
+
 	o.MerchantTransType = &v
 }
 

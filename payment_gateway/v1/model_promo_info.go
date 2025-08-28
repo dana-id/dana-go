@@ -90,6 +90,7 @@ func (o *PromoInfo) GetPromoAmountOk() (*Money, bool) {
 
 // SetPromoAmount sets field value
 func (o *PromoInfo) SetPromoAmount(v Money) {
+
 	o.PromoAmount = v
 }
 
@@ -114,6 +115,7 @@ func (o *PromoInfo) GetPromoIdOk() (*string, bool) {
 
 // SetPromoId sets field value
 func (o *PromoInfo) SetPromoId(v string) {
+
 	o.PromoId = v
 }
 
@@ -138,6 +140,7 @@ func (o *PromoInfo) GetPromoTypeOk() (*string, bool) {
 
 // SetPromoType sets field value
 func (o *PromoInfo) SetPromoType(v string) {
+
 	o.PromoType = v
 }
 

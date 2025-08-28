@@ -89,6 +89,7 @@ func (o *VirtualAccountInfo) HasVirtualAccountCode() bool {
 
 // SetVirtualAccountCode gets a reference to the given string and assigns it to the VirtualAccountCode field.
 func (o *VirtualAccountInfo) SetVirtualAccountCode(v string) {
+
 	o.VirtualAccountCode = &v
 }
 
@@ -121,6 +122,7 @@ func (o *VirtualAccountInfo) HasVirtualAccountExpiryTime() bool {
 
 // SetVirtualAccountExpiryTime gets a reference to the given string and assigns it to the VirtualAccountExpiryTime field.
 func (o *VirtualAccountInfo) SetVirtualAccountExpiryTime(v string) {
+
 	o.VirtualAccountExpiryTime = &v
 }
 
@@ -153,6 +155,7 @@ func (o *VirtualAccountInfo) HasSignature() bool {
 
 // SetSignature gets a reference to the given string and assigns it to the Signature field.
 func (o *VirtualAccountInfo) SetSignature(v string) {
+
 	o.Signature = &v
 }
 

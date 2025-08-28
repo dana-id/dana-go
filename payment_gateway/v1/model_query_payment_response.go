@@ -121,6 +121,7 @@ func (o *QueryPaymentResponse) GetResponseCodeOk() (*string, bool) {
 
 // SetResponseCode sets field value
 func (o *QueryPaymentResponse) SetResponseCode(v string) {
+
 	o.ResponseCode = v
 }
 
@@ -145,6 +146,7 @@ func (o *QueryPaymentResponse) GetResponseMessageOk() (*string, bool) {
 
 // SetResponseMessage sets field value
 func (o *QueryPaymentResponse) SetResponseMessage(v string) {
+
 	o.ResponseMessage = v
 }
 
@@ -177,6 +179,7 @@ func (o *QueryPaymentResponse) HasOriginalPartnerReferenceNo() bool {
 
 // SetOriginalPartnerReferenceNo gets a reference to the given string and assigns it to the OriginalPartnerReferenceNo field.
 func (o *QueryPaymentResponse) SetOriginalPartnerReferenceNo(v string) {
+
 	o.OriginalPartnerReferenceNo = &v
 }
 
@@ -209,6 +212,7 @@ func (o *QueryPaymentResponse) HasOriginalReferenceNo() bool {
 
 // SetOriginalReferenceNo gets a reference to the given string and assigns it to the OriginalReferenceNo field.
 func (o *QueryPaymentResponse) SetOriginalReferenceNo(v string) {
+
 	o.OriginalReferenceNo = &v
 }
 
@@ -241,6 +245,7 @@ func (o *QueryPaymentResponse) HasOriginalExternalId() bool {
 
 // SetOriginalExternalId gets a reference to the given string and assigns it to the OriginalExternalId field.
 func (o *QueryPaymentResponse) SetOriginalExternalId(v string) {
+
 	o.OriginalExternalId = &v
 }
 
@@ -265,6 +270,7 @@ func (o *QueryPaymentResponse) GetServiceCodeOk() (*string, bool) {
 
 // SetServiceCode sets field value
 func (o *QueryPaymentResponse) SetServiceCode(v string) {
+
 	o.ServiceCode = v
 }
 
@@ -289,6 +295,7 @@ func (o *QueryPaymentResponse) GetLatestTransactionStatusOk() (*string, bool) {
 
 // SetLatestTransactionStatus sets field value
 func (o *QueryPaymentResponse) SetLatestTransactionStatus(v string) {
+
 	o.LatestTransactionStatus = v
 }
 
@@ -321,6 +328,7 @@ func (o *QueryPaymentResponse) HasTransactionStatusDesc() bool {
 
 // SetTransactionStatusDesc gets a reference to the given string and assigns it to the TransactionStatusDesc field.
 func (o *QueryPaymentResponse) SetTransactionStatusDesc(v string) {
+
 	o.TransactionStatusDesc = &v
 }
 
@@ -353,6 +361,7 @@ func (o *QueryPaymentResponse) HasOriginalResponseCode() bool {
 
 // SetOriginalResponseCode gets a reference to the given string and assigns it to the OriginalResponseCode field.
 func (o *QueryPaymentResponse) SetOriginalResponseCode(v string) {
+
 	o.OriginalResponseCode = &v
 }
 
@@ -385,6 +394,7 @@ func (o *QueryPaymentResponse) HasOriginalResponseMessage() bool {
 
 // SetOriginalResponseMessage gets a reference to the given string and assigns it to the OriginalResponseMessage field.
 func (o *QueryPaymentResponse) SetOriginalResponseMessage(v string) {
+
 	o.OriginalResponseMessage = &v
 }
 
@@ -417,6 +427,7 @@ func (o *QueryPaymentResponse) HasSessionId() bool {
 
 // SetSessionId gets a reference to the given string and assigns it to the SessionId field.
 func (o *QueryPaymentResponse) SetSessionId(v string) {
+
 	o.SessionId = &v
 }
 
@@ -449,6 +460,7 @@ func (o *QueryPaymentResponse) HasRequestID() bool {
 
 // SetRequestID gets a reference to the given string and assigns it to the RequestID field.
 func (o *QueryPaymentResponse) SetRequestID(v string) {
+
 	o.RequestID = &v
 }
 
@@ -481,6 +493,7 @@ func (o *QueryPaymentResponse) HasTransAmount() bool {
 
 // SetTransAmount gets a reference to the given Money and assigns it to the TransAmount field.
 func (o *QueryPaymentResponse) SetTransAmount(v Money) {
+
 	o.TransAmount = &v
 }
 
@@ -513,6 +526,7 @@ func (o *QueryPaymentResponse) HasAmount() bool {
 
 // SetAmount gets a reference to the given Money and assigns it to the Amount field.
 func (o *QueryPaymentResponse) SetAmount(v Money) {
+
 	o.Amount = &v
 }
 
@@ -545,6 +559,7 @@ func (o *QueryPaymentResponse) HasFeeAmount() bool {
 
 // SetFeeAmount gets a reference to the given Money and assigns it to the FeeAmount field.
 func (o *QueryPaymentResponse) SetFeeAmount(v Money) {
+
 	o.FeeAmount = &v
 }
 
@@ -577,6 +592,7 @@ func (o *QueryPaymentResponse) HasPaidTime() bool {
 
 // SetPaidTime gets a reference to the given string and assigns it to the PaidTime field.
 func (o *QueryPaymentResponse) SetPaidTime(v string) {
+
 	o.PaidTime = &v
 }
 
@@ -609,6 +625,7 @@ func (o *QueryPaymentResponse) HasTitle() bool {
 
 // SetTitle gets a reference to the given string and assigns it to the Title field.
 func (o *QueryPaymentResponse) SetTitle(v string) {
+
 	o.Title = &v
 }
 
@@ -641,6 +658,7 @@ func (o *QueryPaymentResponse) HasAdditionalInfo() bool {
 
 // SetAdditionalInfo gets a reference to the given QueryPaymentResponseAdditionalInfo and assigns it to the AdditionalInfo field.
 func (o *QueryPaymentResponse) SetAdditionalInfo(v QueryPaymentResponseAdditionalInfo) {
+
 	o.AdditionalInfo = &v
 }
 

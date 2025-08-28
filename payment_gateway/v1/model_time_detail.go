@@ -91,6 +91,7 @@ func (o *TimeDetail) GetCreatedTimeOk() (*string, bool) {
 
 // SetCreatedTime sets field value
 func (o *TimeDetail) SetCreatedTime(v string) {
+
 	o.CreatedTime = v
 }
 
@@ -115,6 +116,7 @@ func (o *TimeDetail) GetExpiryTimeOk() (*string, bool) {
 
 // SetExpiryTime sets field value
 func (o *TimeDetail) SetExpiryTime(v string) {
+
 	o.ExpiryTime = v
 }
 
@@ -147,6 +149,7 @@ func (o *TimeDetail) HasPaidTimes() bool {
 
 // SetPaidTimes gets a reference to the given []string and assigns it to the PaidTimes field.
 func (o *TimeDetail) SetPaidTimes(v []string) {
+
 	o.PaidTimes = v
 }
 
@@ -179,6 +182,7 @@ func (o *TimeDetail) HasConfirmedTimes() bool {
 
 // SetConfirmedTimes gets a reference to the given []string and assigns it to the ConfirmedTimes field.
 func (o *TimeDetail) SetConfirmedTimes(v []string) {
+
 	o.ConfirmedTimes = v
 }
 
@@ -211,6 +215,7 @@ func (o *TimeDetail) HasCancelledTime() bool {
 
 // SetCancelledTime gets a reference to the given string and assigns it to the CancelledTime field.
 func (o *TimeDetail) SetCancelledTime(v string) {
+
 	o.CancelledTime = &v
 }
 

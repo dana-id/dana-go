@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **State** | Pointer to **string** | Random string for CSRF protection purposes | [optional] 
 **Lang** | Pointer to **string** | Service language code. ISO 639-1 | [optional] [default to "id"]
 **AllowRegistration** | Pointer to **string** | If value equals true, provider may enable registration process during binding. Default true | [optional] [default to "true"]
+**Mode** | Pointer to **string** | Mode of the authorization. The possible values are API or DEEPLINK | [optional] 
 
 ## Methods
 
@@ -242,6 +243,31 @@ SetAllowRegistration sets AllowRegistration field to given value.
 `func (o *Oauth2UrlData) HasAllowRegistration() bool`
 
 HasAllowRegistration returns a boolean if a field has been set.
+
+### GetMode
+
+`func (o *Oauth2UrlData) GetMode() string`
+
+GetMode returns the Mode field if non-nil, zero value otherwise.
+
+### GetModeOk
+
+`func (o *Oauth2UrlData) GetModeOk() (*string, bool)`
+
+GetModeOk returns a tuple with the Mode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMode
+
+`func (o *Oauth2UrlData) SetMode(v string)`
+
+SetMode sets Mode field to given value.
+
+### HasMode
+
+`func (o *Oauth2UrlData) HasMode() bool`
+
+HasMode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

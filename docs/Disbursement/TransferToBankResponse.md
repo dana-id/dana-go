@@ -9,14 +9,14 @@ Name | Type | Description | Notes
 **ReferenceNo** | Pointer to **string** | Transaction identifier on DANA system | [optional] 
 **PartnerReferenceNo** | Pointer to **string** | Unique transaction identifier on partner system which assigned to each transaction<br /> Notes:<br /> If the partner receives a timeout or an unexpected response from DANA and partner expects to perform retry request to DANA, please use the partnerReferenceNo that is the same as the one used in the transaction request process before  | [optional] 
 **TransactionDate** | Pointer to **string** | Transaction date, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
-**ReferenceNumber** | **string** | Reference number | 
+**ReferenceNumber** | Pointer to **string** | Reference number | [optional] 
 **AdditionalInfo** | Pointer to **map[string]interface{}** | Additional information | [optional] 
 
 ## Methods
 
 ### NewTransferToBankResponse
 
-`func NewTransferToBankResponse(responseCode string, responseMessage string, referenceNumber string, ) *TransferToBankResponse`
+`func NewTransferToBankResponse(responseCode string, responseMessage string, ) *TransferToBankResponse`
 
 NewTransferToBankResponse instantiates a new TransferToBankResponse object
 This constructor will assign default values to properties that have it defined,
@@ -165,6 +165,11 @@ and a boolean to check if the value has been set.
 
 SetReferenceNumber sets ReferenceNumber field to given value.
 
+### HasReferenceNumber
+
+`func (o *TransferToBankResponse) HasReferenceNumber() bool`
+
+HasReferenceNumber returns a boolean if a field has been set.
 
 ### GetAdditionalInfo
 

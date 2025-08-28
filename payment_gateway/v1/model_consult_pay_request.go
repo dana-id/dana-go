@@ -88,6 +88,7 @@ func (o *ConsultPayRequest) GetMerchantIdOk() (*string, bool) {
 
 // SetMerchantId sets field value
 func (o *ConsultPayRequest) SetMerchantId(v string) {
+
 	o.MerchantId = v
 }
 
@@ -112,6 +113,7 @@ func (o *ConsultPayRequest) GetAmountOk() (*Money, bool) {
 
 // SetAmount sets field value
 func (o *ConsultPayRequest) SetAmount(v Money) {
+
 	o.Amount = v
 }
 
@@ -136,6 +138,7 @@ func (o *ConsultPayRequest) GetAdditionalInfoOk() (*ConsultPayRequestAdditionalI
 
 // SetAdditionalInfo sets field value
 func (o *ConsultPayRequest) SetAdditionalInfo(v ConsultPayRequestAdditionalInfo) {
+
 	o.AdditionalInfo = v
 }
 

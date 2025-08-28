@@ -87,6 +87,7 @@ func (o *RefundOptionBill) HasPayMethod() bool {
 
 // SetPayMethod gets a reference to the given string and assigns it to the PayMethod field.
 func (o *RefundOptionBill) SetPayMethod(v string) {
+
 	o.PayMethod = &v
 }
 
@@ -119,6 +120,7 @@ func (o *RefundOptionBill) HasTransAmount() bool {
 
 // SetTransAmount gets a reference to the given Money and assigns it to the TransAmount field.
 func (o *RefundOptionBill) SetTransAmount(v Money) {
+
 	o.TransAmount = &v
 }
 

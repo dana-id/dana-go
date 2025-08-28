@@ -47,6 +47,12 @@ const (
     ACQUIREMENTSTATUS_CANCELLED_ Acquirementstatus = "CANCELLED"
 )
 
+type Mode string
+const (
+    MODE_API_ Mode = "API"
+    MODE_DEEPLINK_ Mode = "DEEPLINK"
+)
+
 type Resourcetype string
 const (
     RESOURCETYPE_BALANCE_ Resourcetype = "BALANCE"
@@ -99,6 +105,7 @@ const (
     PAYMETHOD_ONLINE_CREDIT_ Paymethod = "ONLINE_CREDIT"
     PAYMETHOD_LOAN_CREDIT_ Paymethod = "LOAN_CREDIT"
     PAYMETHOD_NETWORK_PAY_ Paymethod = "NETWORK_PAY"
+    PAYMETHOD_CARD_ Paymethod = "CARD"
 )
 
 type Payoption string
@@ -121,14 +128,5 @@ type Type string
 const (
     TYPE_PAY_RETURN_ Type = "PAY_RETURN"
     TYPE_NOTIFICATION_ Type = "NOTIFICATION"
-)
-
-type Actortype string
-const (
-    ACTORTYPE_USER_ Actortype = "USER"
-    ACTORTYPE_MERCHANT_ Actortype = "MERCHANT"
-    ACTORTYPE_MERCHANT_OPERATOR_ Actortype = "MERCHANT_OPERATOR"
-    ACTORTYPE_BACK_OFFICE_ Actortype = "BACK_OFFICE"
-    ACTORTYPE_SYSTEM_ Actortype = "SYSTEM"
 )
 
