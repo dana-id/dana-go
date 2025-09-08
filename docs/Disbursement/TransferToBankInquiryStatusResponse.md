@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **OriginalExternalId** | Pointer to **string** | Original external identifier on header message | [optional] 
 **ServiceCode** | **string** | Transaction type indicator is based on the service code of the original transaction request, value always 00 | [default to "00"]
 **Amount** | Pointer to [**Money**](Money.md) | Amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO  | [optional] 
-**LatestTransactionStatus** | **string** | Status of latest transaction:<br /> 00 - Success<br /> 01 - Initiated<br /> 02 - Paying<br /> 03 - Pending<br /> 04 - Refunded<br /> 05 - Canceled<br /> 06 - Failed<br /> 07 - Not found  | 
+**LatestTransactionStatus** | **string** | Status of latest transaction:<br /> 00 - Success<br /> 01 - Initiated<br /> 02 - Paying<br /> 03 - Pending<br /> 04 - Refunded<br /> 05 - Cancelled<br /> 06 - Failed<br /> 07 - Not found  | 
 **TransactionStatusDesc** | Pointer to **string** | Description of transaction status | [optional] 
 **AdditionalInfo** | Pointer to **map[string]interface{}** | Additional information | [optional] 
 

@@ -389,20 +389,27 @@ Payload is passed through a pointer to TransferToDanaInquiryStatusRequest (struc
 ```go
 import disbursement "github.com/dana-id/dana-go/disbursement/v1"
 
-ipg := string(disbursement.SOURCEPLATFORM_IPG_)
+value := string(disbursement.CHARGETARGET_DIVISION_)
 ```
 
-## latestTransactionStatus
+## ChargeTarget
 | Value | Description |
 |-------|-------------|
-| `00` |  |
-| `01` |  |
-| `02` |  |
-| `03` |  |
-| `04` |  |
-| `05` |  |
-| `06` |  |
-| `07` |  |
+| `CHARGETARGET_DIVISION_` |  |
+| `CHARGETARGET_MERCHANT_` |  |
+
+
+## LatestTransactionStatus
+| Value | Description |
+|-------|-------------|
+| `LATESTTRANSACTIONSTATUS_00_` |  |
+| `LATESTTRANSACTIONSTATUS_01_` |  |
+| `LATESTTRANSACTIONSTATUS_02_` |  |
+| `LATESTTRANSACTIONSTATUS_03_` |  |
+| `LATESTTRANSACTIONSTATUS_04_` |  |
+| `LATESTTRANSACTIONSTATUS_05_` |  |
+| `LATESTTRANSACTIONSTATUS_06_` |  |
+| `LATESTTRANSACTIONSTATUS_07_` |  |
 
 
 

@@ -226,16 +226,21 @@ func GetUsablePrivateKey(apiKey *config.APIKey) ([]byte, error) {
 			return nil, fmt.Errorf("failed to read private key file: %v", err)
 		}
 
-		// Print the first line of the key just for verification
 		keyStr := string(privateKeyBytes)
 		if len(keyStr) > 0 {
 			lines := strings.Split(keyStr, "\n")
 			if len(lines) > 0 {
 				fmt.Println("Private key file loaded successfully, begins with:", lines[0])
 			}
+
+			normalizedKey, err := normalizePEMKey(keyStr)
+			if err != nil {
+				return nil, fmt.Errorf("failed to normalize private key from file: %v", err)
+			}
+			return normalizedKey, nil
 		}
 
-		return privateKeyBytes, nil
+		return nil, fmt.Errorf("empty private key file: %s", apiKey.PRIVATE_KEY_PATH)
 	} else if apiKey.PRIVATE_KEY != "" {
 		// Convert to proper PEM format if needed
 		privateKey, err := normalizePEMKey(apiKey.PRIVATE_KEY)
@@ -243,7 +248,7 @@ func GetUsablePrivateKey(apiKey *config.APIKey) ([]byte, error) {
 			return nil, fmt.Errorf("failed to normalize private key: %v", err)
 		}
 
-		return []byte(privateKey), nil
+		return privateKey, nil
 	}
 
 	return nil, errors.New("no private key or private key path provided")

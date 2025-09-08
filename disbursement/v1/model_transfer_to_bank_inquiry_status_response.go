@@ -51,7 +51,7 @@ type TransferToBankInquiryStatusResponse struct {
 	ServiceCode string `json:"serviceCode"`
 	// Amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO 
 	Amount *Money `json:"amount,omitempty"`
-	// Status of latest transaction:<br> 00 - Success<br> 01 - Initiated<br> 02 - Paying<br> 03 - Pending<br> 04 - Refunded<br> 05 - Canceled<br> 06 - Failed<br> 07 - Not found 
+	// Status of latest transaction:<br> 00 - Success<br> 01 - Initiated<br> 02 - Paying<br> 03 - Pending<br> 04 - Refunded<br> 05 - Cancelled<br> 06 - Failed<br> 07 - Not found 
 	LatestTransactionStatus string `json:"latestTransactionStatus"`
 	// Description of transaction status
 	TransactionStatusDesc *string `json:"transactionStatusDesc,omitempty"`

@@ -593,143 +593,157 @@ Name | Type | Description  | Notes
 ```go
 import merchant_management "github.com/dana-id/dana-go/merchant_management/v1"
 
-ipg := string(merchant_management.SOURCEPLATFORM_IPG_)
+value := string(merchant_management.SHOPPARENTTYPE_MERCHANT_)
 ```
 
-## businessEntity
+## GOODS_SOLD_TYPE
 | Value | Description |
 |-------|-------------|
-| `pt` |  |
-| `cv` |  |
-| `individu` |  |
-| `usaha_dagang` |  |
-| `yayasan` |  |
-| `koperasi` |  |
+| `GOODS_SOLD_TYPE_DIGITAL_` |  |
+| `GOODS_SOLD_TYPE_PHYSICAL_` |  |
 
 
-## divisionIdType
+## USER_PROFILING
 | Value | Description |
 |-------|-------------|
-| `INNER_ID` |  |
-| `EXTERNAL_ID` |  |
+| `USER_PROFILING_B2B_` |  |
+| `USER_PROFILING_B2C_` |  |
 
 
-## divisionType
+## BusinessEntity
 | Value | Description |
 |-------|-------------|
-| `REGION` |  |
-| `AREA` |  |
-| `BRANCH` |  |
-| `OUTLET` |  |
-| `STORE` |  |
-| `KIOSK` |  |
-| `STALL` |  |
-| `COUNTER` |  |
-| `BOOTH` |  |
-| `POINT_OF_SALE` |  |
-| `VENDING_MACHINE` |  |
+| `BUSINESSENTITY_PT_` |  |
+| `BUSINESSENTITY_CV_` |  |
+| `BUSINESSENTITY_INDIVIDU_` |  |
+| `BUSINESSENTITY_USAHA_DAGANG_` |  |
+| `BUSINESSENTITY_YAYASAN_` |  |
+| `BUSINESSENTITY_KOPERASI_` |  |
 
 
-## docType
+## DivisionIdType
 | Value | Description |
 |-------|-------------|
-| `KTP` |  |
-| `SIM` |  |
-| `SIUP` |  |
-| `NIB` |  |
+| `DIVISIONIDTYPE_INNER_ID_` |  |
+| `DIVISIONIDTYPE_EXTERNAL_ID_` |  |
 
 
-## loyalty
+## DivisionType
 | Value | Description |
 |-------|-------------|
-| `true` |  |
-| `false` |  |
+| `DIVISIONTYPE_REGION_` |  |
+| `DIVISIONTYPE_AREA_` |  |
+| `DIVISIONTYPE_BRANCH_` |  |
+| `DIVISIONTYPE_OUTLET_` |  |
+| `DIVISIONTYPE_STORE_` |  |
+| `DIVISIONTYPE_KIOSK_` |  |
+| `DIVISIONTYPE_STALL_` |  |
+| `DIVISIONTYPE_COUNTER_` |  |
+| `DIVISIONTYPE_BOOTH_` |  |
+| `DIVISIONTYPE_POINT_OF_SALE_` |  |
+| `DIVISIONTYPE_VENDING_MACHINE_` |  |
 
 
-## ownerIdType
+## DocType
 | Value | Description |
 |-------|-------------|
-| `KTP` |  |
-| `SIM` |  |
-| `PASSPORT` |  |
-| `SIUP` |  |
-| `NIB` |  |
+| `DOCTYPE_KTP_` |  |
+| `DOCTYPE_SIM_` |  |
+| `DOCTYPE_SIUP_` |  |
+| `DOCTYPE_NIB_` |  |
 
 
-## parentRoleType
+## Loyalty
 | Value | Description |
 |-------|-------------|
-| `MERCHANT` |  |
-| `DIVISION` |  |
-| `EXTERNAL_DIVISION` |  |
+| `LOYALTY_TRUE_` |  |
+| `LOYALTY_FALSE_` |  |
 
 
-## pgDivisionFlag
+## OwnerIdType
 | Value | Description |
 |-------|-------------|
-| `true` |  |
-| `false` |  |
+| `OWNERIDTYPE_KTP_` |  |
+| `OWNERIDTYPE_SIM_` |  |
+| `OWNERIDTYPE_PASSPORT_` |  |
+| `OWNERIDTYPE_SIUP_` |  |
+| `OWNERIDTYPE_NIB_` |  |
 
 
-## resourceType
+## ParentRoleType
 | Value | Description |
 |-------|-------------|
-| `MERCHANT_DEPOSIT_BALANCE` |  |
-| `MERCHANT_AVAILABLE_BALANCE` |  |
-| `MERCHANT_TOTAL_BALANCE` |  |
+| `PARENTROLETYPE_MERCHANT_` |  |
+| `PARENTROLETYPE_DIVISION_` |  |
+| `PARENTROLETYPE_EXTERNAL_DIVISION_` |  |
 
 
-## resultStatus
+## PgDivisionFlag
 | Value | Description |
 |-------|-------------|
-| `S` |  |
-| `F` |  |
-| `U` |  |
+| `PGDIVISIONFLAG_TRUE_` |  |
+| `PGDIVISIONFLAG_FALSE_` |  |
 
 
-## shopBizType
+## ResourceType
 | Value | Description |
 |-------|-------------|
-| `ONLINE` |  |
-| `OFFLINE` |  |
+| `RESOURCETYPE_MERCHANT_DEPOSIT_BALANCE_` |  |
+| `RESOURCETYPE_MERCHANT_AVAILABLE_BALANCE_` |  |
+| `RESOURCETYPE_MERCHANT_TOTAL_BALANCE_` |  |
 
 
-## shopIdType
+## ResultStatus
 | Value | Description |
 |-------|-------------|
-| `INNER_ID` |  |
-| `EXTERNAL_ID` |  |
+| `RESULTSTATUS_S_` |  |
+| `RESULTSTATUS_F_` |  |
+| `RESULTSTATUS_U_` |  |
 
 
-## shopOwning
+## ShopBizType
 | Value | Description |
 |-------|-------------|
-| `DIRECT_OWNED` |  |
-| `FRANCHISED` |  |
+| `SHOPBIZTYPE_ONLINE_` |  |
+| `SHOPBIZTYPE_OFFLINE_` |  |
 
 
-## shopParentType
+## ShopIdType
 | Value | Description |
 |-------|-------------|
-| `MERCHANT` |  |
-| `DIVISION` |  |
-| `EXTERNAL_DIVISION` |  |
+| `SHOPIDTYPE_INNER_ID_` |  |
+| `SHOPIDTYPE_EXTERNAL_ID_` |  |
 
 
-## sizeType
+## ShopOwning
 | Value | Description |
 |-------|-------------|
-| `UMI` |  |
-| `UKE` |  |
-| `UME` |  |
-| `UBE` |  |
+| `SHOPOWNING_DIRECT_OWNED_` |  |
+| `SHOPOWNING_FRANCHISED_` |  |
 
 
-## verified
+## ShopParentType
 | Value | Description |
 |-------|-------------|
-| `true` |  |
-| `false` |  |
+| `SHOPPARENTTYPE_MERCHANT_` |  |
+| `SHOPPARENTTYPE_DIVISION_` |  |
+| `SHOPPARENTTYPE_EXTERNAL_DIVISION_` |  |
+
+
+## SizeType
+| Value | Description |
+|-------|-------------|
+| `SIZETYPE_UMI_` |  |
+| `SIZETYPE_UKE_` |  |
+| `SIZETYPE_UME_` |  |
+| `SIZETYPE_UBE_` |  |
+
+
+## Verified
+| Value | Description |
+|-------|-------------|
+| `VERIFIED_TRUE_` |  |
+| `VERIFIED_FALSE_` |  |
 
 
 

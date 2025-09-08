@@ -570,134 +570,134 @@ Payload is passed through a pointer to WidgetPaymentRequest (struct with type Ap
 ```go
 import widget "github.com/dana-id/dana-go/widget/v1"
 
-ipg := string(widget.SOURCEPLATFORM_IPG_)
+value := string(widget.SERVICETYPE_PARKING_)
 ```
 
-## acquirementStatus
+## AcquirementStatus
 | Value | Description |
 |-------|-------------|
-| `INIT` |  |
-| `SUCCESS` |  |
-| `CLOSED` |  |
-| `PAYING` |  |
-| `MERCHANT_ACCEPT` |  |
-| `CANCELLED` |  |
+| `ACQUIREMENTSTATUS_INIT_` |  |
+| `ACQUIREMENTSTATUS_SUCCESS_` |  |
+| `ACQUIREMENTSTATUS_CLOSED_` |  |
+| `ACQUIREMENTSTATUS_PAYING_` |  |
+| `ACQUIREMENTSTATUS_MERCHANT_ACCEPT_` |  |
+| `ACQUIREMENTSTATUS_CANCELLED_` |  |
 
 
-## mode
+## Mode
 | Value | Description |
 |-------|-------------|
-| `API` |  |
-| `DEEPLINK` |  |
+| `MODE_API_` |  |
+| `MODE_DEEPLINK_` |  |
 
 
-## orderTerminalType
+## OrderTerminalType
 | Value | Description |
 |-------|-------------|
-| `APP` | Mobile Application |
-| `WEB` | Browser Web |
-| `WAP` | Mobile Wap |
-| `SYSTEM` | System Call |
+| `ORDERTERMINALTYPE_APP_` | Mobile Application |
+| `ORDERTERMINALTYPE_WEB_` | Browser Web |
+| `ORDERTERMINALTYPE_WAP_` | Mobile Wap |
+| `ORDERTERMINALTYPE_SYSTEM_` | System Call |
 
 
-## payMethod
+## PayMethod
 | Value | Description |
 |-------|-------------|
-| `BALANCE` | Payment method with balance |
-| `COUPON` | Payment method with coupon |
-| `NET_BANKING` | Payment method with internet banking |
-| `CREDIT_CARD` | Payment method with credit card |
-| `DEBIT_CARD` | Payment method with debit card |
-| `VIRTUAL_ACCOUNT` | Payment method with virtual account |
-| `OTC` | Payment method with OTC |
-| `DIRECT_DEBIT_CREDIT_CARD` | Payment method with direct debit of credit card |
-| `DIRECT_DEBIT_DEBIT_CARD` | Payment method with direct debit of debit card |
-| `ONLINE_CREDIT` | Payment method with online Credit |
-| `LOAN_CREDIT` | Payment method with DANA Cicil |
-| `NETWORK_PAY` | Payment method with e-wallet |
-| `CARD` | Payment method with Card |
+| `PAYMETHOD_BALANCE_` | Payment method with balance |
+| `PAYMETHOD_COUPON_` | Payment method with coupon |
+| `PAYMETHOD_NET_BANKING_` | Payment method with internet banking |
+| `PAYMETHOD_CREDIT_CARD_` | Payment method with credit card |
+| `PAYMETHOD_DEBIT_CARD_` | Payment method with debit card |
+| `PAYMETHOD_VIRTUAL_ACCOUNT_` | Payment method with virtual account |
+| `PAYMETHOD_OTC_` | Payment method with OTC |
+| `PAYMETHOD_DIRECT_DEBIT_CREDIT_CARD_` | Payment method with direct debit of credit card |
+| `PAYMETHOD_DIRECT_DEBIT_DEBIT_CARD_` | Payment method with direct debit of debit card |
+| `PAYMETHOD_ONLINE_CREDIT_` | Payment method with online Credit |
+| `PAYMETHOD_LOAN_CREDIT_` | Payment method with DANA Cicil |
+| `PAYMETHOD_NETWORK_PAY_` | Payment method with e-wallet |
+| `PAYMETHOD_CARD_` | Payment method with Card |
 
 
-## payOption
+## PayOption
 | Value | Description |
 |-------|-------------|
-| `NETWORK_PAY_PG_SPAY` | Payment method with ShopeePay e-wallet |
-| `NETWORK_PAY_PG_OVO` | Payment method with OVO e-wallet |
-| `NETWORK_PAY_PG_GOPAY` | Payment method with GoPay e-wallet |
-| `NETWORK_PAY_PG_LINKAJA` | Payment method with LinkAja e-wallet |
-| `NETWORK_PAY_PG_CARD` | Payment method with Card |
-| `VIRTUAL_ACCOUNT_BCA` | Payment method with BCA virtual account |
-| `VIRTUAL_ACCOUNT_BNI` | Payment method with BNI virtual account |
-| `VIRTUAL_ACCOUNT_MANDIRI` | Payment method with Mandiri virtual account |
-| `VIRTUAL_ACCOUNT_BRI` | Payment method with BRI virtual account |
-| `VIRTUAL_ACCOUNT_BTPN` | Payment method with BTPN virtual account |
-| `VIRTUAL_ACCOUNT_CIMB` | Payment method with CIMB virtual account |
-| `VIRTUAL_ACCOUNT_PERMATA` | Payment method with Permata virtual account |
+| `PAYOPTION_NETWORK_PAY_PG_SPAY_` | Payment method with ShopeePay e-wallet |
+| `PAYOPTION_NETWORK_PAY_PG_OVO_` | Payment method with OVO e-wallet |
+| `PAYOPTION_NETWORK_PAY_PG_GOPAY_` | Payment method with GoPay e-wallet |
+| `PAYOPTION_NETWORK_PAY_PG_LINKAJA_` | Payment method with LinkAja e-wallet |
+| `PAYOPTION_NETWORK_PAY_PG_CARD_` | Payment method with Card |
+| `PAYOPTION_VIRTUAL_ACCOUNT_BCA_` | Payment method with BCA virtual account |
+| `PAYOPTION_VIRTUAL_ACCOUNT_BNI_` | Payment method with BNI virtual account |
+| `PAYOPTION_VIRTUAL_ACCOUNT_MANDIRI_` | Payment method with Mandiri virtual account |
+| `PAYOPTION_VIRTUAL_ACCOUNT_BRI_` | Payment method with BRI virtual account |
+| `PAYOPTION_VIRTUAL_ACCOUNT_BTPN_` | Payment method with BTPN virtual account |
+| `PAYOPTION_VIRTUAL_ACCOUNT_CIMB_` | Payment method with CIMB virtual account |
+| `PAYOPTION_VIRTUAL_ACCOUNT_PERMATA_` | Payment method with Permata virtual account |
 
 
-## promoType
+## PromoType
 | Value | Description |
 |-------|-------------|
-| `CASH_BACK` |  |
-| `DISCOUNT` |  |
-| `VOUCHER` |  |
-| `POINT` |  |
+| `PROMOTYPE_CASH_BACK_` |  |
+| `PROMOTYPE_DISCOUNT_` |  |
+| `PROMOTYPE_VOUCHER_` |  |
+| `PROMOTYPE_POINT_` |  |
 
 
-## resourceType
+## ResourceType
 | Value | Description |
 |-------|-------------|
-| `BALANCE` |  |
-| `TRANSACTION_URL` |  |
-| `MASK_DANA_ID` |  |
-| `TOPUP_URL` |  |
-| `OTT` |  |
-| `USER_KYC` |  |
+| `RESOURCETYPE_BALANCE_` |  |
+| `RESOURCETYPE_TRANSACTION_URL_` |  |
+| `RESOURCETYPE_MASK_DANA_ID_` |  |
+| `RESOURCETYPE_TOPUP_URL_` |  |
+| `RESOURCETYPE_OTT_` |  |
+| `RESOURCETYPE_USER_KYC_` |  |
 
 
-## resultStatus
+## ResultStatus
 | Value | Description |
 |-------|-------------|
-| `S` |  |
-| `F` |  |
-| `U` |  |
+| `RESULTSTATUS_S_` |  |
+| `RESULTSTATUS_F_` |  |
+| `RESULTSTATUS_U_` |  |
 
 
-## serviceScenario
+## ServiceScenario
 | Value | Description |
 |-------|-------------|
-| `SCAN_AND_PAY` |  |
-| `EXIT_AND_PAY` |  |
-| `EMAS_PURCHASE` |  |
+| `SERVICESCENARIO_SCAN_AND_PAY_` |  |
+| `SERVICESCENARIO_EXIT_AND_PAY_` |  |
+| `SERVICESCENARIO_EMAS_PURCHASE_` |  |
 
 
-## serviceType
+## ServiceType
 | Value | Description |
 |-------|-------------|
-| `PARKING` |  |
-| `INVESTMENT` |  |
+| `SERVICETYPE_PARKING_` |  |
+| `SERVICETYPE_INVESTMENT_` |  |
 
 
-## sourcePlatform
+## SourcePlatform
 | Value | Description |
 |-------|-------------|
-| `IPG` |  |
+| `SOURCEPLATFORM_IPG_` |  |
 
 
-## terminalType
+## TerminalType
 | Value | Description |
 |-------|-------------|
-| `APP` | Mobile Application |
-| `WEB` | Browser Web |
-| `WAP` | Mobile Wap |
-| `SYSTEM` | System Call |
+| `TERMINALTYPE_APP_` | Mobile Application |
+| `TERMINALTYPE_WEB_` | Browser Web |
+| `TERMINALTYPE_WAP_` | Mobile Wap |
+| `TERMINALTYPE_SYSTEM_` | System Call |
 
 
-## type
+## Type
 | Value | Description |
 |-------|-------------|
-| `PAY_RETURN` | When finish payment, DANA will notify to the URL that has been defined by |
-| `NOTIFICATION` | After the payment, the user will be redirected to merchant page, this is mandatory |
+| `TYPE_PAY_RETURN_` | When finish payment, DANA will notify to the URL that has been defined by |
+| `TYPE_NOTIFICATION_` | After the payment, the user will be redirected to merchant page, this is mandatory |
 
 
 
