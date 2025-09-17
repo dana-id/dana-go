@@ -626,6 +626,7 @@ value := string(widget.SERVICETYPE_PARKING_)
 | `PAYOPTION_NETWORK_PAY_PG_GOPAY_` | Payment method with GoPay e-wallet |
 | `PAYOPTION_NETWORK_PAY_PG_LINKAJA_` | Payment method with LinkAja e-wallet |
 | `PAYOPTION_NETWORK_PAY_PG_CARD_` | Payment method with Card |
+| `PAYOPTION_NETWORK_PAY_PC_INDOMARET_` | Payment method with Indomaret |
 | `PAYOPTION_VIRTUAL_ACCOUNT_BCA_` | Payment method with BCA virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_BNI_` | Payment method with BNI virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_MANDIRI_` | Payment method with Mandiri virtual account |

@@ -308,13 +308,13 @@ func (o *CreateOrderByApiRequest) HasValidUpTo() bool {
 }
 
 // SetValidUpTo gets a reference to the given string and assigns it to the ValidUpTo field.
-func (o *CreateOrderByApiRequest) SetValidUpTo(v string) {
+func (o *CreateOrderByApiRequest) SetValidUpTo(v string) error {
 	// Validate that validUpTo date is not more than one week in the future
 	if !utils.IsNil(v) {
 		// Parse the input date
 		inputDate, err := time.Parse(time.RFC3339, v)
 		if err != nil {
-			panic(fmt.Errorf("invalid date format for validUpTo. Expected format: YYYY-MM-DDTHH:mm:ss+07:00"))
+			return fmt.Errorf("invalid date format for validUpTo. Expected format: YYYY-MM-DDTHH:mm:ss+07:00")
 		}
 
 		// Create Jakarta timezone object (GMT+7)
@@ -328,11 +328,12 @@ func (o *CreateOrderByApiRequest) SetValidUpTo(v string) {
 		
 		// Check if the input date exceeds the maximum allowed date
 		if inputDate.After(maxDate) {
-			panic(fmt.Errorf("validUpTo date cannot be more than one week in the future"))
+			return fmt.Errorf("validUpTo date cannot be more than one week in the future")
 		}
 	}
 
 	o.ValidUpTo = &v
+	return nil
 }
 
 // GetDisabledPayMethods returns the DisabledPayMethods field value if set, zero value otherwise.

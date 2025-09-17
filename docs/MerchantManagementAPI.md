@@ -13,6 +13,11 @@ Method | HTTP request | Description
 [**UpdateShop**](MerchantManagementAPI.md#UpdateShop) | **Post** /dana/merchant/shop/updateShop.htm | Update Shop
 
 
+## Additional Documentation
+
+* [Enum Types](#enum-types) - List of available enum constants
+* [Webhook Parser](#webhookparser) - Webhook handling
+
 
 ## CreateDivision
 

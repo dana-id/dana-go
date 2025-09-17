@@ -48,7 +48,7 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 	if data.Mode != nil {
 		mode = *data.Mode
 	}
-	
+
 	if mode == "DEEPLINK" {
 		if env == "sandbox" {
 			baseUrl = "https://m.sandbox.dana.id/n/link/binding"
@@ -78,8 +78,12 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 		state = uuidStr
 	}
 
-	// Generate scopes
-	scopes := GenerateScopes()
+	var scopes string
+	if data.Scopes != nil {
+		scopes = strings.Join(data.Scopes, ",")
+	} else {
+		scopes = GenerateScopes()
+	}
 
 	// Generate external ID
 	externalId := GenerateExternalId(data.ExternalId)
@@ -94,7 +98,7 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 
 	// Build URL with required parameters
 	var params []string
-	
+
 	// Variable to store requestId for DEEPLINK mode
 	var requestId string
 
@@ -102,11 +106,11 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 	params = append(params, "partnerId="+partnerId)
 	params = append(params, "scopes="+scopes)
 	params = append(params, "externalId="+externalId)
-	
+
 	if mode == "DEEPLINK" {
 		// Generate UUID request ID for DEEPLINK mode
 		requestId = uuid.New().String()
-		
+
 		// Add DEEPLINK specific parameters
 		params = append(params, "terminalType=WEB")
 		params = append(params, "requestId="+requestId)
@@ -115,7 +119,7 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 	} else { // API mode
 		// Generate channel ID for API mode
 		channelId := GenerateChannelId()
-		
+
 		// Add API specific parameters
 		params = append(params, "channelId="+channelId)
 		params = append(params, "redirectUrl="+url.QueryEscape(data.RedirectUrl))
@@ -144,25 +148,25 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 		// Use a map for seamless data modifications
 		seamlessDataMap := make(map[string]interface{})
 		rawData := data.SeamlessData
-		
+
 		// Convert to JSON and back to ensure we have a map
 		seamlessDataBytes, err := json.Marshal(rawData)
 		if err != nil {
 			return "", fmt.Errorf("error marshaling seamlessData: %v", err)
 		}
-		
+
 		err = json.Unmarshal(seamlessDataBytes, &seamlessDataMap)
 		if err != nil {
 			return "", fmt.Errorf("error unmarshaling seamlessData: %v", err)
 		}
-		
+
 		// Handle mobile/mobileNumber conversion
 		if mobileNumber, ok := seamlessDataMap["mobileNumber"]; ok {
 			seamlessDataMap["mobile"] = mobileNumber
 			seamlessDataMap["mobileNumber"] = nil
 			delete(seamlessDataMap, "mobileNumber")
 		}
-		
+
 		// Add DEEPLINK specific data
 		if mode == "DEEPLINK" && requestId != "" {
 			seamlessDataMap["externalUid"] = externalId
@@ -170,7 +174,7 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 			seamlessDataMap["verifiedTime"] = "0"
 			seamlessDataMap["reqMsgId"] = requestId
 		}
-		
+
 		// Convert seamlessData object to JSON string
 		seamlessDataBytes, err = json.Marshal(seamlessDataMap)
 		if err != nil {

@@ -148,11 +148,7 @@ func sha256LowerHex(data string) string {
 }
 
 func (p *WebhookParser) constructStringToVerify(httpMethod, relativePathURL, body, xTimestamp string) (string, error) {
-	minifiedBody, err := MinifyJSON(body)
-	if err != nil {
-		return "", fmt.Errorf("constructStringToVerify: failed to minify JSON body: %w", err)
-	}
-	bodyHash := sha256LowerHex(minifiedBody)
+	bodyHash := sha256LowerHex(body)
 	return fmt.Sprintf("%s:%s:%s:%s", httpMethod, relativePathURL, bodyHash, xTimestamp), nil
 }
 

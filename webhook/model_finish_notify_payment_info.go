@@ -15,9 +15,10 @@
 package webhook
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
+
 	utils "github.com/dana-id/dana-go/utils"
 )
 
@@ -27,9 +28,9 @@ var _ utils.MappedNullable = &FinishNotifyPaymentInfo{}
 // FinishNotifyPaymentInfo struct for FinishNotifyPaymentInfo
 type FinishNotifyPaymentInfo struct {
 	// Cashier request identifier
-	CashierRequestId string `json:"cashierRequestId"`
+	CashierRequestId *string `json:"cashierRequestId,omitempty"`
 	// Information of paid time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
-	PaidTime string `json:"paidTime" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
+	PaidTime *string `json:"paidTime,omitempty" validate:"omitempty,regexp=^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\+07:00$"`
 	// Information of pay option. Refer to payOptionInfos for the detailed
 	PayOptionInfos []PayOptionInfo `json:"payOptionInfos"`
 	// Extend information of pay request
@@ -44,10 +45,8 @@ type _FinishNotifyPaymentInfo FinishNotifyPaymentInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFinishNotifyPaymentInfo(cashierRequestId string, paidTime string, payOptionInfos []PayOptionInfo) *FinishNotifyPaymentInfo {
+func NewFinishNotifyPaymentInfo(payOptionInfos []PayOptionInfo) *FinishNotifyPaymentInfo {
 	this := FinishNotifyPaymentInfo{}
-	this.CashierRequestId = cashierRequestId
-	this.PaidTime = paidTime
 	this.PayOptionInfos = payOptionInfos
 	return &this
 }
@@ -67,7 +66,7 @@ func (o *FinishNotifyPaymentInfo) GetCashierRequestId() string {
 		return ret
 	}
 
-	return o.CashierRequestId
+	return *o.CashierRequestId
 }
 
 // GetCashierRequestIdOk returns a tuple with the CashierRequestId field value
@@ -76,11 +75,11 @@ func (o *FinishNotifyPaymentInfo) GetCashierRequestIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.CashierRequestId, true
+	return o.CashierRequestId, true
 }
 
 // SetCashierRequestId sets field value
-func (o *FinishNotifyPaymentInfo) SetCashierRequestId(v string) {
+func (o *FinishNotifyPaymentInfo) SetCashierRequestId(v *string) {
 	o.CashierRequestId = v
 }
 
@@ -91,7 +90,7 @@ func (o *FinishNotifyPaymentInfo) GetPaidTime() string {
 		return ret
 	}
 
-	return o.PaidTime
+	return *o.PaidTime
 }
 
 // GetPaidTimeOk returns a tuple with the PaidTime field value
@@ -100,11 +99,11 @@ func (o *FinishNotifyPaymentInfo) GetPaidTimeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PaidTime, true
+	return o.PaidTime, true
 }
 
 // SetPaidTime sets field value
-func (o *FinishNotifyPaymentInfo) SetPaidTime(v string) {
+func (o *FinishNotifyPaymentInfo) SetPaidTime(v *string) {
 	o.PaidTime = v
 }
 
@@ -197,7 +196,7 @@ func (o *FinishNotifyPaymentInfo) SetExtendInfo(v string) {
 }
 
 func (o FinishNotifyPaymentInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -206,8 +205,12 @@ func (o FinishNotifyPaymentInfo) MarshalJSON() ([]byte, error) {
 
 func (o FinishNotifyPaymentInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["cashierRequestId"] = o.CashierRequestId
-	toSerialize["paidTime"] = o.PaidTime
+	if !utils.IsNil(o.CashierRequestId) {
+		toSerialize["cashierRequestId"] = o.CashierRequestId
+	}
+	if !utils.IsNil(o.PaidTime) {
+		toSerialize["paidTime"] = o.PaidTime
+	}
 	toSerialize["payOptionInfos"] = o.PayOptionInfos
 	if !utils.IsNil(o.PayRequestExtendInfo) {
 		toSerialize["payRequestExtendInfo"] = o.PayRequestExtendInfo
@@ -223,8 +226,6 @@ func (o *FinishNotifyPaymentInfo) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"cashierRequestId",
-		"paidTime",
 		"payOptionInfos",
 	}
 
@@ -233,10 +234,10 @@ func (o *FinishNotifyPaymentInfo) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -292,5 +293,3 @@ func (v *NullableFinishNotifyPaymentInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

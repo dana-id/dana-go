@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CashierRequestId** | **string** | Cashier request identifier | 
-**PaidTime** | **string** | Information of paid time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | 
+**CashierRequestId** | **string** | Cashier request identifier | [optional]
+**PaidTime** | **string** | Information of paid time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional]
 **PayOptionInfos** | [**[]PayOptionInfo**](PayOptionInfo.md) | Information of pay option. Refer to payOptionInfos for the detailed | 
 **PayRequestExtendInfo** | Pointer to **string** | Extend information of pay request | [optional] 
 **ExtendInfo** | Pointer to **string** | Extend information | [optional] 
@@ -44,7 +44,7 @@ and a boolean to check if the value has been set.
 
 ### SetCashierRequestId
 
-`func (o *FinishNotifyPaymentInfo) SetCashierRequestId(v string)`
+`func (o *FinishNotifyPaymentInfo) SetCashierRequestId(v *string)`
 
 SetCashierRequestId sets CashierRequestId field to given value.
 
@@ -64,7 +64,7 @@ and a boolean to check if the value has been set.
 
 ### SetPaidTime
 
-`func (o *FinishNotifyPaymentInfo) SetPaidTime(v string)`
+`func (o *FinishNotifyPaymentInfo) SetPaidTime(v *string)`
 
 SetPaidTime sets PaidTime field to given value.
 

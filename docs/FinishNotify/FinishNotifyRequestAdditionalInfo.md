@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ShopInfo** | Pointer to [**ShopInfo**](ShopInfo.md) |  | [optional] 
 **ExtendInfo** | Pointer to **string** | Extended information (as a JSON string) | [optional] 
 **ExtendInfoClosedReason** | Pointer to **string** | Reason for order closure (if order is closed) | [optional] 
+**PaidTime** | Pointer to **string** | Information of paid time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
 
 ## Methods
 
@@ -127,6 +128,25 @@ SetExtendInfoClosedReason sets ExtendInfoClosedReason field to given value.
 `func (o *FinishNotifyAdditionalInfo) HasExtendInfoClosedReason() bool`
 
 HasExtendInfoClosedReason returns a boolean if a field has been set.
+
+### GetPaidTime
+
+`func (o *FinishNotifyAdditionalInfo) GetPaidTime() string`
+
+GetPaidTime returns the PaidTime field if non-nil, zero value otherwise.
+
+### GetPaidTimeOk
+
+`func (o *FinishNotifyAdditionalInfo) GetPaidTimeOk() (*string, bool)`
+
+GetPaidTimeOk returns a tuple with the PaidTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaidTime
+
+`func (o *FinishNotifyAdditionalInfo) SetPaidTime(v string)`
+
+SetPaidTime sets PaidTime field to given value.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

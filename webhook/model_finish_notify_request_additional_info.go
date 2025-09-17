@@ -16,6 +16,7 @@ package webhook
 
 import (
 	"encoding/json"
+
 	utils "github.com/dana-id/dana-go/utils"
 )
 
@@ -32,6 +33,8 @@ type FinishNotifyRequestAdditionalInfo struct {
 	ExtendInfo *string `json:"extendInfo,omitempty"`
 	// Additional information of closed reason. Required if order is closed
 	ExtendInfoClosedReason *string `json:"extendInfo.closedReason,omitempty"`
+	// Additional information of paid time
+	PaidTime *string `json:"paidTime,omitempty" validate:"omitempty,regexp=^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\+07:00$"`
 }
 
 // NewFinishNotifyRequestAdditionalInfo instantiates a new FinishNotifyRequestAdditionalInfo object
@@ -179,8 +182,40 @@ func (o *FinishNotifyRequestAdditionalInfo) SetExtendInfoClosedReason(v string) 
 	o.ExtendInfoClosedReason = &v
 }
 
+// GetPaidTime returns the PaidTime field value if set, zero value otherwise.
+func (o *FinishNotifyRequestAdditionalInfo) GetPaidTime() string {
+	if o == nil || utils.IsNil(o.PaidTime) {
+		var ret string
+		return ret
+	}
+	return *o.PaidTime
+}
+
+// GetPaidTimeOk returns a tuple with the PaidTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FinishNotifyRequestAdditionalInfo) GetPaidTimeOk() (*string, bool) {
+	if o == nil || utils.IsNil(o.PaidTime) {
+		return nil, false
+	}
+	return o.PaidTime, true
+}
+
+// HasPaidTime returns a boolean if a field has been set.
+func (o *FinishNotifyRequestAdditionalInfo) HasPaidTime() bool {
+	if o != nil && !utils.IsNil(o.PaidTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaidTime gets a reference to the given string and assigns it to the PaidTime field.
+func (o *FinishNotifyRequestAdditionalInfo) SetPaidTime(v string) {
+	o.PaidTime = &v
+}
+
 func (o FinishNotifyRequestAdditionalInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -200,6 +235,9 @@ func (o FinishNotifyRequestAdditionalInfo) ToMap() (map[string]interface{}, erro
 	}
 	if !utils.IsNil(o.ExtendInfoClosedReason) {
 		toSerialize["extendInfo.closedReason"] = o.ExtendInfoClosedReason
+	}
+	if !utils.IsNil(o.PaidTime) {
+		toSerialize["paidTime"] = o.PaidTime
 	}
 	return toSerialize, nil
 }
@@ -239,5 +277,3 @@ func (v *NullableFinishNotifyRequestAdditionalInfo) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -220,7 +220,6 @@ func GetUsablePrivateKey(apiKey *config.APIKey) ([]byte, error) {
 	// Prioritize reading from file if path is available
 	if apiKey.PRIVATE_KEY_PATH != "" {
 		// Read private key from file
-		fmt.Println("Reading private key from file:", apiKey.PRIVATE_KEY_PATH)
 		privateKeyBytes, err := os.ReadFile(apiKey.PRIVATE_KEY_PATH)
 		if err != nil {
 			return nil, fmt.Errorf("failed to read private key file: %v", err)
@@ -228,11 +227,6 @@ func GetUsablePrivateKey(apiKey *config.APIKey) ([]byte, error) {
 
 		keyStr := string(privateKeyBytes)
 		if len(keyStr) > 0 {
-			lines := strings.Split(keyStr, "\n")
-			if len(lines) > 0 {
-				fmt.Println("Private key file loaded successfully, begins with:", lines[0])
-			}
-
 			normalizedKey, err := normalizePEMKey(keyStr)
 			if err != nil {
 				return nil, fmt.Errorf("failed to normalize private key from file: %v", err)

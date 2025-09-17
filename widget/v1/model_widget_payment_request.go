@@ -245,8 +245,9 @@ func (o *WidgetPaymentRequest) HasValidUpTo() bool {
 }
 
 // SetValidUpTo gets a reference to the given string and assigns it to the ValidUpTo field.
-func (o *WidgetPaymentRequest) SetValidUpTo(v string) {
+func (o *WidgetPaymentRequest) SetValidUpTo(v string) error {
 	o.ValidUpTo = &v
+	return nil
 }
 
 // GetPointOfInitiation returns the PointOfInitiation field value if set, zero value otherwise.
