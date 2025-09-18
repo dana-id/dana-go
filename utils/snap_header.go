@@ -247,8 +247,14 @@ func GetUsablePrivateKey(apiKey *config.APIKey) ([]byte, error) {
 
 	return nil, errors.New("no private key or private key path provided")
 }
-func normalizePEMKey(keyContent string) ([]byte, error) {
 
+func normalizePEMKey(keyContent string) ([]byte, error) {
+	return NormalizePEMKeyWithType(keyContent, "PRIVATE KEY")
+}
+
+// NormalizePEMKeyWithType takes a raw key content string and attempts to normalize it into a standard PEM format byte slice.
+// It handles env-style PEMs (with literal \\n), raw PEMs, and minified/semi-minified keys.
+func NormalizePEMKeyWithType(keyContent string, keyType string) ([]byte, error) {
 	hasBeginMarkerPreCheck := strings.Contains(keyContent, "-----BEGIN")
 	hasEndMarkerPreCheck := strings.Contains(keyContent, "-----END")
 	hasLiteralNewline := strings.Contains(keyContent, "\\n")
@@ -274,10 +280,8 @@ func normalizePEMKey(keyContent string) ([]byte, error) {
 			return nil, fmt.Errorf("key content is empty after processing and removing markers/newlines")
 		}
 
-		keyTypeHeader := "PRIVATE KEY"
-
 		var pemBuffer bytes.Buffer
-		pemBuffer.WriteString(fmt.Sprintf("-----BEGIN %s-----\n", keyTypeHeader))
+		pemBuffer.WriteString(fmt.Sprintf("-----BEGIN %s-----\n", keyType))
 		for i := 0; i < len(base64KeyData); i += 64 {
 			end := i + 64
 			if end > len(base64KeyData) {
@@ -286,7 +290,7 @@ func normalizePEMKey(keyContent string) ([]byte, error) {
 			pemBuffer.WriteString(base64KeyData[i:end])
 			pemBuffer.WriteString("\n")
 		}
-		pemBuffer.WriteString(fmt.Sprintf("-----END %s-----\n", keyTypeHeader))
+		pemBuffer.WriteString(fmt.Sprintf("-----END %s-----\n", keyType))
 		return pemBuffer.Bytes(), nil
 	} else {
 		return nil, fmt.Errorf(
