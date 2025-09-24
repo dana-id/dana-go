@@ -15,9 +15,10 @@
 package webhook
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
+
 	utils "github.com/dana-id/dana-go/utils"
 )
 
@@ -36,16 +37,16 @@ type FinishNotifyRequest struct {
 	MerchantId string `json:"merchantId"`
 	// Information of sub merchant identifier
 	SubMerchantId *string `json:"subMerchantId,omitempty"`
-	// Amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br> 
+	// Amount. Contains two sub-fields:<br> 1. Value: Transaction amount, including the cents<br> 2. Currency: Currency code based on ISO<br>
 	Amount Money `json:"amount"`
-	// Transaction status code:<br> - 00 = Success, the order has been paid<br> - 05 = Cancelled, the order has been closed because it is expired<br> 
+	// Transaction status code:<br> - 00 = Success, the order has been paid<br> - 05 = Cancelled, the order has been closed because it is expired<br>
 	LatestTransactionStatus string `json:"latestTransactionStatus"`
 	// Description of transaction status
 	TransactionStatusDesc *string `json:"transactionStatusDesc,omitempty"`
 	// Transaction created time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
-	CreatedTime string `json:"createdTime" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
+	CreatedTime string `json:"createdTime"`
 	// Transaction finished time, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time)
-	FinishedTime string `json:"finishedTime" validate:"regexp=^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}\\\\+07:00$"`
+	FinishedTime string `json:"finishedTime"`
 	// Store identifier to indicate to which store this payment belongs to
 	ExternalStoreId *string `json:"externalStoreId,omitempty"`
 	// Additional information
@@ -407,7 +408,7 @@ func (o *FinishNotifyRequest) SetAdditionalInfo(v FinishNotifyRequestAdditionalI
 }
 
 func (o FinishNotifyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -460,10 +461,10 @@ func (o *FinishNotifyRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -519,5 +520,3 @@ func (v *NullableFinishNotifyRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

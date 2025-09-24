@@ -181,7 +181,7 @@ func GetOpenApiGeneratedHeaders(body string, apiKey *config.APIKey, functionName
 	timestamp := jktTime.Format("2006-01-02T15:04:05+07:00")
 
 	// Generate unique request message ID
-	reqMsgID := uuid.New().String()
+	reqMsgID := "sdk" + uuid.New().String()[3:]
 
 	// Basic OPEN_API headers
 	headers := map[string]string{

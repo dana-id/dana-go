@@ -387,6 +387,7 @@ value := string(payment_gateway.PAYMETHOD_BALANCE_)
 | `PAYOPTION_NETWORK_PAY_PG_LINKAJA_` | Payment method with LinkAja e-wallet |
 | `PAYOPTION_NETWORK_PAY_PG_CARD_` | Payment method with Card |
 | `PAYOPTION_NETWORK_PAY_PC_INDOMARET_` | Payment method with Indomaret |
+| `PAYOPTION_NETWORK_PAY_PG_QRIS_` | Payment method with QRIS |
 | `PAYOPTION_VIRTUAL_ACCOUNT_BCA_` | Payment method with BCA virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_BNI_` | Payment method with BNI virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_MANDIRI_` | Payment method with Mandiri virtual account |
@@ -394,6 +395,7 @@ value := string(payment_gateway.PAYMETHOD_BALANCE_)
 | `PAYOPTION_VIRTUAL_ACCOUNT_BTPN_` | Payment method with BTPN virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_CIMB_` | Payment method with CIMB virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_PERMATA_` | Payment method with Permata virtual account |
+| `PAYOPTION_VIRTUAL_ACCOUNT_PANIN_` | Payment method with Panin virtual account |
 
 
 ## SourcePlatform

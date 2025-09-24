@@ -139,14 +139,14 @@ func getRuntimeHeaders(body string, apiKey *config.APIKey, method string, endpoi
 		return baseHeaders
 
 	case ScenarioApplyOTT, ScenarioUnbindingAccount, ScenarioBalanceInquiry:
-		baseHeaders[HeaderXExternalID] = uuid.New().String()
+		baseHeaders[HeaderXExternalID] = "sdk" + uuid.New().String()[3:]
 		baseHeaders[HeaderXSignature] = generateSignature(body, apiKey, method, endpoint, timestamp, scenario)
 
 		extractAdditionalHeaders(baseHeaders, body)
 		return baseHeaders
 
 	default:
-		baseHeaders[HeaderXExternalID] = uuid.New().String()
+		baseHeaders[HeaderXExternalID] = "sdk" + uuid.New().String()[3:]
 		baseHeaders[HeaderXSignature] = generateSignature(body, apiKey, method, endpoint, timestamp, scenario)
 		return baseHeaders
 	}
