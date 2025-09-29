@@ -50,16 +50,16 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 	}
 
 	if mode == "DEEPLINK" {
-		if env == "sandbox" {
-			baseUrl = "https://m.sandbox.dana.id/n/link/binding"
-		} else {
+		if strings.ToLower(env) == "production" {
 			baseUrl = "https://link.dana.id/bindSnap"
+		} else {
+			baseUrl = "https://m.sandbox.dana.id/n/link/binding"
 		}
 	} else { // API mode
-		if env == "sandbox" {
-			baseUrl = "https://m.sandbox.dana.id/n/ipg/oauth"
-		} else {
+		if strings.ToLower(env) == "production" {
 			baseUrl = "https://m.dana.id/n/ipg/oauth"
+		} else {
+			baseUrl = "https://m.sandbox.dana.id/n/ipg/oauth"
 		}
 	}
 

@@ -395,7 +395,7 @@ value := string(payment_gateway.PAYMETHOD_BALANCE_)
 | `PAYOPTION_VIRTUAL_ACCOUNT_BTPN_` | Payment method with BTPN virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_CIMB_` | Payment method with CIMB virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_PERMATA_` | Payment method with Permata virtual account |
-| `PAYOPTION_VIRTUAL_ACCOUNT_PANIN_` | Payment method with Panin virtual account |
+| `PAYOPTION_VIRTUAL_ACCOUNT_PANI_` | Payment method with Panin virtual account |
 
 
 ## SourcePlatform
