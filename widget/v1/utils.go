@@ -57,9 +57,9 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 		}
 	} else { // API mode
 		if strings.ToLower(env) == "production" {
-			baseUrl = "https://m.dana.id/n/ipg/oauth"
+			baseUrl = "https://m.dana.id/v1.0/get-auth-code"
 		} else {
-			baseUrl = "https://m.sandbox.dana.id/n/ipg/oauth"
+			baseUrl = "https://m.sandbox.dana.id/v1.0/get-auth-code"
 		}
 	}
 
