@@ -18,6 +18,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
+	"regexp"
 	"strings"
 )
 
@@ -131,14 +132,33 @@ func setFieldValue(field reflect.Value, value interface{}, fieldType reflect.Typ
 	return nil
 }
 
-// ensureMinifiedJSON checks if JSON is already minified and minifies it if necessary
-func EnsureMinifiedJSON(jsonStr string) (string, error) {
-	// Quick check: if JSON contains spaces around common separators, it's likely not minified
-	if isJSONMinified(jsonStr) {
-		return jsonStr, nil
-	}
+func processNestedJSONFields(jsonStr string) string {
+	normalizedStr := strings.ReplaceAll(jsonStr, `\\"`, `\"`)
+	re := regexp.MustCompile(`"(\w+)":"(\{.*?\})"`)
 
-	return minifyJSON(jsonStr)
+	return re.ReplaceAllStringFunc(normalizedStr, func(match string) string {
+		parts := re.FindStringSubmatch(match)
+		if len(parts) == 3 {
+			fieldName := parts[1]
+			jsonValue := parts[2]
+
+			escapedValue := strings.ReplaceAll(jsonValue, `"`, `\"`)
+
+			return fmt.Sprintf(`"%s":"%s"`, fieldName, escapedValue)
+		}
+		return match
+	})
+}
+
+func EnsureMinifiedJSON(jsonStr string) (string, error) {
+	normalizedStr := strings.ReplaceAll(jsonStr, `\\"`, `\"`)
+
+	if isJSONMinified(normalizedStr) {
+		return normalizedStr, nil
+	}
+	processedStr := processNestedJSONFields(normalizedStr)
+
+	return minifyJSON(processedStr)
 }
 
 // isJSONMinified performs a quick heuristic check to see if JSON is already minified

@@ -26,7 +26,7 @@ import (
 	"os"
 	"strings"
 
-	utils "github.com/dana-id/dana-go/utils"
+	"github.com/dana-id/dana-go/utils"
 )
 
 type WebhookParser struct {
@@ -108,14 +108,35 @@ func (p *WebhookParser) ParseWebhook(
 	headers HeaderGetter,
 	body string,
 ) (*FinishNotifyRequest, error) {
-	xSignature := headers.Get("X-SIGNATURE")
-	xTimestamp := headers.Get("X-TIMESTAMP")
+	normalizedHeaders := make(map[string]string)
+
+	headerKeys := []string{"x-signature", "x-timestamp"}
+
+	for _, key := range headerKeys {
+		if value := headers.Get(key); value != "" {
+			normalizedHeaders[strings.ToUpper(key)] = value
+		}
+		if value := headers.Get(strings.ToUpper(key)); value != "" {
+			normalizedHeaders[strings.ToUpper(key)] = value
+		}
+		if value := headers.Get(strings.Title(key)); value != "" {
+			normalizedHeaders[strings.ToUpper(key)] = value
+		}
+	}
+
+	xSignature := normalizedHeaders["X-SIGNATURE"]
+	xTimestamp := normalizedHeaders["X-TIMESTAMP"]
 
 	if xSignature == "" || xTimestamp == "" {
 		return nil, fmt.Errorf("missing X-SIGNATURE or X-TIMESTAMP header")
 	}
 
-	stringToVerify, err := p.constructStringToVerify(httpMethod, relativePathURL, body, xTimestamp)
+	processedBody, err := utils.EnsureMinifiedJSON(body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to process JSON body: %w", err)
+	}
+
+	stringToVerify, err := p.constructStringToVerify(httpMethod, relativePathURL, processedBody, xTimestamp)
 	if err != nil {
 		return nil, fmt.Errorf("failed to construct string for verification: %w", err)
 	}
@@ -125,20 +146,17 @@ func (p *WebhookParser) ParseWebhook(
 		return nil, fmt.Errorf("failed to base64 decode X-SIGNATURE: %w", err)
 	}
 
-	hashedStringToVerify := sha256.Sum256([]byte(stringToVerify))
+	hasher := sha256.New()
+	hasher.Write([]byte(stringToVerify))
+	hashedStringToVerify := hasher.Sum(nil)
 
 	err = rsa.VerifyPKCS1v15(p.publicKey, crypto.SHA256, hashedStringToVerify[:], signatureBytes)
 	if err != nil {
-		if err == rsa.ErrVerification {
-			return nil, fmt.Errorf("signature verification failed: %w. StringToVerify: '%s'", err, stringToVerify)
-		}
-		return nil, fmt.Errorf("error during signature verification: %w. StringToVerify: '%s'", err, stringToVerify)
+		return nil, fmt.Errorf("signature verification failed: %w", err)
 	}
-
-	var payload FinishNotifyRequest
-	if err := utils.FlexibleUnmarshal([]byte(body), &payload); err != nil {
-		return nil, fmt.Errorf("failed to unmarshal JSON body into FinishNotifyRequest: %w", err)
+	var result FinishNotifyRequest
+	if err := utils.FlexibleUnmarshal([]byte(processedBody), &result); err != nil {
+		return nil, fmt.Errorf("failed to unmarshal webhook body: %w", err)
 	}
-
-	return &payload, nil
+	return &result, nil
 }
