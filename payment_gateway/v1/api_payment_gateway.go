@@ -155,7 +155,7 @@ func (a *PaymentGatewayAPIService) CancelOrderExecute(r ApiCancelOrderRequest) (
 			}
 		}
 		dataForSnapStr = string(dst.Bytes())
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, true, "")
 		
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -288,7 +288,7 @@ func (a *PaymentGatewayAPIService) ConsultPayExecute(r ApiConsultPayRequest) (*C
 			}
 		}
 		dataForSnapStr = string(dst.Bytes())
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, true, "")
 		
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -421,7 +421,7 @@ func (a *PaymentGatewayAPIService) CreateOrderExecute(r ApiCreateOrderRequest) (
 			}
 		}
 		dataForSnapStr = string(dst.Bytes())
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, true, "")
 		
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -554,7 +554,7 @@ func (a *PaymentGatewayAPIService) QueryPaymentExecute(r ApiQueryPaymentRequest)
 			}
 		}
 		dataForSnapStr = string(dst.Bytes())
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, true, "")
 		
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -687,7 +687,7 @@ func (a *PaymentGatewayAPIService) RefundOrderExecute(r ApiRefundOrderRequest) (
 			}
 		}
 		dataForSnapStr = string(dst.Bytes())
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, true, "")
 		
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

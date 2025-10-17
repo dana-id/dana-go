@@ -39,6 +39,8 @@ type APIKey struct {
 	CLIENT_SECRET string
 	CLIENT_ID     string
 	ACCESS_TOKEN  string
+	// Debug mode
+	X_DEBUG string
 }
 
 // ServerVariable stores the information about a server variable

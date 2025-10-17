@@ -49,6 +49,7 @@ const (
 	HeaderXDeviceID             = "X-DEVICE-ID"
 	HeaderXLatitude             = "X-LATITUDE"
 	HeaderXLongitude            = "X-LONGITUDE"
+	HeaderXDebug                = "X-Debug-Mode"
 )
 
 // Scenario constants
@@ -61,7 +62,9 @@ const (
 
 // SetSnapHeaders applies all Snap API authentication headers to the provided headers map
 // This centralized function helps avoid duplicate authentication code across API methods
-func SetSnapHeaders(headerParams map[string]string, apiKey *config.APIKey, body string, method string, endpoint string, opts ...string) {
+func SetSnapHeaders(headerParams map[string]string, apiKey *config.APIKey, body string,
+	method string, endpoint string, supportDebugMode bool,
+	opts ...string) {
 	if apiKey == nil {
 		ReportError("API key is required for authentication")
 		return
@@ -97,6 +100,13 @@ func SetSnapHeaders(headerParams map[string]string, apiKey *config.APIKey, body 
 	runtimeHeaders := getRuntimeHeaders(body, apiKey, method, endpoint, scenario)
 	for k, v := range runtimeHeaders {
 		headerParams[k] = v
+	}
+
+	// Set X-Debug-Mode header
+	if apiKey.X_DEBUG == "true" &&
+		strings.ToLower(apiKey.ENV) == strings.ToLower(config.ENV_SANDBOX) &&
+		supportDebugMode {
+		headerParams[HeaderXDebug] = "true"
 	}
 
 	// Remove sensitive data from headerParams

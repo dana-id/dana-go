@@ -157,7 +157,7 @@ func (a *WidgetAPIService) AccountUnbindingExecute(r ApiAccountUnbindingRequest)
 		dataForSnapStr = string(dst.Bytes())
 
 		// SNAP signature scenario: ACCOUNT UNBINDING
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "unbinding_account")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "unbinding_account")
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -291,7 +291,7 @@ func (a *WidgetAPIService) ApplyOTTExecute(r ApiApplyOTTRequest) (*ApplyOTTRespo
 		dataForSnapStr = string(dst.Bytes())
 
 		// SNAP signature scenario: APPLY OTT
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "apply_ott")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "apply_ott")
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -425,7 +425,7 @@ func (a *WidgetAPIService) ApplyTokenExecute(r ApiApplyTokenRequest) (*ApplyToke
 		dataForSnapStr = string(dst.Bytes())
 
 		// SNAP signature scenario: APPLY TOKEN
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "apply_token")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "apply_token")
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -559,7 +559,7 @@ func (a *WidgetAPIService) BalanceInquiryExecute(r ApiBalanceInquiryRequest) (*B
 		dataForSnapStr = string(dst.Bytes())
 
 		// SNAP signature scenario: BALANCE INQUIRY
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "balance_inquiry")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "balance_inquiry")
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -693,7 +693,7 @@ func (a *WidgetAPIService) CancelOrderExecute(r ApiCancelOrderRequest) (*CancelO
 		dataForSnapStr = string(dst.Bytes())
 
 		// Default B2B signature scenario
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -827,7 +827,7 @@ func (a *WidgetAPIService) QueryPaymentExecute(r ApiQueryPaymentRequest) (*Query
 		dataForSnapStr = string(dst.Bytes())
 
 		// Default B2B signature scenario
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -961,7 +961,7 @@ func (a *WidgetAPIService) QueryUserProfileExecute(r ApiQueryUserProfileRequest)
 		dataForSnapStr = string(dst.Bytes())
 
 		// Default B2B signature scenario
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1095,7 +1095,7 @@ func (a *WidgetAPIService) RefundOrderExecute(r ApiRefundOrderRequest) (*RefundO
 		dataForSnapStr = string(dst.Bytes())
 
 		// Default B2B signature scenario
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1229,7 +1229,7 @@ func (a *WidgetAPIService) WidgetPaymentExecute(r ApiWidgetPaymentRequest) (*Wid
 		dataForSnapStr = string(dst.Bytes())
 
 		// Default B2B signature scenario
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

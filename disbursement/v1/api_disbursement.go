@@ -155,7 +155,7 @@ func (a *DisbursementAPIService) BankAccountInquiryExecute(r ApiBankAccountInqui
 			}
 		}
 		dataForSnapStr = string(dst.Bytes())
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 		
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -288,7 +288,7 @@ func (a *DisbursementAPIService) DanaAccountInquiryExecute(r ApiDanaAccountInqui
 			}
 		}
 		dataForSnapStr = string(dst.Bytes())
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 		
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -421,7 +421,7 @@ func (a *DisbursementAPIService) TransferToBankExecute(r ApiTransferToBankReques
 			}
 		}
 		dataForSnapStr = string(dst.Bytes())
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 		
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -554,7 +554,7 @@ func (a *DisbursementAPIService) TransferToBankInquiryStatusExecute(r ApiTransfe
 			}
 		}
 		dataForSnapStr = string(dst.Bytes())
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 		
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -687,7 +687,7 @@ func (a *DisbursementAPIService) TransferToDanaExecute(r ApiTransferToDanaReques
 			}
 		}
 		dataForSnapStr = string(dst.Bytes())
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 		
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -820,7 +820,7 @@ func (a *DisbursementAPIService) TransferToDanaInquiryStatusExecute(r ApiTransfe
 			}
 		}
 		dataForSnapStr = string(dst.Bytes())
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, "")
+		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 		
 	}
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)

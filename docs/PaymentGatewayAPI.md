@@ -45,6 +45,7 @@ func main() {
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
 		ORIGIN:       os.Getenv("ORIGIN"),
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+		// X_DEBUG: os.Getenv("X_DEBUG"), // Optional, can be set to "true" to enable debug mode (showing reason of failed request in additionalInfo.debugMessage in response)
 	}
 	apiClient := dana.NewAPIClient(configuration)
 	
@@ -106,6 +107,7 @@ func main() {
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
 		ORIGIN:       os.Getenv("ORIGIN"),
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+		// X_DEBUG: os.Getenv("X_DEBUG"), // Optional, can be set to "true" to enable debug mode (showing reason of failed request in additionalInfo.debugMessage in response)
 	}
 	apiClient := dana.NewAPIClient(configuration)
 	
@@ -167,6 +169,7 @@ func main() {
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
 		ORIGIN:       os.Getenv("ORIGIN"),
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+		// X_DEBUG: os.Getenv("X_DEBUG"), // Optional, can be set to "true" to enable debug mode (showing reason of failed request in additionalInfo.debugMessage in response)
 	}
 	apiClient := dana.NewAPIClient(configuration)
 	
@@ -228,6 +231,7 @@ func main() {
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
 		ORIGIN:       os.Getenv("ORIGIN"),
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+		// X_DEBUG: os.Getenv("X_DEBUG"), // Optional, can be set to "true" to enable debug mode (showing reason of failed request in additionalInfo.debugMessage in response)
 	}
 	apiClient := dana.NewAPIClient(configuration)
 	
@@ -289,6 +293,7 @@ func main() {
 		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"), // Can provide the private key directly as a string or via a file path (PRIVATE_KEY_PATH). If both added, we will prioritize the path
 		ORIGIN:       os.Getenv("ORIGIN"),
 		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+		// X_DEBUG: os.Getenv("X_DEBUG"), // Optional, can be set to "true" to enable debug mode (showing reason of failed request in additionalInfo.debugMessage in response)
 	}
 	apiClient := dana.NewAPIClient(configuration)
 	
