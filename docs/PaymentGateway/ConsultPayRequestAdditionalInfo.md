@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Buyer** | [**Buyer**](Buyer.md) | Additional information of buyer | 
+**Buyer** | Pointer to [**Buyer**](Buyer.md) | Additional information of buyer | [optional] 
 **EnvInfo** | [**EnvInfo**](EnvInfo.md) | Additional information of environment info | 
 **MerchantTransType** | Pointer to **string** | Additional information of merchant transaction type | [optional] 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewConsultPayRequestAdditionalInfo
 
-`func NewConsultPayRequestAdditionalInfo(buyer Buyer, envInfo EnvInfo, ) *ConsultPayRequestAdditionalInfo`
+`func NewConsultPayRequestAdditionalInfo(envInfo EnvInfo, ) *ConsultPayRequestAdditionalInfo`
 
 NewConsultPayRequestAdditionalInfo instantiates a new ConsultPayRequestAdditionalInfo object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +46,11 @@ and a boolean to check if the value has been set.
 
 SetBuyer sets Buyer field to given value.
 
+### HasBuyer
+
+`func (o *ConsultPayRequestAdditionalInfo) HasBuyer() bool`
+
+HasBuyer returns a boolean if a field has been set.
 
 ### GetEnvInfo
 

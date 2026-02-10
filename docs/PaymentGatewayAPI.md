@@ -393,6 +393,7 @@ value := string(payment_gateway.PAYMETHOD_BALANCE_)
 | `PAYOPTION_NETWORK_PAY_PG_CARD_` | Payment method with Card |
 | `PAYOPTION_NETWORK_PAY_PC_INDOMARET_` | Payment method with Indomaret |
 | `PAYOPTION_NETWORK_PAY_PG_QRIS_` | Payment method with QRIS |
+| `PAYOPTION_NETWORK_PAY_PL_INDODANA_` | Payment method with Paylater Indodana |
 | `PAYOPTION_VIRTUAL_ACCOUNT_BCA_` | Payment method with BCA virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_BNI_` | Payment method with BNI virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_MANDIRI_` | Payment method with Mandiri virtual account |
@@ -421,8 +422,8 @@ value := string(payment_gateway.PAYMETHOD_BALANCE_)
 ## Type
 | Value | Description |
 |-------|-------------|
-| `TYPE_PAY_RETURN_` | When finish payment, DANA will notify to the URL that has been defined by |
-| `TYPE_NOTIFICATION_` | After the payment, the user will be redirected to merchant page, this is mandatory |
+| `TYPE_PAY_RETURN_` | After the payment, the user will be redirected to merchant page, this is mandatory |
+| `TYPE_NOTIFICATION_` | When finish payment, DANA will notify to the URL that has been defined by user |
 
 
 

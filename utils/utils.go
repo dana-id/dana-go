@@ -18,10 +18,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"os"
 	"reflect"
+	"sort"
+	"strings"
 	"time"
 	"unicode/utf8"
-	"sort"
 )
 
 // PtrBool is a helper routine that returns a pointer to given boolean value.
@@ -385,4 +387,42 @@ func Strlen(s string) int {
 func StrContains(s []string, searchterm string) bool {
     i := sort.SearchStrings(s, searchterm)
     return i < len(s) && s[i] == searchterm
+}
+
+// ValidateValidUpToDate validates that a date string is not more than 30 minutes in the future (sandbox only)
+// This function checks the DANA_ENV or ENV environment variable and only validates in sandbox environment
+// 
+// Parameters:
+//   - dateStr: The date string to validate in RFC3339 format (e.g., "2024-01-01T12:00:00+07:00")
+//
+// Returns:
+//   - error: An error if the date is invalid, exceeds 30 minutes in the future, or nil if validation passes
+func ValidateValidUpToDate(dateStr string) error {
+	// Only validate in sandbox environment
+	env := os.Getenv("DANA_ENV")
+	if env == "" {
+		env = os.Getenv("ENV")
+	}
+	if env == "" || strings.ToLower(env) == "sandbox" {
+		// Parse the input date
+		inputDate, err := time.Parse(time.RFC3339, dateStr)
+		if err != nil {
+			return fmt.Errorf("invalid date format for validUpTo. Expected format: YYYY-MM-DDTHH:mm:ss+07:00")
+		}
+
+		// Create Jakarta timezone object (GMT+7)
+		jakartaTz, _ := time.LoadLocation("Asia/Jakarta")
+		
+		// Current date in Jakarta timezone
+		currentDate := time.Now().In(jakartaTz)
+		
+		// Maximum allowed date (current date + 30 minutes)
+		maxDate := currentDate.Add(30 * time.Minute)
+		
+		// Check if the input date exceeds the maximum allowed date
+		if inputDate.After(maxDate) {
+			return fmt.Errorf("validUpTo date cannot be more than 30 minutes in the future")
+		}
+	}
+	return nil
 }

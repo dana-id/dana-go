@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **SubMerchantId** | Pointer to **string** | Information of sub merchant identifier | [optional] 
 **Amount** | [**Money**](Money.md) | Amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | 
 **ExternalStoreId** | Pointer to **string** | Store identifier to indicate to which store this payment belongs to | [optional] 
-**ValidUpTo** | Pointer to **string** | The time when the payment will be automatically expired, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) and cannot be more than one week in the future. | [optional] 
+**ValidUpTo** | **string** | The time when the payment will be automatically expired, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) and cannot be more than one week in the future. | 
 **DisabledPayMethods** | Pointer to **string** | Payment method(s) that cannot be used for this | [optional] 
 **UrlParams** | [**[]UrlParam**](UrlParam.md) | Notify URL that DANA must send the payment notification to | 
 **PayOptionDetails** | [**[]PayOptionDetail**](PayOptionDetail.md) |  | 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewCreateOrderRequest
 
-`func NewCreateOrderRequest(partnerReferenceNo string, merchantId string, amount Money, urlParams []UrlParam, payOptionDetails []PayOptionDetail, ) *CreateOrderRequest`
+`func NewCreateOrderRequest(partnerReferenceNo string, merchantId string, amount Money, validUpTo string, urlParams []UrlParam, payOptionDetails []PayOptionDetail, ) *CreateOrderRequest`
 
 NewCreateOrderRequest instantiates a new CreateOrderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -188,11 +188,6 @@ and a boolean to check if the value has been set.
 
 SetValidUpTo sets ValidUpTo field to given value.
 
-### HasValidUpTo
-
-`func (o *CreateOrderRequest) HasValidUpTo() bool`
-
-HasValidUpTo returns a boolean if a field has been set.
 
 ### GetDisabledPayMethods
 

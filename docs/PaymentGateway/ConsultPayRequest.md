@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **MerchantId** | **string** | Merchant identifier that is unique per each merchant | 
 **Amount** | [**Money**](Money.md) | Amount. Contains two sub-fields:<br /> 1. Value: Transaction amount, including the cents<br /> 2. Currency: Currency code based on ISO<br />  | 
 **AdditionalInfo** | [**ConsultPayRequestAdditionalInfo**](ConsultPayRequestAdditionalInfo.md) | Additional information | 
+**ExternalStoreId** | Pointer to **string** | Store identifier to indicate to which store this payment belongs to. Need to be provided to show QRIS payment method. | [optional] 
 
 ## Methods
 
@@ -86,6 +87,31 @@ and a boolean to check if the value has been set.
 
 SetAdditionalInfo sets AdditionalInfo field to given value.
 
+
+### GetExternalStoreId
+
+`func (o *ConsultPayRequest) GetExternalStoreId() string`
+
+GetExternalStoreId returns the ExternalStoreId field if non-nil, zero value otherwise.
+
+### GetExternalStoreIdOk
+
+`func (o *ConsultPayRequest) GetExternalStoreIdOk() (*string, bool)`
+
+GetExternalStoreIdOk returns a tuple with the ExternalStoreId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalStoreId
+
+`func (o *ConsultPayRequest) SetExternalStoreId(v string)`
+
+SetExternalStoreId sets ExternalStoreId field to given value.
+
+### HasExternalStoreId
+
+`func (o *ConsultPayRequest) HasExternalStoreId() bool`
+
+HasExternalStoreId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **SubMerchantId** | Pointer to **string** |  | [optional] 
 **Amount** | [**Money**](Money.md) |  | 
 **ExternalStoreId** | Pointer to **string** | Store identifier to indicate to which store this payment belongs to | [optional] 
-**ValidUpTo** | Pointer to **string** | The time when the payment will be automatically expired, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | [optional] 
+**ValidUpTo** | **string** | The time when the payment will be automatically expired, in format YYYY-MM-DDTHH:mm:ss+07:00. Time must be in GMT+7 (Jakarta time) | 
 **PointOfInitiation** | Pointer to **string** | Used for getting more info regarding source of request of the user | [optional] 
 **DisabledPayMethods** | Pointer to **string** | Payment method(s) that cannot be used for this payment | [optional] 
 **PayOptionDetails** | Pointer to [**[]PayOptionDetail**](PayOptionDetail.md) | Payment option that will be used for this payment | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewWidgetPaymentRequest
 
-`func NewWidgetPaymentRequest(partnerReferenceNo string, merchantId string, amount Money, additionalInfo WidgetPaymentRequestAdditionalInfo, ) *WidgetPaymentRequest`
+`func NewWidgetPaymentRequest(partnerReferenceNo string, merchantId string, amount Money, validUpTo string, additionalInfo WidgetPaymentRequestAdditionalInfo, ) *WidgetPaymentRequest`
 
 NewWidgetPaymentRequest instantiates a new WidgetPaymentRequest object
 This constructor will assign default values to properties that have it defined,
@@ -164,11 +164,6 @@ and a boolean to check if the value has been set.
 
 SetValidUpTo sets ValidUpTo field to given value.
 
-### HasValidUpTo
-
-`func (o *WidgetPaymentRequest) HasValidUpTo() bool`
-
-HasValidUpTo returns a boolean if a field has been set.
 
 ### GetPointOfInitiation
 

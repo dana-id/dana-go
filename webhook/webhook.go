@@ -29,6 +29,17 @@ import (
 	"github.com/dana-id/dana-go/utils"
 )
 
+// Sandbox gateway public key used for webhook signature verification when ENV is sandbox.
+const sandboxWebhookPublicKey = `-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnaKVGRbin4Wh4KN35OPh
+ytJBjYTz7QZKSZjmHfiHxFmulfT87rta+IvGJ0rCBgg+1EtKk1hX8G5gPGJs1htJ
+5jHa3/jCk9l+luzjnuT9UVlwJahvzmFw+IoDoM7hIPjsLtnIe04SgYo0tZBpEmkQ
+vUGhmHPqYnUGSSMIpDLJDvbyr8gtwluja1SbRphgDCoYVXq+uUJ5HzPS049aaxTS
+nfXh/qXuDoB9EzCrgppLDS2ubmk21+dr7WaO/3RFjnwx5ouv6w+iC1XOJKar3CTk
+X6JV1OSST1C9sbPGzMHZ8AGB51BM0mok7davD/5irUk+f0C25OgzkwtxAt80dkDo
+/QIDAQAB
+-----END PUBLIC KEY-----`
+
 type WebhookParser struct {
 	publicKey *rsa.PublicKey
 }
@@ -36,7 +47,13 @@ type WebhookParser struct {
 func NewWebhookParser(publicKey *string, publicKeyPath *string) (*WebhookParser, error) {
 	var keyInputContent string
 
-	if publicKeyPath != nil && *publicKeyPath != "" {
+	env := os.Getenv("DANA_ENV")
+	if env == "" {
+		env = os.Getenv("ENV")
+	}
+	if env == "" || strings.ToLower(env) == "sandbox" {
+		keyInputContent = sandboxWebhookPublicKey
+	} else if publicKeyPath != nil && *publicKeyPath != "" {
 		fileBytes, errReadFile := os.ReadFile(*publicKeyPath)
 		if errReadFile != nil {
 			return nil, fmt.Errorf("failed to read key from file path '%s': %w", *publicKeyPath, errReadFile)

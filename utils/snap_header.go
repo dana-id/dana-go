@@ -102,10 +102,11 @@ func SetSnapHeaders(headerParams map[string]string, apiKey *config.APIKey, body 
 		headerParams[k] = v
 	}
 
-	// Set X-Debug-Mode header
-	if apiKey.X_DEBUG == "true" &&
-		strings.ToLower(apiKey.ENV) == strings.ToLower(config.ENV_SANDBOX) &&
-		supportDebugMode {
+	// Set X-Debug-Mode header: in sandbox, default to true unless X_DEBUG is explicitly "false"
+	xDebug := os.Getenv("X_DEBUG")
+	debugEnabled := xDebug == "" || strings.ToLower(xDebug) != "false"
+	if strings.ToLower(apiKey.ENV) == strings.ToLower(config.ENV_SANDBOX) &&
+		supportDebugMode && debugEnabled {
 		headerParams[HeaderXDebug] = "true"
 	}
 
@@ -281,9 +282,15 @@ func NormalizePEMKeyWithType(keyContent string, keyType string) ([]byte, error) 
 	hasEndMarker := strings.Contains(keyContent, "-----END")
 
 	if hasBeginMarker && hasEndMarker {
+		// Normalize line endings so PEM copied from Windows (CRLF) or macOS (LF) works the same
+		keyContent = strings.ReplaceAll(keyContent, "\r\n", "\n")
+		keyContent = strings.ReplaceAll(keyContent, "\r", "\n")
 		return []byte(keyContent), nil
 	} else if !hasBeginMarker && !hasEndMarker {
-		base64KeyData := strings.ReplaceAll(keyContent, "\n", "")
+		// Strip all newline variants (LF, CRLF, CR) so paste from Windows or macOS works
+		base64KeyData := strings.ReplaceAll(keyContent, "\r\n", "")
+		base64KeyData = strings.ReplaceAll(base64KeyData, "\n", "")
+		base64KeyData = strings.ReplaceAll(base64KeyData, "\r", "")
 		base64KeyData = strings.TrimSpace(base64KeyData)
 
 		if base64KeyData == "" {
@@ -310,7 +317,8 @@ func NormalizePEMKeyWithType(keyContent string, keyType string) ([]byte, error) 
 	}
 }
 
-// ConvertToPEM converts a key string to PEM format if it's not already in that format
+// ConvertToPEM converts a key string to PEM format if it's not already in that format.
+// It normalizes line endings so PEM copied from Windows (CRLF) or macOS (LF) works the same.
 func ConvertToPEM(key string, keyType string) string {
 	header := fmt.Sprintf("-----BEGIN %s KEY-----", keyType)
 	footer := fmt.Sprintf("-----END %s KEY-----", keyType)
@@ -318,12 +326,18 @@ func ConvertToPEM(key string, keyType string) string {
 
 	// Check if the key is already in PEM format
 	if strings.Contains(key, header) && strings.Contains(key, footer) {
-		// Just ensure newlines are properly formatted
-		return strings.ReplaceAll(key, "\\n", delimiter)
+		// Normalize: literal \n -> newline, then CRLF/CR -> LF
+		key = strings.ReplaceAll(key, "\\n", delimiter)
+		key = strings.ReplaceAll(key, "\r\n", delimiter)
+		key = strings.ReplaceAll(key, "\r", delimiter)
+		return key
 	}
 
-	// Replace any escaped newlines with actual newlines first
+	// Replace escaped newlines and strip all line endings so paste from Windows or macOS works
 	key = strings.ReplaceAll(key, "\\n", "")
+	key = strings.ReplaceAll(key, "\r\n", "")
+	key = strings.ReplaceAll(key, "\n", "")
+	key = strings.ReplaceAll(key, "\r", "")
 
 	// Split the key into 64-character chunks
 	chunks := []string{}

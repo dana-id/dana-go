@@ -5,11 +5,11 @@ All URIs are relative to http://api.sandbox.dana.id for sandbox environment and 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**BankAccountInquiry**](DisbursementAPI.md#BankAccountInquiry) | **Post** /v1.0/emoney/bank-account-inquiry.htm | Transfer to Bank Account Inquiry
-[**DanaAccountInquiry**](DisbursementAPI.md#DanaAccountInquiry) | **Post** /v1.0/emoney/account-inquiry.htm | DANA Account Inquiry
+[**DanaAccountInquiry**](DisbursementAPI.md#DanaAccountInquiry) | **Post** /rest/v1.0/emoney/account-inquiry | DANA Account Inquiry
 [**TransferToBank**](DisbursementAPI.md#TransferToBank) | **Post** /v1.0/emoney/transfer-bank.htm | Transfer to Bank
 [**TransferToBankInquiryStatus**](DisbursementAPI.md#TransferToBankInquiryStatus) | **Post** /v1.0/emoney/transfer-bank-status.htm | Transfer to Bank Inquiry Status
-[**TransferToDana**](DisbursementAPI.md#TransferToDana) | **Post** /v1.0/emoney/topup.htm | Transfer to DANA
-[**TransferToDanaInquiryStatus**](DisbursementAPI.md#TransferToDanaInquiryStatus) | **Post** /v1.0/emoney/topup-status.htm | Transfer to DANA Inquiry Status
+[**TransferToDana**](DisbursementAPI.md#TransferToDana) | **Post** /rest/v1.0/emoney/topup | Transfer to DANA
+[**TransferToDanaInquiryStatus**](DisbursementAPI.md#TransferToDanaInquiryStatus) | **Post** /rest/v1.0/emoney/topup-status | Transfer to DANA Inquiry Status
 
 
 ## Additional Documentation
