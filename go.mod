@@ -1,4 +1,4 @@
-module github.com/dana-id/dana-go
+module github.com/dana-id/dana-go/v2
 
 go 1.22
 

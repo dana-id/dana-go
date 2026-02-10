@@ -23,10 +23,10 @@ import (
 	"fmt"
 	"encoding/json"
 
-	common "github.com/dana-id/dana-go/common"
-	config "github.com/dana-id/dana-go/config"
-	exceptions "github.com/dana-id/dana-go/exceptions"
-	utils "github.com/dana-id/dana-go/utils"
+	common "github.com/dana-id/dana-go/v2/common"
+	config "github.com/dana-id/dana-go/v2/config"
+	exceptions "github.com/dana-id/dana-go/v2/exceptions"
+	utils "github.com/dana-id/dana-go/v2/utils"
 )
 
 

@@ -16,7 +16,7 @@ package widget
 
 import (
 	"encoding/json"
-	utils "github.com/dana-id/dana-go/utils"
+	utils "github.com/dana-id/dana-go/v2/utils"
 )
 
 // checks if the InternationalOrderInfo type satisfies the MappedNullable interface at compile time

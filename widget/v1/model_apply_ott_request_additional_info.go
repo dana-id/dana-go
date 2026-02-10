@@ -18,7 +18,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"bytes"
-	utils "github.com/dana-id/dana-go/utils"
+	utils "github.com/dana-id/dana-go/v2/utils"
 )
 
 // checks if the ApplyOTTRequestAdditionalInfo type satisfies the MappedNullable interface at compile time

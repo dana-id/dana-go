@@ -18,7 +18,7 @@ import (
 	"encoding/json"
 	"bytes"
 	"fmt"
-	utils "github.com/dana-id/dana-go/utils"
+	utils "github.com/dana-id/dana-go/v2/utils"
 )
 
 // checks if the QueryDivisionResponse type satisfies the MappedNullable interface at compile time

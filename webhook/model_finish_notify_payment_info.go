@@ -19,7 +19,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	utils "github.com/dana-id/dana-go/utils"
+	utils "github.com/dana-id/dana-go/v2/utils"
 )
 
 // checks if the FinishNotifyPaymentInfo type satisfies the MappedNullable interface at compile time

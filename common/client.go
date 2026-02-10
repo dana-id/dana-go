@@ -19,7 +19,7 @@ import (
 	"net/http"
 	"net/url"
 
-	config "github.com/dana-id/dana-go/config"
+	config "github.com/dana-id/dana-go/v2/config"
 )
 
 // This package provides common interfaces and types used across the Dana API client

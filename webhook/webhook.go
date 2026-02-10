@@ -26,7 +26,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/dana-id/dana-go/utils"
+	"github.com/dana-id/dana-go/v2/utils"
 )
 
 // Sandbox gateway public key used for webhook signature verification when ENV is sandbox.

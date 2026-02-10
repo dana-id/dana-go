@@ -17,8 +17,8 @@ package payment_gateway
 import (
 	"fmt"
 
-	exceptions "github.com/dana-id/dana-go/exceptions"
-	utils "github.com/dana-id/dana-go/utils"
+	exceptions "github.com/dana-id/dana-go/v2/exceptions"
+	utils "github.com/dana-id/dana-go/v2/utils"
 )
 
 // ValidationFunc is a function type for custom validations

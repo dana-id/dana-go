@@ -18,7 +18,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
-	utils "github.com/dana-id/dana-go/utils"
+	utils "github.com/dana-id/dana-go/v2/utils"
 )
 
 // CreateOrderRequest - This schema is a oneOf type with the following possible variants:<br> - CreateOrderByApiRequest<br> - CreateOrderByRedirectRequest<br> 

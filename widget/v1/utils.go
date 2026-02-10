@@ -32,7 +32,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/dana-id/dana-go/utils"
+	"github.com/dana-id/dana-go/v2/utils"
 )
 
 func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {

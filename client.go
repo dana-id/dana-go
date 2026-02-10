@@ -35,13 +35,13 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 
-	common "github.com/dana-id/dana-go/common"
-	config "github.com/dana-id/dana-go/config"
-	disbursement "github.com/dana-id/dana-go/disbursement/v1"
-	exceptions "github.com/dana-id/dana-go/exceptions"
-	merchant_management "github.com/dana-id/dana-go/merchant_management/v1"
-	payment_gateway "github.com/dana-id/dana-go/payment_gateway/v1"
-	widget "github.com/dana-id/dana-go/widget/v1"
+	common "github.com/dana-id/dana-go/v2/common"
+	config "github.com/dana-id/dana-go/v2/config"
+	disbursement "github.com/dana-id/dana-go/v2/disbursement/v1"
+	exceptions "github.com/dana-id/dana-go/v2/exceptions"
+	merchant_management "github.com/dana-id/dana-go/v2/merchant_management/v1"
+	payment_gateway "github.com/dana-id/dana-go/v2/payment_gateway/v1"
+	widget "github.com/dana-id/dana-go/v2/widget/v1"
 )
 
 var (
