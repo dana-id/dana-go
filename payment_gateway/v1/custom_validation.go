@@ -16,10 +16,14 @@ package payment_gateway
 
 import (
 	"fmt"
+	"regexp"
 
 	exceptions "github.com/dana-id/dana-go/v2/exceptions"
 	utils "github.com/dana-id/dana-go/v2/utils"
 )
+
+// moneyValuePattern: value must be digits (1-16) + "." + exactly 2 digits (e.g. 10000.00)
+var moneyValuePattern = regexp.MustCompile(`^\d{1,16}\.\d{2}$`)
 
 // ValidationFunc is a function type for custom validations
 type ValidationFunc func(interface{}) error
@@ -27,11 +31,10 @@ type ValidationFunc func(interface{}) error
 // validationRegistry maps request type names to their validation functions
 var validationRegistry = map[string][]ValidationFunc{
 	"CreateOrderRequest": {
+		validateAdditionalInfoRequiredCreateOrderRequest,
+		validateMoneyValueCreateOrderRequest,
 		validateValidUpToCreateOrderRequest,
 		validateExternalStoreIdForQris,
-		// Add more validation functions here as needed
-		// Example: validateAmountCreateOrderRequest,
-		// Example: validateMerchantIdCreateOrderRequest,
 	},
 	// Add more request types and their validations here as needed
 }
@@ -55,6 +58,62 @@ func CustomValidation(request interface{}, returnValue interface{}) error {
 		return nil
 	}
 
+	return nil
+}
+
+// validateAdditionalInfoRequiredCreateOrderRequest validates that AdditionalInfo must exist for CreateOrderByApiRequest and CreateOrderByRedirectRequest
+func validateAdditionalInfoRequiredCreateOrderRequest(request interface{}) error {
+	req, ok := request.(*CreateOrderRequest)
+	if !ok || req == nil {
+		return nil
+	}
+	if req.CreateOrderByApiRequest != nil {
+		if req.CreateOrderByApiRequest.AdditionalInfo == nil {
+			return &exceptions.GenericOpenAPIError{
+				ErrorMsg: "additionalInfo is required",
+			}
+		}
+	}
+	if req.CreateOrderByRedirectRequest != nil {
+		if req.CreateOrderByRedirectRequest.AdditionalInfo == nil {
+			return &exceptions.GenericOpenAPIError{
+				ErrorMsg: "additionalInfo is required",
+			}
+		}
+	}
+	return nil
+}
+
+// validateMoneyValueCreateOrderRequest validates that Money value fields match pattern ^\d{1,16}\.\d{2}$
+func validateMoneyValueCreateOrderRequest(request interface{}) error {
+	req, ok := request.(*CreateOrderRequest)
+	if !ok || req == nil {
+		return nil
+	}
+	validateMoney := func(m Money, fieldName string) error {
+		v := m.Value
+		if v == "" {
+			return &exceptions.GenericOpenAPIError{
+				ErrorMsg: fmt.Sprintf("%s.value is required", fieldName),
+			}
+		}
+		if !moneyValuePattern.MatchString(v) {
+			return &exceptions.GenericOpenAPIError{
+				ErrorMsg: fmt.Sprintf("%s.value must match pattern (e.g. 10000.00): got %q", fieldName, v),
+			}
+		}
+		return nil
+	}
+	if req.CreateOrderByApiRequest != nil {
+		if err := validateMoney(req.CreateOrderByApiRequest.Amount, "amount"); err != nil {
+			return err
+		}
+	}
+	if req.CreateOrderByRedirectRequest != nil {
+		if err := validateMoney(req.CreateOrderByRedirectRequest.Amount, "amount"); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
