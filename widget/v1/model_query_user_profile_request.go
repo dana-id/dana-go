@@ -28,6 +28,8 @@ var _ utils.MappedNullable = &QueryUserProfileRequest{}
 type QueryUserProfileRequest struct {
 	// The resource type list that the merchant server wants to get from DANA
 	UserResources []string `json:"userResources"`
+	// Access token required for user profile query
+	AccessToken string `json:"accessToken"`
 }
 
 type _QueryUserProfileRequest QueryUserProfileRequest
@@ -36,9 +38,10 @@ type _QueryUserProfileRequest QueryUserProfileRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQueryUserProfileRequest(userResources []string) *QueryUserProfileRequest {
+func NewQueryUserProfileRequest(userResources []string, accessToken string) *QueryUserProfileRequest {
 	this := QueryUserProfileRequest{}
 	this.UserResources = userResources
+	this.AccessToken = accessToken
 	return &this
 }
 
@@ -74,6 +77,30 @@ func (o *QueryUserProfileRequest) SetUserResources(v []string) {
 	o.UserResources = v
 }
 
+// GetAccessToken returns the AccessToken field value
+func (o *QueryUserProfileRequest) GetAccessToken() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AccessToken
+}
+
+// GetAccessTokenOk returns a tuple with the AccessToken field value
+// and a boolean to check if the value has been set.
+func (o *QueryUserProfileRequest) GetAccessTokenOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AccessToken, true
+}
+
+// SetAccessToken sets field value
+func (o *QueryUserProfileRequest) SetAccessToken(v string) {
+	o.AccessToken = v
+}
+
 func (o QueryUserProfileRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -85,6 +112,7 @@ func (o QueryUserProfileRequest) MarshalJSON() ([]byte, error) {
 func (o QueryUserProfileRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["userResources"] = o.UserResources
+	toSerialize["accessToken"] = o.AccessToken
 	return toSerialize, nil
 }
 
@@ -94,6 +122,7 @@ func (o *QueryUserProfileRequest) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"userResources",
+		"accessToken",
 	}
 
 	allProperties := make(map[string]interface{})

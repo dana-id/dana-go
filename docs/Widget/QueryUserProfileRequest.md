@@ -5,12 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **UserResources** | **[]string** | The resource type list that the merchant server wants to get from DANA | 
+**AccessToken** | **string** | Access token required for user profile query | 
 
 ## Methods
 
 ### NewQueryUserProfileRequest
 
-`func NewQueryUserProfileRequest(userResources []string, ) *QueryUserProfileRequest`
+`func NewQueryUserProfileRequest(userResources []string, accessToken string, ) *QueryUserProfileRequest`
 
 NewQueryUserProfileRequest instantiates a new QueryUserProfileRequest object
 This constructor will assign default values to properties that have it defined,
@@ -43,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *QueryUserProfileRequest) SetUserResources(v []string)`
 
 SetUserResources sets UserResources field to given value.
+
+
+### GetAccessToken
+
+`func (o *QueryUserProfileRequest) GetAccessToken() string`
+
+GetAccessToken returns the AccessToken field if non-nil, zero value otherwise.
+
+### GetAccessTokenOk
+
+`func (o *QueryUserProfileRequest) GetAccessTokenOk() (*string, bool)`
+
+GetAccessTokenOk returns a tuple with the AccessToken field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessToken
+
+`func (o *QueryUserProfileRequest) SetAccessToken(v string)`
+
+SetAccessToken sets AccessToken field to given value.
 
 
 

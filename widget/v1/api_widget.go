@@ -22,6 +22,7 @@ import (
 	"net/url"
 	"fmt"
 	"encoding/json"
+	"reflect"
 
 	common "github.com/dana-id/dana-go/v2/common"
 	config "github.com/dana-id/dana-go/v2/config"
@@ -131,6 +132,7 @@ func (a *WidgetAPIService) AccountUnbindingExecute(r ApiAccountUnbindingRequest)
 	}
 	// body params
 	localVarPostBody = r.accountUnbindingRequest
+	
 	// Set API Key Authentication headers using centralized utility function
 	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
 		// Process request body for authentication if present
@@ -154,6 +156,7 @@ func (a *WidgetAPIService) AccountUnbindingExecute(r ApiAccountUnbindingRequest)
 		// SNAP signature scenario: ACCOUNT UNBINDING
 		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "unbinding_account")
 	}
+
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -271,6 +274,7 @@ func (a *WidgetAPIService) ApplyOTTExecute(r ApiApplyOTTRequest) (*ApplyOTTRespo
 	}
 	// body params
 	localVarPostBody = r.applyOTTRequest
+	
 	// Set API Key Authentication headers using centralized utility function
 	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
 		// Process request body for authentication if present
@@ -294,6 +298,7 @@ func (a *WidgetAPIService) ApplyOTTExecute(r ApiApplyOTTRequest) (*ApplyOTTRespo
 		// SNAP signature scenario: APPLY OTT
 		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "apply_ott")
 	}
+
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -411,6 +416,7 @@ func (a *WidgetAPIService) ApplyTokenExecute(r ApiApplyTokenRequest) (*ApplyToke
 	}
 	// body params
 	localVarPostBody = r.applyTokenRequest
+	
 	// Set API Key Authentication headers using centralized utility function
 	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
 		// Process request body for authentication if present
@@ -434,6 +440,7 @@ func (a *WidgetAPIService) ApplyTokenExecute(r ApiApplyTokenRequest) (*ApplyToke
 		// SNAP signature scenario: APPLY TOKEN
 		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "apply_token")
 	}
+
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -551,6 +558,7 @@ func (a *WidgetAPIService) BalanceInquiryExecute(r ApiBalanceInquiryRequest) (*B
 	}
 	// body params
 	localVarPostBody = r.balanceInquiryRequest
+	
 	// Set API Key Authentication headers using centralized utility function
 	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
 		// Process request body for authentication if present
@@ -574,6 +582,7 @@ func (a *WidgetAPIService) BalanceInquiryExecute(r ApiBalanceInquiryRequest) (*B
 		// SNAP signature scenario: BALANCE INQUIRY
 		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "balance_inquiry")
 	}
+
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -691,6 +700,7 @@ func (a *WidgetAPIService) CancelOrderExecute(r ApiCancelOrderRequest) (*CancelO
 	}
 	// body params
 	localVarPostBody = r.cancelOrderRequest
+	
 	// Set API Key Authentication headers using centralized utility function
 	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
 		// Process request body for authentication if present
@@ -714,6 +724,7 @@ func (a *WidgetAPIService) CancelOrderExecute(r ApiCancelOrderRequest) (*CancelO
 		// Default B2B signature scenario
 		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 	}
+
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -831,6 +842,7 @@ func (a *WidgetAPIService) QueryPaymentExecute(r ApiQueryPaymentRequest) (*Query
 	}
 	// body params
 	localVarPostBody = r.queryPaymentRequest
+	
 	// Set API Key Authentication headers using centralized utility function
 	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
 		// Process request body for authentication if present
@@ -854,6 +866,7 @@ func (a *WidgetAPIService) QueryPaymentExecute(r ApiQueryPaymentRequest) (*Query
 		// Default B2B signature scenario
 		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 	}
+
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -971,29 +984,84 @@ func (a *WidgetAPIService) QueryUserProfileExecute(r ApiQueryUserProfileRequest)
 	}
 	// body params
 	localVarPostBody = r.queryUserProfileRequest
-	// Set API Key Authentication headers using centralized utility function
-	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
-		// Process request body for authentication if present
-		var dataForSnapStr string
-		dst := &bytes.Buffer{}
-		dataForSnap, err := json.Marshal(localVarPostBody)
-		if err != nil {
-			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
-				ErrorMsg: fmt.Sprintf("Failed to marshal request: %v", err),
-			}
+	// Create the full request structure for OPEN_API
+	// Wrap the simplified body parameters in the proper DANA request format
+	functionName := "dana.member.query.queryUserProfile"
+	
+	// Check configuration before proceeding
+	if a.GetConfig() == nil || a.GetConfig().APIKey == nil {
+		return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+			ErrorMsg: "API key is required for OPEN_API endpoints",
 		}
-
-		err = json.Compact(dst, dataForSnap)
-		if err != nil {
-			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
-				ErrorMsg: err.Error(),
-			}
-		}
-		dataForSnapStr = string(dst.Bytes())
-
-		// Default B2B signature scenario
-		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 	}
+	
+	// Generate head parameters
+	headParams := utils.GetOpenApiGeneratedHeaders("", a.GetConfig().APIKey, functionName)
+	
+	// Extract accessToken from request body if available (widget-specific)
+	if requestBodyMap, ok := localVarPostBody.(map[string]interface{}); ok {
+		if accessToken, exists := requestBodyMap["accessToken"]; exists {
+			if accessTokenStr, ok := accessToken.(string); ok && accessTokenStr != "" {
+				headParams["accessToken"] = accessTokenStr
+			}
+		}
+	}
+	
+	// For struct-based request bodies, try reflection to get AccessToken field
+	if headParams["accessToken"] == "" {
+		if reqValue := reflect.ValueOf(localVarPostBody); reqValue.Kind() == reflect.Struct {
+			if accessTokenField := reqValue.FieldByName("AccessToken"); accessTokenField.IsValid() && accessTokenField.Kind() == reflect.String {
+				if accessTokenValue := accessTokenField.String(); accessTokenValue != "" {
+					headParams["accessToken"] = accessTokenValue
+				}
+			}
+		} else if reqValue.Kind() == reflect.Ptr && !reqValue.IsNil() {
+			if elemValue := reqValue.Elem(); elemValue.Kind() == reflect.Struct {
+				if accessTokenField := elemValue.FieldByName("AccessToken"); accessTokenField.IsValid() && accessTokenField.Kind() == reflect.String {
+					if accessTokenValue := accessTokenField.String(); accessTokenValue != "" {
+						headParams["accessToken"] = accessTokenValue
+					}
+				}
+			}
+		}
+	}
+	
+	// Create the full request structure
+	requestBody := map[string]interface{}{
+		"request": map[string]interface{}{
+			"head": headParams,
+			"body": localVarPostBody,
+		},
+	}
+	
+	// Generate signature
+	signature := ""
+	if a.GetConfig().APIKey != nil && (a.GetConfig().APIKey.PRIVATE_KEY != "" || a.GetConfig().APIKey.PRIVATE_KEY_PATH != "") {
+		bodyBytes, err := json.Marshal(requestBody["request"])
+		if err != nil {
+			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+				ErrorMsg: fmt.Sprintf("Failed to marshal request body for signature: %v", err),
+			}
+		}
+		
+		sig, err := utils.GenerateOpenApiSignature(string(bodyBytes), a.GetConfig().APIKey)
+		if err != nil {
+			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+				ErrorMsg: fmt.Sprintf("Failed to generate signature: %v", err),
+			}
+		}
+		signature = sig
+	}
+	
+	// Add signature to the request
+	if signature != "" {
+		requestBody["signature"] = signature
+	}
+	
+	// Set the final request body
+	localVarPostBody = requestBody
+	
+
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1111,6 +1179,7 @@ func (a *WidgetAPIService) RefundOrderExecute(r ApiRefundOrderRequest) (*RefundO
 	}
 	// body params
 	localVarPostBody = r.refundOrderRequest
+	
 	// Set API Key Authentication headers using centralized utility function
 	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
 		// Process request body for authentication if present
@@ -1134,6 +1203,7 @@ func (a *WidgetAPIService) RefundOrderExecute(r ApiRefundOrderRequest) (*RefundO
 		// Default B2B signature scenario
 		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 	}
+
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1251,6 +1321,7 @@ func (a *WidgetAPIService) WidgetPaymentExecute(r ApiWidgetPaymentRequest) (*Wid
 	}
 	// body params
 	localVarPostBody = r.widgetPaymentRequest
+	
 	// Set API Key Authentication headers using centralized utility function
 	if a.GetConfig() != nil && a.GetConfig().APIKey != nil {
 		// Process request body for authentication if present
@@ -1274,6 +1345,7 @@ func (a *WidgetAPIService) WidgetPaymentExecute(r ApiWidgetPaymentRequest) (*Wid
 		// Default B2B signature scenario
 		utils.SetSnapHeaders(localVarHeaderParams, a.GetConfig().APIKey, dataForSnapStr, localVarHTTPMethod, localVarPath, false, "")
 	}
+
 	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
