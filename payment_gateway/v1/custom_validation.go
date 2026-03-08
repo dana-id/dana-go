@@ -16,7 +16,9 @@ package payment_gateway
 
 import (
 	"fmt"
+	"os"
 	"regexp"
+	"strings"
 
 	exceptions "github.com/dana-id/dana-go/v2/exceptions"
 	utils "github.com/dana-id/dana-go/v2/utils"
@@ -35,6 +37,7 @@ var validationRegistry = map[string][]ValidationFunc{
 		validateMoneyValueCreateOrderRequest,
 		validateValidUpToCreateOrderRequest,
 		validateExternalStoreIdForQris,
+		validateSandboxPayMethodAndPayOption,
 	},
 	// Add more request types and their validations here as needed
 }
@@ -185,5 +188,74 @@ func validateExternalStoreIdForQris(request interface{}) error {
 		}
 	}
 
+	return nil
+}
+
+// In sandbox, only these payMethods are available (Payment Gateway).
+var sandboxAllowedPayMethods = map[string]bool{
+	"BALANCE": true, "CREDIT_CARD": true, "DEBIT_CARD": true,
+	"VIRTUAL_ACCOUNT": true, "NETWORK_PAY": true,
+}
+
+// In sandbox, only these payOptions are available (exact or suffix match e.g. VIRTUAL_ACCOUNT_BRI).
+var sandboxAllowedPayOptions = map[string]bool{
+	"CARD": true, "QRIS": true, "BRI": true, "PANIN": true,
+	"CIMB": true, "MANDIRI": true, "BTPN": true,
+}
+
+func isSandbox() bool {
+	env := os.Getenv("DANA_ENV")
+	if env == "" {
+		env = os.Getenv("ENV")
+	}
+	if env == "" {
+		env = "sandbox"
+	}
+	return strings.ToLower(env) == "sandbox"
+}
+
+func payOptionAllowedInSandbox(value string) bool {
+	value = strings.TrimSpace(value)
+	if value == "" {
+		return false
+	}
+	if sandboxAllowedPayOptions[value] {
+		return true
+	}
+	for opt := range sandboxAllowedPayOptions {
+		if strings.HasSuffix(value, "_"+opt) {
+			return true
+		}
+	}
+	return false
+}
+
+// validateSandboxPayMethodAndPayOption validates that in sandbox only allowed payMethod and payOption values are used.
+func validateSandboxPayMethodAndPayOption(request interface{}) error {
+	if !isSandbox() {
+		return nil
+	}
+	req, ok := request.(*CreateOrderRequest)
+	if !ok || req == nil || req.CreateOrderByApiRequest == nil {
+		return nil
+	}
+	apiReq := req.CreateOrderByApiRequest
+	if apiReq.PayOptionDetails == nil {
+		return nil
+	}
+	for i, detail := range apiReq.PayOptionDetails {
+		pm := strings.TrimSpace(detail.PayMethod)
+		if pm != "" && !sandboxAllowedPayMethods[pm] {
+			return &exceptions.GenericOpenAPIError{
+				ErrorMsg: fmt.Sprintf("in sandbox, payMethod must be one of [BALANCE, CREDIT_CARD, DEBIT_CARD, VIRTUAL_ACCOUNT, NETWORK_PAY]; got %q in payOptionDetails[%d]", pm, i),
+			}
+		}
+		po := strings.TrimSpace(detail.PayOption)
+		if po != "" && !payOptionAllowedInSandbox(po) {
+			return &exceptions.GenericOpenAPIError{
+				ErrorMsg: fmt.Sprintf("in sandbox, payOption must be one of [CARD, QRIS, BRI, PANIN, CIMB, MANDIRI, BTPN] (or suffix like VIRTUAL_ACCOUNT_BRI); got %q in payOptionDetails[%d]", po, i),
+			}
+		}
+	}
 	return nil
 }
