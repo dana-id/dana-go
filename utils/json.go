@@ -184,14 +184,25 @@ func isJSONMinified(jsonStr string) bool {
 
 // MinifyJSON compacts a JSON string by removing unnecessary whitespace.
 func minifyJSON(jsonStr string) (string, error) {
-	var obj interface{}
-	if err := json.Unmarshal([]byte(jsonStr), &obj); err != nil {
-		return "", fmt.Errorf("MinifyJSON: failed to unmarshal JSON: %w", err)
+	// First, try to unmarshal as an object
+	var obj map[string]interface{}
+	if err := json.Unmarshal([]byte(jsonStr), &obj); err == nil {
+		minifiedBytes, err := json.Marshal(obj)
+		if err != nil {
+			return "", fmt.Errorf("MinifyJSON: failed to marshal JSON object for minification: %w", err)
+		}
+		return string(minifiedBytes), nil
 	}
 
-	minifiedBytes, err := json.Marshal(obj)
-	if err != nil {
-		return "", fmt.Errorf("MinifyJSON: failed to marshal JSON for minification: %w", err)
+	// If that fails, try to unmarshal as an array
+	var arr []interface{}
+	if err := json.Unmarshal([]byte(jsonStr), &arr); err == nil {
+		minifiedBytes, err := json.Marshal(arr)
+		if err != nil {
+			return "", fmt.Errorf("MinifyJSON: failed to marshal JSON array for minification: %w", err)
+		}
+		return string(minifiedBytes), nil
 	}
-	return string(minifiedBytes), nil
+
+	return "", fmt.Errorf("MinifyJSON: failed to unmarshal JSON as object or array")
 }

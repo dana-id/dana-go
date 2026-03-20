@@ -16,6 +16,7 @@ package widget
 
 import (
 	"fmt"
+	"strings"
 
 	exceptions "github.com/dana-id/dana-go/v2/exceptions"
 	utils "github.com/dana-id/dana-go/v2/utils"
@@ -32,6 +33,9 @@ var validationRegistry = map[string][]ValidationFunc{
 		// Example: validateAmountWidgetPaymentRequest,
 		// Example: validateMerchantIdWidgetPaymentRequest,
 	},
+	"ApplyTokenRequest": {
+		validateApplyTokenAuthCodeNotFromQueryString,
+	},
 	// Add more request types and their validations here as needed
 }
 
@@ -44,6 +48,14 @@ func CustomValidation(request interface{}, returnValue interface{}) error {
 	switch req := request.(type) {
 	case *WidgetPaymentRequest:
 		if validators, exists := validationRegistry["WidgetPaymentRequest"]; exists {
+			for _, validator := range validators {
+				if err := validator(req); err != nil {
+					return err
+				}
+			}
+		}
+	case *ApplyTokenRequest:
+		if validators, exists := validationRegistry["ApplyTokenRequest"]; exists {
 			for _, validator := range validators {
 				if err := validator(req); err != nil {
 					return err
@@ -74,5 +86,44 @@ func validateValidUpToWidgetPaymentRequest(request interface{}) error {
 		}
 	}
 
+	return nil
+}
+
+// validateApplyTokenAuthCodeNotFromQueryString rejects authCode values that look like a pasted URL query
+// (e.g. still containing & or = from other parameters).
+func validateApplyTokenAuthCodeNotFromQueryString(request interface{}) error {
+	req, ok := request.(*ApplyTokenRequest)
+	if !ok || req == nil {
+		return nil
+	}
+
+	if req.ApplyTokenAuthorizationCodeRequest != nil {
+		if err := validateAuthCodeNoQueryDelimiters(req.ApplyTokenAuthorizationCodeRequest.AuthCode); err != nil {
+			return err
+		}
+	}
+
+	if req.ApplyTokenRefreshTokenRequest != nil && req.ApplyTokenRefreshTokenRequest.AuthCode != nil {
+		code := strings.TrimSpace(*req.ApplyTokenRefreshTokenRequest.AuthCode)
+		if code != "" {
+			if err := validateAuthCodeNoQueryDelimiters(code); err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
+}
+
+func validateAuthCodeNoQueryDelimiters(authCode string) error {
+	authCode = strings.TrimSpace(authCode)
+	if authCode == "" {
+		return nil
+	}
+	if strings.ContainsAny(authCode, "&=") {
+		return &exceptions.GenericOpenAPIError{
+			ErrorMsg: "authCode must not contain '&' or '='; paste only the authorization code value, not the full URL query string or including other parameters",
+		}
+	}
 	return nil
 }

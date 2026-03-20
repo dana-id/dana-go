@@ -24,7 +24,7 @@ import (
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
-	mathrand "math/rand"
+	"math/big"
 	"net/url"
 	"os"
 	"strings"
@@ -220,9 +220,15 @@ func GenerateChannelId() string {
 	// Go doesn't directly format milliseconds with padded zeros, so we extract and format them
 	milliseconds := fmt.Sprintf("%03d", jakartaTime.Nanosecond()/1000000)
 
-	// Generate a random 7-digit number for the nanopart
-	mathrand.Seed(time.Now().UnixNano())
-	nanopart := fmt.Sprintf("%07d", mathrand.Intn(10000000))
+	// Generate a cryptographically strong random 7-digit number for the nanopart
+	max := big.NewInt(10000000) // 0..9_999_999
+	n, err := rand.Int(rand.Reader, max)
+	if err != nil {
+		// Fallback: use timestamp-based value to avoid blocking generation
+		nanopart := fmt.Sprintf("%07d", jakartaTime.Nanosecond()%10000000)
+		return fmt.Sprintf("%s%s%s%s%s%s%s%s", year, month, day, hours, minutes, seconds, milliseconds, nanopart)
+	}
+	nanopart := fmt.Sprintf("%07d", n.Int64())
 
 	return fmt.Sprintf("%s%s%s%s%s%s%s%s", year, month, day, hours, minutes, seconds, milliseconds, nanopart)
 }
