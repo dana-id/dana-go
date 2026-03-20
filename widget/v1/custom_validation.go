@@ -48,17 +48,45 @@ func CustomValidation(request interface{}, returnValue interface{}) error {
 	switch req := request.(type) {
 	case *WidgetPaymentRequest:
 		if validators, exists := validationRegistry["WidgetPaymentRequest"]; exists {
+			var validationErrors []error
 			for _, validator := range validators {
 				if err := validator(req); err != nil {
-					return err
+					validationErrors = append(validationErrors, err)
+				}
+			}
+			if len(validationErrors) > 0 {
+				messages := make([]string, 0, len(validationErrors))
+				for _, err := range validationErrors {
+					if err == nil {
+						continue
+					}
+					messages = append(messages, err.Error())
+				}
+
+				return &exceptions.GenericOpenAPIError{
+					ErrorMsg: fmt.Sprintf("validation failed: %s", strings.Join(messages, "; ")),
 				}
 			}
 		}
 	case *ApplyTokenRequest:
 		if validators, exists := validationRegistry["ApplyTokenRequest"]; exists {
+			var validationErrors []error
 			for _, validator := range validators {
 				if err := validator(req); err != nil {
-					return err
+					validationErrors = append(validationErrors, err)
+				}
+			}
+			if len(validationErrors) > 0 {
+				messages := make([]string, 0, len(validationErrors))
+				for _, err := range validationErrors {
+					if err == nil {
+						continue
+					}
+					messages = append(messages, err.Error())
+				}
+
+				return &exceptions.GenericOpenAPIError{
+					ErrorMsg: fmt.Sprintf("validation failed: %s", strings.Join(messages, "; ")),
 				}
 			}
 		}

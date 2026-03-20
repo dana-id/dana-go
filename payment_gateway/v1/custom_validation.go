@@ -247,7 +247,6 @@ func isVirtualAccountPayMethod(payMethod string) bool {
 //   - phoneNumber is required for Card and e-wallet payments, and must be 1-15 characters.
 //     Card: payMethod CARD (and credit/debit-card methods) OR payOption NETWORK_PAY_PG_CARD
 //     E-wallet: payOption NETWORK_PAY_PG_{SPAY,OVO,GOPAY,LINKAJA}
-//   - paymentCode is required for Virtual account payments, and must be 1-64 characters.
 func validateConditionalPayOptionAdditionalInfoCreateOrderRequest(request interface{}) error {
 	req, ok := request.(*CreateOrderRequest)
 	if !ok || req == nil {
@@ -266,10 +265,6 @@ func validateConditionalPayOptionAdditionalInfoCreateOrderRequest(request interf
 		if additional != nil && additional.PhoneNumber != nil {
 			phoneNumber = strings.TrimSpace(*additional.PhoneNumber)
 		}
-		paymentCode := ""
-		if additional != nil && additional.PaymentCode != nil {
-			paymentCode = strings.TrimSpace(*additional.PaymentCode)
-		}
 
 		// Card and e-wallet payments require phoneNumber.
 		if isCardPayment(payMethod, payOption) || isEwalletPayment(payOption) {
@@ -285,19 +280,6 @@ func validateConditionalPayOptionAdditionalInfoCreateOrderRequest(request interf
 			}
 		}
 
-		// Virtual account payments require paymentCode.
-		if isVirtualAccountPayMethod(payMethod) {
-			if paymentCode == "" {
-				return &exceptions.GenericOpenAPIError{
-					ErrorMsg: fmt.Sprintf("paymentCode is required for virtual account payment (payOptionDetails[%d])", i),
-				}
-			}
-			if runeLen(paymentCode) < 1 || runeLen(paymentCode) > 64 {
-				return &exceptions.GenericOpenAPIError{
-					ErrorMsg: fmt.Sprintf("paymentCode must be between 1 and 64 characters (payOptionDetails[%d])", i),
-				}
-			}
-		}
 	}
 
 	return nil
