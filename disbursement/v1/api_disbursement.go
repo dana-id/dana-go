@@ -630,6 +630,24 @@ func (a *DisbursementAPIService) TransferToDana(ctx context.Context) ApiTransfer
 	}
 }
 
+// getTransferToDanaPath returns Transfer to DANA (topup) path based on environment
+func (a *DisbursementAPIService) getTransferToDanaPath() string {
+	env := ""
+	if a.cfg != nil && a.cfg.APIKey != nil {
+		env = a.cfg.APIKey.DANA_ENV
+		if env == "" {
+			env = a.cfg.APIKey.ENV
+		}
+	}
+	if env == "" {
+		env = config.ENV_SANDBOX
+	}
+	if env == config.ENV_PRODUCTION {
+		return "/v1.0/emoney/topup.htm"
+	}
+	return "/rest/v1.0/emoney/topup"
+}
+
 // Execute executes the request
 //  @return TransferToDanaResponse
 func (a *DisbursementAPIService) TransferToDanaExecute(r ApiTransferToDanaRequest) (*TransferToDanaResponse, *http.Response, error) {
@@ -647,7 +665,7 @@ func (a *DisbursementAPIService) TransferToDanaExecute(r ApiTransferToDanaReques
 		}
 	}
 
-	localVarPath := localBasePath + "/rest/v1.0/emoney/topup"
+	localVarPath := localBasePath + a.getTransferToDanaPath()
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -763,6 +781,24 @@ func (a *DisbursementAPIService) TransferToDanaInquiryStatus(ctx context.Context
 	}
 }
 
+// getTransferToDanaInquiryStatusPath returns topup-status inquiry path based on environment
+func (a *DisbursementAPIService) getTransferToDanaInquiryStatusPath() string {
+	env := ""
+	if a.cfg != nil && a.cfg.APIKey != nil {
+		env = a.cfg.APIKey.DANA_ENV
+		if env == "" {
+			env = a.cfg.APIKey.ENV
+		}
+	}
+	if env == "" {
+		env = config.ENV_SANDBOX
+	}
+	if env == config.ENV_PRODUCTION {
+		return "/v1.0/emoney/topup-status.htm"
+	}
+	return "/rest/v1.0/emoney/topup-status"
+}
+
 // Execute executes the request
 //  @return TransferToDanaInquiryStatusResponse
 func (a *DisbursementAPIService) TransferToDanaInquiryStatusExecute(r ApiTransferToDanaInquiryStatusRequest) (*TransferToDanaInquiryStatusResponse, *http.Response, error) {
@@ -780,7 +816,7 @@ func (a *DisbursementAPIService) TransferToDanaInquiryStatusExecute(r ApiTransfe
 		}
 	}
 
-	localVarPath := localBasePath + "/rest/v1.0/emoney/topup-status"
+	localVarPath := localBasePath + a.getTransferToDanaInquiryStatusPath()
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
