@@ -637,6 +637,7 @@ value := string(widget.SERVICETYPE_PARKING_)
 | `PAYOPTION_VIRTUAL_ACCOUNT_CIMB_` | Payment method with CIMB virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_PERMATA_` | Payment method with Permata virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_PANI_` | Payment method with Panin virtual account |
+| `PAYOPTION_VIRTUAL_ACCOUNT_BSI_PAYMENT_` | Payment method with BSI virtual account |
 
 
 ## PromoType

@@ -397,6 +397,7 @@ value := string(payment_gateway.PAYMETHOD_BALANCE_)
 | `PAYOPTION_VIRTUAL_ACCOUNT_BCA_` | Payment method with BCA virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_BNI_` | Payment method with BNI virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_MANDIRI_` | Payment method with Mandiri virtual account |
+| `PAYOPTION_VIRTUAL_ACCOUNT_BSI_PAYMENT_` | Payment method with BSI virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_BRI_` | Payment method with BRI virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_BTPN_` | Payment method with BTPN virtual account |
 | `PAYOPTION_VIRTUAL_ACCOUNT_CIMB_` | Payment method with CIMB virtual account |
