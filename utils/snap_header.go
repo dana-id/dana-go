@@ -86,12 +86,13 @@ func SetSnapHeaders(headerParams map[string]string, apiKey *config.APIKey, body 
 
 	switch scenario {
 	case ScenarioApplyToken:
-		// Apply-Token uses X-CLIENT-KEY instead of X-PARTNER-ID
+		// Apply-Token uses X-CLIENT-KEY; X-PARTNER-ID is also required by the Merchant Portal
 		if apiKey.X_PARTNER_ID != "" {
 			headerParams[HeaderXClientKey] = apiKey.X_PARTNER_ID
+			headerParams[HeaderXPartnerID] = apiKey.X_PARTNER_ID
 		}
 	default:
-		// Other scenarios retain X-PARTNER-ID
+		// Other scenarios use X-PARTNER-ID
 		if apiKey.X_PARTNER_ID != "" {
 			headerParams[HeaderXPartnerID] = apiKey.X_PARTNER_ID
 		}
