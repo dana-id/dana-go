@@ -293,8 +293,8 @@ var sandboxAllowedPayMethods = map[string]bool{
 
 // In sandbox, only these payOptions are available (exact or suffix match e.g. VIRTUAL_ACCOUNT_BRI).
 var sandboxAllowedPayOptions = map[string]bool{
-	"CARD": true, "QRIS": true, "BRI": true, "PANIN": true,
-	"CIMB": true, "MANDIRI": true, "BTPN": true, "BSI": true,
+	"CARD": true, "QRIS": true, "BRI": true, "PANI": true,
+	"CIMB": true, "MANDIRI": true, "BTPN": true, "BSI_PAYMENT": true,
 }
 
 func isSandbox() bool {
