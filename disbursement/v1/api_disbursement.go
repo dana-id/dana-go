@@ -213,24 +213,6 @@ func (a *DisbursementAPIService) DanaAccountInquiry(ctx context.Context) ApiDana
 	}
 }
 
-// getAccountInquiryPath returns the account inquiry path based on environment
-func (a *DisbursementAPIService) getAccountInquiryPath() string {
-	env := ""
-	if a.cfg != nil && a.cfg.APIKey != nil {
-		env = a.cfg.APIKey.DANA_ENV
-		if env == "" {
-			env = a.cfg.APIKey.ENV
-		}
-	}
-	if env == "" {
-		env = config.ENV_SANDBOX
-	}
-	if env == config.ENV_PRODUCTION {
-		return "/v1.0/emoney/account-inquiry.htm"
-	}
-	return "/rest/v1.0/emoney/account-inquiry"
-}
-
 // Execute executes the request
 //  @return DanaAccountInquiryResponse
 func (a *DisbursementAPIService) DanaAccountInquiryExecute(r ApiDanaAccountInquiryRequest) (*DanaAccountInquiryResponse, *http.Response, error) {
@@ -248,7 +230,7 @@ func (a *DisbursementAPIService) DanaAccountInquiryExecute(r ApiDanaAccountInqui
 		}
 	}
 
-	localVarPath := localBasePath + a.getAccountInquiryPath()
+	localVarPath := localBasePath + "/rest/v1.0/emoney/account-inquiry"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -630,24 +612,6 @@ func (a *DisbursementAPIService) TransferToDana(ctx context.Context) ApiTransfer
 	}
 }
 
-// getTransferToDanaPath returns Transfer to DANA (topup) path based on environment
-func (a *DisbursementAPIService) getTransferToDanaPath() string {
-	env := ""
-	if a.cfg != nil && a.cfg.APIKey != nil {
-		env = a.cfg.APIKey.DANA_ENV
-		if env == "" {
-			env = a.cfg.APIKey.ENV
-		}
-	}
-	if env == "" {
-		env = config.ENV_SANDBOX
-	}
-	if env == config.ENV_PRODUCTION {
-		return "/v1.0/emoney/topup.htm"
-	}
-	return "/rest/v1.0/emoney/topup"
-}
-
 // Execute executes the request
 //  @return TransferToDanaResponse
 func (a *DisbursementAPIService) TransferToDanaExecute(r ApiTransferToDanaRequest) (*TransferToDanaResponse, *http.Response, error) {
@@ -665,7 +629,7 @@ func (a *DisbursementAPIService) TransferToDanaExecute(r ApiTransferToDanaReques
 		}
 	}
 
-	localVarPath := localBasePath + a.getTransferToDanaPath()
+	localVarPath := localBasePath + "/rest/v1.0/emoney/topup"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -781,24 +745,6 @@ func (a *DisbursementAPIService) TransferToDanaInquiryStatus(ctx context.Context
 	}
 }
 
-// getTransferToDanaInquiryStatusPath returns topup-status inquiry path based on environment
-func (a *DisbursementAPIService) getTransferToDanaInquiryStatusPath() string {
-	env := ""
-	if a.cfg != nil && a.cfg.APIKey != nil {
-		env = a.cfg.APIKey.DANA_ENV
-		if env == "" {
-			env = a.cfg.APIKey.ENV
-		}
-	}
-	if env == "" {
-		env = config.ENV_SANDBOX
-	}
-	if env == config.ENV_PRODUCTION {
-		return "/v1.0/emoney/topup-status.htm"
-	}
-	return "/rest/v1.0/emoney/topup-status"
-}
-
 // Execute executes the request
 //  @return TransferToDanaInquiryStatusResponse
 func (a *DisbursementAPIService) TransferToDanaInquiryStatusExecute(r ApiTransferToDanaInquiryStatusRequest) (*TransferToDanaInquiryStatusResponse, *http.Response, error) {
@@ -816,7 +762,7 @@ func (a *DisbursementAPIService) TransferToDanaInquiryStatusExecute(r ApiTransfe
 		}
 	}
 
-	localVarPath := localBasePath + a.getTransferToDanaInquiryStatusPath()
+	localVarPath := localBasePath + "/rest/v1.0/emoney/topup-status"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

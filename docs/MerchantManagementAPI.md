@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateDivision**](MerchantManagementAPI.md#CreateDivision) | **Post** /dana/merchant/division/createDivision.htm | Create Division
 [**CreateShop**](MerchantManagementAPI.md#CreateShop) | **Post** /dana/merchant/shop/createShop.htm | Member – Create Shop
+[**QueryAssetCardList**](MerchantManagementAPI.md#QueryAssetCardList) | **Post** /dana/member/asset/queryAssetCardList.htm | Member – Query asset card list
 [**QueryDivision**](MerchantManagementAPI.md#QueryDivision) | **Post** /dana/merchant/division/queryDivision.htm | Query Division
 [**QueryMerchantResource**](MerchantManagementAPI.md#QueryMerchantResource) | **Post** /dana/merchant/queryMerchantResource.htm | Member – Merchant Open API Check Disbursement Account
 [**QueryShop**](MerchantManagementAPI.md#QueryShop) | **Post** /dana/merchant/shop/queryShop.htm | Member – Query Shop
@@ -168,6 +169,88 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateShopResponse**](MerchantManagement/CreateShopResponse.md)
+
+### Authorization
+
+[CLIENT_SECRET](../README.md#CLIENT_SECRET)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## QueryAssetCardList
+
+> QueryAssetCardListResponse QueryAssetCardList(ctx).QueryAssetCardListRequest(queryAssetCardListRequest).Execute()
+
+Member – Query asset card list
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	dana "github.com/dana-id/dana-go"
+	"github.com/dana-id/dana-go/config"
+	merchant_management "github.com/dana-id/dana-go/merchant_management/v1"
+)
+
+func main() {
+	// Define request struct directly (example)
+	request := merchant_management.QueryAssetCardListRequest{
+		// Fill in required fields here, e.g.:
+		// Field1: "value1",
+		// Field2: "value2",
+	}
+
+	configuration := config.NewConfiguration()
+	// Set API keys
+	configuration.APIKey = &config.APIKey{
+		// ENV:          config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production. Can use DANA_ENV instead
+		DANA_ENV:     config.ENV_SANDBOX, // use config.ENV_PRODUCTION for production
+		X_PARTNER_ID: os.Getenv("X_PARTNER_ID"),
+		PRIVATE_KEY:  os.Getenv("PRIVATE_KEY"),
+		ORIGIN:       os.Getenv("ORIGIN"),
+		// PRIVATE_KEY_PATH: os.Getenv("PRIVATE_KEY_PATH"),
+	}
+	apiClient := dana.NewAPIClient(configuration)
+	_, r, err := apiClient.MerchantManagementAPI.QueryAssetCardList(context.Background()).QueryAssetCardListRequest(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MerchantManagementAPI.QueryAssetCardList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `QueryAssetCardList`: QueryAssetCardListResponse
+	fmt.Fprintf(os.Stdout, "Response from `MerchantManagementAPI.QueryAssetCardList`: %v\n", r.Body)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiQueryAssetCardListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **queryAssetCardListRequest** | [**QueryAssetCardListRequest**](MerchantManagement/QueryAssetCardListRequest.md) |  | 
+
+### Return type
+
+[**QueryAssetCardListResponse**](MerchantManagement/QueryAssetCardListResponse.md)
 
 ### Authorization
 
@@ -615,6 +698,25 @@ value := string(merchant_management.SHOPPARENTTYPE_MERCHANT_)
 | `USER_PROFILING_B2C_` |  |
 
 
+## AssetType
+| Value | Description |
+|-------|-------------|
+| `ASSETTYPE_CHECKING_ACCOUNT_` |  |
+| `ASSETTYPE_SAVINGS_ACCOUNT_` |  |
+| `ASSETTYPE_LOAN_ACCOUNT_` |  |
+| `ASSETTYPE_IMPS_ACCOUNT_` |  |
+| `ASSETTYPE_DEBIT_CARD_` |  |
+| `ASSETTYPE_CREDIT_CARD_` |  |
+| `ASSETTYPE_SECURED_CREDIT_CARD_` |  |
+| `ASSETTYPE_VA_ACCOUNT_` |  |
+| `ASSETTYPE_OTC_ACCOUNT_` |  |
+| `ASSETTYPE_REFUND_ACCOUNT_` |  |
+| `ASSETTYPE_CREDIT_ACCOUNT_` |  |
+| `ASSETTYPE_LOAN_` |  |
+| `ASSETTYPE_MUTUAL_FUNDS_ACCOUNT_` |  |
+| `ASSETTYPE_INVESTMENT_` |  |
+
+
 ## BusinessEntity
 | Value | Description |
 |-------|-------------|
@@ -624,6 +726,33 @@ value := string(merchant_management.SHOPPARENTTYPE_MERCHANT_)
 | `BUSINESSENTITY_USAHA_DAGANG_` |  |
 | `BUSINESSENTITY_YAYASAN_` |  |
 | `BUSINESSENTITY_KOPERASI_` |  |
+
+
+## ContactBizType
+| Value | Description |
+|-------|-------------|
+| `CONTACTBIZTYPE_TRANSFER_HIS_` |  |
+| `CONTACTBIZTYPE_DIRECT_TRANSFER_` |  |
+| `CONTACTBIZTYPE_GENERAL_CARD_` |  |
+| `CONTACTBIZTYPE_DIRECTPAY_CARD_` |  |
+| `CONTACTBIZTYPE_PAYMENT_CARD_` |  |
+| `CONTACTBIZTYPE_CASHOUT_CARD_` |  |
+| `CONTACTBIZTYPE_IMPS_ACCOUNT_` |  |
+| `CONTACTBIZTYPE_INVESTMENT_ACCOUNT_` |  |
+
+
+## DefaultAsset
+| Value | Description |
+|-------|-------------|
+| `DEFAULTASSET_TRUE_` |  |
+| `DEFAULTASSET_FALSE_` |  |
+
+
+## DirectDebit
+| Value | Description |
+|-------|-------------|
+| `DIRECTDEBIT_TRUE_` |  |
+| `DIRECTDEBIT_FALSE_` |  |
 
 
 ## DivisionIdType
@@ -656,6 +785,20 @@ value := string(merchant_management.SHOPPARENTTYPE_MERCHANT_)
 | `DOCTYPE_SIM_` |  |
 | `DOCTYPE_SIUP_` |  |
 | `DOCTYPE_NIB_` |  |
+
+
+## EnableOnly
+| Value | Description |
+|-------|-------------|
+| `ENABLEONLY_TRUE_` |  |
+| `ENABLEONLY_FALSE_` |  |
+
+
+## EnableStatus
+| Value | Description |
+|-------|-------------|
+| `ENABLESTATUS_TRUE_` |  |
+| `ENABLESTATUS_FALSE_` |  |
 
 
 ## Loyalty

@@ -51,7 +51,7 @@ func GenerateOauthUrl(data *Oauth2UrlData) (string, error) {
 
 	if mode == "DEEPLINK" {
 		if strings.ToLower(env) == "production" {
-			baseUrl = "https://link.dana.id/bindSnap"
+			baseUrl = "https://m.dana.id/n/link/bind"
 		} else {
 			baseUrl = "https://m.sandbox.dana.id/n/link/binding"
 		}
@@ -247,9 +247,8 @@ func GenerateScopes() string {
 	// Return different scopes based on environment
 	if strings.ToLower(env) != "production" {
 		return "CASHIER,AGREEMENT_PAY,QUERY_BALANCE,DEFAULT_BASIC_PROFILE,MINI_DANA"
-	} else {
-		return "CASHIER"
 	}
+	return "MINI_DANA,CASHIER,QUERY_BALANCE,DEFAULT_BASIC_PROFILE"
 }
 
 // GenerateExternalId generates an external ID based on input or creates a new one
@@ -362,6 +361,12 @@ func GenerateCompletePaymentUrl(widgetPaymentResponse *WidgetPaymentResponse, ap
 
 	ott := *applyOTTResponse.UserResources[0].Value
 
-	// Combine the URL with the OTT token
-	return fmt.Sprintf("%s&ott=%s", webRedirectUrl, ott)
+	u, err := url.Parse(webRedirectUrl)
+	if err != nil {
+		return webRedirectUrl
+	}
+	q := u.Query()
+	q.Set("ott", ott)
+	u.RawQuery = q.Encode()
+	return u.String()
 }

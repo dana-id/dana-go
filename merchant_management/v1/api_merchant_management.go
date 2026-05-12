@@ -375,6 +375,171 @@ func (a *MerchantManagementAPIService) CreateShopExecute(r ApiCreateShopRequest)
 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
+type ApiQueryAssetCardListRequest struct {
+	ctx context.Context
+	ApiService *MerchantManagementAPIService
+	queryAssetCardListRequest *QueryAssetCardListRequest
+}
+
+func (r ApiQueryAssetCardListRequest) QueryAssetCardListRequest(queryAssetCardListRequest QueryAssetCardListRequest) ApiQueryAssetCardListRequest {
+	r.queryAssetCardListRequest = &queryAssetCardListRequest
+	return r
+}
+
+func (r ApiQueryAssetCardListRequest) Execute() (*QueryAssetCardListResponse, *http.Response, error) {
+	return r.ApiService.QueryAssetCardListExecute(r)
+}
+
+/*
+QueryAssetCardList Member – Query asset card list
+
+Query member asset cards filtered by contact business type and asset type.
+JSON envelope uses `request.head`, `request.body`, and root `signature` (same Open API pattern as other `.htm` endpoints).
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiQueryAssetCardListRequest
+*/
+func (a *MerchantManagementAPIService) QueryAssetCardList(ctx context.Context) ApiQueryAssetCardListRequest {
+	return ApiQueryAssetCardListRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return QueryAssetCardListResponse
+func (a *MerchantManagementAPIService) QueryAssetCardListExecute(r ApiQueryAssetCardListRequest) (*QueryAssetCardListResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []common.FormFile
+		localVarReturnValue  *QueryAssetCardListResponse
+	)
+
+	localBasePath, err := a.GetConfig().ServerURLWithContext(r.ctx, "MerchantManagementAPIService.QueryAssetCardList")
+	if err != nil {
+		return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+			ErrorMsg: err.Error(),
+		}
+	}
+
+	localVarPath := localBasePath + "/dana/member/asset/queryAssetCardList.htm"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.queryAssetCardListRequest == nil {
+		return localVarReturnValue, nil, utils.ReportError("queryAssetCardListRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := utils.SelectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := utils.SelectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.queryAssetCardListRequest
+	functionName := "dana.member.asset.queryAssetCardList"
+
+	// Create the full request structure for OPEN_API
+	// Wrap the simplified body parameters in the proper DANA request format
+	
+	// Generate head parameters
+	headParams := utils.GetOpenApiGeneratedHeaders("", a.cfg.APIKey, functionName)
+	
+	// Create the full request structure
+	requestBody := map[string]interface{}{
+		"request": map[string]interface{}{
+			"head": headParams,
+			"body": localVarPostBody,
+		},
+	}
+	
+	// Generate signature
+	signature := ""
+	if a.cfg.APIKey != nil && (a.cfg.APIKey.PRIVATE_KEY != "" || a.cfg.APIKey.PRIVATE_KEY_PATH != "") {
+		bodyBytes, err := json.Marshal(requestBody["request"])
+		if err != nil {
+			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+				ErrorMsg: fmt.Sprintf("Failed to marshal request body for signature: %v", err),
+			}
+		}
+		
+		sig, err := utils.GenerateOpenApiSignature(string(bodyBytes), a.cfg.APIKey)
+		if err != nil {
+			return localVarReturnValue, nil, &exceptions.GenericOpenAPIError{
+				ErrorMsg: fmt.Sprintf("Failed to generate signature: %v", err),
+			}
+		}
+		signature = sig
+	}
+	
+	// Add signature to the request
+	if signature != "" {
+		requestBody["signature"] = signature
+	}
+	
+	// Set the final request body
+	localVarPostBody = requestBody
+	
+	// For OPEN_API, we don't need to set additional headers as the signature is already in the body
+
+	req, err := a.PrepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.CallAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &exceptions.GenericOpenAPIError{
+			RawBody:  localVarBody,
+			ErrorMsg: localVarHTTPResponse.Status,
+		}
+		var v QueryAssetCardListResponse
+		err = a.Decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.ErrorMsg = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.ModelData = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.Decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &exceptions.GenericOpenAPIError{
+			RawBody:  localVarBody,
+			ErrorMsg: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 type ApiQueryDivisionRequest struct {
 	ctx context.Context
 	ApiService *MerchantManagementAPIService

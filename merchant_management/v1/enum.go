@@ -135,6 +135,60 @@ const (
     SHOPBIZTYPE_OFFLINE_ ShopBizType = "OFFLINE"
 )
 
+type ContactBizType string
+const (
+    CONTACTBIZTYPE_TRANSFER_HIS_ ContactBizType = "TRANSFER_HIS"
+    CONTACTBIZTYPE_DIRECT_TRANSFER_ ContactBizType = "DIRECT_TRANSFER"
+    CONTACTBIZTYPE_GENERAL_CARD_ ContactBizType = "GENERAL_CARD"
+    CONTACTBIZTYPE_DIRECTPAY_CARD_ ContactBizType = "DIRECTPAY_CARD"
+    CONTACTBIZTYPE_PAYMENT_CARD_ ContactBizType = "PAYMENT_CARD"
+    CONTACTBIZTYPE_CASHOUT_CARD_ ContactBizType = "CASHOUT_CARD"
+    CONTACTBIZTYPE_IMPS_ACCOUNT_ ContactBizType = "IMPS_ACCOUNT"
+    CONTACTBIZTYPE_INVESTMENT_ACCOUNT_ ContactBizType = "INVESTMENT_ACCOUNT"
+)
+
+type AssetType string
+const (
+    ASSETTYPE_CHECKING_ACCOUNT_ AssetType = "CHECKING_ACCOUNT"
+    ASSETTYPE_SAVINGS_ACCOUNT_ AssetType = "SAVINGS_ACCOUNT"
+    ASSETTYPE_LOAN_ACCOUNT_ AssetType = "LOAN_ACCOUNT"
+    ASSETTYPE_IMPS_ACCOUNT_ AssetType = "IMPS_ACCOUNT"
+    ASSETTYPE_DEBIT_CARD_ AssetType = "DEBIT_CARD"
+    ASSETTYPE_CREDIT_CARD_ AssetType = "CREDIT_CARD"
+    ASSETTYPE_SECURED_CREDIT_CARD_ AssetType = "SECURED_CREDIT_CARD"
+    ASSETTYPE_VA_ACCOUNT_ AssetType = "VA_ACCOUNT"
+    ASSETTYPE_OTC_ACCOUNT_ AssetType = "OTC_ACCOUNT"
+    ASSETTYPE_REFUND_ACCOUNT_ AssetType = "REFUND_ACCOUNT"
+    ASSETTYPE_CREDIT_ACCOUNT_ AssetType = "CREDIT_ACCOUNT"
+    ASSETTYPE_LOAN_ AssetType = "LOAN"
+    ASSETTYPE_MUTUAL_FUNDS_ACCOUNT_ AssetType = "MUTUAL_FUNDS_ACCOUNT"
+    ASSETTYPE_INVESTMENT_ AssetType = "INVESTMENT"
+)
+
+type DefaultAsset string
+const (
+    DEFAULTASSET_TRUE_ DefaultAsset = "true"
+    DEFAULTASSET_FALSE_ DefaultAsset = "false"
+)
+
+type EnableStatus string
+const (
+    ENABLESTATUS_TRUE_ EnableStatus = "true"
+    ENABLESTATUS_FALSE_ EnableStatus = "false"
+)
+
+type DirectDebit string
+const (
+    DIRECTDEBIT_TRUE_ DirectDebit = "true"
+    DIRECTDEBIT_FALSE_ DirectDebit = "false"
+)
+
+type EnableOnly string
+const (
+    ENABLEONLY_TRUE_ EnableOnly = "true"
+    ENABLEONLY_FALSE_ EnableOnly = "false"
+)
+
 type GOODS_SOLD_TYPE string
 const (
     GOODS_SOLD_TYPE_DIGITAL_ GOODS_SOLD_TYPE = "DIGITAL"

@@ -1,5 +1,6 @@
 api_merchant_management.go
 docs/AddressInfo.md
+docs/AssetCardListItem.md
 docs/BusinessDocs.md
 docs/CreateDivisionRequest.md
 docs/CreateDivisionRequestExtInfo.md
@@ -13,10 +14,16 @@ docs/CreateShopResponseResponse.md
 docs/CreateShopResponseResponseBody.md
 docs/CreateShopResponseResponseHead.md
 docs/DivisionResourceInfo.md
+docs/MemberAssetResultInfo.md
 docs/MerchantManagementAPI.md
 docs/MerchantResourceInformation.md
 docs/MobileNoInfo.md
 docs/PicInfo.md
+docs/QueryAssetCardListRequest.md
+docs/QueryAssetCardListResponse.md
+docs/QueryAssetCardListResponseResponse.md
+docs/QueryAssetCardListResponseResponseBody.md
+docs/QueryAssetCardListResponseResponseHead.md
 docs/QueryDivisionRequest.md
 docs/QueryDivisionResponse.md
 docs/QueryDivisionResponseResponse.md
@@ -45,6 +52,7 @@ docs/UpdateShopResponseResponse.md
 docs/UpdateShopResponseResponseHead.md
 docs/UserName.md
 model_address_info.go
+model_asset_card_list_item.go
 model_business_docs.go
 model_create_division_request.go
 model_create_division_request_ext_info.go
@@ -58,9 +66,15 @@ model_create_shop_response_response.go
 model_create_shop_response_response_body.go
 model_create_shop_response_response_head.go
 model_division_resource_info.go
+model_member_asset_result_info.go
 model_merchant_resource_information.go
 model_mobile_no_info.go
 model_pic_info.go
+model_query_asset_card_list_request.go
+model_query_asset_card_list_response.go
+model_query_asset_card_list_response_response.go
+model_query_asset_card_list_response_response_body.go
+model_query_asset_card_list_response_response_head.go
 model_query_division_request.go
 model_query_division_response.go
 model_query_division_response_response.go
